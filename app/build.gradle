@@ -30,4 +30,7 @@ dependencies {
     compile 'org.jsoup:jsoup:1.9.2'//jsoup网络爬虫
     //EventBus
     compile 'org.greenrobot:eventbus:3.0.0'
+
+    //解决方法数65536限制
+    compile 'com.android.support:multidex:1.0.0'
 }

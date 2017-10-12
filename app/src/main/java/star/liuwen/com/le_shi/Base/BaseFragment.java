@@ -12,6 +12,7 @@ import org.greenrobot.eventbus.ThreadMode;
 import star.liuwen.com.le_shi.EventBus.Event;
 import star.liuwen.com.le_shi.EventBus.EventBusUtil;
 import star.liuwen.com.le_shi.Utils.ToastUtils;
+import star.liuwen.com.le_shi.View.LoadingProgressDialog;
 
 /**
  * Created by liuwen on 2017/6/21.
