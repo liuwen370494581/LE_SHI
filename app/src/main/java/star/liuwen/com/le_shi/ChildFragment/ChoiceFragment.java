@@ -11,15 +11,15 @@ import star.liuwen.com.le_shi.R;
 
 /**
  * Created by liuwen on 2017/10/13.
- *  精选
+ * 精选
  */
-public class ChoiceFragment extends BaseFragment{
+public class ChoiceFragment extends BaseFragment {
 
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_hot, container, false);
+        View view = inflater.inflate(R.layout.fragment_choice, container, false);
         initView(view);
         return view;
     }
@@ -27,8 +27,9 @@ public class ChoiceFragment extends BaseFragment{
     private void initView(View view) {
     }
 
+
     @Override
     public void initData() {
-        
+
     }
 }
