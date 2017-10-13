@@ -1,4 +1,4 @@
-package star.liuwen.com.le_shi.Fragment;
+package star.liuwen.com.le_shi.ChildFragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,19 +11,23 @@ import star.liuwen.com.le_shi.R;
 
 /**
  * Created by liuwen on 2017/10/12.
+ * 电视剧
  */
-public class UpgcFragment extends BaseFragment {
-
+public class TvFragment extends BaseFragment {
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_upgc, container, false);
+        View view = inflater.inflate(R.layout.fragment_hot, container, false);
+        initView(view);
         return view;
+    }
+
+    private void initView(View view) {
     }
 
     @Override
     public void initData() {
-
+        
     }
 }

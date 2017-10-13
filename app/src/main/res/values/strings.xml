@@ -8,4 +8,20 @@
         <item>直播</item>
         <item>我的</item>
     </string-array>
+
+    <string-array name="tab_titles">
+        <item>热点</item>
+        <item>精选</item>
+        <item>电视剧</item>
+        <item>电影</item>
+        <item>综艺</item>
+        <item>自制</item>
+        <item>动漫</item>
+        <item>体育</item>
+        <item>音乐</item>
+        <item>财经</item>
+        <item>科技</item>
+    </string-array>
+
+
 </resources>

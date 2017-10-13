@@ -11,4 +11,6 @@
     <color name="gray2">#919191</color>
     <color name="font_dark_gray">#333333</color>
     <color name="gray_transparent">#7000</color>
+
+    <color name="text_color_66">#666666</color>
 </resources>

@@ -64,6 +64,9 @@ public class MainActivity extends BaseActivity {
         mTableLayout.addTab(mTableLayout.newTab().setCustomView(getTabView(2)));
         mTableLayout.addTab(mTableLayout.newTab().setCustomView(getTabView(3)));
         mTableLayout.addTab(mTableLayout.newTab().setCustomView(getTabView(4)));
+        mTableLayout.getTabAt(0).getCustomView().findViewById(R.id.id_oval_red_img).setVisibility(View.VISIBLE);
+        mTableLayout.getTabAt(3).getCustomView().findViewById(R.id.id_oval_red_img).setVisibility(View.VISIBLE);
+        mTableLayout.getTabAt(4).getCustomView().findViewById(R.id.id_oval_red_img).setVisibility(View.VISIBLE);
         mMyViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {

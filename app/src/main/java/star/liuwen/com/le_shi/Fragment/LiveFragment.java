@@ -18,7 +18,7 @@ public class LiveFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_index, container, false);
+        View view = inflater.inflate(R.layout.fragment_live, container, false);
         return view;
     }
     @Override

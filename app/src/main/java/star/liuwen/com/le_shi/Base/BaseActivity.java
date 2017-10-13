@@ -16,6 +16,7 @@ import star.liuwen.com.le_shi.EventBus.Event;
 import star.liuwen.com.le_shi.EventBus.EventBusUtil;
 import star.liuwen.com.le_shi.R;
 import star.liuwen.com.le_shi.Utils.ActivityKiller;
+import star.liuwen.com.le_shi.Utils.StatusBarUtils;
 import star.liuwen.com.le_shi.Utils.ToastUtils;
 import star.liuwen.com.le_shi.View.LoadingProgressDialog;
 
@@ -45,7 +46,7 @@ public abstract class BaseActivity extends AppCompatActivity {
             EventBusUtil.register(this);
         }
         //大于android 4.4版本才有这种沉侵式状态
-        //  StatusBarUtils.setWindowStatusBarColor(this, R.color.statusColor);
+        StatusBarUtils.setWindowStatusBarColor(this, R.color.bg_color);
         ActivityKiller.getInstance().addActivity(this);
     }
 
