@@ -18,14 +18,13 @@ import star.liuwen.com.le_shi.R;
 /**
  * Created by liuwen on 2017/10/13.
  */
-public class MainUIAction {
-
+public class HotAction {
 
     public static void searchCoverData(final Context context, final ActionCallBack callBack) {
         Observable.create(new ObservableOnSubscribe<List<CoverModel>>() {
             @Override
             public void subscribe(ObservableEmitter<List<CoverModel>> e) throws Exception {
-                e.onNext(HtmlParserUtil.searchCoverData());
+                e.onNext(HtmlParserUtil.searchHotData());
             }
         }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<List<CoverModel>>() {
             @Override
@@ -38,5 +37,4 @@ public class MainUIAction {
             }
         });
     }
-
 }

@@ -66,5 +66,6 @@ public class HotFragment extends BaseFragment {
                 hideLoadingDialog();
             }
         });
+
     }
 }

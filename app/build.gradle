@@ -38,4 +38,5 @@ dependencies {
     compile "io.reactivex.rxjava2:rxandroid:2.0.1"
 
     compile 'com.hejunlin.superindicatorlibray:superindicatorlibray:1.0.3'
+    compile 'cn.bingoogolapple:bga-adapter:1.2.0@aar'
 }

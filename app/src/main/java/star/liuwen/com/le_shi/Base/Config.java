@@ -5,7 +5,7 @@ package star.liuwen.com.le_shi.Base;
  */
 public class Config {
 
-    public static final String TAG = "LE_SHI";
+    public static final String TAG = "MainActivity";
 
     public static final String LE_SHI_URL = "http://www.baofeng.com/";
 }
