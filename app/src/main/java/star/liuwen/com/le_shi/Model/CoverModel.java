@@ -11,6 +11,8 @@ public class CoverModel implements Serializable {
     private String coverDesc;
     private String coverTitle;
     private String coverUrl;//封面
+    private String coverPage;//集数
+    private String coverScore;//评分
 
     public CoverModel() {
     }
@@ -21,6 +23,16 @@ public class CoverModel implements Serializable {
         this.coverTitle = coverTitle;
         this.coverUrl = coverUrl;
     }
+
+    public CoverModel(String coverVideoUrl, String coverDesc, String coverTitle, String coverUrl, String coverPage) {
+        this.coverVideoUrl = coverVideoUrl;
+        this.coverDesc = coverDesc;
+        this.coverTitle = coverTitle;
+        this.coverUrl = coverUrl;
+        this.coverPage = coverPage;
+    }
+
+
 
     public String getCoverVideoUrl() {
         return coverVideoUrl;
@@ -52,5 +64,21 @@ public class CoverModel implements Serializable {
 
     public void setCoverUrl(String coverUrl) {
         this.coverUrl = coverUrl;
+    }
+
+    public String getCoverPage() {
+        return coverPage;
+    }
+
+    public void setCoverPage(String coverPage) {
+        this.coverPage = coverPage;
+    }
+
+    public String getCoverScore() {
+        return coverScore;
+    }
+
+    public void setCoverScore(String coverScore) {
+        this.coverScore = coverScore;
     }
 }

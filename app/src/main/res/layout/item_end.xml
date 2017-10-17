@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/id_item_layout"
+              android:layout_width="match_parent"
+              android:layout_height="100dp"
+              android:orientation="vertical"
+              android:visibility="gone">
+
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="80dp"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:text="-------------  我也是有底线的-------------"/>
+</LinearLayout>
