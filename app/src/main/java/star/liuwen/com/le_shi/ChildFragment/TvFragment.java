@@ -6,7 +6,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import star.liuwen.com.le_shi.Base.BaseFragment;
+import star.liuwen.com.le_shi.Base.Config;
+import star.liuwen.com.le_shi.Jsoup.Action.ActionCallBack;
+import star.liuwen.com.le_shi.Jsoup.Action.TvAction;
+import star.liuwen.com.le_shi.Model.CoverModel;
 import star.liuwen.com.le_shi.R;
 
 /**
@@ -28,6 +35,20 @@ public class TvFragment extends BaseFragment {
 
     @Override
     public void initData() {
-        
+        LoadData();
+    }
+
+    private void LoadData() {
+        TvAction.searchTvHotPlayData(getActivity(), Config.BAO_FENG_TV_URL, new ActionCallBack() {
+            @Override
+            public void ok(Object object) {
+
+            }
+
+            @Override
+            public void failed(Object object) {
+
+            }
+        });
     }
 }

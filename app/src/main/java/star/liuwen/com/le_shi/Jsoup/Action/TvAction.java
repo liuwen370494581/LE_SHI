@@ -16,15 +16,16 @@ import star.liuwen.com.le_shi.Model.CoverModel;
 import star.liuwen.com.le_shi.R;
 
 /**
- * Created by liuwen on 2017/10/13.
+ * Created by liuwen on 2017/10/17.
  */
-public class HotAction {
+public class TvAction {
 
-    public static void searchCoverData(final Context context, final String url, final ActionCallBack callBack) {
+
+    public static void searchTvCover(final Context context, final String url, final ActionCallBack callBack) {
         Observable.create(new ObservableOnSubscribe<List<CoverModel>>() {
             @Override
             public void subscribe(ObservableEmitter<List<CoverModel>> e) throws Exception {
-                e.onNext(HtmlParserUtil.searchHotData(url));
+                e.onNext(HtmlParserUtil.searchCoverData(url));
             }
         }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<List<CoverModel>>() {
             @Override
@@ -37,4 +38,24 @@ public class HotAction {
             }
         });
     }
+
+
+    public static void searchTvHotPlayData(final Context context, final String url, final ActionCallBack callBack) {
+        Observable.create(new ObservableOnSubscribe<List<CoverModel>>() {
+            @Override
+            public void subscribe(ObservableEmitter<List<CoverModel>> e) throws Exception {
+                e.onNext(HtmlParserUtil.searchTvHotPlay(url));
+            }
+        }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<List<CoverModel>>() {
+            @Override
+            public void accept(@NonNull List<CoverModel> models) throws Exception {
+                if (models != null && models.size() != 0) {
+                    callBack.ok(models);
+                } else {
+                    callBack.failed(context.getResources().getString(R.string.find_no_result));
+                }
+            }
+        });
+    }
+
 }

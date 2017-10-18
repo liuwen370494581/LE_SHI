@@ -21,14 +21,14 @@ import star.liuwen.com.le_shi.Model.CoverModel;
  */
 public class HtmlParserUtil {
 
-    public static List<CoverModel> searchCoverData() {
+    public static List<CoverModel> searchCoverData(String url) {
         List<CoverModel> list = new ArrayList<>();
         try {
-            Document document = Jsoup.connect(Config.LE_SHI_URL)
+            Document document = Jsoup.connect(url)
                     .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31").timeout(40000).get();
             Element element = document.getElementsByAttributeValue("class", "change-pic-list").first();
             Elements links = element.getElementsByTag("a");
-            //   Log.e(Config.TAG, links.size() + "");
+            Log.e(Config.TAG, links.toString());
             for (Element link : links) {
                 CoverModel model = new CoverModel();
                 model.setCoverUrl(link.attr("data-pic"));
@@ -43,10 +43,10 @@ public class HtmlParserUtil {
     }
 
     //今日热点
-    public static List<CoverModel> searchHotData() {
+    public static List<CoverModel> searchHotData(String url) {
         List<CoverModel> list = new ArrayList<>();
         try {
-            Document document = Jsoup.connect(Config.LE_SHI_URL)
+            Document document = Jsoup.connect(url)
                     .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31").timeout(40000).get();
             Elements elements = document.select("div.news-list-picbox");
             Log.e(Config.TAG, elements.size() + "");
@@ -67,10 +67,10 @@ public class HtmlParserUtil {
     }
 
     //猜你喜欢
-    public static List<CoverModel> searchLovely() {
+    public static List<CoverModel> searchLovely(String url) {
         List<CoverModel> list = new ArrayList<>();
         try {
-            Document document = Jsoup.connect(Config.LE_SHI_URL)
+            Document document = Jsoup.connect(url)
                     .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31").timeout(40000).get();
             Elements elements = document.select("ul.js-guest-like-list").select("div.js-collect");
             //  Log.e(Config.TAG, elements.toString());
@@ -94,10 +94,10 @@ public class HtmlParserUtil {
 
 
     //编辑推荐
-    public static List<CoverModel> searchEditRecommend() {
+    public static List<CoverModel> searchEditRecommend(String url) {
         List<CoverModel> list = new ArrayList<>();
         try {
-            Document document = Jsoup.connect(Config.LE_SHI_URL)
+            Document document = Jsoup.connect(url)
                     .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31").timeout(40000).get();
             Elements elements = document.select("div.js-editor-recommend").select("div.js-collect");
             Log.e(Config.TAG, elements.size() + "");
@@ -118,10 +118,10 @@ public class HtmlParserUtil {
         return list;
     }
 
-    public static List<CoverModel> searchEditRecommend2() {
+    public static List<CoverModel> searchEditRecommend2(String url) {
         List<CoverModel> list = new ArrayList<>();
         try {
-            Document document = Jsoup.connect(Config.LE_SHI_URL)
+            Document document = Jsoup.connect(url)
                     .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31").timeout(40000).get();
             Elements elements = document.select("div.js-editor-recommend").select("div.hot-pic-text-box");
             Log.e(Config.TAG, elements.size() + "");
@@ -141,10 +141,10 @@ public class HtmlParserUtil {
     }
 
     //电视剧
-    public static List<CoverModel> searchTV() {
+    public static List<CoverModel> searchTV(String url) {
         List<CoverModel> list = new ArrayList<>();
         try {
-            Document document = Jsoup.connect(Config.LE_SHI_URL)
+            Document document = Jsoup.connect(url)
                     .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31").timeout(40000).get();
             Elements elements = document.select("div.tv-landscape-con");
 
@@ -170,10 +170,10 @@ public class HtmlParserUtil {
 
 
     //电影
-    public static List<CoverModel> searchMovie() {
+    public static List<CoverModel> searchMovie(String url) {
         List<CoverModel> list = new ArrayList<>();
         try {
-            Document document = Jsoup.connect(Config.LE_SHI_URL)
+            Document document = Jsoup.connect(url)
                     .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31").timeout(40000).get();
             Elements elements = document.select("div.tv-landscape-con");
 //           Log.e(Config.TAG, elements.toString());
@@ -200,10 +200,10 @@ public class HtmlParserUtil {
 
 
     //动漫
-    public static List<CoverModel> searchDongMan() {
+    public static List<CoverModel> searchDongMan(String url) {
         List<CoverModel> list = new ArrayList<>();
         try {
-            Document document = Jsoup.connect(Config.LE_SHI_URL)
+            Document document = Jsoup.connect(url)
                     .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31").timeout(40000).get();
             Elements elements = document.select("div.tv-landscape-con");
 //           Log.e(Config.TAG, elements.toString());
@@ -230,10 +230,10 @@ public class HtmlParserUtil {
     }
 
     //综艺
-    public static List<CoverModel> searchZongYi() {
+    public static List<CoverModel> searchZongYi(String url) {
         List<CoverModel> list = new ArrayList<>();
         try {
-            Document document = Jsoup.connect(Config.LE_SHI_URL)
+            Document document = Jsoup.connect(url)
                     .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31").timeout(40000).get();
             Elements elements = document.select("div.tv-landscape-con");
 //           Log.e(Config.TAG, elements.toString());
@@ -261,10 +261,10 @@ public class HtmlParserUtil {
 
 
     //教育
-    public static List<CoverModel> searchEducation() {
+    public static List<CoverModel> searchEducation(String url) {
         List<CoverModel> list = new ArrayList<>();
         try {
-            Document document = Jsoup.connect(Config.LE_SHI_URL)
+            Document document = Jsoup.connect(url)
                     .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31").timeout(40000).get();
             Elements elements = document.select("div.tv-landscape-con");
 //           Log.e(Config.TAG, elements.toString());
@@ -291,10 +291,10 @@ public class HtmlParserUtil {
 
 
     //微电影
-    public static List<CoverModel> searchWeiMovie() {
+    public static List<CoverModel> searchWeiMovie(String url) {
         List<CoverModel> list = new ArrayList<>();
         try {
-            Document document = Jsoup.connect(Config.LE_SHI_URL)
+            Document document = Jsoup.connect(url)
                     .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31").timeout(40000).get();
             Elements elements = document.select("div.tv-landscape-con");
 //           Log.e(Config.TAG, elements.toString());
@@ -320,10 +320,10 @@ public class HtmlParserUtil {
     }
 
     //音乐
-    public static List<CoverModel> searchMv() {
+    public static List<CoverModel> searchMv(String url) {
         List<CoverModel> list = new ArrayList<>();
         try {
-            Document document = Jsoup.connect(Config.LE_SHI_URL)
+            Document document = Jsoup.connect(url)
                     .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31").timeout(40000).get();
             Elements elements = document.select("div.tv-landscape-con");
 //           Log.e(Config.TAG, elements.toString());
@@ -350,10 +350,10 @@ public class HtmlParserUtil {
 
 
     //体育
-    public static List<CoverModel> searchSports() {
+    public static List<CoverModel> searchSports(String url) {
         List<CoverModel> list = new ArrayList<>();
         try {
-            Document document = Jsoup.connect(Config.LE_SHI_URL)
+            Document document = Jsoup.connect(url)
                     .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31").timeout(40000).get();
             Elements elements = document.select("ul.education-list").select("div.js-collect");
 //            Log.e(Config.TAG, elements.toString());
@@ -377,10 +377,10 @@ public class HtmlParserUtil {
 
 
     //全景
-    public static List<CoverModel> searchOverAllView() {
+    public static List<CoverModel> searchOverAllView(String url) {
         List<CoverModel> list = new ArrayList<>();
         try {
-            Document document = Jsoup.connect(Config.LE_SHI_URL)
+            Document document = Jsoup.connect(url)
                     .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31").timeout(40000).get();
             Elements elements = document.select("ul.education-list").select("div.js-collect");
 //            Log.e(Config.TAG, elements.toString());
@@ -405,10 +405,10 @@ public class HtmlParserUtil {
     }
 
     //全景
-    public static List<CoverModel> searchOverAllView2() {
+    public static List<CoverModel> searchOverAllView2(String url) {
         List<CoverModel> list = new ArrayList<>();
         try {
-            Document document = Jsoup.connect(Config.LE_SHI_URL)
+            Document document = Jsoup.connect(url)
                     .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31").timeout(40000).get();
             Elements elements1 = document.select("ul.education-list").select("div.hot-pic-text-box");
             for (int i = 7; i < elements1.size(); i++) {
@@ -418,6 +418,53 @@ public class HtmlParserUtil {
                 Log.e(Config.TAG, "评分===" + elements1.get(i).select("p.hot-pic-tit").select("span").first().text());
                 Log.e(Config.TAG, "desc==" + elements1.get(i).select("p.hot-pic-tip").text());
                 list.add(model);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+
+    //============================================电视剧数据===============================================
+
+
+    public static List<CoverModel> searchTvHotPlay(String url) {
+        List<CoverModel> list = new ArrayList<>();
+        try {
+            Document document = Jsoup.connect(url)
+                    .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31").timeout(40000).get();
+            Elements elements1 = document.select("ul.movie-guesslike-list");
+            for (int i = 0; i < elements1.size(); i++) {
+
+                for (int j = 0; j < elements1.select("div.js-collect").size(); j++) {
+                    CoverModel model = new CoverModel();
+                    model.setCoverVideoUrl(elements1.select("div.js-collect").get(j).select("a").attr("href"));
+                    model.setCoverTitle(elements1.select("div.js-collect").get(j).select("a").attr("title"));
+                    model.setCoverUrl(elements1.select("div.js-collect").get(j).select("a").select("img").attr("data-ersrc"));
+                    model.setCoverType("热播剧");
+                    Log.e(Config.TAG, "videoUrl====" + elements1.select("div.js-collect").get(j).select("a").attr("href"));
+                    Log.e(Config.TAG, "title====" + elements1.select("div.js-collect").get(j).select("a").attr("title"));
+                    Log.e(Config.TAG, "image====" + elements1.select("div.js-collect").get(j).select("a").select("img").attr("data-ersrc"));
+                    list.add(model);
+                }
+                for (int n = 0; n < elements1.select("p.hot-pic-text").size(); n++) {
+                    CoverModel model = new CoverModel();
+                    model.setCoverPage(elements1.select("p.hot-pic-text").get(n).select("a").text());
+                    Log.e(Config.TAG, "集数===" + elements1.select("p.hot-pic-text").get(n).select("a").text());
+                    list.add(model);
+                }
+
+                for (int m = 0; m < elements1.select("div.hot-pic-text-box").size(); m++) {
+                    CoverModel model = new CoverModel();
+                    model.setCoverScore(elements1.select("div.hot-pic-text-box").get(m).select("p.hot-pic-tit").select("span").first().text());
+                    model.setCoverDesc(elements1.select("div.hot-pic-text-box").get(m).select("p.hot-pic-tip").text());
+                    Log.e(Config.TAG, "评分===" + elements1.select("div.hot-pic-text-box").get(m).select("p.hot-pic-tit").select("span").first().text());
+                    Log.e(Config.TAG, "desc===" + elements1.select("div.hot-pic-text-box").get(m).select("p.hot-pic-tip").text());
+                    list.add(model);
+
+                }
+                break;
             }
         } catch (Exception e) {
             e.printStackTrace();

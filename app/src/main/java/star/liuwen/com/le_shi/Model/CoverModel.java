@@ -13,6 +13,7 @@ public class CoverModel implements Serializable {
     private String coverUrl;//封面
     private String coverPage;//集数
     private String coverScore;//评分
+    private String coverType;//类型
 
     public CoverModel() {
     }
@@ -80,5 +81,13 @@ public class CoverModel implements Serializable {
 
     public void setCoverScore(String coverScore) {
         this.coverScore = coverScore;
+    }
+
+    public String getCoverType() {
+        return coverType;
+    }
+
+    public void setCoverType(String coverType) {
+        this.coverType = coverType;
     }
 }
