@@ -25,7 +25,7 @@ import star.liuwen.com.le_shi.R;
 public class MainUIAction {
 
 
-    public static void searchCoverData(final Context context, final String url,final ActionCallBack callBack) {
+    public static void searchCoverData(final Context context, final String url, final ActionCallBack callBack) {
         Observable.create(new ObservableOnSubscribe<List<CoverModel>>() {
             @Override
             public void subscribe(ObservableEmitter<List<CoverModel>> e) throws Exception {
@@ -44,7 +44,7 @@ public class MainUIAction {
     }
 
 
-    public static void searchLovelyData(final Context context, final String url,final ActionCallBack callBack) {
+    public static void searchLovelyData(final Context context, final String url, final ActionCallBack callBack) {
         Observable.create(new ObservableOnSubscribe<List<CoverModel>>() {
             @Override
             public void subscribe(ObservableEmitter<List<CoverModel>> e) throws Exception {
@@ -62,7 +62,7 @@ public class MainUIAction {
         });
     }
 
-    public static void searchEditRecommendData(final Context context, final String url,final ActionCallBack callBack) {
+    public static void searchEditRecommendData(final Context context, final String url, final ActionCallBack callBack) {
         Observable.create(new ObservableOnSubscribe<List<CoverModel>>() {
             @Override
             public void subscribe(ObservableEmitter<List<CoverModel>> e) throws Exception {
@@ -80,7 +80,7 @@ public class MainUIAction {
         });
     }
 
-    public static void searchEditRecommendData2(final Context context, final String url,final ActionCallBack callBack) {
+    public static void searchEditRecommendData2(final Context context, final String url, final ActionCallBack callBack) {
         Observable.create(new ObservableOnSubscribe<List<CoverModel>>() {
             @Override
             public void subscribe(ObservableEmitter<List<CoverModel>> e) throws Exception {
@@ -97,11 +97,12 @@ public class MainUIAction {
             }
         });
     }
-    public static void searchTvData(final Context context,final String url, final ActionCallBack callBack) {
+
+    public static void searchTvData(final Context context, final String url, final int start, final int size, final String tvType, final ActionCallBack callBack) {
         Observable.create(new ObservableOnSubscribe<List<CoverModel>>() {
             @Override
             public void subscribe(ObservableEmitter<List<CoverModel>> e) throws Exception {
-                e.onNext(HtmlParserUtil.searchTV(url));
+                e.onNext(HtmlParserUtil.searchTV(url, start, size, tvType));
             }
         }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<List<CoverModel>>() {
             @Override
@@ -115,7 +116,7 @@ public class MainUIAction {
         });
     }
 
-    public static void searchMovieData(final Context context, final String url,final ActionCallBack callBack) {
+    public static void searchMovieData(final Context context, final String url, final ActionCallBack callBack) {
         Observable.create(new ObservableOnSubscribe<List<CoverModel>>() {
             @Override
             public void subscribe(ObservableEmitter<List<CoverModel>> e) throws Exception {
@@ -133,7 +134,7 @@ public class MainUIAction {
         });
     }
 
-    public static void searchDongManData(final Context context,final String url, final ActionCallBack callBack) {
+    public static void searchDongManData(final Context context, final String url, final ActionCallBack callBack) {
         Observable.create(new ObservableOnSubscribe<List<CoverModel>>() {
             @Override
             public void subscribe(ObservableEmitter<List<CoverModel>> e) throws Exception {
@@ -151,7 +152,7 @@ public class MainUIAction {
         });
     }
 
-    public static void searchZongYiData(final Context context,final String url, final ActionCallBack callBack) {
+    public static void searchZongYiData(final Context context, final String url, final ActionCallBack callBack) {
         Observable.create(new ObservableOnSubscribe<List<CoverModel>>() {
             @Override
             public void subscribe(ObservableEmitter<List<CoverModel>> e) throws Exception {
@@ -170,7 +171,7 @@ public class MainUIAction {
     }
 
 
-    public static void searchEducationData(final Context context,final String url, final ActionCallBack callBack) {
+    public static void searchEducationData(final Context context, final String url, final ActionCallBack callBack) {
         Observable.create(new ObservableOnSubscribe<List<CoverModel>>() {
             @Override
             public void subscribe(ObservableEmitter<List<CoverModel>> e) throws Exception {
@@ -188,7 +189,7 @@ public class MainUIAction {
         });
     }
 
-    public static void searchWeiMovieData(final Context context,final String url, final ActionCallBack callBack) {
+    public static void searchWeiMovieData(final Context context, final String url, final ActionCallBack callBack) {
         Observable.create(new ObservableOnSubscribe<List<CoverModel>>() {
             @Override
             public void subscribe(ObservableEmitter<List<CoverModel>> e) throws Exception {
@@ -206,7 +207,7 @@ public class MainUIAction {
         });
     }
 
-    public static void searchMVData(final Context context,final String url, final ActionCallBack callBack) {
+    public static void searchMVData(final Context context, final String url, final ActionCallBack callBack) {
         Observable.create(new ObservableOnSubscribe<List<CoverModel>>() {
             @Override
             public void subscribe(ObservableEmitter<List<CoverModel>> e) throws Exception {
@@ -224,7 +225,7 @@ public class MainUIAction {
         });
     }
 
-    public static void searchSportsData(final Context context,final String url, final ActionCallBack callBack) {
+    public static void searchSportsData(final Context context, final String url, final ActionCallBack callBack) {
         Observable.create(new ObservableOnSubscribe<List<CoverModel>>() {
             @Override
             public void subscribe(ObservableEmitter<List<CoverModel>> e) throws Exception {
@@ -243,7 +244,7 @@ public class MainUIAction {
     }
 
 
-    public static void searchOverAllViewData(final Context context,final String url, final ActionCallBack callBack) {
+    public static void searchOverAllViewData(final Context context, final String url, final ActionCallBack callBack) {
         Observable.create(new ObservableOnSubscribe<List<CoverModel>>() {
             @Override
             public void subscribe(ObservableEmitter<List<CoverModel>> e) throws Exception {
@@ -261,7 +262,7 @@ public class MainUIAction {
         });
     }
 
-    public static void searchOverAllViewData2(final Context context,final String url, final ActionCallBack callBack) {
+    public static void searchOverAllViewData2(final Context context, final String url, final ActionCallBack callBack) {
         Observable.create(new ObservableOnSubscribe<List<CoverModel>>() {
             @Override
             public void subscribe(ObservableEmitter<List<CoverModel>> e) throws Exception {

@@ -40,11 +40,11 @@ public class TvAction {
     }
 
 
-    public static void searchTvHotPlayData(final Context context, final String url, final ActionCallBack callBack) {
+    public static void searchTvHotPlayData(final Context context, final String url, final int start, final int size, final boolean isDate, final boolean isDate2, final boolean isDate3, final String tvType, final ActionCallBack callBack) {
         Observable.create(new ObservableOnSubscribe<List<CoverModel>>() {
             @Override
             public void subscribe(ObservableEmitter<List<CoverModel>> e) throws Exception {
-                e.onNext(HtmlParserUtil.searchTvHotPlay(url));
+                e.onNext(HtmlParserUtil.searchTvHotPlay(url, start,size,isDate, isDate2, isDate3, tvType));
             }
         }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<List<CoverModel>>() {
             @Override
@@ -57,5 +57,4 @@ public class TvAction {
             }
         });
     }
-
 }

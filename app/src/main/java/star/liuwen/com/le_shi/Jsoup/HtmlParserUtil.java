@@ -141,20 +141,20 @@ public class HtmlParserUtil {
     }
 
     //电视剧
-    public static List<CoverModel> searchTV(String url) {
+    public static List<CoverModel> searchTV(String url, int start, int size, String tvType) {
         List<CoverModel> list = new ArrayList<>();
         try {
             Document document = Jsoup.connect(url)
                     .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31").timeout(40000).get();
             Elements elements = document.select("div.tv-landscape-con");
-
-            for (int i = 0; i < 12; i++) {
+            for (int i = start; i < size; i++) {
                 CoverModel model = new CoverModel();
                 model.setCoverUrl(elements.get(i).select("div.js-collect").select("a").select("img").attr("data-ersrc"));
                 model.setCoverTitle(elements.get(i).select("div.js-collect").select("a").attr("title"));
                 model.setCoverVideoUrl(elements.get(i).select("div.js-collect").select("a").select("img").attr("src"));
                 model.setCoverDesc(elements.get(i).select("div.hot-pic-text-box").select("p.hot-pic-tip").text());
                 model.setCoverPage(elements.get(i).select("div.js-collect").select("p.hot-pic-text").select("a").text());
+                model.setCoverType(tvType);
                 Log.e(Config.TAG, "videoUrl====" + elements.get(i).select("div.js-collect").select("a").attr("href"));
                 Log.e(Config.TAG, "title====" + elements.get(i).select("div.js-collect").select("a").attr("title"));
                 Log.e(Config.TAG, "image====" + elements.get(i).select("div.js-collect").select("a").select("img").attr("data-ersrc"));
@@ -429,48 +429,55 @@ public class HtmlParserUtil {
     //============================================电视剧数据===============================================
 
 
-    public static List<CoverModel> searchTvHotPlay(String url) {
+    public static List<CoverModel> searchTvHotPlay(String url, int start, int size, boolean isDate1, boolean isDate2, boolean isDate3, String tvType) {
         List<CoverModel> list = new ArrayList<>();
         try {
             Document document = Jsoup.connect(url)
                     .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31").timeout(40000).get();
             Elements elements1 = document.select("ul.movie-guesslike-list");
-            for (int i = 0; i < elements1.size(); i++) {
-
-                for (int j = 0; j < elements1.select("div.js-collect").size(); j++) {
+            Elements elements2 = elements1.select("div.js-collect");
+            Elements elements3 = elements1.select("p.hot-pic-text");
+            Elements elements4 = elements1.select("div.hot-pic-text-box");
+            if (isDate1)
+                for (int j = start; j < size; j++) {
                     CoverModel model = new CoverModel();
-                    model.setCoverVideoUrl(elements1.select("div.js-collect").get(j).select("a").attr("href"));
-                    model.setCoverTitle(elements1.select("div.js-collect").get(j).select("a").attr("title"));
-                    model.setCoverUrl(elements1.select("div.js-collect").get(j).select("a").select("img").attr("data-ersrc"));
-                    model.setCoverType("热播剧");
-                    Log.e(Config.TAG, "videoUrl====" + elements1.select("div.js-collect").get(j).select("a").attr("href"));
-                    Log.e(Config.TAG, "title====" + elements1.select("div.js-collect").get(j).select("a").attr("title"));
-                    Log.e(Config.TAG, "image====" + elements1.select("div.js-collect").get(j).select("a").select("img").attr("data-ersrc"));
-                    list.add(model);
-                }
-                for (int n = 0; n < elements1.select("p.hot-pic-text").size(); n++) {
-                    CoverModel model = new CoverModel();
-                    model.setCoverPage(elements1.select("p.hot-pic-text").get(n).select("a").text());
-                    Log.e(Config.TAG, "集数===" + elements1.select("p.hot-pic-text").get(n).select("a").text());
+                    model.setCoverVideoUrl(elements2.get(j).select("a").attr("href"));
+                    model.setCoverTitle(elements2.get(j).select("a").attr("title"));
+                    model.setCoverUrl(elements2.get(j).select("a").select("img").attr("data-ersrc"));
+                    model.setCoverType(tvType);
+                    Log.e(Config.TAG, "videoUrl====" + elements2.get(j).select("a").attr("href"));
+                    Log.e(Config.TAG, "title====" + elements2.get(j).select("a").attr("title"));
+                    Log.e(Config.TAG, "image====" + elements2.get(j).select("a").select("img").attr("data-ersrc"));
                     list.add(model);
                 }
 
-                for (int m = 0; m < elements1.select("div.hot-pic-text-box").size(); m++) {
+            if (isDate2)
+                for (int n = start; n < size; n++) {
                     CoverModel model = new CoverModel();
-                    model.setCoverScore(elements1.select("div.hot-pic-text-box").get(m).select("p.hot-pic-tit").select("span").first().text());
-                    model.setCoverDesc(elements1.select("div.hot-pic-text-box").get(m).select("p.hot-pic-tip").text());
-                    Log.e(Config.TAG, "评分===" + elements1.select("div.hot-pic-text-box").get(m).select("p.hot-pic-tit").select("span").first().text());
-                    Log.e(Config.TAG, "desc===" + elements1.select("div.hot-pic-text-box").get(m).select("p.hot-pic-tip").text());
+                    model.setCoverType(tvType);
+                    model.setCoverPage(elements3.get(n).select("a").text());
+                    Log.e(Config.TAG, "集数===" + elements3.get(n).select("a").text());
                     list.add(model);
-
                 }
-                break;
-            }
+
+
+            if (isDate3)
+                for (int m = start; m < size; m++) {
+                    CoverModel model = new CoverModel();
+                    model.setCoverType(tvType);
+                    model.setCoverScore(elements4.get(m).select("p.hot-pic-tit").select("span").first().text());
+                    model.setCoverDesc(elements4.get(m).select("p.hot-pic-tip").text());
+                    Log.e(Config.TAG, "评分===" + elements4.get(m).select("p.hot-pic-tit").select("span").first().text());
+                    Log.e(Config.TAG, "desc===" + elements4.get(m).select("p.hot-pic-tip").text());
+                    list.add(model);
+                }
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }
         return list;
     }
 
-
+    //
 }
