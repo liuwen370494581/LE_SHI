@@ -429,7 +429,7 @@ public class HtmlParserUtil {
     //============================================电视剧数据===============================================
 
 
-    public static List<CoverModel> searchTvHotPlay(String url, int start, int size, boolean isDate1, boolean isDate2, boolean isDate3, String tvType) {
+    public static List<CoverModel> searchTvHotPlay(String url, int start, int size, boolean isDate1, boolean isDate2, String tvType) {
         List<CoverModel> list = new ArrayList<>();
         try {
             Document document = Jsoup.connect(url)
@@ -452,16 +452,6 @@ public class HtmlParserUtil {
                 }
 
             if (isDate2)
-                for (int n = start; n < size; n++) {
-                    CoverModel model = new CoverModel();
-                    model.setCoverType(tvType);
-                    model.setCoverPage(elements3.get(n).select("a").text());
-                    Log.e(Config.TAG, "集数===" + elements3.get(n).select("a").text());
-                    list.add(model);
-                }
-
-
-            if (isDate3)
                 for (int m = start; m < size; m++) {
                     CoverModel model = new CoverModel();
                     model.setCoverType(tvType);
