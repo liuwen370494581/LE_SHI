@@ -62,11 +62,11 @@ public class MainUIAction {
         });
     }
 
-    public static void searchEditRecommendData(final Context context, final String url, final ActionCallBack callBack) {
+    public static void searchEditRecommendData(final Context context, final String url, final String type, final ActionCallBack callBack) {
         Observable.create(new ObservableOnSubscribe<List<CoverModel>>() {
             @Override
             public void subscribe(ObservableEmitter<List<CoverModel>> e) throws Exception {
-                e.onNext(HtmlParserUtil.searchEditRecommend(url));
+                e.onNext(HtmlParserUtil.searchEditRecommend(url, type));
             }
         }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<List<CoverModel>>() {
             @Override
@@ -80,11 +80,11 @@ public class MainUIAction {
         });
     }
 
-    public static void searchEditRecommendData2(final Context context, final String url, final ActionCallBack callBack) {
+    public static void searchEditRecommendData2(final Context context, final String url, final String type, final ActionCallBack callBack) {
         Observable.create(new ObservableOnSubscribe<List<CoverModel>>() {
             @Override
             public void subscribe(ObservableEmitter<List<CoverModel>> e) throws Exception {
-                e.onNext(HtmlParserUtil.searchEditRecommend2(url));
+                e.onNext(HtmlParserUtil.searchEditRecommend2(url, type));
             }
         }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<List<CoverModel>>() {
             @Override
@@ -116,11 +116,11 @@ public class MainUIAction {
         });
     }
 
-    public static void searchMovieData(final Context context, final String url, final ActionCallBack callBack) {
+    public static void searchMovieData(final Context context, final String url, final String type, final ActionCallBack callBack) {
         Observable.create(new ObservableOnSubscribe<List<CoverModel>>() {
             @Override
             public void subscribe(ObservableEmitter<List<CoverModel>> e) throws Exception {
-                e.onNext(HtmlParserUtil.searchMovie(url));
+                e.onNext(HtmlParserUtil.searchMovie(url, type));
             }
         }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<List<CoverModel>>() {
             @Override
@@ -134,11 +134,11 @@ public class MainUIAction {
         });
     }
 
-    public static void searchDongManData(final Context context, final String url, final ActionCallBack callBack) {
+    public static void searchDongManData(final Context context, final String url, final String type, final ActionCallBack callBack) {
         Observable.create(new ObservableOnSubscribe<List<CoverModel>>() {
             @Override
             public void subscribe(ObservableEmitter<List<CoverModel>> e) throws Exception {
-                e.onNext(HtmlParserUtil.searchDongMan(url));
+                e.onNext(HtmlParserUtil.searchDongMan(url, type));
             }
         }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<List<CoverModel>>() {
             @Override
@@ -152,84 +152,11 @@ public class MainUIAction {
         });
     }
 
-    public static void searchZongYiData(final Context context, final String url, final ActionCallBack callBack) {
+    public static void searchZongYiData(final Context context, final String url, final String type, final ActionCallBack callBack) {
         Observable.create(new ObservableOnSubscribe<List<CoverModel>>() {
             @Override
             public void subscribe(ObservableEmitter<List<CoverModel>> e) throws Exception {
-                e.onNext(HtmlParserUtil.searchZongYi(url));
-            }
-        }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<List<CoverModel>>() {
-            @Override
-            public void accept(@NonNull List<CoverModel> models) throws Exception {
-                if (models != null && models.size() != 0) {
-                    callBack.ok(models);
-                } else {
-                    callBack.failed(context.getResources().getString(R.string.find_no_result));
-                }
-            }
-        });
-    }
-
-
-    public static void searchEducationData(final Context context, final String url, final ActionCallBack callBack) {
-        Observable.create(new ObservableOnSubscribe<List<CoverModel>>() {
-            @Override
-            public void subscribe(ObservableEmitter<List<CoverModel>> e) throws Exception {
-                e.onNext(HtmlParserUtil.searchEducation(url));
-            }
-        }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<List<CoverModel>>() {
-            @Override
-            public void accept(@NonNull List<CoverModel> models) throws Exception {
-                if (models != null && models.size() != 0) {
-                    callBack.ok(models);
-                } else {
-                    callBack.failed(context.getResources().getString(R.string.find_no_result));
-                }
-            }
-        });
-    }
-
-    public static void searchWeiMovieData(final Context context, final String url, final ActionCallBack callBack) {
-        Observable.create(new ObservableOnSubscribe<List<CoverModel>>() {
-            @Override
-            public void subscribe(ObservableEmitter<List<CoverModel>> e) throws Exception {
-                e.onNext(HtmlParserUtil.searchWeiMovie(url));
-            }
-        }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<List<CoverModel>>() {
-            @Override
-            public void accept(@NonNull List<CoverModel> models) throws Exception {
-                if (models != null && models.size() != 0) {
-                    callBack.ok(models);
-                } else {
-                    callBack.failed(context.getResources().getString(R.string.find_no_result));
-                }
-            }
-        });
-    }
-
-    public static void searchMVData(final Context context, final String url, final ActionCallBack callBack) {
-        Observable.create(new ObservableOnSubscribe<List<CoverModel>>() {
-            @Override
-            public void subscribe(ObservableEmitter<List<CoverModel>> e) throws Exception {
-                e.onNext(HtmlParserUtil.searchMv(url));
-            }
-        }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<List<CoverModel>>() {
-            @Override
-            public void accept(@NonNull List<CoverModel> models) throws Exception {
-                if (models != null && models.size() != 0) {
-                    callBack.ok(models);
-                } else {
-                    callBack.failed(context.getResources().getString(R.string.find_no_result));
-                }
-            }
-        });
-    }
-
-    public static void searchSportsData(final Context context, final String url, final ActionCallBack callBack) {
-        Observable.create(new ObservableOnSubscribe<List<CoverModel>>() {
-            @Override
-            public void subscribe(ObservableEmitter<List<CoverModel>> e) throws Exception {
-                e.onNext(HtmlParserUtil.searchSports(url));
+                e.onNext(HtmlParserUtil.searchZongYi(url, type));
             }
         }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<List<CoverModel>>() {
             @Override
@@ -244,11 +171,11 @@ public class MainUIAction {
     }
 
 
-    public static void searchOverAllViewData(final Context context, final String url, final ActionCallBack callBack) {
+    public static void searchEducationData(final Context context, final String url, final String type, final ActionCallBack callBack) {
         Observable.create(new ObservableOnSubscribe<List<CoverModel>>() {
             @Override
             public void subscribe(ObservableEmitter<List<CoverModel>> e) throws Exception {
-                e.onNext(HtmlParserUtil.searchOverAllView(url));
+                e.onNext(HtmlParserUtil.searchEducation(url, type));
             }
         }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<List<CoverModel>>() {
             @Override
@@ -262,11 +189,84 @@ public class MainUIAction {
         });
     }
 
-    public static void searchOverAllViewData2(final Context context, final String url, final ActionCallBack callBack) {
+    public static void searchWeiMovieData(final Context context, final String url, final String type, final ActionCallBack callBack) {
         Observable.create(new ObservableOnSubscribe<List<CoverModel>>() {
             @Override
             public void subscribe(ObservableEmitter<List<CoverModel>> e) throws Exception {
-                e.onNext(HtmlParserUtil.searchOverAllView2(url));
+                e.onNext(HtmlParserUtil.searchWeiMovie(url, type));
+            }
+        }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<List<CoverModel>>() {
+            @Override
+            public void accept(@NonNull List<CoverModel> models) throws Exception {
+                if (models != null && models.size() != 0) {
+                    callBack.ok(models);
+                } else {
+                    callBack.failed(context.getResources().getString(R.string.find_no_result));
+                }
+            }
+        });
+    }
+
+    public static void searchMVData(final Context context, final String url, final String type, final ActionCallBack callBack) {
+        Observable.create(new ObservableOnSubscribe<List<CoverModel>>() {
+            @Override
+            public void subscribe(ObservableEmitter<List<CoverModel>> e) throws Exception {
+                e.onNext(HtmlParserUtil.searchMv(url, type));
+            }
+        }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<List<CoverModel>>() {
+            @Override
+            public void accept(@NonNull List<CoverModel> models) throws Exception {
+                if (models != null && models.size() != 0) {
+                    callBack.ok(models);
+                } else {
+                    callBack.failed(context.getResources().getString(R.string.find_no_result));
+                }
+            }
+        });
+    }
+
+    public static void searchSportsData(final Context context, final String url, final String type, final ActionCallBack callBack) {
+        Observable.create(new ObservableOnSubscribe<List<CoverModel>>() {
+            @Override
+            public void subscribe(ObservableEmitter<List<CoverModel>> e) throws Exception {
+                e.onNext(HtmlParserUtil.searchSports(url, type));
+            }
+        }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<List<CoverModel>>() {
+            @Override
+            public void accept(@NonNull List<CoverModel> models) throws Exception {
+                if (models != null && models.size() != 0) {
+                    callBack.ok(models);
+                } else {
+                    callBack.failed(context.getResources().getString(R.string.find_no_result));
+                }
+            }
+        });
+    }
+
+
+    public static void searchOverAllViewData(final Context context, final String url, final String type, final ActionCallBack callBack) {
+        Observable.create(new ObservableOnSubscribe<List<CoverModel>>() {
+            @Override
+            public void subscribe(ObservableEmitter<List<CoverModel>> e) throws Exception {
+                e.onNext(HtmlParserUtil.searchOverAllView(url, type));
+            }
+        }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<List<CoverModel>>() {
+            @Override
+            public void accept(@NonNull List<CoverModel> models) throws Exception {
+                if (models != null && models.size() != 0) {
+                    callBack.ok(models);
+                } else {
+                    callBack.failed(context.getResources().getString(R.string.find_no_result));
+                }
+            }
+        });
+    }
+
+    public static void searchOverAllViewData2(final Context context, final String url, final String type, final ActionCallBack callBack) {
+        Observable.create(new ObservableOnSubscribe<List<CoverModel>>() {
+            @Override
+            public void subscribe(ObservableEmitter<List<CoverModel>> e) throws Exception {
+                e.onNext(HtmlParserUtil.searchOverAllView2(url, type));
             }
         }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<List<CoverModel>>() {
             @Override

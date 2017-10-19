@@ -21,51 +21,53 @@ import star.liuwen.com.le_shi.Model.CoverModel;
 import star.liuwen.com.le_shi.R;
 import star.liuwen.com.le_shi.Utils.GlideUtils;
 import star.liuwen.com.le_shi.Utils.ToastUtils;
+import star.liuwen.com.le_shi.View.CornerLabelView;
 
 /**
- * Created by liuwen on 2017/10/18.
+ * Created by liuwen on 2017/10/19.
  */
-public class TvUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-
-
-    private final int BANNER_VIEW_TYPE = 0;
-    private final int CHANNEL_VIEW_TYPE = 1;
-    private final int HOT_PLAY_VIEW_TYPE = 2;//热播剧
-    private final int POPULAR_VIEW_TYPE = 3;//最受欢迎
-    private final int CITY_LOVE_VIEW_TYPE = 4;//都市爱情
-    private final int XUAN_NING_VIEW_TYPE = 5;//悬拟
-    private final int NETWORK_VIEW_TYPE = 6;//网络
-    private final int KANG_WAR_TYPE = 7;//抗战
-    private final int END_VIEW_TYPE = 8;
-    private Context mContext;
-    private int itemWidth;
+public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private List<HashMap<String, Object>> channelList;//频道数据
     private List<CoverModel> coverList;//封面数据
-    private List<CoverModel> hotPlayList;
-    private List<CoverModel> popularList;
-    private List<CoverModel> popularList2;
-    private List<CoverModel> cityLoveList;
-    private List<CoverModel> cityLoveList2;
-    private List<CoverModel> xuanNingList;
-    private List<CoverModel> xuanNingList2;
-    private List<CoverModel> netWorkList;
-    private List<CoverModel> kangWarList;
+    private List<CoverModel> vipList;//会员
+    private List<CoverModel> vipList2;
+    private List<CoverModel> mostPopularList;//最受欢迎
+    private List<CoverModel> mostPopularList2;
+    private List<CoverModel> huaYuList; //华语
+    private List<CoverModel> huaYuList2;
+    private List<CoverModel> ouMeiList;//欧美
+    private List<CoverModel> ouMeiList2;
+    private List<CoverModel> whiteLoveList;//白色爱情
+    private List<CoverModel> dongHuaList;//动漫
+    private int itemWidth;
+
+    private final int BANNER_VIEW_TYPE = 0;
+    private final int CHANNEL_VIEW_TYPE = 1;
+    private final int ViP_VIEW_TYPE = 2;//Vip
+    private final int POPULAR_VIEW_TYPE = 3;//最受欢迎
+    private final int HUY_YU_VIEW_TYPE = 4;//华语
+    private final int OU_MEI_VIEW_TYPE = 5;//欧美
+    private final int WHITE_LOVER_VIEW_TYPE = 6;//白色爱情
+    private final int DOAG_HUA_TYPE = 7;//动画
+    private final int END_VIEW_TYPE = 8;
+    private Context mContext;
 
 
-    public TvUIAdapter(Context context, List<HashMap<String, Object>> channelList, List<CoverModel> coverList, List<CoverModel> hotPlayList, List<CoverModel> popularList, List<CoverModel> popularList2, List<CoverModel> cityLoveList, List<CoverModel> cityLoveList2, List<CoverModel> xuanNingList, List<CoverModel> xuanNingList2, List<CoverModel> netWorkList, List<CoverModel> kangWarList, int itemWidth) {
+    public MovieAdapter(Context context, List<HashMap<String, Object>> channelList, List<CoverModel> coverList, List<CoverModel> vipList, List<CoverModel> vipList2, List<CoverModel> mostPopularList, List<CoverModel> mostPopularList2, List<CoverModel> huaYuList, List<CoverModel> huaYuList2, List<CoverModel> ouMeiList, List<CoverModel> ouMeiList2, List<CoverModel> whiteLoveList, List<CoverModel> dongHuaList, int itemWidth) {
         mContext = context;
         this.channelList = channelList;
         this.coverList = coverList;
-        this.hotPlayList = hotPlayList;
-        this.popularList = popularList;
-        this.popularList2 = popularList2;
-        this.cityLoveList = cityLoveList;
-        this.cityLoveList2 = cityLoveList2;
-        this.xuanNingList = xuanNingList;
-        this.xuanNingList2 = xuanNingList2;
-        this.netWorkList = netWorkList;
-        this.kangWarList = kangWarList;
+        this.vipList = vipList;
+        this.vipList2 = vipList2;
+        this.mostPopularList = mostPopularList;
+        this.mostPopularList2 = mostPopularList2;
+        this.huaYuList = huaYuList;
+        this.huaYuList2 = huaYuList2;
+        this.ouMeiList = ouMeiList;
+        this.ouMeiList2 = ouMeiList2;
+        this.whiteLoveList = whiteLoveList;
+        this.dongHuaList = dongHuaList;
         this.itemWidth = itemWidth;
     }
 
@@ -76,17 +78,17 @@ public class TvUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         } else if (position == 1) {
             return CHANNEL_VIEW_TYPE;
         } else if (position == 2) {
-            return HOT_PLAY_VIEW_TYPE;
+            return ViP_VIEW_TYPE;
         } else if (position == 3) {
             return POPULAR_VIEW_TYPE;
         } else if (position == 4) {
-            return CITY_LOVE_VIEW_TYPE;
+            return HUY_YU_VIEW_TYPE;
         } else if (position == 5) {
-            return XUAN_NING_VIEW_TYPE;
+            return OU_MEI_VIEW_TYPE;
         } else if (position == 6) {
-            return NETWORK_VIEW_TYPE;
+            return WHITE_LOVER_VIEW_TYPE;
         } else if (position == 7) {
-            return KANG_WAR_TYPE;
+            return DOAG_HUA_TYPE;
         } else {
             return END_VIEW_TYPE;
         }
@@ -101,87 +103,96 @@ public class TvUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         notifyDataSetChanged();
     }
 
-    public void updateHotPlayList(List<CoverModel> list) {
+    public void updateVipList(List<CoverModel> list) {
         if (isListNotEmpty(list)) {
-            hotPlayList = list;
+            vipList = list;
         } else {
-            hotPlayList.clear();
+            vipList.clear();
+        }
+        notifyDataSetChanged();
+    }
+
+    public void updateVipList2(List<CoverModel> list) {
+        if (isListNotEmpty(list)) {
+            vipList2 = list;
+        } else {
+            vipList2.clear();
         }
         notifyDataSetChanged();
     }
 
     public void updatePopularList(List<CoverModel> list) {
         if (isListNotEmpty(list)) {
-            popularList = list;
+            mostPopularList = list;
         } else {
-            popularList.clear();
+            mostPopularList.clear();
         }
         notifyDataSetChanged();
     }
 
     public void updatePopularList2(List<CoverModel> list) {
         if (isListNotEmpty(list)) {
-            popularList2 = list;
+            mostPopularList2 = list;
         } else {
-            popularList2.clear();
+            mostPopularList2.clear();
         }
         notifyDataSetChanged();
     }
 
 
-    public void updateCityLoveList(List<CoverModel> list) {
+    public void updateHuaYuList(List<CoverModel> list) {
         if (isListNotEmpty(list)) {
-            cityLoveList = list;
+            huaYuList = list;
         } else {
-            cityLoveList.clear();
+            huaYuList.clear();
         }
         notifyDataSetChanged();
     }
 
-    public void updateCityLoveList2(List<CoverModel> list) {
+    public void updateHuaYuList2(List<CoverModel> list) {
         if (isListNotEmpty(list)) {
-            cityLoveList2 = list;
+            huaYuList2 = list;
         } else {
-            cityLoveList2.clear();
-        }
-        notifyDataSetChanged();
-    }
-
-
-    public void updateXuanNingList(List<CoverModel> list) {
-        if (isListNotEmpty(list)) {
-            xuanNingList = list;
-        } else {
-            xuanNingList.clear();
+            huaYuList2.clear();
         }
         notifyDataSetChanged();
     }
 
 
-    public void updateXuanNingList2(List<CoverModel> list) {
+    public void updateOuMeiList(List<CoverModel> list) {
         if (isListNotEmpty(list)) {
-            xuanNingList2 = list;
+            ouMeiList = list;
         } else {
-            xuanNingList2.clear();
+            ouMeiList.clear();
         }
         notifyDataSetChanged();
     }
 
 
-    public void updateNetWorkList(List<CoverModel> list) {
+    public void updateOuMeiList2(List<CoverModel> list) {
         if (isListNotEmpty(list)) {
-            netWorkList = list;
+            ouMeiList2 = list;
         } else {
-            netWorkList.clear();
+            ouMeiList2.clear();
         }
         notifyDataSetChanged();
     }
 
-    public void updateKangWarList(List<CoverModel> list) {
+
+    public void updateWhiteLoveList(List<CoverModel> list) {
         if (isListNotEmpty(list)) {
-            kangWarList = list;
+            whiteLoveList = list;
         } else {
-            kangWarList.clear();
+            whiteLoveList.clear();
+        }
+        notifyDataSetChanged();
+    }
+
+    public void updateDongHuaList(List<CoverModel> list) {
+        if (isListNotEmpty(list)) {
+            dongHuaList = list;
+        } else {
+            dongHuaList.clear();
         }
         notifyDataSetChanged();
     }
@@ -200,30 +211,30 @@ public class TvUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         } else if (viewType == CHANNEL_VIEW_TYPE) {
             view = getView(R.layout.channel_recycler_view);
             return new HomeUIAdapter.ChannelHolder(view);
-        } else if (viewType == HOT_PLAY_VIEW_TYPE) {
+        } else if (viewType == ViP_VIEW_TYPE) {
             view = getView(R.layout.item_common);
-            return new HotPlayHolder(view);
+            return new VipHolder(view);
         } else if (viewType == POPULAR_VIEW_TYPE) {
             view = getView(R.layout.item_common);
             return new PopularHolder(view);
-        } else if (viewType == CITY_LOVE_VIEW_TYPE) {
+        } else if (viewType == HUY_YU_VIEW_TYPE) {
             view = getView(R.layout.item_common);
-            return new CityLoveHolder(view);
-        } else if (viewType == XUAN_NING_VIEW_TYPE) {
+            return new HuaYuHolder(view);
+        } else if (viewType == OU_MEI_VIEW_TYPE) {
             view = getView(R.layout.item_common);
-            return new XuanNingHolder(view);
-        } else if (viewType == NETWORK_VIEW_TYPE) {
+            return new OuMeiHolder(view);
+        } else if (viewType == WHITE_LOVER_VIEW_TYPE) {
             view = getView(R.layout.item_common);
-            return new NetWorkHolder(view);
-        } else if (viewType == KANG_WAR_TYPE) {
+            return new WhiteLoveHolder(view);
+        } else if (viewType == DOAG_HUA_TYPE) {
             view = getView(R.layout.item_common);
-            return new KangWarHolder(view);
+            return new DongHuaHolder(view);
         } else {
             view = getView(R.layout.item_end);
             return new HomeUIAdapter.EndHolder(view);
         }
-    }
 
+    }
 
     private View getView(int view) {
         View view1 = View.inflate(mContext, view, null);
@@ -249,69 +260,68 @@ public class TvUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     ToastUtils.showToast(mContext, channelList.get(position).get("title").toString());
                 }
             });
-        } else if (holder instanceof HotPlayHolder) {
-            HotPlayHolder hotPlayHolder = (HotPlayHolder) holder;
-            CommAdapter commAdapter = new CommAdapter(hotPlayHolder.mRecyclerView);
-            final GridLayoutManager gridLayoutManager = new GridLayoutManager(mContext, 2, LinearLayoutManager.VERTICAL, false);
-            hotPlayHolder.mRecyclerView.setLayoutManager(gridLayoutManager);
-            commAdapter.setData(hotPlayList);
-            hotPlayHolder.mRecyclerView.setAdapter(commAdapter);
-            if (hotPlayList.size() != 0) {
-                hotPlayHolder.ReHead.setVisibility(View.VISIBLE);
-                hotPlayHolder.tvType.setText(hotPlayList.get(0).getCoverType());
+        } else if (holder instanceof VipHolder) {
+            VipHolder vipHolder = (VipHolder) holder;
+            PopAndCityLoveAndXuanningAdapter mAdapter = new PopAndCityLoveAndXuanningAdapter(mContext, vipList, vipList2, false);
+            final GridLayoutManager gridLayoutManager = new GridLayoutManager(mContext, 3, LinearLayoutManager.VERTICAL, false);
+            vipHolder.mRecyclerView.setLayoutManager(gridLayoutManager);
+            vipHolder.mRecyclerView.setAdapter(mAdapter);
+            if (vipList.size() != 0) {
+                vipHolder.ReHead.setVisibility(View.VISIBLE);
+                vipHolder.tvType.setText(vipList.get(0).getCoverType());
             }
         } else if (holder instanceof PopularHolder) {
             PopularHolder popularHolder = (PopularHolder) holder;
-            PopAndCityLoveAndXuanningAdapter mAdapter = new PopAndCityLoveAndXuanningAdapter(mContext, popularList, popularList2,true);
-            final GridLayoutManager gridLayoutManager = new GridLayoutManager(mContext, 2, LinearLayoutManager.VERTICAL, false);
+            PopAndCityLoveAndXuanningAdapter mAdapter = new PopAndCityLoveAndXuanningAdapter(mContext, mostPopularList, mostPopularList2, false);
+            final GridLayoutManager gridLayoutManager = new GridLayoutManager(mContext, 3, LinearLayoutManager.VERTICAL, false);
             popularHolder.mRecyclerView.setLayoutManager(gridLayoutManager);
             popularHolder.mRecyclerView.setAdapter(mAdapter);
-            if (popularList.size() != 0) {
+            if (mostPopularList.size() != 0) {
                 popularHolder.ReHead.setVisibility(View.VISIBLE);
-                popularHolder.tvType.setText(popularList.get(0).getCoverType());
+                popularHolder.tvType.setText(mostPopularList.get(0).getCoverType());
             }
 
-        } else if (holder instanceof CityLoveHolder) {
-            CityLoveHolder cityLoveHolder = (CityLoveHolder) holder;
-            PopAndCityLoveAndXuanningAdapter mAdapter = new PopAndCityLoveAndXuanningAdapter(mContext, cityLoveList, cityLoveList2,true);
-            final GridLayoutManager gridLayoutManager = new GridLayoutManager(mContext, 2, LinearLayoutManager.VERTICAL, false);
-            cityLoveHolder.mRecyclerView.setLayoutManager(gridLayoutManager);
-            cityLoveHolder.mRecyclerView.setAdapter(mAdapter);
-            if (cityLoveList.size() != 0) {
-                cityLoveHolder.ReHead.setVisibility(View.VISIBLE);
-                cityLoveHolder.tvType.setText(cityLoveList.get(0).getCoverType());
+        } else if (holder instanceof HuaYuHolder) {
+            HuaYuHolder huaYuHolder = (HuaYuHolder) holder;
+            PopAndCityLoveAndXuanningAdapter mAdapter = new PopAndCityLoveAndXuanningAdapter(mContext, huaYuList, huaYuList2, false);
+            final GridLayoutManager gridLayoutManager = new GridLayoutManager(mContext, 3, LinearLayoutManager.VERTICAL, false);
+            huaYuHolder.mRecyclerView.setLayoutManager(gridLayoutManager);
+            huaYuHolder.mRecyclerView.setAdapter(mAdapter);
+            if (huaYuList.size() != 0) {
+                huaYuHolder.ReHead.setVisibility(View.VISIBLE);
+                huaYuHolder.tvType.setText(huaYuList.get(0).getCoverType());
             }
-        } else if (holder instanceof XuanNingHolder) {
-            XuanNingHolder xuanNingHolder = (XuanNingHolder) holder;
-            PopAndCityLoveAndXuanningAdapter mAdapter = new PopAndCityLoveAndXuanningAdapter(mContext, xuanNingList, xuanNingList2,true);
-            final GridLayoutManager gridLayoutManager = new GridLayoutManager(mContext, 2, LinearLayoutManager.VERTICAL, false);
-            xuanNingHolder.mRecyclerView.setLayoutManager(gridLayoutManager);
-            xuanNingHolder.mRecyclerView.setAdapter(mAdapter);
-            if (xuanNingList.size() != 0) {
-                xuanNingHolder.ReHead.setVisibility(View.VISIBLE);
-                xuanNingHolder.tvType.setText(xuanNingList.get(0).getCoverType());
+        } else if (holder instanceof OuMeiHolder) {
+            OuMeiHolder ouMeiHolder = (OuMeiHolder) holder;
+            PopAndCityLoveAndXuanningAdapter mAdapter = new PopAndCityLoveAndXuanningAdapter(mContext, ouMeiList, ouMeiList2, false);
+            final GridLayoutManager gridLayoutManager = new GridLayoutManager(mContext, 3, LinearLayoutManager.VERTICAL, false);
+            ouMeiHolder.mRecyclerView.setLayoutManager(gridLayoutManager);
+            ouMeiHolder.mRecyclerView.setAdapter(mAdapter);
+            if (ouMeiList.size() != 0) {
+                ouMeiHolder.ReHead.setVisibility(View.VISIBLE);
+                ouMeiHolder.tvType.setText(ouMeiList.get(0).getCoverType());
             }
-        } else if (holder instanceof NetWorkHolder) {
-            NetWorkHolder netWorkHolder = (NetWorkHolder) holder;
-            CommAdapter commAdapter = new CommAdapter(netWorkHolder.mRecyclerView);
+        } else if (holder instanceof WhiteLoveHolder) {
+            WhiteLoveHolder whiteLoveHolder = (WhiteLoveHolder) holder;
+            CommAdapter commAdapter = new CommAdapter(whiteLoveHolder.mRecyclerView);
             final GridLayoutManager gridLayoutManager = new GridLayoutManager(mContext, 2, LinearLayoutManager.VERTICAL, false);
-            netWorkHolder.mRecyclerView.setLayoutManager(gridLayoutManager);
-            commAdapter.setData(netWorkList);
-            if (netWorkList.size() != 0) {
-                netWorkHolder.ReHead.setVisibility(View.VISIBLE);
-                netWorkHolder.tvType.setText(netWorkList.get(0).getCoverType());
+            whiteLoveHolder.mRecyclerView.setLayoutManager(gridLayoutManager);
+            commAdapter.setData(whiteLoveList);
+            if (whiteLoveList.size() != 0) {
+                whiteLoveHolder.ReHead.setVisibility(View.VISIBLE);
+                whiteLoveHolder.tvType.setText(whiteLoveList.get(0).getCoverType());
             }
-            netWorkHolder.mRecyclerView.setAdapter(commAdapter);
-        } else if (holder instanceof KangWarHolder) {
-            KangWarHolder kangWarHolder = (KangWarHolder) holder;
-            CommAdapter commAdapter = new CommAdapter(kangWarHolder.mRecyclerView);
+            whiteLoveHolder.mRecyclerView.setAdapter(commAdapter);
+        } else if (holder instanceof DongHuaHolder) {
+            DongHuaHolder dongHuaHolder = (DongHuaHolder) holder;
+            CommAdapter commAdapter = new CommAdapter(dongHuaHolder.mRecyclerView);
             final GridLayoutManager gridLayoutManager = new GridLayoutManager(mContext, 2, LinearLayoutManager.VERTICAL, false);
-            kangWarHolder.mRecyclerView.setLayoutManager(gridLayoutManager);
-            commAdapter.setData(kangWarList);
-            kangWarHolder.mRecyclerView.setAdapter(commAdapter);
-            if (kangWarList.size() != 0) {
-                kangWarHolder.ReHead.setVisibility(View.VISIBLE);
-                kangWarHolder.tvType.setText(kangWarList.get(0).getCoverType());
+            dongHuaHolder.mRecyclerView.setLayoutManager(gridLayoutManager);
+            commAdapter.setData(dongHuaList);
+            dongHuaHolder.mRecyclerView.setAdapter(commAdapter);
+            if (dongHuaList.size() != 0) {
+                dongHuaHolder.ReHead.setVisibility(View.VISIBLE);
+                dongHuaHolder.tvType.setText(dongHuaList.get(0).getCoverType());
             }
         } else if (holder instanceof HomeUIAdapter.EndHolder) {
             HomeUIAdapter.EndHolder endHolder = (HomeUIAdapter.EndHolder) holder;
@@ -325,6 +335,11 @@ public class TvUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
 
+    @Override
+    public int getItemCount() {
+        return 8;
+    }
+
 
     private void setBanner(HomeUIAdapter.BannerHolder channelHolder) {
         BannerAdapter mBannerAdapter = new BannerAdapter(mContext, coverList);
@@ -333,24 +348,19 @@ public class TvUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         channelHolder.indicator.setViewPager(channelHolder.viewpager);
     }
 
-
-    @Override
-    public int getItemCount() {
-        return 8;
-    }
-
-    public static class HotPlayHolder extends RecyclerView.ViewHolder {
+    public static class VipHolder extends RecyclerView.ViewHolder {
         RecyclerView mRecyclerView;
         RelativeLayout ReHead;
         private TextView tvType;
 
-        public HotPlayHolder(View itemView) {
+        public VipHolder(View itemView) {
             super(itemView);
             mRecyclerView = (RecyclerView) itemView.findViewById(R.id.common_recycler_view);
             ReHead = (RelativeLayout) itemView.findViewById(R.id.re_show);
             tvType = (TextView) itemView.findViewById(R.id.tv_title);
         }
     }
+
 
     public static class PopularHolder extends RecyclerView.ViewHolder {
         RecyclerView mRecyclerView;
@@ -365,12 +375,13 @@ public class TvUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
 
-    public static class CityLoveHolder extends RecyclerView.ViewHolder {
+
+    public static class HuaYuHolder extends RecyclerView.ViewHolder {
         RecyclerView mRecyclerView;
         RelativeLayout ReHead;
         private TextView tvType;
 
-        public CityLoveHolder(View itemView) {
+        public HuaYuHolder(View itemView) {
             super(itemView);
             mRecyclerView = (RecyclerView) itemView.findViewById(R.id.common_recycler_view);
             ReHead = (RelativeLayout) itemView.findViewById(R.id.re_show);
@@ -378,12 +389,12 @@ public class TvUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
 
-    public static class XuanNingHolder extends RecyclerView.ViewHolder {
+    public static class OuMeiHolder extends RecyclerView.ViewHolder {
         RecyclerView mRecyclerView;
         RelativeLayout ReHead;
         private TextView tvType;
 
-        public XuanNingHolder(View itemView) {
+        public OuMeiHolder(View itemView) {
             super(itemView);
             mRecyclerView = (RecyclerView) itemView.findViewById(R.id.common_recycler_view);
             ReHead = (RelativeLayout) itemView.findViewById(R.id.re_show);
@@ -391,12 +402,13 @@ public class TvUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
 
-    public static class NetWorkHolder extends RecyclerView.ViewHolder {
+
+    public static class WhiteLoveHolder extends RecyclerView.ViewHolder {
         RecyclerView mRecyclerView;
         RelativeLayout ReHead;
         private TextView tvType;
 
-        public NetWorkHolder(View itemView) {
+        public WhiteLoveHolder(View itemView) {
             super(itemView);
             mRecyclerView = (RecyclerView) itemView.findViewById(R.id.common_recycler_view);
             ReHead = (RelativeLayout) itemView.findViewById(R.id.re_show);
@@ -404,12 +416,13 @@ public class TvUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
 
-    public static class KangWarHolder extends RecyclerView.ViewHolder {
+
+    public static class DongHuaHolder extends RecyclerView.ViewHolder {
         RecyclerView mRecyclerView;
         RelativeLayout ReHead;
         private TextView tvType;
 
-        public KangWarHolder(View itemView) {
+        public DongHuaHolder(View itemView) {
             super(itemView);
             mRecyclerView = (RecyclerView) itemView.findViewById(R.id.common_recycler_view);
             ReHead = (RelativeLayout) itemView.findViewById(R.id.re_show);
@@ -435,7 +448,6 @@ public class TvUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
 
-
     private class CommAdapter extends BGARecyclerViewAdapter<CoverModel> {
 
         public CommAdapter(RecyclerView recyclerView) {
@@ -444,12 +456,13 @@ public class TvUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         @Override
         protected void fillData(BGAViewHolderHelper helper, int position, CoverModel model) {
+            CornerLabelView cVTitle = helper.getView(R.id.label);
             GlideUtils.loadImage(helper.getImageView(R.id.image_hot), model.getCoverUrl(), R.mipmap.defalut_img, R.mipmap.defalut_img);
             helper.setText(R.id.txt_name, model.getCoverTitle());
             helper.setVisibility(R.id.txt_desc, View.VISIBLE);
             helper.setText(R.id.txt_desc, model.getCoverDesc());
-            if (model.getCoverPage() != null) {
-                helper.setText(R.id.tv_page, model.getCoverPage());
+            if (model.getCoverScore() != null) {
+                helper.setText(R.id.tv_page, model.getCoverScore() + "分");
             }
         }
     }

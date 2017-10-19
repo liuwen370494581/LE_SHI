@@ -116,7 +116,7 @@ public class ChoiceFragment extends BaseFragment {
             }
         });
 
-        MainUIAction.searchSportsData(getActivity(), Config.BAO_FENG_URL, new ActionCallBack() {
+        MainUIAction.searchSportsData(getActivity(), Config.BAO_FENG_URL,"体育", new ActionCallBack() {
             @Override
             public void ok(Object object) {
                 sportsList.addAll((Collection<? extends CoverModel>) object);
@@ -130,7 +130,7 @@ public class ChoiceFragment extends BaseFragment {
             }
         });
 
-        MainUIAction.searchEditRecommendData(getActivity(), Config.BAO_FENG_URL, new ActionCallBack() {
+        MainUIAction.searchEditRecommendData(getActivity(), Config.BAO_FENG_URL,"编辑推荐", new ActionCallBack() {
             @Override
             public void ok(Object object) {
                 editList.addAll((Collection<? extends CoverModel>) object);
@@ -143,7 +143,7 @@ public class ChoiceFragment extends BaseFragment {
             }
         });
 
-        MainUIAction.searchEditRecommendData2(getActivity(), Config.BAO_FENG_URL, new ActionCallBack() {
+        MainUIAction.searchEditRecommendData2(getActivity(), Config.BAO_FENG_URL, "编辑推荐",new ActionCallBack() {
             @Override
             public void ok(Object object) {
                 editList2.addAll((Collection<? extends CoverModel>) object);
@@ -170,7 +170,7 @@ public class ChoiceFragment extends BaseFragment {
         });
 
 
-        MainUIAction.searchMovieData(getActivity(), Config.BAO_FENG_URL, new ActionCallBack() {
+        MainUIAction.searchMovieData(getActivity(), Config.BAO_FENG_URL, "电影", new ActionCallBack() {
             @Override
             public void ok(Object object) {
                 movieList.addAll((Collection<? extends CoverModel>) object);
@@ -183,7 +183,7 @@ public class ChoiceFragment extends BaseFragment {
             }
         });
 
-        MainUIAction.searchDongManData(getActivity(), Config.BAO_FENG_URL, new ActionCallBack() {
+        MainUIAction.searchDongManData(getActivity(), Config.BAO_FENG_URL,"动漫", new ActionCallBack() {
             @Override
             public void ok(Object object) {
                 dongManList.addAll((Collection<? extends CoverModel>) object);
@@ -196,7 +196,7 @@ public class ChoiceFragment extends BaseFragment {
             }
         });
 
-        MainUIAction.searchZongYiData(getActivity(), Config.BAO_FENG_URL, new ActionCallBack() {
+        MainUIAction.searchZongYiData(getActivity(), Config.BAO_FENG_URL,"综艺", new ActionCallBack() {
             @Override
             public void ok(Object object) {
                 zongYiList.addAll((Collection<? extends CoverModel>) object);
@@ -209,7 +209,7 @@ public class ChoiceFragment extends BaseFragment {
             }
         });
 
-        MainUIAction.searchEducationData(getActivity(), Config.BAO_FENG_URL, new ActionCallBack() {
+        MainUIAction.searchEducationData(getActivity(), Config.BAO_FENG_URL,"教育", new ActionCallBack() {
             @Override
             public void ok(Object object) {
                 education.addAll((Collection<? extends CoverModel>) object);
@@ -222,7 +222,7 @@ public class ChoiceFragment extends BaseFragment {
             }
         });
 
-        MainUIAction.searchWeiMovieData(getActivity(), Config.BAO_FENG_URL, new ActionCallBack() {
+        MainUIAction.searchWeiMovieData(getActivity(), Config.BAO_FENG_URL,"微电影", new ActionCallBack() {
             @Override
             public void ok(Object object) {
                 weiMovieList.addAll((Collection<? extends CoverModel>) object);
@@ -235,7 +235,7 @@ public class ChoiceFragment extends BaseFragment {
             }
         });
 
-        MainUIAction.searchMVData(getActivity(), Config.BAO_FENG_URL, new ActionCallBack() {
+        MainUIAction.searchMVData(getActivity(), Config.BAO_FENG_URL, "音乐",new ActionCallBack() {
             @Override
             public void ok(Object object) {
                 musicList.addAll((Collection<? extends CoverModel>) object);
@@ -248,7 +248,7 @@ public class ChoiceFragment extends BaseFragment {
             }
         });
 
-        MainUIAction.searchOverAllViewData(getActivity(), Config.BAO_FENG_URL, new ActionCallBack() {
+        MainUIAction.searchOverAllViewData(getActivity(), Config.BAO_FENG_URL,"全景", new ActionCallBack() {
             @Override
             public void ok(Object object) {
                 overViewList.addAll((Collection<? extends CoverModel>) object);
@@ -261,7 +261,7 @@ public class ChoiceFragment extends BaseFragment {
             }
         });
 
-        MainUIAction.searchOverAllViewData2(getActivity(), Config.BAO_FENG_URL, new ActionCallBack() {
+        MainUIAction.searchOverAllViewData2(getActivity(), Config.BAO_FENG_URL, "全景",new ActionCallBack() {
             @Override
             public void ok(Object object) {
                 overViewList2.addAll((Collection<? extends CoverModel>) object);

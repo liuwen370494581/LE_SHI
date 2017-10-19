@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/ly_hot"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -7,20 +8,19 @@
 
 
     <FrameLayout
-        android:visibility="visible"
         android:id="@+id/frame_layout"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:visibility="visible">
 
         <ImageView
-            android:src="@mipmap/defalut_img"
             android:id="@+id/image_hot"
             android:layout_width="170dp"
             android:layout_height="105dp"
-            android:scaleType="fitXY"/>
+            android:scaleType="fitXY"
+            android:src="@mipmap/defalut_img"/>
 
         <TextView
-            android:textStyle="bold"
             android:id="@+id/tv_page"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -28,7 +28,15 @@
             android:layout_marginBottom="2dp"
             android:layout_marginRight="5dp"
             android:textColor="@color/white"
-            android:textSize="11sp"/>
+            android:textSize="11sp"
+            android:textStyle="bold"/>
+
+        <star.liuwen.com.le_shi.View.CornerLabelView
+            android:id="@+id/label"
+            style="@style/CornerLabelView.Default"
+            android:visibility="gone"
+            app:clvFillColor="@android:color/holo_orange_light"
+            app:clvText1=""/>
     </FrameLayout>
 
     <TextView

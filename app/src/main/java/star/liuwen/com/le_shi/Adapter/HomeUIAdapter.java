@@ -255,34 +255,34 @@ public class HomeUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             ChannelHolder holder = new ChannelHolder(view);
             return holder;
         } else if (viewType == SPORTS_TYPE) {
-            view = getView(R.layout.item_sports);
+            view = getView(R.layout.item_common);
             return new SportsHolder(view);
         } else if (viewType == EDIT_VIEW_TYPE) {
-            view = getView(R.layout.item_edit);
+            view = getView(R.layout.item_common);
             return new EditHolder(view);
         } else if (viewType == TV_TYPE) {
-            view = getView(R.layout.item_tv);
+            view = getView(R.layout.item_common);
             return new TvHolder(view);
         } else if (viewType == MOVIE_TYPE) {
-            view = getView(R.layout.item_movie);
+            view = getView(R.layout.item_common);
             return new MovieHolder(view);
         } else if (viewType == DONG_MAN_TYPE) {
-            view = getView(R.layout.item_dongman);
+            view = getView(R.layout.item_common);
             return new DongManHolder(view);
         } else if (viewType == ZONG_YI_TYPE) {
-            view = getView(R.layout.item_zongyi);
+            view = getView(R.layout.item_common);
             return new ZongYiHolder(view);
         } else if (viewType == EDUCATION_TYPE) {
-            view = getView(R.layout.item_education);
+            view = getView(R.layout.item_common);
             return new EducationHolder(view);
         } else if (viewType == WEI_MOVIE_TYPE) {
-            view = getView(R.layout.item_wei_movie);
+            view = getView(R.layout.item_common);
             return new WeiMovieHolder(view);
         } else if (viewType == MUSIC_TYPE) {
-            view = getView(R.layout.item_music);
+            view = getView(R.layout.item_common);
             return new MusicHolder(view);
         } else if (viewType == OVER_VIEW_TYPE) {
-            view = getView(R.layout.item_over_view);
+            view = getView(R.layout.item_common);
             return new OverViewHolder(view);
         } else {
             view = getView(R.layout.item_end);
@@ -322,6 +322,7 @@ public class HomeUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             sportsHolder.mRecyclerView.setAdapter(commAdapter);
             if (sportsList.size() != 0) {
                 sportsHolder.ReHead.setVisibility(View.VISIBLE);
+                sportsHolder.tvType.setText(sportsList.get(0).getCoverType());
             }
         } else if (holder instanceof EditHolder) {
             EditHolder editHolder = (EditHolder) holder;
@@ -331,6 +332,7 @@ public class HomeUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             editHolder.mRecyclerView.setAdapter(editAndOverViewAdapter);
             if (editList.size() != 0) {
                 editHolder.ReHead.setVisibility(View.VISIBLE);
+                editHolder.tvType.setText(editList.get(0).getCoverType());
             }
 
         } else if (holder instanceof TvHolder) {
@@ -342,6 +344,7 @@ public class HomeUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             tvHolder.mRecyclerView.setAdapter(commAdapter);
             if (tvList.size() != 0) {
                 tvHolder.ReHead.setVisibility(View.VISIBLE);
+                tvHolder.tvType.setText(tvList.get(0).getCoverType());
             }
 
         } else if (holder instanceof MovieHolder) {
@@ -353,6 +356,7 @@ public class HomeUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             movieHolder.mRecyclerView.setAdapter(commAdapter);
             if (movieList.size() != 0) {
                 movieHolder.ReHead.setVisibility(View.VISIBLE);
+                movieHolder.tvType.setText(movieList.get(0).getCoverType());
             }
 
         } else if (holder instanceof DongManHolder) {
@@ -362,8 +366,9 @@ public class HomeUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             dongManHolder.mRecyclerView.setLayoutManager(manager);
             commAdapter.setData(dongManList);
             dongManHolder.mRecyclerView.setAdapter(commAdapter);
-            if (movieList.size() != 0) {
+            if (dongManList.size() != 0) {
                 dongManHolder.ReHead.setVisibility(View.VISIBLE);
+                dongManHolder.tvType.setText(dongManList.get(0).getCoverType());
             }
 
         } else if (holder instanceof ZongYiHolder) {
@@ -375,6 +380,7 @@ public class HomeUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             zongYiHolder.mRecyclerView.setAdapter(commAdapter);
             if (zongYiList.size() != 0) {
                 zongYiHolder.ReHead.setVisibility(View.VISIBLE);
+                zongYiHolder.tvType.setText(zongYiList.get(0).getCoverType());
             }
 
         } else if (holder instanceof EducationHolder) {
@@ -386,6 +392,7 @@ public class HomeUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             educationHolder.mRecyclerView.setAdapter(commAdapter);
             if (education.size() != 0) {
                 educationHolder.ReHead.setVisibility(View.VISIBLE);
+                educationHolder.tvType.setText(education.get(0).getCoverType());
             }
 
         } else if (holder instanceof WeiMovieHolder) {
@@ -397,6 +404,7 @@ public class HomeUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             weiMovieHolder.mRecyclerView.setAdapter(commAdapter);
             if (weiMovieList.size() != 0) {
                 weiMovieHolder.ReHead.setVisibility(View.VISIBLE);
+                weiMovieHolder.tvType.setText(weiMovieList.get(0).getCoverType());
             }
 
         } else if (holder instanceof MusicHolder) {
@@ -408,6 +416,7 @@ public class HomeUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             musicHolder.mRecyclerView.setAdapter(commAdapter);
             if (musicList.size() != 0) {
                 musicHolder.ReHead.setVisibility(View.VISIBLE);
+                musicHolder.tvType.setText(musicList.get(0).getCoverType());
             }
 
         } else if (holder instanceof OverViewHolder) {
@@ -416,8 +425,9 @@ public class HomeUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             GridLayoutManager manager = new GridLayoutManager(mContext, 2, LinearLayoutManager.VERTICAL, false);
             overViewHolder.mRecyclerView.setLayoutManager(manager);
             overViewHolder.mRecyclerView.setAdapter(editAndOverViewAdapter);
-            if (editList.size() != 0) {
+            if (overViewList.size() != 0) {
                 overViewHolder.ReHead.setVisibility(View.VISIBLE);
+                overViewHolder.tvType.setText(overViewList.get(0).getCoverType());
             }
         } else if (holder instanceof EndHolder) {
             EndHolder endHolder = (EndHolder) holder;
@@ -474,110 +484,130 @@ public class HomeUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     public static class EditHolder extends RecyclerView.ViewHolder {
         RecyclerView mRecyclerView;
         RelativeLayout ReHead;
+        private TextView tvType;
 
         public EditHolder(View itemView) {
             super(itemView);
-            mRecyclerView = (RecyclerView) itemView.findViewById(R.id.edit_recycler_view);
+            mRecyclerView = (RecyclerView) itemView.findViewById(R.id.common_recycler_view);
             ReHead = (RelativeLayout) itemView.findViewById(R.id.re_show);
+            tvType = (TextView) itemView.findViewById(R.id.tv_title);
         }
     }
 
     public static class SportsHolder extends RecyclerView.ViewHolder {
         RecyclerView mRecyclerView;
         RelativeLayout ReHead;
+        private TextView tvType;
 
         public SportsHolder(View itemView) {
             super(itemView);
-            mRecyclerView = (RecyclerView) itemView.findViewById(R.id.sports_recycler_view);
+            mRecyclerView = (RecyclerView) itemView.findViewById(R.id.common_recycler_view);
             ReHead = (RelativeLayout) itemView.findViewById(R.id.re_show);
+            tvType = (TextView) itemView.findViewById(R.id.tv_title);
         }
     }
 
     public static class TvHolder extends RecyclerView.ViewHolder {
         RecyclerView mRecyclerView;
         RelativeLayout ReHead;
+        private TextView tvType;
 
         public TvHolder(View itemView) {
             super(itemView);
-            mRecyclerView = (RecyclerView) itemView.findViewById(R.id.tv_recycler_view);
+            mRecyclerView = (RecyclerView) itemView.findViewById(R.id.common_recycler_view);
             ReHead = (RelativeLayout) itemView.findViewById(R.id.re_show);
+            tvType = (TextView) itemView.findViewById(R.id.tv_title);
         }
     }
 
     public static class MovieHolder extends RecyclerView.ViewHolder {
         RecyclerView mRecyclerView;
         RelativeLayout ReHead;
+        private TextView tvType;
 
         public MovieHolder(View itemView) {
             super(itemView);
-            mRecyclerView = (RecyclerView) itemView.findViewById(R.id.movie_recycler_view);
+            mRecyclerView = (RecyclerView) itemView.findViewById(R.id.common_recycler_view);
             ReHead = (RelativeLayout) itemView.findViewById(R.id.re_show);
+            tvType = (TextView) itemView.findViewById(R.id.tv_title);
         }
     }
 
     public static class DongManHolder extends RecyclerView.ViewHolder {
         RecyclerView mRecyclerView;
         RelativeLayout ReHead;
+        private TextView tvType;
 
         public DongManHolder(View itemView) {
             super(itemView);
-            mRecyclerView = (RecyclerView) itemView.findViewById(R.id.dongman_recycler_view);
+            mRecyclerView = (RecyclerView) itemView.findViewById(R.id.common_recycler_view);
             ReHead = (RelativeLayout) itemView.findViewById(R.id.re_show);
+            tvType = (TextView) itemView.findViewById(R.id.tv_title);
         }
     }
 
     public static class ZongYiHolder extends RecyclerView.ViewHolder {
         RecyclerView mRecyclerView;
         RelativeLayout ReHead;
+        private TextView tvType;
 
         public ZongYiHolder(View itemView) {
             super(itemView);
-            mRecyclerView = (RecyclerView) itemView.findViewById(R.id.zongyi_recycler_view);
+            mRecyclerView = (RecyclerView) itemView.findViewById(R.id.common_recycler_view);
             ReHead = (RelativeLayout) itemView.findViewById(R.id.re_show);
+            tvType = (TextView) itemView.findViewById(R.id.tv_title);
         }
     }
 
     public static class EducationHolder extends RecyclerView.ViewHolder {
         RecyclerView mRecyclerView;
         RelativeLayout ReHead;
+        private TextView tvType;
 
         public EducationHolder(View itemView) {
             super(itemView);
-            mRecyclerView = (RecyclerView) itemView.findViewById(R.id.education_recycler_view);
+            mRecyclerView = (RecyclerView) itemView.findViewById(R.id.common_recycler_view);
             ReHead = (RelativeLayout) itemView.findViewById(R.id.re_show);
+            tvType = (TextView) itemView.findViewById(R.id.tv_title);
         }
     }
 
     public static class WeiMovieHolder extends RecyclerView.ViewHolder {
         RecyclerView mRecyclerView;
         RelativeLayout ReHead;
+        private TextView tvType;
 
         public WeiMovieHolder(View itemView) {
             super(itemView);
-            mRecyclerView = (RecyclerView) itemView.findViewById(R.id.wei_movie_recycler_view);
+            mRecyclerView = (RecyclerView) itemView.findViewById(R.id.common_recycler_view);
             ReHead = (RelativeLayout) itemView.findViewById(R.id.re_show);
+            tvType = (TextView) itemView.findViewById(R.id.tv_title);
         }
     }
 
     public static class MusicHolder extends RecyclerView.ViewHolder {
         RecyclerView mRecyclerView;
         RelativeLayout ReHead;
+        private TextView tvType;
 
         public MusicHolder(View itemView) {
             super(itemView);
-            mRecyclerView = (RecyclerView) itemView.findViewById(R.id.music_recycler_view);
+            mRecyclerView = (RecyclerView) itemView.findViewById(R.id.common_recycler_view);
             ReHead = (RelativeLayout) itemView.findViewById(R.id.re_show);
+            tvType = (TextView) itemView.findViewById(R.id.tv_title);
         }
     }
 
     public static class OverViewHolder extends RecyclerView.ViewHolder {
         RecyclerView mRecyclerView;
         RelativeLayout ReHead;
+        private TextView tvType;
 
         public OverViewHolder(View itemView) {
             super(itemView);
-            mRecyclerView = (RecyclerView) itemView.findViewById(R.id.over_view_recycler_view);
+            mRecyclerView = (RecyclerView) itemView.findViewById(R.id.common_recycler_view);
             ReHead = (RelativeLayout) itemView.findViewById(R.id.re_show);
+            tvType = (TextView) itemView.findViewById(R.id.tv_title);
         }
     }
 
@@ -621,10 +651,14 @@ public class HomeUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         protected void fillData(BGAViewHolderHelper helper, int position, CoverModel model) {
             GlideUtils.loadImage(helper.getImageView(R.id.image_hot), model.getCoverUrl(), R.mipmap.defalut_img, R.mipmap.defalut_img);
             helper.setText(R.id.txt_name, model.getCoverTitle());
-            helper.setText(R.id.txt_desc, model.getCoverDesc());
             if (model.getCoverPage() != null) {
                 helper.setText(R.id.tv_page, model.getCoverPage());
             }
+            if (model.getCoverDesc() != null) {
+                helper.setText(R.id.txt_desc, model.getCoverDesc());
+                helper.setVisibility(R.id.txt_desc, View.VISIBLE);
+            }
+
         }
     }
 
@@ -642,7 +676,6 @@ public class HomeUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             if (model.getCoverPage() != null) {
                 helper.setText(R.id.tv_page, model.getCoverPage());
             }
-
         }
     }
 }

@@ -58,6 +58,7 @@ public class TvFragment extends BaseFragment {
         return view;
     }
 
+
     private void init() {
         channelList = new ArrayList<>();
         coverList = new ArrayList<>();//封面数据
@@ -199,7 +200,6 @@ public class TvFragment extends BaseFragment {
 
             @Override
             public void failed(Object object) {
-                hideLoadingDialog();
             }
         });
         MainUIAction.searchTvData(getActivity(), Config.BAO_FENG_TV_URL, 8, 10, "网络剧", new ActionCallBack() {

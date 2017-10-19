@@ -94,7 +94,7 @@ public class HtmlParserUtil {
 
 
     //编辑推荐
-    public static List<CoverModel> searchEditRecommend(String url) {
+    public static List<CoverModel> searchEditRecommend(String url, String type) {
         List<CoverModel> list = new ArrayList<>();
         try {
             Document document = Jsoup.connect(url)
@@ -104,6 +104,7 @@ public class HtmlParserUtil {
 
             for (Element element : elements) {
                 CoverModel model = new CoverModel();
+                model.setCoverType(type);
                 model.setCoverUrl(element.select("a").select("img").attr("data-ersrc"));
                 model.setCoverTitle(element.select("a").attr("title"));
                 model.setCoverVideoUrl(element.select("a").attr("href"));
@@ -118,7 +119,7 @@ public class HtmlParserUtil {
         return list;
     }
 
-    public static List<CoverModel> searchEditRecommend2(String url) {
+    public static List<CoverModel> searchEditRecommend2(String url, String type) {
         List<CoverModel> list = new ArrayList<>();
         try {
             Document document = Jsoup.connect(url)
@@ -128,6 +129,7 @@ public class HtmlParserUtil {
 
             for (Element element : elements) {
                 CoverModel model = new CoverModel();
+                model.setCoverType(type);
                 model.setCoverDesc(element.select("p.hot-pic-tip").text());
                 model.setCoverScore(element.select("p.hot-pic-tit").select("span").first().text());
                 Log.e(Config.TAG, "评分===" + element.select("p.hot-pic-tit").select("span").first().text());
@@ -170,7 +172,7 @@ public class HtmlParserUtil {
 
 
     //电影
-    public static List<CoverModel> searchMovie(String url) {
+    public static List<CoverModel> searchMovie(String url, String type) {
         List<CoverModel> list = new ArrayList<>();
         try {
             Document document = Jsoup.connect(url)
@@ -181,6 +183,7 @@ public class HtmlParserUtil {
             //
             for (int i = 12; i < 24; i++) {
                 CoverModel model = new CoverModel();
+                model.setCoverType(type);
                 model.setCoverUrl(elements.get(i).select("div.js-collect").select("a").select("img").attr("data-ersrc"));
                 model.setCoverTitle(elements.get(i).select("div.js-collect").select("a").attr("title"));
                 model.setCoverVideoUrl(elements.get(i).select("div.js-collect").select("a").select("img").attr("src"));
@@ -200,7 +203,7 @@ public class HtmlParserUtil {
 
 
     //动漫
-    public static List<CoverModel> searchDongMan(String url) {
+    public static List<CoverModel> searchDongMan(String url, String type) {
         List<CoverModel> list = new ArrayList<>();
         try {
             Document document = Jsoup.connect(url)
@@ -211,6 +214,7 @@ public class HtmlParserUtil {
             //
             for (int i = 24; i < 34; i++) {
                 CoverModel model = new CoverModel();
+                model.setCoverType(type);
                 model.setCoverUrl(elements.get(i).select("div.js-collect").select("a").select("img").attr("data-ersrc"));
                 model.setCoverTitle(elements.get(i).select("div.js-collect").select("a").attr("title"));
                 model.setCoverVideoUrl(elements.get(i).select("div.js-collect").select("a").select("img").attr("src"));
@@ -230,7 +234,7 @@ public class HtmlParserUtil {
     }
 
     //综艺
-    public static List<CoverModel> searchZongYi(String url) {
+    public static List<CoverModel> searchZongYi(String url, String type) {
         List<CoverModel> list = new ArrayList<>();
         try {
             Document document = Jsoup.connect(url)
@@ -241,6 +245,7 @@ public class HtmlParserUtil {
             //
             for (int i = 34; i < 42; i++) {
                 CoverModel model = new CoverModel();
+                model.setCoverType(type);
                 model.setCoverUrl(elements.get(i).select("div.js-collect").select("a").select("img").attr("data-ersrc"));
                 model.setCoverTitle(elements.get(i).select("div.js-collect").select("a").attr("title"));
                 model.setCoverVideoUrl(elements.get(i).select("div.js-collect").select("a").select("img").attr("src"));
@@ -261,7 +266,7 @@ public class HtmlParserUtil {
 
 
     //教育
-    public static List<CoverModel> searchEducation(String url) {
+    public static List<CoverModel> searchEducation(String url, String type) {
         List<CoverModel> list = new ArrayList<>();
         try {
             Document document = Jsoup.connect(url)
@@ -272,6 +277,7 @@ public class HtmlParserUtil {
             //
             for (int i = 44; i < 50; i++) {
                 CoverModel model = new CoverModel();
+                model.setCoverType(type);
                 model.setCoverUrl(elements.get(i).select("div.js-collect").select("a").select("img").attr("data-ersrc"));
                 model.setCoverTitle(elements.get(i).select("div.js-collect").select("a").attr("title"));
                 model.setCoverVideoUrl(elements.get(i).select("div.js-collect").select("a").select("img").attr("src"));
@@ -291,7 +297,7 @@ public class HtmlParserUtil {
 
 
     //微电影
-    public static List<CoverModel> searchWeiMovie(String url) {
+    public static List<CoverModel> searchWeiMovie(String url, String type) {
         List<CoverModel> list = new ArrayList<>();
         try {
             Document document = Jsoup.connect(url)
@@ -302,6 +308,7 @@ public class HtmlParserUtil {
             //
             for (int i = 50; i < 58; i++) {
                 CoverModel model = new CoverModel();
+                model.setCoverType(type);
                 model.setCoverUrl(elements.get(i).select("div.js-collect").select("a").select("img").attr("data-ersrc"));
                 model.setCoverTitle(elements.get(i).select("div.js-collect").select("a").attr("title"));
                 model.setCoverVideoUrl(elements.get(i).select("div.js-collect").select("a").select("img").attr("src"));
@@ -320,7 +327,7 @@ public class HtmlParserUtil {
     }
 
     //音乐
-    public static List<CoverModel> searchMv(String url) {
+    public static List<CoverModel> searchMv(String url, String type) {
         List<CoverModel> list = new ArrayList<>();
         try {
             Document document = Jsoup.connect(url)
@@ -331,6 +338,7 @@ public class HtmlParserUtil {
             //
             for (int i = 58; i < elements.size(); i++) {
                 CoverModel model = new CoverModel();
+                model.setCoverType(type);
                 model.setCoverUrl(elements.get(i).select("div.js-collect").select("a").select("img").attr("data-ersrc"));
                 model.setCoverTitle(elements.get(i).select("div.js-collect").select("a").attr("title"));
                 model.setCoverVideoUrl(elements.get(i).select("div.js-collect").select("a").select("img").attr("src"));
@@ -350,7 +358,7 @@ public class HtmlParserUtil {
 
 
     //体育
-    public static List<CoverModel> searchSports(String url) {
+    public static List<CoverModel> searchSports(String url, String type) {
         List<CoverModel> list = new ArrayList<>();
         try {
             Document document = Jsoup.connect(url)
@@ -361,6 +369,7 @@ public class HtmlParserUtil {
 
             for (int i = 0; i < 6; i++) {
                 CoverModel model = new CoverModel();
+                model.setCoverType(type);
                 model.setCoverUrl(elements.get(i).select("a").select("img").attr("data-ersrc"));
                 model.setCoverTitle(elements.get(i).select("a").attr("title"));
                 model.setCoverVideoUrl(elements.get(i).select("a").select("img").attr("src"));
@@ -377,7 +386,7 @@ public class HtmlParserUtil {
 
 
     //全景
-    public static List<CoverModel> searchOverAllView(String url) {
+    public static List<CoverModel> searchOverAllView(String url, String type) {
         List<CoverModel> list = new ArrayList<>();
         try {
             Document document = Jsoup.connect(url)
@@ -388,6 +397,7 @@ public class HtmlParserUtil {
 
             for (int i = 7; i < elements.size(); i++) {
                 CoverModel model = new CoverModel();
+                model.setCoverType(type);
                 model.setCoverUrl(elements.get(i).select("a").select("img").attr("data-ersrc"));
                 model.setCoverTitle(elements.get(i).select("a").attr("title"));
                 model.setCoverVideoUrl(elements.get(i).select("a").select("img").attr("src"));
@@ -405,7 +415,7 @@ public class HtmlParserUtil {
     }
 
     //全景
-    public static List<CoverModel> searchOverAllView2(String url) {
+    public static List<CoverModel> searchOverAllView2(String url, String type) {
         List<CoverModel> list = new ArrayList<>();
         try {
             Document document = Jsoup.connect(url)
@@ -413,6 +423,7 @@ public class HtmlParserUtil {
             Elements elements1 = document.select("ul.education-list").select("div.hot-pic-text-box");
             for (int i = 7; i < elements1.size(); i++) {
                 CoverModel model = new CoverModel();
+                model.setCoverType(type);
                 model.setCoverDesc(elements1.get(i).select("p.hot-pic-tip").text());
                 model.setCoverScore(elements1.get(i).select("p.hot-pic-tit").select("span").first().text());
                 Log.e(Config.TAG, "评分===" + elements1.get(i).select("p.hot-pic-tit").select("span").first().text());
@@ -436,7 +447,6 @@ public class HtmlParserUtil {
                     .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31").timeout(40000).get();
             Elements elements1 = document.select("ul.movie-guesslike-list");
             Elements elements2 = elements1.select("div.js-collect");
-            Elements elements3 = elements1.select("p.hot-pic-text");
             Elements elements4 = elements1.select("div.hot-pic-text-box");
             if (isDate1)
                 for (int j = start; j < size; j++) {
@@ -469,5 +479,32 @@ public class HtmlParserUtil {
         return list;
     }
 
-    //
+    //===================================================电影数据===========================================
+    //各种电影数据
+    public static List<CoverModel> searchALLMovie(String url, int start, int size, String tvType) {
+        List<CoverModel> list = new ArrayList<>();
+        try {
+            Document document = Jsoup.connect(url)
+                    .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31").timeout(40000).get();
+            Elements elements = document.select("div.tv-landscape-con");
+            for (int i = start; i < size; i++) {
+                CoverModel model = new CoverModel();
+                model.setCoverUrl(elements.get(i).select("div.js-collect").select("a").select("img").attr("data-ersrc"));
+                model.setCoverTitle(elements.get(i).select("div.js-collect").select("a").attr("title"));
+                model.setCoverVideoUrl(elements.get(i).select("div.js-collect").select("a").select("img").attr("src"));
+                model.setCoverDesc(elements.get(i).select("div.hot-pic-text-box").select("p.hot-pic-tip").text());
+                model.setCoverScore(elements.get(i).select("div.hot-pic-text-box").select("p.hot-pic-tit").select("span").first().text());
+                model.setCoverType(tvType);
+                Log.e(Config.TAG, "videoUrl====" + elements.get(i).select("div.js-collect").select("a").attr("href"));
+                Log.e(Config.TAG, "title====" + elements.get(i).select("div.js-collect").select("a").attr("title"));
+                Log.e(Config.TAG, "image====" + elements.get(i).select("div.js-collect").select("a").select("img").attr("data-ersrc"));
+                Log.e(Config.TAG, "desc===" + elements.get(i).select("div.hot-pic-text-box").select("p.hot-pic-tip").text());
+                Log.e(Config.TAG, "分数===" +elements.get(i).select("div.hot-pic-text-box").select("p.hot-pic-tit").select("span").first().text());
+                list.add(model);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
 }

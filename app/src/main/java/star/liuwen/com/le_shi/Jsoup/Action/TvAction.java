@@ -21,11 +21,11 @@ import star.liuwen.com.le_shi.R;
 public class TvAction {
 
 
-    public static void searchTvCover(final Context context, final String url, final ActionCallBack callBack) {
+    public static void searchTvHotPlayData(final Context context, final String url, final int start, final int size, final boolean isDate, final boolean isDate2, final String tvType, final ActionCallBack callBack) {
         Observable.create(new ObservableOnSubscribe<List<CoverModel>>() {
             @Override
             public void subscribe(ObservableEmitter<List<CoverModel>> e) throws Exception {
-                e.onNext(HtmlParserUtil.searchCoverData(url));
+                e.onNext(HtmlParserUtil.searchTvHotPlay(url, start, size, isDate, isDate2, tvType));
             }
         }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<List<CoverModel>>() {
             @Override
@@ -39,12 +39,13 @@ public class TvAction {
         });
     }
 
+    //===================电影资源=========================================================
 
-    public static void searchTvHotPlayData(final Context context, final String url, final int start, final int size, final boolean isDate, final boolean isDate2, final String tvType, final ActionCallBack callBack) {
+    public static void searchAllMovieData(final Context context, final String url, final int start, final int size, final String tvType, final ActionCallBack callBack) {
         Observable.create(new ObservableOnSubscribe<List<CoverModel>>() {
             @Override
             public void subscribe(ObservableEmitter<List<CoverModel>> e) throws Exception {
-                e.onNext(HtmlParserUtil.searchTvHotPlay(url, start, size, isDate, isDate2, tvType));
+                e.onNext(HtmlParserUtil.searchALLMovie(url, start, size, tvType));
             }
         }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<List<CoverModel>>() {
             @Override

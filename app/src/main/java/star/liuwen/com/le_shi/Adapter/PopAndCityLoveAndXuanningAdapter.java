@@ -13,6 +13,7 @@ import java.util.List;
 import star.liuwen.com.le_shi.Model.CoverModel;
 import star.liuwen.com.le_shi.R;
 import star.liuwen.com.le_shi.Utils.GlideUtils;
+import star.liuwen.com.le_shi.View.CornerLabelView;
 
 /**
  * Created by liuwen on 2017/10/18.
@@ -23,6 +24,7 @@ public class PopAndCityLoveAndXuanningAdapter extends RecyclerView.Adapter<PopAn
     private Context mContext;
     private List<CoverModel> mList;
     private List<CoverModel> mList2;
+    private boolean isTvOrMovieView;
 
     public PopAndCityLoveAndXuanningAdapter(Context context, List<CoverModel> list, List<CoverModel> list2) {
         mContext = context;
@@ -30,9 +32,16 @@ public class PopAndCityLoveAndXuanningAdapter extends RecyclerView.Adapter<PopAn
         mList2 = list2;
     }
 
+    public PopAndCityLoveAndXuanningAdapter(Context context, List<CoverModel> list, List<CoverModel> list2, boolean isTvOrMovieView) {
+        mContext = context;
+        mList = list;
+        mList2 = list2;
+        this.isTvOrMovieView = isTvOrMovieView;
+    }
+
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.item_edit_over_view, parent, false);
+        View view = LayoutInflater.from(mContext).inflate(isTvOrMovieView ? R.layout.item_edit_over_view : R.layout.item_tv_movie, parent, false);
         MyViewHolder holder = new MyViewHolder(view);
         return holder;
 
@@ -68,6 +77,10 @@ public class PopAndCityLoveAndXuanningAdapter extends RecyclerView.Adapter<PopAn
             holder.tvVideoDesc.setText(mList2.get(position).getCoverDesc());
             holder.tvVideoPage.setText(mList2.get(position).getCoverScore() + "分");
         }
+        if (mList.get(position).getCoverType().equals("会员专区")) {
+            holder.cvTitle.setVisibility(View.VISIBLE);
+            holder.cvTitle.setText1(mList.get(position).getCoverType());
+        }
     }
 
     @Override
@@ -80,6 +93,8 @@ public class PopAndCityLoveAndXuanningAdapter extends RecyclerView.Adapter<PopAn
         TextView tvVideoDesc;
         TextView tvVideoPage;
         ImageView imgUrl;
+        private CornerLabelView cvTitle;
+
 
         public MyViewHolder(View view) {
             super(view);
@@ -87,6 +102,7 @@ public class PopAndCityLoveAndXuanningAdapter extends RecyclerView.Adapter<PopAn
             tvVideoDesc = (TextView) view.findViewById(R.id.txt_desc);
             tvVideoName = (TextView) view.findViewById(R.id.txt_name);
             tvVideoPage = (TextView) view.findViewById(R.id.tv_page);
+            cvTitle = (CornerLabelView) view.findViewById(R.id.label);
         }
     }
 }
