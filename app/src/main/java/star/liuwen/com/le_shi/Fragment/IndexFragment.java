@@ -33,7 +33,7 @@ public class IndexFragment extends BaseFragment {
 
     private String[] mTabTitles = new String[]{};
     private BaseFragment[] fragments = {new HotFragment(), new ChoiceFragment(),
-            new TvFragment(), new MovieFragment(), new VarietyFragment(), new ZiZhiFragment(),new MangaFragment(),new SportsFragment(),new MusicFragment(),new CaiJingFragment(),new ScienceFragment()};
+            new TvFragment(), new MovieFragment(), new VarietyFragment(), new ZiZhiFragment(), new MangaFragment(), new SportsFragment(), new MusicFragment(), new CaiJingFragment(), new ScienceFragment()};
 
 
     @Nullable
@@ -48,8 +48,8 @@ public class IndexFragment extends BaseFragment {
         TabLayout tabLayout = (TabLayout) view.findViewById(R.id.tab_layout);
         ViewPager viewPager = (ViewPager) view.findViewById(R.id.view_pager);
         mTabTitles = getResources().getStringArray(R.array.tab_titles);
-        viewPager.setAdapter(new FragmentAdapter(getActivity().getSupportFragmentManager()));
-        viewPager.setOffscreenPageLimit(0);
+        viewPager.setAdapter(new FragmentAdapter(getChildFragmentManager()));
+        viewPager.setOffscreenPageLimit(fragments.length);
         tabLayout.setupWithViewPager(viewPager, true);
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override

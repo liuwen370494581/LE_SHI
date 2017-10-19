@@ -40,13 +40,10 @@ public class TvFragment extends BaseFragment {
     private List<CoverModel> hotPlayList;
     private List<CoverModel> popularList;
     private List<CoverModel> popularList2;
-    private List<CoverModel> popularList3;
     private List<CoverModel> cityLoveList;
     private List<CoverModel> cityLoveList2;
-    private List<CoverModel> cityLoverList3;
     private List<CoverModel> xuanNingList;
     private List<CoverModel> xuanNingList2;
-    private List<CoverModel> xuanNingList3;
     private List<CoverModel> netWorkList;
     private List<CoverModel> kangWarList;
     private boolean isLoaded = false;
@@ -67,13 +64,10 @@ public class TvFragment extends BaseFragment {
         hotPlayList = new ArrayList<>();
         popularList = new ArrayList<>();
         popularList2 = new ArrayList<>();
-        popularList3 = new ArrayList<>();
         cityLoveList = new ArrayList<>();
         cityLoveList2 = new ArrayList<>();
-        cityLoverList3 = new ArrayList<>();
         xuanNingList = new ArrayList<>();
         xuanNingList2 = new ArrayList<>();
-        xuanNingList3 = new ArrayList<>();
         netWorkList = new ArrayList<>();
         kangWarList = new ArrayList<>();
     }
@@ -91,14 +85,14 @@ public class TvFragment extends BaseFragment {
 
     @Override
     public void initData() {
-        if (!isLoaded)
+        if (!isLoaded) {
             LoadData();
-        isLoaded = true;
+            isLoaded = true;
+        }
     }
 
     private void LoadData() {
         showLoadingDialog("", true, null);
-
         MainUIAction.searchCoverData(getActivity(), Config.BAO_FENG_TV_URL, new ActionCallBack() {
             @Override
             public void ok(Object object) {

@@ -38,13 +38,35 @@ public class PopAndCityLoveAndXuanningAdapter extends RecyclerView.Adapter<PopAn
 
     }
 
+    public void updateList(List<CoverModel> list) {
+        if (isListNotEmpty(list)) {
+            mList = list;
+        } else {
+            mList.clear();
+        }
+        notifyDataSetChanged();
+    }
+
+    public void updateList2(List<CoverModel> list) {
+        if (isListNotEmpty(list)) {
+            mList2 = list;
+        } else {
+            mList2.clear();
+        }
+        notifyDataSetChanged();
+    }
+
+    public static boolean isListNotEmpty(List list) {
+        return list != null && !list.isEmpty();
+    }
+
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         holder.tvVideoName.setText(mList.get(position).getCoverTitle());
         GlideUtils.loadImage(holder.imgUrl, mList.get(position).getCoverUrl(), R.mipmap.defalut_img, R.mipmap.defalut_img);
         if (mList2.size() != 0 && mList2.size() == mList.size()) {
             holder.tvVideoDesc.setText(mList2.get(position).getCoverDesc());
-            holder.tvVideoPage.setText(mList2.get(position).getCoverScore()+"分");
+            holder.tvVideoPage.setText(mList2.get(position).getCoverScore() + "分");
         }
     }
 

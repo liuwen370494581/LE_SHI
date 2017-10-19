@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -284,7 +285,7 @@ public class HomeUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             view = getView(R.layout.item_over_view);
             return new OverViewHolder(view);
         } else {
-            view = getView(R.layout.item_edit);
+            view = getView(R.layout.item_end);
             return new EndHolder(view);
         }
     }
@@ -420,13 +421,13 @@ public class HomeUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             }
         } else if (holder instanceof EndHolder) {
             EndHolder endHolder = (EndHolder) holder;
-//            if (itemWidth != 0) {
-//                endHolder.lyItem.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-//                endHolder.tvTitle.setGravity(Gravity.CENTER);
-//            }
-//            if (editList.size() != 0 && tvList.size() != 0 && movieList.size() != 0 && weiMovieList.size() != 0 && musicList.size() != 0 && zongYiList.size() != 0 && education.size() != 0 && dongManList.size() != 0) {
-//                endHolder.lyItem.setVisibility(View.VISIBLE);
-//            }
+            if (itemWidth != 0) {
+                endHolder.lyItem.setLayoutParams(new ViewGroup.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+                endHolder.tvTitle.setGravity(Gravity.CENTER);
+            }
+            if (editList.size() != 0 && tvList.size() != 0 && movieList.size() != 0 && weiMovieList.size() != 0 && musicList.size() != 0 && zongYiList.size() != 0 && education.size() != 0 && dongManList.size() != 0) {
+                endHolder.lyItem.setVisibility(View.VISIBLE);
+            }
         }
 
     }
@@ -441,7 +442,7 @@ public class HomeUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     @Override
     public int getItemCount() {
-        return 13;
+        return 12;
     }
 
 
