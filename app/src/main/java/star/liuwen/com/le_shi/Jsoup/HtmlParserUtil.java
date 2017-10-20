@@ -395,7 +395,7 @@ public class HtmlParserUtil {
 //            Log.e(Config.TAG, elements.toString());
 //            Log.e(Config.TAG, elements.size() + "");
 
-            for (int i = 7; i < elements.size(); i++) {
+            for (int i = 7; i < 13; i++) {
                 CoverModel model = new CoverModel();
                 model.setCoverType(type);
                 model.setCoverUrl(elements.get(i).select("a").select("img").attr("data-ersrc"));
@@ -421,7 +421,7 @@ public class HtmlParserUtil {
             Document document = Jsoup.connect(url)
                     .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31").timeout(40000).get();
             Elements elements1 = document.select("ul.education-list").select("div.hot-pic-text-box");
-            for (int i = 7; i < elements1.size(); i++) {
+            for (int i = 7; i < 13; i++) {
                 CoverModel model = new CoverModel();
                 model.setCoverType(type);
                 model.setCoverDesc(elements1.get(i).select("p.hot-pic-tip").text());
@@ -436,10 +436,7 @@ public class HtmlParserUtil {
         return list;
     }
 
-
     //============================================电视剧数据===============================================
-
-
     public static List<CoverModel> searchTvHotPlay(String url, int start, int size, boolean isDate1, boolean isDate2, String tvType) {
         List<CoverModel> list = new ArrayList<>();
         try {
@@ -499,7 +496,7 @@ public class HtmlParserUtil {
                 Log.e(Config.TAG, "title====" + elements.get(i).select("div.js-collect").select("a").attr("title"));
                 Log.e(Config.TAG, "image====" + elements.get(i).select("div.js-collect").select("a").select("img").attr("data-ersrc"));
                 Log.e(Config.TAG, "desc===" + elements.get(i).select("div.hot-pic-text-box").select("p.hot-pic-tip").text());
-                Log.e(Config.TAG, "分数===" +elements.get(i).select("div.hot-pic-text-box").select("p.hot-pic-tit").select("span").first().text());
+                Log.e(Config.TAG, "分数===" + elements.get(i).select("div.hot-pic-text-box").select("p.hot-pic-tit").select("span").first().text());
                 list.add(model);
             }
         } catch (Exception e) {
@@ -507,4 +504,31 @@ public class HtmlParserUtil {
         }
         return list;
     }
+    //===============================================综艺数据=============================================
+
+    public static List<CoverModel> searchZongYiCoverData(String url) {
+        List<CoverModel> list = new ArrayList<>();
+        try {
+            Document document = Jsoup.connect(url)
+                    .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31").timeout(40000).get();
+            Element element = document.getElementsByAttributeValue("class", "channel-pic-list").first();
+            Elements links = element.getElementsByTag("a");
+            // Log.e(Config.TAG, links.toString());
+            for (Element link : links) {
+                CoverModel model = new CoverModel();
+                model.setCoverUrl(link.attr("data-pic"));
+                model.setCoverTitle(link.attr("title"));
+                model.setCoverVideoUrl(link.attr("href"));
+                model.setCoverDesc(link.attr("data-value"));
+                Log.e(Config.TAG, "img===" + link.attr("data-pic"));
+                Log.e(Config.TAG, "desc===" + link.attr("title"));
+                Log.e(Config.TAG, "href===" + link.attr("href"));
+                list.add(model);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
 }
