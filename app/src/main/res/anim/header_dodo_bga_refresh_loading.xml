@@ -2,15 +2,39 @@
 <animation-list xmlns:android="http://schemas.android.com/apk/res/android"
                 android:oneshot="false">
     <item
-        android:drawable="@mipmap/im_loading_1"
+        android:drawable="@mipmap/yanhua1"
         android:duration="100"/>
     <item
-        android:drawable="@mipmap/im_loading_2"
+        android:drawable="@mipmap/yanhua2"
         android:duration="100"/>
     <item
-        android:drawable="@mipmap/im_loading_3"
+        android:drawable="@mipmap/yanhua3"
         android:duration="100"/>
     <item
-        android:drawable="@mipmap/im_loading_4"
+        android:drawable="@mipmap/yanhua4"
+        android:duration="100"/>
+    <item
+        android:drawable="@mipmap/yanhua5"
+        android:duration="100"/>
+    <item
+        android:drawable="@mipmap/yanhua6"
+        android:duration="100"/>
+    <item
+        android:drawable="@mipmap/yanhua7"
+        android:duration="100"/>
+    <item
+        android:drawable="@mipmap/yanhua8"
+        android:duration="100"/>
+    <item
+        android:drawable="@mipmap/yanhua9"
+        android:duration="100"/>
+    <item
+        android:drawable="@mipmap/yanhua10"
+        android:duration="100"/>
+    <item
+        android:drawable="@mipmap/yanhua11"
+        android:duration="100"/>
+    <item
+        android:drawable="@mipmap/yanhua12"
         android:duration="100"/>
 </animation-list>

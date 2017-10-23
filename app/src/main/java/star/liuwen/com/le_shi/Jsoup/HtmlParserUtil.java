@@ -530,5 +530,4 @@ public class HtmlParserUtil {
         }
         return list;
     }
-
 }
