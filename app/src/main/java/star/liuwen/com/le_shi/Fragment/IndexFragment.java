@@ -12,17 +12,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import star.liuwen.com.le_shi.Base.BaseFragment;
-import star.liuwen.com.le_shi.ChildFragment.CaiJingFragment;
 import star.liuwen.com.le_shi.ChildFragment.ChoiceFragment;
-import star.liuwen.com.le_shi.ChildFragment.HotFragment;
 import star.liuwen.com.le_shi.ChildFragment.MangaFragment;
 import star.liuwen.com.le_shi.ChildFragment.MovieFragment;
 import star.liuwen.com.le_shi.ChildFragment.MusicFragment;
-import star.liuwen.com.le_shi.ChildFragment.ScienceFragment;
-import star.liuwen.com.le_shi.ChildFragment.SportsFragment;
 import star.liuwen.com.le_shi.ChildFragment.TvFragment;
 import star.liuwen.com.le_shi.ChildFragment.VarietyFragment;
-import star.liuwen.com.le_shi.ChildFragment.ZiZhiFragment;
+import star.liuwen.com.le_shi.ChildFragment.WeiMovieFragment;
+import star.liuwen.com.le_shi.ChildFragment.ZiXunFragment;
 import star.liuwen.com.le_shi.R;
 
 /**
@@ -32,8 +29,8 @@ public class IndexFragment extends BaseFragment {
 
 
     private String[] mTabTitles = new String[]{};
-    private BaseFragment[] fragments = {new HotFragment(), new ChoiceFragment(),
-            new TvFragment(), new MovieFragment(), new VarietyFragment(), new ZiZhiFragment(), new MangaFragment(), new SportsFragment(), new MusicFragment(), new CaiJingFragment(), new ScienceFragment()};
+    private BaseFragment[] fragments = {new ChoiceFragment(),
+            new TvFragment(), new MovieFragment(), new VarietyFragment(), new MangaFragment(), new ZiXunFragment(), new MusicFragment(), new WeiMovieFragment()};
 
 
     @Nullable

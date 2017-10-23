@@ -10,15 +10,13 @@ import star.liuwen.com.le_shi.Base.BaseFragment;
 import star.liuwen.com.le_shi.R;
 
 /**
- * Created by liuwen on 2017/10/13.
+ * Created by liuwen on 2017/10/23.
  */
-public class ScienceFragment extends BaseFragment {
-
-
+public class ZiXunFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_science, container, false);
+        View view = inflater.inflate(R.layout.fragment_zi_xun, container, false);
         initView(view);
         return view;
     }

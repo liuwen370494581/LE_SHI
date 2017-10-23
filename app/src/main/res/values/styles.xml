@@ -9,6 +9,13 @@
     </style>
 
 
+    <style name="welcomeTheme" parent="AppTheme">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
     <!--对话框需要的资源-->
     <style name="CustomDialogStyle" parent="Theme.AppCompat.Light.Dialog">
         <item name="android:windowFrame">@null</item>

@@ -10,22 +10,22 @@ import star.liuwen.com.le_shi.Base.BaseFragment;
 import star.liuwen.com.le_shi.R;
 
 /**
- * Created by liuwen on 2017/10/13.
- * 财经
+ * Created by liuwen on 2017/10/23.
  */
-public class CaiJingFragment extends BaseFragment {
+public class WeiMovieFragment extends BaseFragment {
 
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_caijing, container, false);
+        View view = inflater.inflate(R.layout.fragment_w_movie, container, false);
         initView(view);
         return view;
     }
 
     private void initView(View view) {
     }
+
 
     @Override
     public void initData() {

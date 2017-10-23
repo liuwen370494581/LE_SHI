@@ -530,4 +530,63 @@ public class HtmlParserUtil {
         }
         return list;
     }
+    //==============================================动漫资源=============================================
+
+    public static List<CoverModel> searchDongManEveryUpdateData(String url, int start, int size, String date) {
+        List<CoverModel> list = new ArrayList<>();
+        try {
+            Document document = Jsoup.connect(url)
+                    .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31").timeout(40000).get();
+            Elements elements = document.select("ul.update-list");
+            for (int i = start; i < size; i++) {
+                Elements links = elements.get(i).getElementsByTag("li");
+                for (int j = 0; j < links.size(); j++) {
+                    CoverModel model = new CoverModel();
+                    Log.e(Config.TAG, "动漫 videoUrl====" + links.get(j).select("a").attr("href"));
+                    Log.e(Config.TAG, "动漫title====" + links.get(j).select("a").attr("title"));
+                    Log.e(Config.TAG, "动漫img====" + links.get(j).select("a").select("img").attr("data-ersrc"));
+                    Log.e(Config.TAG, "动漫 集数===" + links.get(j).select("div.dailyupdate-info").select("p").text());
+                    model.setCoverVideoUrl(links.get(j).select("a").attr("href"));
+                    model.setCoverTitle(links.get(j).select("a").attr("title"));
+                    model.setCoverPage(links.get(j).select("div.dailyupdate-info").select("p").text());
+                    model.setCoverUrl(links.get(j).select("a").select("img").attr("data-ersrc"));
+                    model.setCoverType(date);
+                    list.add(model);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+
+    public static List<CoverModel> searchDongMan(String url, int start, int size, String tvType) {
+        List<CoverModel> list = new ArrayList<>();
+        try {
+            Document document = Jsoup.connect(url)
+                    .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31").timeout(40000).get();
+            Elements elements = document.select("div.tv-landscape-con");
+            for (int i = start; i < size; i++) {
+                CoverModel model = new CoverModel();
+                model.setCoverUrl(elements.get(i).select("div.js-collect").select("a").select("img").attr("data-ersrc"));
+                model.setCoverTitle(elements.get(i).select("div.js-collect").select("a").attr("title"));
+                model.setCoverVideoUrl(elements.get(i).select("div.js-collect").select("a").select("img").attr("src"));
+                model.setCoverDesc(elements.get(i).select("div.hot-pic-text-box").select("p.hot-pic-tip").text());
+                model.setCoverScore(elements.get(i).select("div.hot-pic-text-box").select("p.hot-pic-tit").select("span").first().text());
+                model.setCoverType(tvType);
+                model.setCoverPage(elements.get(i).select("div.js-collect").select("p.hot-pic-text").select("a").text());
+                Log.e(Config.TAG, "videoUrl====" + elements.get(i).select("div.js-collect").select("a").attr("href"));
+                Log.e(Config.TAG, "title====" + elements.get(i).select("div.js-collect").select("a").attr("title"));
+                Log.e(Config.TAG, "image====" + elements.get(i).select("div.js-collect").select("a").select("img").attr("data-ersrc"));
+                Log.e(Config.TAG, "desc===" + elements.get(i).select("div.hot-pic-text-box").select("p.hot-pic-tip").text());
+                Log.e(Config.TAG, "集数===" + elements.get(i).select("div.js-collect").select("p.hot-pic-text").select("a").text());
+                Log.e(Config.TAG, "分数===" + elements.get(i).select("div.hot-pic-text-box").select("p.hot-pic-tit").select("span").first().text());
+                list.add(model);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
 }

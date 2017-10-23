@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -23,41 +24,40 @@ import star.liuwen.com.le_shi.Utils.GlideUtils;
 import star.liuwen.com.le_shi.Utils.ToastUtils;
 
 /**
- * Created by liuwen on 2017/10/19.
+ * Created by liuwen on 2017/10/23.
  */
-public class VarietyUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class DongManUiAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+
+
     private List<HashMap<String, Object>> channelList;//频道数据
     private List<CoverModel> coverList;//封面数据
-    private List<CoverModel> highlightsList;//精彩看点
-    private List<CoverModel> highlightsList2;
-    private List<CoverModel> hotPlayList;//最热播放
-    private List<CoverModel> varietyList;//内地综艺
-    private List<CoverModel> varietyList2;
-    private List<CoverModel> baoFengList;//暴风出品
-    private List<CoverModel> baoFengList2;
+    private List<CoverModel> hotPlayList;//热门播放
+    private List<CoverModel> baoFengList;//暴风推荐
+    private List<CoverModel> qinZiList;//亲子
+    private List<CoverModel> reviewClassicList;//重温经典
+    private List<CoverModel> everyDateUpdateList;//每日更新
+    private Context mContext;
     private int itemWidth;
 
     private final int BANNER_VIEW_TYPE = 0;
     private final int CHANNEL_VIEW_TYPE = 1;
-    private final int HIGHLIGHT_VIEW_TYPE = 2;//精彩看点
-    private final int HOT_PLAY_VIEW_TYPE = 3;//热播剧
-    private final int VARIETY_VIEW_TYPE = 4;//内地综艺
-    private final int BAO_FENG_VIEW_TYPE = 5;//暴风出品
-    private final int END_VIEW_TYPE = 6;
-    private Context mContext;
+    private final int HOT_PLAY_VIEW_TYPE = 2;//热播剧
+    private final int BAO_FENG_VIEW_TYPE = 3;//暴风推荐
+    private final int EVERY_DATE_UPDATE_VIEW_TYPE = 4;//每日更新
+    private final int QIN_ZI_VIEW_TYPE = 5;//亲子
+    private final int REVIEW_CLASSICLIST_VIEW_TYPE = 6;//重温经典
+    private final int END_VIEW_TYPE = 7;
 
 
-    public VarietyUIAdapter(Context context, List<HashMap<String, Object>> channelList, List<CoverModel> coverList, List<CoverModel> highlightsList, List<CoverModel> highlightsList2, List<CoverModel> hotPlayList, List<CoverModel> varietyList, List<CoverModel> varietyList2, List<CoverModel> baoFengList, List<CoverModel> baoFengList2, int itemWidth) {
+    public DongManUiAdapter(Context context, List<HashMap<String, Object>> channelList, List<CoverModel> coverList, List<CoverModel> hotPlayList, List<CoverModel> baoFengList, List<CoverModel> qinZiList, List<CoverModel> reviewClassicList, List<CoverModel> everyDateUpdateList, int itemWidth) {
         mContext = context;
         this.channelList = channelList;
         this.coverList = coverList;
-        this.highlightsList = highlightsList;
-        this.highlightsList2 = highlightsList2;
         this.hotPlayList = hotPlayList;
-        this.varietyList = varietyList;
-        this.varietyList2 = varietyList2;
         this.baoFengList = baoFengList;
-        this.baoFengList2 = baoFengList2;
+        this.qinZiList = qinZiList;
+        this.reviewClassicList = reviewClassicList;
+        this.everyDateUpdateList = everyDateUpdateList;
         this.itemWidth = itemWidth;
     }
 
@@ -68,17 +68,20 @@ public class VarietyUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         } else if (position == 1) {
             return CHANNEL_VIEW_TYPE;
         } else if (position == 2) {
-            return HIGHLIGHT_VIEW_TYPE;
-        } else if (position == 3) {
             return HOT_PLAY_VIEW_TYPE;
-        } else if (position == 4) {
-            return VARIETY_VIEW_TYPE;
-        } else if (position == 5) {
+        } else if (position == 3) {
             return BAO_FENG_VIEW_TYPE;
+        } else if (position == 4) {
+            return EVERY_DATE_UPDATE_VIEW_TYPE;
+        } else if (position == 5) {
+            return QIN_ZI_VIEW_TYPE;
+        } else if (position == 6) {
+            return REVIEW_CLASSICLIST_VIEW_TYPE;
         } else {
             return END_VIEW_TYPE;
         }
     }
+
 
     public void updateCoverList(List<CoverModel> list) {
         if (isListNotEmpty(list)) {
@@ -98,43 +101,23 @@ public class VarietyUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         notifyDataSetChanged();
     }
 
-    public void updateHighlightsList(List<CoverModel> list) {
+    public void updateQinZiList(List<CoverModel> list) {
         if (isListNotEmpty(list)) {
-            highlightsList = list;
+            qinZiList = list;
         } else {
-            highlightsList.clear();
+            qinZiList.clear();
         }
         notifyDataSetChanged();
     }
 
-    public void updateHighlightsList2(List<CoverModel> list) {
+    public void updateReviewClassicList(List<CoverModel> list) {
         if (isListNotEmpty(list)) {
-            highlightsList2 = list;
+            reviewClassicList = list;
         } else {
-            highlightsList2.clear();
+            reviewClassicList.clear();
         }
         notifyDataSetChanged();
     }
-
-
-    public void updateVarietyList(List<CoverModel> list) {
-        if (isListNotEmpty(list)) {
-            varietyList = list;
-        } else {
-            varietyList.clear();
-        }
-        notifyDataSetChanged();
-    }
-
-    public void updateVarietyList2(List<CoverModel> list) {
-        if (isListNotEmpty(list)) {
-            varietyList2 = list;
-        } else {
-            varietyList2.clear();
-        }
-        notifyDataSetChanged();
-    }
-
 
     public void updateBaoFengList(List<CoverModel> list) {
         if (isListNotEmpty(list)) {
@@ -145,19 +128,23 @@ public class VarietyUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         notifyDataSetChanged();
     }
 
-
-    public void updateBaoFengList2(List<CoverModel> list) {
+    public void updateEveryDateUpdateList(List<CoverModel> list) {
         if (isListNotEmpty(list)) {
-            baoFengList2 = list;
+            everyDateUpdateList = list;
         } else {
-            baoFengList2.clear();
+            everyDateUpdateList.clear();
         }
         notifyDataSetChanged();
     }
 
-
     public static boolean isListNotEmpty(List list) {
         return list != null && !list.isEmpty();
+    }
+
+
+    private View getView(int view) {
+        View view1 = View.inflate(mContext, view, null);
+        return view1;
     }
 
     @Override
@@ -173,26 +160,23 @@ public class VarietyUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         } else if (viewType == HOT_PLAY_VIEW_TYPE) {
             view = getView(R.layout.item_common);
             return new TvUIAdapter.HotPlayHolder(view);
-        } else if (viewType == HIGHLIGHT_VIEW_TYPE) {
-            view = getView(R.layout.item_common);
-            return new HighlightHolder(view);
-        } else if (viewType == VARIETY_VIEW_TYPE) {
-            view = getView(R.layout.item_common);
-            return new VarietyHolder(view);
         } else if (viewType == BAO_FENG_VIEW_TYPE) {
             view = getView(R.layout.item_common);
-            return new BaoFengHolder(view);
+            return new VarietyUIAdapter.BaoFengHolder(view);
+        } else if (viewType == EVERY_DATE_UPDATE_VIEW_TYPE) {
+            view = getView(R.layout.item_common);
+            return new EveryDateUpdateHolder(view);
+        } else if (viewType == QIN_ZI_VIEW_TYPE) {
+            view = getView(R.layout.item_common);
+            return new QinZiPlayHolder(view);
+        } else if (viewType == REVIEW_CLASSICLIST_VIEW_TYPE) {
+            view = getView(R.layout.item_common);
+            return new ReviewClassicHolder(view);
         } else {
             view = getView(R.layout.item_end);
             return new HomeUIAdapter.EndHolder(view);
         }
     }
-
-    private View getView(int view) {
-        View view1 = View.inflate(mContext, view, null);
-        return view1;
-    }
-
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
@@ -212,32 +196,35 @@ public class VarietyUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                     ToastUtils.showToast(mContext, channelList.get(position).get("title").toString());
                 }
             });
-        } else if (holder instanceof HighlightHolder) {
-            HighlightHolder highlightHolder = (HighlightHolder) holder;
-            PopAndCityLoveAndXuanningAdapter mAdapter = new PopAndCityLoveAndXuanningAdapter(mContext, highlightsList, highlightsList2, true);
+        } else if (holder instanceof QinZiPlayHolder) {
+            QinZiPlayHolder qinZiPlayHolder = (QinZiPlayHolder) holder;
             final GridLayoutManager gridLayoutManager = new GridLayoutManager(mContext, 2, LinearLayoutManager.VERTICAL, false);
-            highlightHolder.mRecyclerView.setLayoutManager(gridLayoutManager);
-            highlightHolder.mRecyclerView.setAdapter(mAdapter);
-            if (highlightsList.size() != 0) {
-                highlightHolder.ReHead.setVisibility(View.VISIBLE);
-                highlightHolder.tvType.setText(highlightsList.get(0).getCoverType());
+            qinZiPlayHolder.mRecyclerView.setLayoutManager(gridLayoutManager);
+            CommAdapter mAdapter = new CommAdapter(qinZiPlayHolder.mRecyclerView);
+            mAdapter.setData(qinZiList);
+            qinZiPlayHolder.mRecyclerView.setAdapter(mAdapter);
+            if (qinZiList.size() != 0) {
+                qinZiPlayHolder.ReHead.setVisibility(View.VISIBLE);
+                qinZiPlayHolder.tvType.setText(qinZiList.get(0).getCoverType());
             }
-        } else if (holder instanceof VarietyHolder) {
-            VarietyHolder varietyHolder = (VarietyHolder) holder;
-            PopAndCityLoveAndXuanningAdapter mAdapter = new PopAndCityLoveAndXuanningAdapter(mContext, varietyList, varietyList2, true);
+        } else if (holder instanceof ReviewClassicHolder) {
+            ReviewClassicHolder reviewClassicHolder = (ReviewClassicHolder) holder;
+            CommAdapter mAdapter = new CommAdapter(reviewClassicHolder.mRecyclerView);
             final GridLayoutManager gridLayoutManager = new GridLayoutManager(mContext, 2, LinearLayoutManager.VERTICAL, false);
-            varietyHolder.mRecyclerView.setLayoutManager(gridLayoutManager);
-            varietyHolder.mRecyclerView.setAdapter(mAdapter);
-            if (varietyList.size() != 0) {
-                varietyHolder.ReHead.setVisibility(View.VISIBLE);
-                varietyHolder.tvType.setText(varietyList.get(0).getCoverType());
+            reviewClassicHolder.mRecyclerView.setLayoutManager(gridLayoutManager);
+            mAdapter.setData(reviewClassicList);
+            reviewClassicHolder.mRecyclerView.setAdapter(mAdapter);
+            if (reviewClassicList.size() != 0) {
+                reviewClassicHolder.ReHead.setVisibility(View.VISIBLE);
+                reviewClassicHolder.tvType.setText(reviewClassicList.get(0).getCoverType());
             }
 
-        } else if (holder instanceof BaoFengHolder) {
-            BaoFengHolder baoFengHolder = (BaoFengHolder) holder;
-            PopAndCityLoveAndXuanningAdapter mAdapter = new PopAndCityLoveAndXuanningAdapter(mContext, baoFengList, baoFengList2, false);
-            final GridLayoutManager gridLayoutManager = new GridLayoutManager(mContext, 3, LinearLayoutManager.VERTICAL, false);
+        } else if (holder instanceof VarietyUIAdapter.BaoFengHolder) {
+            VarietyUIAdapter.BaoFengHolder baoFengHolder = (VarietyUIAdapter.BaoFengHolder) holder;
+            final GridLayoutManager gridLayoutManager = new GridLayoutManager(mContext, 2, LinearLayoutManager.VERTICAL, false);
             baoFengHolder.mRecyclerView.setLayoutManager(gridLayoutManager);
+            CommAdapter mAdapter = new CommAdapter(baoFengHolder.mRecyclerView);
+            mAdapter.setData(baoFengList);
             baoFengHolder.mRecyclerView.setAdapter(mAdapter);
             if (baoFengList.size() != 0) {
                 baoFengHolder.ReHead.setVisibility(View.VISIBLE);
@@ -254,6 +241,19 @@ public class VarietyUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 hotPlayHolder.ReHead.setVisibility(View.VISIBLE);
                 hotPlayHolder.tvType.setText(hotPlayList.get(0).getCoverType());
             }
+        } else if (holder instanceof EveryDateUpdateHolder) {
+            EveryDateUpdateHolder everyDateUpdateHolder = (EveryDateUpdateHolder) holder;
+            EveryDateUpdateAdapter mAdapter = new EveryDateUpdateAdapter(everyDateUpdateHolder.mRecyclerView);
+            mAdapter.setData(everyDateUpdateList);
+            final GridLayoutManager gridLayoutManager = new GridLayoutManager(mContext, 5, LinearLayoutManager.VERTICAL, false);
+            everyDateUpdateHolder.mRecyclerView.setLayoutManager(gridLayoutManager);
+            everyDateUpdateHolder.mRecyclerView.setAdapter(mAdapter);
+
+            if (everyDateUpdateList.size() != 0) {
+                everyDateUpdateHolder.ReHead.setVisibility(View.VISIBLE);
+                everyDateUpdateHolder.tvType.setText(everyDateUpdateList.get(0).getCoverType());
+            }
+
         } else if (holder instanceof HomeUIAdapter.EndHolder) {
             HomeUIAdapter.EndHolder endHolder = (HomeUIAdapter.EndHolder) holder;
 //            if (itemWidth != 0) {
@@ -268,8 +268,9 @@ public class VarietyUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     @Override
     public int getItemCount() {
-        return 6;
+        return 7;
     }
+
 
     private void setBanner(HomeUIAdapter.BannerHolder channelHolder) {
         BannerAdapter mBannerAdapter = new BannerAdapter(mContext, coverList);
@@ -278,6 +279,45 @@ public class VarietyUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         channelHolder.indicator.setViewPager(channelHolder.viewpager);
     }
 
+
+    public static class QinZiPlayHolder extends RecyclerView.ViewHolder {
+        RecyclerView mRecyclerView;
+        RelativeLayout ReHead;
+        TextView tvType;
+
+        public QinZiPlayHolder(View itemView) {
+            super(itemView);
+            mRecyclerView = (RecyclerView) itemView.findViewById(R.id.common_recycler_view);
+            ReHead = (RelativeLayout) itemView.findViewById(R.id.re_show);
+            tvType = (TextView) itemView.findViewById(R.id.tv_title);
+        }
+    }
+
+    public static class ReviewClassicHolder extends RecyclerView.ViewHolder {
+        RecyclerView mRecyclerView;
+        RelativeLayout ReHead;
+        TextView tvType;
+
+        public ReviewClassicHolder(View itemView) {
+            super(itemView);
+            mRecyclerView = (RecyclerView) itemView.findViewById(R.id.common_recycler_view);
+            ReHead = (RelativeLayout) itemView.findViewById(R.id.re_show);
+            tvType = (TextView) itemView.findViewById(R.id.tv_title);
+        }
+    }
+
+    public static class EveryDateUpdateHolder extends RecyclerView.ViewHolder {
+        RecyclerView mRecyclerView;
+        RelativeLayout ReHead;
+        TextView tvType;
+
+        public EveryDateUpdateHolder(View itemView) {
+            super(itemView);
+            mRecyclerView = (RecyclerView) itemView.findViewById(R.id.common_recycler_view);
+            ReHead = (RelativeLayout) itemView.findViewById(R.id.re_show);
+            tvType = (TextView) itemView.findViewById(R.id.tv_title);
+        }
+    }
 
     private class ChannelAdapter extends BGARecyclerViewAdapter<HashMap<String, Object>> {
 
@@ -294,49 +334,11 @@ public class VarietyUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             Glide.with(mContext).load(model.get("pic")).into(helper.getImageView(R.id.iv_logo));
 
         }
+
     }
 
-    public static class HighlightHolder extends RecyclerView.ViewHolder {
-        RecyclerView mRecyclerView;
-        RelativeLayout ReHead;
-        private TextView tvType;
-
-        public HighlightHolder(View itemView) {
-            super(itemView);
-            mRecyclerView = (RecyclerView) itemView.findViewById(R.id.common_recycler_view);
-            ReHead = (RelativeLayout) itemView.findViewById(R.id.re_show);
-            tvType = (TextView) itemView.findViewById(R.id.tv_title);
-        }
-    }
-
-    public static class VarietyHolder extends RecyclerView.ViewHolder {
-        RecyclerView mRecyclerView;
-        RelativeLayout ReHead;
-        private TextView tvType;
-
-        public VarietyHolder(View itemView) {
-            super(itemView);
-            mRecyclerView = (RecyclerView) itemView.findViewById(R.id.common_recycler_view);
-            ReHead = (RelativeLayout) itemView.findViewById(R.id.re_show);
-            tvType = (TextView) itemView.findViewById(R.id.tv_title);
-        }
-    }
-
-    public static class BaoFengHolder extends RecyclerView.ViewHolder {
-        RecyclerView mRecyclerView;
-        RelativeLayout ReHead;
-        TextView tvType;
-
-        public BaoFengHolder(View itemView) {
-            super(itemView);
-            mRecyclerView = (RecyclerView) itemView.findViewById(R.id.common_recycler_view);
-            ReHead = (RelativeLayout) itemView.findViewById(R.id.re_show);
-            tvType = (TextView) itemView.findViewById(R.id.tv_title);
-        }
-    }
 
     private class CommAdapter extends BGARecyclerViewAdapter<CoverModel> {
-
         public CommAdapter(RecyclerView recyclerView) {
             super(recyclerView, R.layout.hot_item);
         }
@@ -353,4 +355,21 @@ public class VarietyUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         }
     }
 
+    private class EveryDateUpdateAdapter extends BGARecyclerViewAdapter<CoverModel> {
+
+        public EveryDateUpdateAdapter(RecyclerView recyclerView) {
+            super(recyclerView, R.layout.item_every_date_update);
+        }
+
+        @Override
+        protected void fillData(BGAViewHolderHelper helper, int position, CoverModel model) {
+            GlideUtils.loadImage(helper.getImageView(R.id.image_hot), model.getCoverUrl(), R.mipmap.defalut_img, R.mipmap.defalut_img);
+            helper.setText(R.id.txt_name, model.getCoverTitle());
+            helper.setText(R.id.txt_desc, model.getCoverDesc());
+            if (model.getCoverPage() != null) {
+                helper.setText(R.id.tv_page, model.getCoverPage());
+            }
+
+        }
+    }
 }

@@ -13,8 +13,6 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
-import star.liuwen.com.le_shi.Adapter.MovieAdapter;
-import star.liuwen.com.le_shi.Adapter.TvUIAdapter;
 import star.liuwen.com.le_shi.Adapter.VarietyUIAdapter;
 import star.liuwen.com.le_shi.Base.BaseFragment;
 import star.liuwen.com.le_shi.Base.Config;
@@ -30,8 +28,6 @@ import star.liuwen.com.le_shi.Utils.DensityUtil;
  * 综艺
  */
 public class VarietyFragment extends BaseFragment {
-
-
     private List<HashMap<String, Object>> channelList;//频道数据
     private List<CoverModel> coverList;//封面数据
     private List<CoverModel> highlightsList;//精彩看点
@@ -116,7 +112,7 @@ public class VarietyFragment extends BaseFragment {
                     }
                 });
 
-        TvAction.searchTvHotPlayData(getActivity(), Config.BAO_FENG_ZONG_YI_URL, 0, 6, true, false, "精彩看点",
+        TvAction.searchTvHotPlayData(getActivity(), Config.BAO_FENG_ZONG_YI_URL, 0, 6, false, true, "精彩看点",
                 new ActionCallBack() {
                     @Override
                     public void ok(Object object) {

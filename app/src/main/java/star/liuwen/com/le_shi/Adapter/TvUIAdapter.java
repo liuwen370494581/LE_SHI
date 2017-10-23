@@ -262,7 +262,7 @@ public class TvUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             }
         } else if (holder instanceof PopularHolder) {
             PopularHolder popularHolder = (PopularHolder) holder;
-            PopAndCityLoveAndXuanningAdapter mAdapter = new PopAndCityLoveAndXuanningAdapter(mContext, popularList, popularList2,true);
+            PopAndCityLoveAndXuanningAdapter mAdapter = new PopAndCityLoveAndXuanningAdapter(mContext, popularList, popularList2, true);
             final GridLayoutManager gridLayoutManager = new GridLayoutManager(mContext, 2, LinearLayoutManager.VERTICAL, false);
             popularHolder.mRecyclerView.setLayoutManager(gridLayoutManager);
             popularHolder.mRecyclerView.setAdapter(mAdapter);
@@ -273,7 +273,7 @@ public class TvUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         } else if (holder instanceof CityLoveHolder) {
             CityLoveHolder cityLoveHolder = (CityLoveHolder) holder;
-            PopAndCityLoveAndXuanningAdapter mAdapter = new PopAndCityLoveAndXuanningAdapter(mContext, cityLoveList, cityLoveList2,true);
+            PopAndCityLoveAndXuanningAdapter mAdapter = new PopAndCityLoveAndXuanningAdapter(mContext, cityLoveList, cityLoveList2, true);
             final GridLayoutManager gridLayoutManager = new GridLayoutManager(mContext, 2, LinearLayoutManager.VERTICAL, false);
             cityLoveHolder.mRecyclerView.setLayoutManager(gridLayoutManager);
             cityLoveHolder.mRecyclerView.setAdapter(mAdapter);
@@ -283,7 +283,7 @@ public class TvUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             }
         } else if (holder instanceof XuanNingHolder) {
             XuanNingHolder xuanNingHolder = (XuanNingHolder) holder;
-            PopAndCityLoveAndXuanningAdapter mAdapter = new PopAndCityLoveAndXuanningAdapter(mContext, xuanNingList, xuanNingList2,true);
+            PopAndCityLoveAndXuanningAdapter mAdapter = new PopAndCityLoveAndXuanningAdapter(mContext, xuanNingList, xuanNingList2, true);
             final GridLayoutManager gridLayoutManager = new GridLayoutManager(mContext, 2, LinearLayoutManager.VERTICAL, false);
             xuanNingHolder.mRecyclerView.setLayoutManager(gridLayoutManager);
             xuanNingHolder.mRecyclerView.setAdapter(mAdapter);
@@ -342,7 +342,7 @@ public class TvUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public static class HotPlayHolder extends RecyclerView.ViewHolder {
         RecyclerView mRecyclerView;
         RelativeLayout ReHead;
-        private TextView tvType;
+        TextView tvType;
 
         public HotPlayHolder(View itemView) {
             super(itemView);
