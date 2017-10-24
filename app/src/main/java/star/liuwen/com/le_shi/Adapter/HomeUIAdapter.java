@@ -35,11 +35,11 @@ public class HomeUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     private final int BANNER_VIEW_TYPE = 0;//轮播图
     private final int CHANNEL_VIEW_TYPE = 1;//频道
     private final int EDIT_VIEW_TYPE = 2;//编辑推荐
-    private final int SPORTS_TYPE = 3;//体育
-    private final int TV_TYPE = 4;// 电视剧
-    private final int MOVIE_TYPE = 5;//电影
-    private final int DONG_MAN_TYPE = 6; //动漫
-    private final int ZONG_YI_TYPE = 7; //限时免费
+    private final int TV_TYPE = 3;// 电视剧
+    private final int MOVIE_TYPE = 4;//电影
+    private final int DONG_MAN_TYPE = 5; //动漫
+    private final int ZONG_YI_TYPE = 6; //综艺
+    private final int SPORTS_TYPE = 7;//体育
     private final int EDUCATION_TYPE = 8; //教育
     private final int WEI_MOVIE_TYPE = 9; //微电影
     private final int MUSIC_TYPE = 10; //音乐
@@ -221,15 +221,15 @@ public class HomeUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         } else if (position == 2) {
             return EDIT_VIEW_TYPE;
         } else if (position == 3) {
-            return SPORTS_TYPE;
-        } else if (position == 4) {
             return TV_TYPE;
-        } else if (position == 5) {
+        } else if (position == 4) {
             return MOVIE_TYPE;
-        } else if (position == 6) {
+        } else if (position == 5) {
             return DONG_MAN_TYPE;
-        } else if (position == 7) {
+        } else if (position == 6) {
             return ZONG_YI_TYPE;
+        } else if (position == 7) {
+            return SPORTS_TYPE;
         } else if (position == 8) {
             return EDUCATION_TYPE;
         } else if (position == 9) {

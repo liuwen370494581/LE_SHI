@@ -3,6 +3,7 @@ package star.liuwen.com.le_shi.Jsoup;
 import android.util.Log;
 
 import org.jsoup.Jsoup;
+import org.jsoup.nodes.Comment;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -582,6 +583,50 @@ public class HtmlParserUtil {
                 Log.e(Config.TAG, "desc===" + elements.get(i).select("div.hot-pic-text-box").select("p.hot-pic-tip").text());
                 Log.e(Config.TAG, "集数===" + elements.get(i).select("div.js-collect").select("p.hot-pic-text").select("a").text());
                 Log.e(Config.TAG, "分数===" + elements.get(i).select("div.hot-pic-text-box").select("p.hot-pic-tit").select("span").first().text());
+                list.add(model);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+    //==============================================资讯资源=============================================
+
+    public static List<CoverModel> searchZiXunCoverData(String url) {
+        List<CoverModel> list = new ArrayList<>();
+        try {
+            Document document = Jsoup.connect(url)
+                    .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31").timeout(40000).get();
+            Element element = document.getElementsByAttributeValue("class", "hd-info-pic").first();
+            Elements links = element.getElementsByTag("a");
+            for (Element link : links) {
+                CoverModel model = new CoverModel();
+                model.setCoverUrl(link.select("img").attr("src"));
+                model.setCoverTitle(link.select("img").attr("alt"));
+                model.setCoverVideoUrl(link.attr("href"));
+                list.add(model);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    public static List<CoverModel> searchZiXunAll(String url, int start, int size, String tvType) {
+        List<CoverModel> list = new ArrayList<>();
+        try {
+            Document document = Jsoup.connect(url)
+                    .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31").timeout(40000).get();
+            Elements elements = document.select("div.tv-landscape-con");
+            for (int i = start; i < size; i++) {
+                CoverModel model = new CoverModel();
+                model.setCoverVideoUrl(elements.get(i).select("div.hot-pic-like").select("a").attr("href"));
+                model.setCoverTitle(elements.get(i).select("div.hot-pic-like").select("a").attr("title"));
+                model.setCoverUrl(elements.get(i).select("div.hot-pic-like").select("a").select("img").attr("data-ersrc"));
+                model.setCoverType(tvType);
+                Log.e(Config.TAG, "videoUrl====" + elements.get(i).select("div.hot-pic-like").select("a").attr("href"));
+                Log.e(Config.TAG, "title====" + elements.get(i).select("div.hot-pic-like").select("a").attr("title"));
+                Log.e(Config.TAG, "image====" + elements.get(i).select("div.hot-pic-like").select("a").select("img").attr("data-ersrc"));
                 list.add(model);
             }
         } catch (Exception e) {
