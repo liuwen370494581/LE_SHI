@@ -83,6 +83,22 @@ public class HomeUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         this.itemWidth = itemWidth;
     }
 
+    public void clearAllData() {
+        coverList.clear();//封面数据
+        editList.clear();//编辑推荐
+        editList2.clear();//编辑推荐
+        sportsList.clear();// 体育
+        tvList.clear();//电视剧
+        movieList.clear();//电影
+        dongManList.clear();//动漫
+        zongYiList.clear();//综艺
+        education.clear();//教育
+        weiMovieList.clear();//微电影
+        musicList.clear();//音乐
+        overViewList.clear();//全景
+        overViewList2.clear();
+    }
+
     public void updateCoverList(List<CoverModel> list) {
         if (isListNotEmpty(list)) {
             coverList = list;
@@ -358,7 +374,6 @@ public class HomeUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 movieHolder.ReHead.setVisibility(View.VISIBLE);
                 movieHolder.tvType.setText(movieList.get(0).getCoverType());
             }
-
         } else if (holder instanceof DongManHolder) {
             DongManHolder dongManHolder = (DongManHolder) holder;
             CommAdapter commAdapter = new CommAdapter(dongManHolder.mRecyclerView);
@@ -370,7 +385,6 @@ public class HomeUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 dongManHolder.ReHead.setVisibility(View.VISIBLE);
                 dongManHolder.tvType.setText(dongManList.get(0).getCoverType());
             }
-
         } else if (holder instanceof ZongYiHolder) {
             ZongYiHolder zongYiHolder = (ZongYiHolder) holder;
             CommAdapter commAdapter = new CommAdapter(zongYiHolder.mRecyclerView);

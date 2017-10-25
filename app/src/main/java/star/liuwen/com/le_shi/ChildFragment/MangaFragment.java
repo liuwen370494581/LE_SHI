@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -177,7 +178,7 @@ public class MangaFragment extends BaseFragment {
 
     private void initSizeAndDate() {
         try {
-            String currentWeek = DateTimeUtils.getWeekOfDate(getActivity(), DateTimeUtils.getCurrentDateObject());
+            String currentWeek = DateTimeUtils.getWeekOfDate(getActivity(), new Date());
             if (currentWeek.equals(mContext.getString(R.string.mon))) {
                 start = 0;
                 size = 1;

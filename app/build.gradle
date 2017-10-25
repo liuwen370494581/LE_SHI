@@ -40,4 +40,6 @@ dependencies {
     compile 'com.hejunlin.superindicatorlibray:superindicatorlibray:1.0.3'
     compile 'cn.bingoogolapple:bga-adapter:1.2.0@aar'
     compile 'cn.bingoogolapple:bga-refreshlayout:1.0.7@aar'
+    //动画库
+    compile 'com.nineoldandroids:library:2.4.0'
 }

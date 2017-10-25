@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 
 import star.liuwen.com.le_shi.Adapter.HomeUIAdapter;
@@ -32,7 +33,7 @@ public class ChoiceFragment extends BaseFragment {
     private int itemWidth;
     private HomeUIAdapter mAdapter;
 
-
+    private List<HashMap<String, Object>> channelList;
     private List<CoverModel> coverList;//封面数据
     private List<CoverModel> editList;//编辑推荐
     private List<CoverModel> editList2;
@@ -59,6 +60,7 @@ public class ChoiceFragment extends BaseFragment {
     }
 
     private void init() {
+        channelList = new ArrayList<>();
         coverList = new ArrayList<>();
         editList = new ArrayList<>();
         editList2 = new ArrayList<>();
@@ -78,11 +80,12 @@ public class ChoiceFragment extends BaseFragment {
         itemWidth = DensityUtil.getScreenWidth(getActivity());
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_choice);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mAdapter = new HomeUIAdapter(getActivity(), DateEnage.getChannelList(),
+        mAdapter = new HomeUIAdapter(getActivity(), channelList,
                 coverList, editList, editList2, sportsList, tvList, movieList,
                 dongManList, zongYiList, education, weiMovieList, musicList,
                 overViewList, overViewList2, itemWidth);
         mRecyclerView.setAdapter(mAdapter);
+
     }
 
 
@@ -95,7 +98,8 @@ public class ChoiceFragment extends BaseFragment {
     }
 
     private void LoadData() {
-        showLoadingDialog("", true, null);
+        showLoadingDialog("", false, null);
+        channelList = DateEnage.getChannelList();
         MainUIAction.searchCoverData(getActivity(), Config.BAO_FENG_URL, new ActionCallBack() {
             @Override
             public void ok(Object object) {

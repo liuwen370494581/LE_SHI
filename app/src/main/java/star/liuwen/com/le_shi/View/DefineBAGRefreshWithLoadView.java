@@ -53,7 +53,7 @@ public class DefineBAGRefreshWithLoadView extends BGARefreshViewHolder {
     public View getRefreshHeaderView() {
         if(this.mRefreshHeaderView == null) {
             this.mRefreshHeaderView = View.inflate(this.mContext, R.layout.header_bga_dodo, (ViewGroup)null);
-            this.mRefreshHeaderView.setBackgroundColor(0);
+           // this.mRefreshHeaderView.setBackgroundColor(0);
             if(this.mRefreshViewBackgroundColorRes != -1) {
                 this.mRefreshHeaderView.setBackgroundResource(this.mRefreshViewBackgroundColorRes);
             }
