@@ -180,4 +180,23 @@ public class TvAction {
         });
     }
 
+    //vip电影资源
+    public static void searchAllVipMovieData(final Context context, final String url, final int start, final int size, final boolean isDate, final boolean isDate2, final String tvType, final ActionCallBack callBack) {
+        Observable.create(new ObservableOnSubscribe<List<CoverModel>>() {
+            @Override
+            public void subscribe(ObservableEmitter<List<CoverModel>> e) throws Exception {
+                e.onNext(HtmlParserUtil.searchAllVipMovie(url, start, size, isDate, isDate2, tvType));
+            }
+        }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<List<CoverModel>>() {
+            @Override
+            public void accept(@NonNull List<CoverModel> models) throws Exception {
+                if (models != null && models.size() != 0) {
+                    callBack.ok(models);
+                } else {
+                    callBack.failed(context.getResources().getString(R.string.find_no_result));
+                }
+            }
+        });
+    }
+
 }

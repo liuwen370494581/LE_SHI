@@ -56,7 +56,7 @@ public class MainActivity extends BaseActivity {
         fragmentList.add(mMyFragment);
         final MainAdapter mAdapter = new MainAdapter(fragmentList, getSupportFragmentManager());
         mMyViewPager.setAdapter(mAdapter);
-        mMyViewPager.setOffscreenPageLimit(fragmentList.size());
+        mMyViewPager.setOffscreenPageLimit(1);
         mMyViewPager.setSlipping(false);
         mTableLayout.setTabMode(TabLayout.MODE_FIXED);
         mTableLayout.addTab(mTableLayout.newTab().setCustomView(getTabView(0)));

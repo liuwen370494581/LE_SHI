@@ -355,7 +355,7 @@ public class TvUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public static class PopularHolder extends RecyclerView.ViewHolder {
         RecyclerView mRecyclerView;
         RelativeLayout ReHead;
-        private TextView tvType;
+        TextView tvType;
 
         public PopularHolder(View itemView) {
             super(itemView);

@@ -576,7 +576,7 @@ public class HomeUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     public static class EducationHolder extends RecyclerView.ViewHolder {
         RecyclerView mRecyclerView;
         RelativeLayout ReHead;
-        private TextView tvType;
+        TextView tvType;
 
         public EducationHolder(View itemView) {
             super(itemView);

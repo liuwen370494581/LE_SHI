@@ -674,4 +674,44 @@ public class HtmlParserUtil {
         }
         return list;
     }
+    //vip资源
+
+    public static List<CoverModel> searchAllVipMovie(String url, int start, int size, boolean isDate1, boolean isDate2, String tvType) {
+        List<CoverModel> list = new ArrayList<>();
+        try {
+            Document document = Jsoup.connect(url)
+                    .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31").timeout(40000).get();
+            Elements elements1 = document.select("ul.vipcenter-list");
+            Elements elements2 = elements1.select("div.js-collect");
+            Elements elements4 = elements1.select("div.hot-pic-text-box");
+            if (isDate1)
+                for (int j = start; j < size; j++) {
+                    CoverModel model = new CoverModel();
+                    model.setCoverVideoUrl(elements2.get(j).select("a").attr("href"));
+                    model.setCoverTitle(elements2.get(j).select("a").attr("title"));
+                    model.setCoverUrl(elements2.get(j).select("a").select("img").attr("src"));
+                    model.setCoverType(tvType);
+                    Log.e(Config.TAG, "videoUrl====" + elements2.get(j).select("a").attr("href"));
+                    Log.e(Config.TAG, "title====" + elements2.get(j).select("a").attr("title"));
+                    Log.e(Config.TAG, "image====" + elements2.get(j).select("a").select("img").attr("src"));
+                    list.add(model);
+                }
+
+            if (isDate2)
+                for (int m = start; m < size; m++) {
+                    CoverModel model = new CoverModel();
+                    model.setCoverType(tvType);
+                    model.setCoverScore(elements4.get(m).select("p.hot-pic-tit").select("span").first().text());
+                    model.setCoverDesc(elements4.get(m).select("p.hot-pic-tip").text());
+                    Log.e(Config.TAG, "评分===" + elements4.get(m).select("p.hot-pic-tit").select("span").first().text());
+                    Log.e(Config.TAG, "desc===" + elements4.get(m).select("p.hot-pic-tip").text());
+                    list.add(model);
+                }
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
 }

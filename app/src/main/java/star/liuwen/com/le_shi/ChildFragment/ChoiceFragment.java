@@ -92,7 +92,7 @@ public class ChoiceFragment extends BaseFragment {
     @Override
     public void initData() {
         if (!isLoaded) {
-            LoadData();
+          //  LoadData();
             isLoaded = true;
         }
     }
