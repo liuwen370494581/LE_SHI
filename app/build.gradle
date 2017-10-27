@@ -42,4 +42,6 @@ dependencies {
     compile 'cn.bingoogolapple:bga-refreshlayout:1.0.7@aar'
     //动画库
     compile 'com.nineoldandroids:library:2.4.0'
+    compile 'com.github.nukc.stateview:library:1.2.1'
+
 }
