@@ -28,9 +28,9 @@ import star.liuwen.com.le_shi.Utils.GlideUtils;
  */
 public class BannerAdapter extends PagerAdapter {
 
-    private int mSize;
+   // private int mSize;
     private Context mActivity;
-    private float mImageCorner = -1F;
+   // private float mImageCorner = -1F;
     private List<CoverModel> mList;
 
     public BannerAdapter(Context activity, List<CoverModel> list) {

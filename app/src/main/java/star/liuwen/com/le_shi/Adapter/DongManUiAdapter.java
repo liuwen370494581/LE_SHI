@@ -39,14 +39,14 @@ public class DongManUiAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     private Context mContext;
     private int itemWidth;
 
-    private final int BANNER_VIEW_TYPE = 0;
-    private final int CHANNEL_VIEW_TYPE = 1;
-    private final int HOT_PLAY_VIEW_TYPE = 2;//热播剧
-    private final int BAO_FENG_VIEW_TYPE = 3;//暴风推荐
-    private final int EVERY_DATE_UPDATE_VIEW_TYPE = 4;//每日更新
-    private final int QIN_ZI_VIEW_TYPE = 5;//亲子
-    private final int REVIEW_CLASSICLIST_VIEW_TYPE = 6;//重温经典
-    private final int END_VIEW_TYPE = 7;
+    private final static int BANNER_VIEW_TYPE = 0;
+    private final static int CHANNEL_VIEW_TYPE = 1;
+    private final static int HOT_PLAY_VIEW_TYPE = 2;//热播剧
+    private final static int BAO_FENG_VIEW_TYPE = 3;//暴风推荐
+    private final static int EVERY_DATE_UPDATE_VIEW_TYPE = 4;//每日更新
+    private final static int QIN_ZI_VIEW_TYPE = 5;//亲子
+    private final static int REVIEW_CLASSICLIST_VIEW_TYPE = 6;//重温经典
+    private final static int END_VIEW_TYPE = 7;
 
 
     public DongManUiAdapter(Context context, List<HashMap<String, Object>> channelList, List<CoverModel> coverList, List<CoverModel> hotPlayList, List<CoverModel> baoFengList, List<CoverModel> qinZiList, List<CoverModel> reviewClassicList, List<CoverModel> everyDateUpdateList, int itemWidth) {

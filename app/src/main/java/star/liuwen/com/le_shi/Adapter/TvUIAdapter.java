@@ -28,15 +28,15 @@ import star.liuwen.com.le_shi.Utils.ToastUtils;
 public class TvUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
 
-    private final int BANNER_VIEW_TYPE = 0;
-    private final int CHANNEL_VIEW_TYPE = 1;
-    private final int HOT_PLAY_VIEW_TYPE = 2;//热播剧
-    private final int POPULAR_VIEW_TYPE = 3;//最受欢迎
-    private final int CITY_LOVE_VIEW_TYPE = 4;//都市爱情
-    private final int XUAN_NING_VIEW_TYPE = 5;//悬拟
-    private final int NETWORK_VIEW_TYPE = 6;//网络
-    private final int KANG_WAR_TYPE = 7;//抗战
-    private final int END_VIEW_TYPE = 8;
+    private final static int BANNER_VIEW_TYPE = 0;
+    private final static int CHANNEL_VIEW_TYPE = 1;
+    private final static int HOT_PLAY_VIEW_TYPE = 2;//热播剧
+    private final static int POPULAR_VIEW_TYPE = 3;//最受欢迎
+    private final static int CITY_LOVE_VIEW_TYPE = 4;//都市爱情
+    private final static int XUAN_NING_VIEW_TYPE = 5;//悬拟
+    private final static int NETWORK_VIEW_TYPE = 6;//网络
+    private final static int KANG_WAR_TYPE = 7;//抗战
+    private final static int END_VIEW_TYPE = 8;
     private Context mContext;
     private int itemWidth;
 

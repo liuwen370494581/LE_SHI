@@ -62,6 +62,8 @@ public class AdActivity extends BaseActivity {
                         startActivity(new Intent(AdActivity.this, MainActivity.class));
                         finish();
                         break;
+                    default:
+                        break;
                 }
             }
         };

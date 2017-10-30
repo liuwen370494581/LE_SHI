@@ -35,7 +35,6 @@ public class TvFragment extends BaseFragment {
     private int itemWidth;
     private TvUIAdapter mAdapter;
 
-    private List<HashMap<String, Object>> channelList;//频道数据
     private List<CoverModel> coverList;//封面数据
     private List<CoverModel> hotPlayList;
     private List<CoverModel> popularList;
@@ -60,7 +59,6 @@ public class TvFragment extends BaseFragment {
 
 
     private void init() {
-        channelList = new ArrayList<>();
         coverList = new ArrayList<>();//封面数据
         hotPlayList = new ArrayList<>();
         popularList = new ArrayList<>();

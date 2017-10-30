@@ -43,15 +43,15 @@ public class VipUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     private int itemWidth;
     private Context mContext;
 
-    private final int BANNER_VIEW_TYPE = 0;
-    private final int CHANNEL_VIEW_TYPE = 1;
-    private final int POPULAR_VIEW_TYPE = 2;//最受欢迎
-    private final int NEW_FILM_RECOMMEND_VIEW_TYPE = 3;//新片推荐
-    private final int CHOICE_VIEW_TYPE = 4;//精选
-    private final int EDUCATION_VIEW_TYPE = 5;//教育
-    private final int QIN_ZI_VIEW_TYPE = 6;//亲子
-    private final int HORROR_FILM_TYPE = 7;//恐怖
-    private final int END_VIEW_TYPE = 8;
+    private final static int BANNER_VIEW_TYPE = 0;
+    private final static int CHANNEL_VIEW_TYPE = 1;
+    private final static int POPULAR_VIEW_TYPE = 2;//最受欢迎
+    private final static int NEW_FILM_RECOMMEND_VIEW_TYPE = 3;//新片推荐
+    private final static int CHOICE_VIEW_TYPE = 4;//精选
+    private final static int EDUCATION_VIEW_TYPE = 5;//教育
+    private final static int QIN_ZI_VIEW_TYPE = 6;//亲子
+    private final static int HORROR_FILM_TYPE = 7;//恐怖
+    private final static int END_VIEW_TYPE = 8;
 
 
     public VipUIAdapter(Context context, List<HashMap<String, Object>> channelList, List<CoverModel> coverList, List<CoverModel> mostPopularList, List<CoverModel> mostPopularList2, List<CoverModel> newFilmRecommendList, List<CoverModel> newFilmRecommendList2, List<CoverModel> choiceList, List<CoverModel> choiceList2, List<CoverModel> educationList, List<CoverModel> educationList2, List<CoverModel> qinZiList, List<CoverModel> qinZiList2, List<CoverModel> horrorFilmList, List<CoverModel> horrorFilmList2, int itemWidth) {

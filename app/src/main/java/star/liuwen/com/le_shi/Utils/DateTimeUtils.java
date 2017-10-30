@@ -14,7 +14,7 @@ import star.liuwen.com.le_shi.R;
  */
 public class DateTimeUtils {
 
-    public static Calendar CALENDAR = Calendar.getInstance();
+    public  static Calendar CALENDAR = Calendar.getInstance();
 
     public static String getCurrentTime_Today() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");

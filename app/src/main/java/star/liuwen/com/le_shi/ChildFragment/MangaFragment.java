@@ -32,7 +32,6 @@ import star.liuwen.com.le_shi.Utils.DensityUtil;
  * 动漫
  */
 public class MangaFragment extends BaseFragment {
-    private List<HashMap<String, Object>> channelList;//频道数据
     private List<CoverModel> coverList;//封面数据
     private List<CoverModel> hotPlayList;
     private List<CoverModel> baoFengList;
@@ -60,7 +59,6 @@ public class MangaFragment extends BaseFragment {
 
     private void init() {
         hotPlayList = new ArrayList<>();
-        channelList = new ArrayList<>();//频道数据
         coverList = new ArrayList<>();//封面数据
         baoFengList = new ArrayList<>();
         qinZiList = new ArrayList<>();

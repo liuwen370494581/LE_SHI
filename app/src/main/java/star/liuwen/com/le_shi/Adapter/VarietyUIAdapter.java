@@ -37,13 +37,13 @@ public class VarietyUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     private List<CoverModel> baoFengList2;
     private int itemWidth;
 
-    private final int BANNER_VIEW_TYPE = 0;
-    private final int CHANNEL_VIEW_TYPE = 1;
-    private final int HIGHLIGHT_VIEW_TYPE = 2;//精彩看点
-    private final int HOT_PLAY_VIEW_TYPE = 3;//热播剧
-    private final int VARIETY_VIEW_TYPE = 4;//内地综艺
-    private final int BAO_FENG_VIEW_TYPE = 5;//暴风出品
-    private final int END_VIEW_TYPE = 6;
+    private final static int BANNER_VIEW_TYPE = 0;
+    private final static int CHANNEL_VIEW_TYPE = 1;
+    private final static int HIGHLIGHT_VIEW_TYPE = 2;//精彩看点
+    private final static int HOT_PLAY_VIEW_TYPE = 3;//热播剧
+    private final static int VARIETY_VIEW_TYPE = 4;//内地综艺
+    private final static int BAO_FENG_VIEW_TYPE = 5;//暴风出品
+    private final static int END_VIEW_TYPE = 6;
     private Context mContext;
 
 

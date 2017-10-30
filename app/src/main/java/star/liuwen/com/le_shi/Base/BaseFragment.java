@@ -5,12 +5,18 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import com.github.nukc.stateview.StateView;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import star.liuwen.com.le_shi.EventBus.Event;
 import star.liuwen.com.le_shi.EventBus.EventBusUtil;
+import star.liuwen.com.le_shi.R;
 import star.liuwen.com.le_shi.Utils.ToastUtils;
 import star.liuwen.com.le_shi.View.LoadingProgressDialog;
 
@@ -46,7 +52,6 @@ public abstract class BaseFragment extends Fragment {
             EventBusUtil.register(this);
         }
     }
-
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -154,4 +159,6 @@ public abstract class BaseFragment extends Fragment {
     protected void receiveStickyEvent(Event event) {
 
     }
+
+
 }

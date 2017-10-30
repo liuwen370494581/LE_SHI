@@ -119,9 +119,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         if (lyCommonBar == null) {
             return;
         }
-        if (lyCommonBar != null) {
-            lyCommonBar.setVisibility(View.VISIBLE);
-        }
+        lyCommonBar.setVisibility(View.VISIBLE);
         lyCommonBar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -135,10 +133,8 @@ public abstract class BaseActivity extends AppCompatActivity {
         if (mTvCenter == null) {
             return;
         }
-        if (mTvCenter != null) {
-            mTvCenter.setText(str);
-            mTvCenter.setVisibility(View.VISIBLE);
-        }
+        mTvCenter.setText(str);
+        mTvCenter.setVisibility(View.VISIBLE);
     }
 
     public void showLoadingDialog(String loadingText, boolean isCanCancel, LoadingProgressDialog.ILoadingDialogListener listener) {

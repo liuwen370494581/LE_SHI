@@ -30,8 +30,6 @@ import star.liuwen.com.le_shi.Utils.DensityUtil;
  * 电影
  */
 public class MovieFragment extends BaseFragment {
-
-    private List<HashMap<String, Object>> channelList;//频道数据
     private List<CoverModel> coverList;//封面数据
     private List<CoverModel> vipList;//会员
     private List<CoverModel> vipList2;
@@ -61,7 +59,6 @@ public class MovieFragment extends BaseFragment {
 
     private void init() {
         coverList = new ArrayList<>();
-        channelList = new ArrayList<>();
         vipList = new ArrayList<>();
         vipList2 = new ArrayList<>();
         mostPopularList = new ArrayList<>();

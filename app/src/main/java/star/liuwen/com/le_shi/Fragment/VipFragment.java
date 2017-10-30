@@ -30,7 +30,6 @@ import star.liuwen.com.le_shi.Utils.ToastUtils;
  */
 public class VipFragment extends BaseFragment {
 
-    private List<HashMap<String, Object>> channelList = new ArrayList<>();
     private List<CoverModel> coverList = new ArrayList<>();//封面数据
     private List<CoverModel> mostPopularList = new ArrayList<>();//最受欢迎
     private List<CoverModel> mostPopularList2 = new ArrayList<>();//最受欢迎

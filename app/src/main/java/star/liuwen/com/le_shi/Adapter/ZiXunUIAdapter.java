@@ -34,18 +34,18 @@ public class ZiXunUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     private List<CoverModel> musicList;//音乐资讯
     private List<CoverModel> gameList;//游戏资讯
 
-    private final int BANNER_VIEW_TYPE = 0;
-    private final int ZI_XUN_RECOMMEND_VIEW_TYPE = 1;
-    private final int HEAD_LINES_VIEW_TYPE = 2;
-    private final int BAO_XIAO_RECOMMEND_VIEW_TYPE = 3;
-    private final int STRANGE_VIEW_TYPE = 4;
-    private final int FUNNY_VIEW_TYPE = 5;
-    private final int STAR_VIEW_TYPE = 6;
-    private final int SPORTS_VIEW_TYPE = 7;
-    private final int SCIENCE_VIEW_TYPE = 8;
-    private final int MUSIC_VIEW_TYPE = 9;
-    private final int GAME_VIEW_TYPE = 10;
-    private final int END_VIEW_TYPE = 11;
+    private final static int BANNER_VIEW_TYPE = 0;
+    private final static int ZI_XUN_RECOMMEND_VIEW_TYPE = 1;
+    private final static int HEAD_LINES_VIEW_TYPE = 2;
+    private final static int BAO_XIAO_RECOMMEND_VIEW_TYPE = 3;
+    private final static int STRANGE_VIEW_TYPE = 4;
+    private final static int FUNNY_VIEW_TYPE = 5;
+    private final static int STAR_VIEW_TYPE = 6;
+    private final static int SPORTS_VIEW_TYPE = 7;
+    private final static int SCIENCE_VIEW_TYPE = 8;
+    private final static int MUSIC_VIEW_TYPE = 9;
+    private final static int GAME_VIEW_TYPE = 10;
+    private final static int END_VIEW_TYPE = 11;
     private Context mContext;
 
     public ZiXunUIAdapter(Context context, List<CoverModel> coverList, List<CoverModel> ziXunRecommendList, List<CoverModel> headlinesList, List<CoverModel> baoXiaoRecommendList, List<CoverModel> strangeList, List<CoverModel> funList, List<CoverModel> starList, List<CoverModel> sportList, List<CoverModel> scienceList, List<CoverModel> musicList, List<CoverModel> gameList) {

@@ -168,6 +168,7 @@ public class SharedPreferencesUtil {
 
     /**
      * 保存Object转16进制后的string
+     *
      * @param context
      * @param key
      * @param obj
@@ -185,14 +186,15 @@ public class SharedPreferencesUtil {
 
     /**
      * 获取出16进制的string转Object
+     *
      * @param context
      * @param key
      * @return
      */
     public static Object getObj(Context context, String key) {
         try {
-            String objHexString = SharedPreferencesUtil.getStringPreferences(context,key,"");
-            if(!TextUtils.isEmpty(objHexString)) {
+            String objHexString = SharedPreferencesUtil.getStringPreferences(context, key, "");
+            if (!TextUtils.isEmpty(objHexString)) {
                 byte[] stringToBytes = EncryptUtil.stringToBytes(objHexString);
                 ByteArrayInputStream bis = new ByteArrayInputStream(stringToBytes);
                 ObjectInputStream is = new ObjectInputStream(bis);
@@ -200,9 +202,11 @@ public class SharedPreferencesUtil {
                 Object readObject = is.readObject();
                 return readObject;
             }
+        } catch (RuntimeException e) {
+            throw e;
         } catch (Exception e) {
+            e.printStackTrace();
         }
         return null;
     }
-
 }

@@ -32,19 +32,19 @@ import star.liuwen.com.le_shi.Utils.ToastUtils;
 public class HomeUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private Context mContext;
-    private final int BANNER_VIEW_TYPE = 0;//轮播图
-    private final int CHANNEL_VIEW_TYPE = 1;//频道
-    private final int EDIT_VIEW_TYPE = 2;//编辑推荐
-    private final int TV_TYPE = 3;// 电视剧
-    private final int MOVIE_TYPE = 4;//电影
-    private final int DONG_MAN_TYPE = 5; //动漫
-    private final int ZONG_YI_TYPE = 6; //综艺
-    private final int SPORTS_TYPE = 7;//体育
-    private final int EDUCATION_TYPE = 8; //教育
-    private final int WEI_MOVIE_TYPE = 9; //微电影
-    private final int MUSIC_TYPE = 10; //音乐
-    private final int OVER_VIEW_TYPE = 11;//全景
-    private final int END_VIEW_TYPE = 12;//结束
+    private final static int BANNER_VIEW_TYPE = 0;//轮播图
+    private final static int CHANNEL_VIEW_TYPE = 1;//频道
+    private final static int EDIT_VIEW_TYPE = 2;//编辑推荐
+    private final static int TV_TYPE = 3;// 电视剧
+    private final static int MOVIE_TYPE = 4;//电影
+    private final static int DONG_MAN_TYPE = 5; //动漫
+    private final static int ZONG_YI_TYPE = 6; //综艺
+    private final static int SPORTS_TYPE = 7;//体育
+    private final static int EDUCATION_TYPE = 8; //教育
+    private final static int WEI_MOVIE_TYPE = 9; //微电影
+    private final static int MUSIC_TYPE = 10; //音乐
+    private final static int OVER_VIEW_TYPE = 11;//全景
+    private final static int END_VIEW_TYPE = 12;//结束
 
 
     private List<HashMap<String, Object>> channelList;//频道数据
@@ -485,12 +485,10 @@ public class HomeUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     public static class ChannelHolder extends RecyclerView.ViewHolder {
         RecyclerView mRecyclerView;
-        RelativeLayout ReHead;
 
         public ChannelHolder(View itemView) {
             super(itemView);
             mRecyclerView = (RecyclerView) itemView.findViewById(R.id.channel_recycler_view);
-            ReHead = (RelativeLayout) itemView.findViewById(R.id.re_show);
         }
     }
 

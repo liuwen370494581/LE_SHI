@@ -28,7 +28,6 @@ import star.liuwen.com.le_shi.Utils.DensityUtil;
  * 综艺
  */
 public class VarietyFragment extends BaseFragment {
-    private List<HashMap<String, Object>> channelList;//频道数据
     private List<CoverModel> coverList;//封面数据
     private List<CoverModel> highlightsList;//精彩看点
     private List<CoverModel> highlightsList2;
@@ -53,7 +52,6 @@ public class VarietyFragment extends BaseFragment {
     }
 
     private void init() {
-        channelList = new ArrayList<>();//频道数据
         coverList = new ArrayList<>();//封面数据
         highlightsList = new ArrayList<>();
         highlightsList2 = new ArrayList<>();

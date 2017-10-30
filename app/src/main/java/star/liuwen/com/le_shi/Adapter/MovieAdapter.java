@@ -42,15 +42,15 @@ public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     private List<CoverModel> dongHuaList;//动漫
     private int itemWidth;
 
-    private final int BANNER_VIEW_TYPE = 0;
-    private final int CHANNEL_VIEW_TYPE = 1;
-    private final int ViP_VIEW_TYPE = 2;//Vip
-    private final int POPULAR_VIEW_TYPE = 3;//最受欢迎
-    private final int HUY_YU_VIEW_TYPE = 4;//华语
-    private final int OU_MEI_VIEW_TYPE = 5;//欧美
-    private final int WHITE_LOVER_VIEW_TYPE = 6;//白色爱情
-    private final int DOAG_HUA_TYPE = 7;//动画
-    private final int END_VIEW_TYPE = 8;
+    private final static int BANNER_VIEW_TYPE = 0;
+    private final static int CHANNEL_VIEW_TYPE = 1;
+    private final static int ViP_VIEW_TYPE = 2;//Vip
+    private final static int POPULAR_VIEW_TYPE = 3;//最受欢迎
+    private final static int HUY_YU_VIEW_TYPE = 4;//华语
+    private final static int OU_MEI_VIEW_TYPE = 5;//欧美
+    private final static int WHITE_LOVER_VIEW_TYPE = 6;//白色爱情
+    private final static int DOAG_HUA_TYPE = 7;//动画
+    private final static int END_VIEW_TYPE = 8;
     private Context mContext;
 
 
@@ -456,7 +456,7 @@ public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
         @Override
         protected void fillData(BGAViewHolderHelper helper, int position, CoverModel model) {
-            CornerLabelView cVTitle = helper.getView(R.id.label);
+           // CornerLabelView cVTitle = helper.getView(R.id.label);
             GlideUtils.loadImage(helper.getImageView(R.id.image_hot), model.getCoverUrl(), R.mipmap.defalut_img, R.mipmap.defalut_img);
             helper.setText(R.id.txt_name, model.getCoverTitle());
             helper.setVisibility(R.id.txt_desc, View.VISIBLE);
