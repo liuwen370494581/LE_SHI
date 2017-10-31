@@ -653,7 +653,7 @@ public class HomeUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         }
     }
 
-    private class CommAdapter extends BGARecyclerViewAdapter<CoverModel> {
+    private static class CommAdapter extends BGARecyclerViewAdapter<CoverModel> {
 
         public CommAdapter(RecyclerView recyclerView) {
             super(recyclerView, R.layout.hot_item);
@@ -674,7 +674,7 @@ public class HomeUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         }
     }
 
-    private class TvAndMovieAdapter extends BGARecyclerViewAdapter<CoverModel> {
+    private static class TvAndMovieAdapter extends BGARecyclerViewAdapter<CoverModel> {
 
         public TvAndMovieAdapter(RecyclerView recyclerView) {
             super(recyclerView, R.layout.item_tv_movie);

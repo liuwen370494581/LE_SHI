@@ -338,7 +338,7 @@ public class DongManUiAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
 
-    private class CommAdapter extends BGARecyclerViewAdapter<CoverModel> {
+    private static class CommAdapter extends BGARecyclerViewAdapter<CoverModel> {
         public CommAdapter(RecyclerView recyclerView) {
             super(recyclerView, R.layout.hot_item);
         }
@@ -355,7 +355,7 @@ public class DongManUiAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         }
     }
 
-    private class EveryDateUpdateAdapter extends BGARecyclerViewAdapter<CoverModel> {
+    private static class EveryDateUpdateAdapter extends BGARecyclerViewAdapter<CoverModel> {
 
         public EveryDateUpdateAdapter(RecyclerView recyclerView) {
             super(recyclerView, R.layout.item_every_date_update);
