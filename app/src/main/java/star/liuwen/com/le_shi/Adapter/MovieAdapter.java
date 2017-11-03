@@ -9,9 +9,6 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-
-import java.util.HashMap;
 import java.util.List;
 
 import cn.bingoogolapple.androidcommon.adapter.BGAOnRVItemClickListener;
@@ -21,14 +18,13 @@ import star.liuwen.com.le_shi.Model.CoverModel;
 import star.liuwen.com.le_shi.R;
 import star.liuwen.com.le_shi.Utils.GlideUtils;
 import star.liuwen.com.le_shi.Utils.ToastUtils;
-import star.liuwen.com.le_shi.View.CornerLabelView;
 
 /**
  * Created by liuwen on 2017/10/19.
  */
 public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private List<HashMap<String, Object>> channelList;//频道数据
+    private List<String> channelList;//频道数据
     private List<CoverModel> coverList;//封面数据
     private List<CoverModel> vipList;//会员
     private List<CoverModel> vipList2;
@@ -54,7 +50,7 @@ public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     private Context mContext;
 
 
-    public MovieAdapter(Context context, List<HashMap<String, Object>> channelList, List<CoverModel> coverList, List<CoverModel> vipList, List<CoverModel> vipList2, List<CoverModel> mostPopularList, List<CoverModel> mostPopularList2, List<CoverModel> huaYuList, List<CoverModel> huaYuList2, List<CoverModel> ouMeiList, List<CoverModel> ouMeiList2, List<CoverModel> whiteLoveList, List<CoverModel> dongHuaList, int itemWidth) {
+    public MovieAdapter(Context context, List<String> channelList, List<CoverModel> coverList, List<CoverModel> vipList, List<CoverModel> vipList2, List<CoverModel> mostPopularList, List<CoverModel> mostPopularList2, List<CoverModel> huaYuList, List<CoverModel> huaYuList2, List<CoverModel> ouMeiList, List<CoverModel> ouMeiList2, List<CoverModel> whiteLoveList, List<CoverModel> dongHuaList, int itemWidth) {
         mContext = context;
         this.channelList = channelList;
         this.coverList = coverList;
@@ -249,17 +245,11 @@ public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             setBanner(bannerHolder);
         } else if (holder instanceof HomeUIAdapter.ChannelHolder) {
             HomeUIAdapter.ChannelHolder channelHolder = (HomeUIAdapter.ChannelHolder) holder;
-            ChannelAdapter channelAdapter = new ChannelAdapter(channelHolder.mRecyclerView);
+            HomeUIAdapter.ChannelAdapter channelAdapter = new HomeUIAdapter.ChannelAdapter(channelHolder.mRecyclerView);
             final GridLayoutManager manager = new GridLayoutManager(mContext, 4, LinearLayoutManager.VERTICAL, false);
             channelHolder.mRecyclerView.setLayoutManager(manager);
             channelAdapter.setData(channelList);
             channelHolder.mRecyclerView.setAdapter(channelAdapter);
-            channelAdapter.setOnRVItemClickListener(new BGAOnRVItemClickListener() {
-                @Override
-                public void onRVItemClick(ViewGroup parent, View itemView, int position) {
-                    ToastUtils.showToast(mContext, channelList.get(position).get("title").toString());
-                }
-            });
         } else if (holder instanceof VipHolder) {
             VipHolder vipHolder = (VipHolder) holder;
             PopAndCityLoveAndXuanningAdapter mAdapter = new PopAndCityLoveAndXuanningAdapter(mContext, vipList, vipList2, false);
@@ -431,23 +421,6 @@ public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     }
 
 
-    private class ChannelAdapter extends BGARecyclerViewAdapter<HashMap<String, Object>> {
-
-        public ChannelAdapter(RecyclerView recyclerView) {
-            super(recyclerView, R.layout.item_channel);
-        }
-
-        @Override
-        protected void fillData(BGAViewHolderHelper helper, int position, HashMap<String, Object> model) {
-            if (itemWidth != 0) {
-                helper.getView(R.id.id_item_layout).setLayoutParams(new ViewGroup.LayoutParams(itemWidth / 4, ViewGroup.LayoutParams.MATCH_PARENT));
-            }
-            helper.setText(R.id.tv_channel, model.get("title").toString());
-            Glide.with(mContext).load(model.get("pic")).into(helper.getImageView(R.id.iv_logo));
-
-        }
-    }
-
     private static class CommAdapter extends BGARecyclerViewAdapter<CoverModel> {
 
         public CommAdapter(RecyclerView recyclerView) {
@@ -456,7 +429,7 @@ public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
         @Override
         protected void fillData(BGAViewHolderHelper helper, int position, CoverModel model) {
-           // CornerLabelView cVTitle = helper.getView(R.id.label);
+            // CornerLabelView cVTitle = helper.getView(R.id.label);
             GlideUtils.loadImage(helper.getImageView(R.id.image_hot), model.getCoverUrl(), R.mipmap.defalut_img, R.mipmap.defalut_img);
             helper.setText(R.id.txt_name, model.getCoverTitle());
             helper.setVisibility(R.id.txt_desc, View.VISIBLE);

@@ -25,10 +25,10 @@ public class LoadingProgressDialog extends Dialog {
         super(context, R.style.CustomDialogStyle);
         setContentView(R.layout.layout_loading);
         mLinearLayout = (LinearLayout) findViewById(R.id.dialog_toast_bg);
-        // mLinearLayout.getBackground().setAlpha(150);
+        mLinearLayout.getBackground().setAlpha(0);
         mImageView = (ImageView) findViewById(R.id.img_show);
         mImageView.setBackgroundResource(R.drawable.load_animal);
-        AnimationDrawable animationDrawable= (AnimationDrawable) mImageView.getBackground();
+        AnimationDrawable animationDrawable = (AnimationDrawable) mImageView.getBackground();
         animationDrawable.start();
         mTxtT = (TextView) this.findViewById(R.id.txt);
         mTxtT.setText(toastContent);

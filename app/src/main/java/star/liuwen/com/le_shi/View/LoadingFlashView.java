@@ -33,9 +33,16 @@ public class LoadingFlashView extends FrameLayout {
         imgShow = (ImageView) view.findViewById(R.id.img_show);
         tvName = (TextView) view.findViewById(R.id.txt);
         imgShow.setBackgroundResource(R.drawable.load_animal);
-        AnimationDrawable animationDrawable= (AnimationDrawable) imgShow.getBackground();
+        AnimationDrawable animationDrawable = (AnimationDrawable) imgShow.getBackground();
         animationDrawable.start();
         addView(view);
+    }
 
+    public void setShowMsg(String msg) {
+        if (tvName != null) {
+            return;
+        }
+        tvName.setText(msg.isEmpty() ? "" : msg);
+        tvName.setVisibility(msg.isEmpty() ? GONE : VISIBLE);
     }
 }

@@ -9,9 +9,6 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-
-import java.util.HashMap;
 import java.util.List;
 
 import cn.bingoogolapple.androidcommon.adapter.BGAOnRVItemClickListener;
@@ -26,7 +23,7 @@ import star.liuwen.com.le_shi.Utils.ToastUtils;
  * Created by liuwen on 2017/10/19.
  */
 public class VarietyUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private List<HashMap<String, Object>> channelList;//频道数据
+    private List<String> channelList;//频道数据
     private List<CoverModel> coverList;//封面数据
     private List<CoverModel> highlightsList;//精彩看点
     private List<CoverModel> highlightsList2;
@@ -47,7 +44,7 @@ public class VarietyUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     private Context mContext;
 
 
-    public VarietyUIAdapter(Context context, List<HashMap<String, Object>> channelList, List<CoverModel> coverList, List<CoverModel> highlightsList, List<CoverModel> highlightsList2, List<CoverModel> hotPlayList, List<CoverModel> varietyList, List<CoverModel> varietyList2, List<CoverModel> baoFengList, List<CoverModel> baoFengList2, int itemWidth) {
+    public VarietyUIAdapter(Context context, List<String> channelList, List<CoverModel> coverList, List<CoverModel> highlightsList, List<CoverModel> highlightsList2, List<CoverModel> hotPlayList, List<CoverModel> varietyList, List<CoverModel> varietyList2, List<CoverModel> baoFengList, List<CoverModel> baoFengList2, int itemWidth) {
         mContext = context;
         this.channelList = channelList;
         this.coverList = coverList;
@@ -201,17 +198,11 @@ public class VarietyUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             setBanner(bannerHolder);
         } else if (holder instanceof HomeUIAdapter.ChannelHolder) {
             HomeUIAdapter.ChannelHolder channelHolder = (HomeUIAdapter.ChannelHolder) holder;
-            ChannelAdapter channelAdapter = new ChannelAdapter(channelHolder.mRecyclerView);
+            HomeUIAdapter.ChannelAdapter channelAdapter = new HomeUIAdapter.ChannelAdapter(channelHolder.mRecyclerView);
             final GridLayoutManager manager = new GridLayoutManager(mContext, 4, LinearLayoutManager.VERTICAL, false);
             channelHolder.mRecyclerView.setLayoutManager(manager);
             channelAdapter.setData(channelList);
             channelHolder.mRecyclerView.setAdapter(channelAdapter);
-            channelAdapter.setOnRVItemClickListener(new BGAOnRVItemClickListener() {
-                @Override
-                public void onRVItemClick(ViewGroup parent, View itemView, int position) {
-                    ToastUtils.showToast(mContext, channelList.get(position).get("title").toString());
-                }
-            });
         } else if (holder instanceof HighlightHolder) {
             HighlightHolder highlightHolder = (HighlightHolder) holder;
             PopAndCityLoveAndXuanningAdapter mAdapter = new PopAndCityLoveAndXuanningAdapter(mContext, highlightsList, highlightsList2, true);
@@ -278,23 +269,6 @@ public class VarietyUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         channelHolder.indicator.setViewPager(channelHolder.viewpager);
     }
 
-
-    private class ChannelAdapter extends BGARecyclerViewAdapter<HashMap<String, Object>> {
-
-        public ChannelAdapter(RecyclerView recyclerView) {
-            super(recyclerView, R.layout.item_channel);
-        }
-
-        @Override
-        protected void fillData(BGAViewHolderHelper helper, int position, HashMap<String, Object> model) {
-            if (itemWidth != 0) {
-                helper.getView(R.id.id_item_layout).setLayoutParams(new ViewGroup.LayoutParams(itemWidth / 4, ViewGroup.LayoutParams.MATCH_PARENT));
-            }
-            helper.setText(R.id.tv_channel, model.get("title").toString());
-            Glide.with(mContext).load(model.get("pic")).into(helper.getImageView(R.id.iv_logo));
-
-        }
-    }
 
     public static class HighlightHolder extends RecyclerView.ViewHolder {
         RecyclerView mRecyclerView;

@@ -9,8 +9,6 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-
 import java.util.HashMap;
 import java.util.List;
 
@@ -40,7 +38,7 @@ public class TvUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context mContext;
     private int itemWidth;
 
-    private List<HashMap<String, Object>> channelList;//频道数据
+    private List<String> channelList;//频道数据
     private List<CoverModel> coverList;//封面数据
     private List<CoverModel> hotPlayList;
     private List<CoverModel> popularList;
@@ -53,7 +51,7 @@ public class TvUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<CoverModel> kangWarList;
 
 
-    public TvUIAdapter(Context context, List<HashMap<String, Object>> channelList, List<CoverModel> coverList, List<CoverModel> hotPlayList, List<CoverModel> popularList, List<CoverModel> popularList2, List<CoverModel> cityLoveList, List<CoverModel> cityLoveList2, List<CoverModel> xuanNingList, List<CoverModel> xuanNingList2, List<CoverModel> netWorkList, List<CoverModel> kangWarList, int itemWidth) {
+    public TvUIAdapter(Context context, List<String> channelList, List<CoverModel> coverList, List<CoverModel> hotPlayList, List<CoverModel> popularList, List<CoverModel> popularList2, List<CoverModel> cityLoveList, List<CoverModel> cityLoveList2, List<CoverModel> xuanNingList, List<CoverModel> xuanNingList2, List<CoverModel> netWorkList, List<CoverModel> kangWarList, int itemWidth) {
         mContext = context;
         this.channelList = channelList;
         this.coverList = coverList;
@@ -238,17 +236,11 @@ public class TvUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             setBanner(bannerHolder);
         } else if (holder instanceof HomeUIAdapter.ChannelHolder) {
             HomeUIAdapter.ChannelHolder channelHolder = (HomeUIAdapter.ChannelHolder) holder;
-            ChannelAdapter channelAdapter = new ChannelAdapter(channelHolder.mRecyclerView);
+            HomeUIAdapter.ChannelAdapter channelAdapter = new HomeUIAdapter.ChannelAdapter(channelHolder.mRecyclerView);
             final GridLayoutManager manager = new GridLayoutManager(mContext, 4, LinearLayoutManager.VERTICAL, false);
             channelHolder.mRecyclerView.setLayoutManager(manager);
             channelAdapter.setData(channelList);
             channelHolder.mRecyclerView.setAdapter(channelAdapter);
-            channelAdapter.setOnRVItemClickListener(new BGAOnRVItemClickListener() {
-                @Override
-                public void onRVItemClick(ViewGroup parent, View itemView, int position) {
-                    ToastUtils.showToast(mContext, channelList.get(position).get("title").toString());
-                }
-            });
         } else if (holder instanceof HotPlayHolder) {
             HotPlayHolder hotPlayHolder = (HotPlayHolder) holder;
             CommAdapter commAdapter = new CommAdapter(hotPlayHolder.mRecyclerView);
@@ -418,22 +410,6 @@ public class TvUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
 
-    private class ChannelAdapter extends BGARecyclerViewAdapter<HashMap<String, Object>> {
-
-        public ChannelAdapter(RecyclerView recyclerView) {
-            super(recyclerView, R.layout.item_channel);
-        }
-
-        @Override
-        protected void fillData(BGAViewHolderHelper helper, int position, HashMap<String, Object> model) {
-            if (itemWidth != 0) {
-                helper.getView(R.id.id_item_layout).setLayoutParams(new ViewGroup.LayoutParams(itemWidth / 4, ViewGroup.LayoutParams.MATCH_PARENT));
-            }
-            helper.setText(R.id.tv_channel, model.get("title").toString());
-            Glide.with(mContext).load(model.get("pic")).into(helper.getImageView(R.id.iv_logo));
-
-        }
-    }
 
 
     private static class CommAdapter extends BGARecyclerViewAdapter<CoverModel> {

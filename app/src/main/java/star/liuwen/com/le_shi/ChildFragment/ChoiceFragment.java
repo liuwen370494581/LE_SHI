@@ -80,7 +80,7 @@ public class ChoiceFragment extends BaseFragment {
         itemWidth = DensityUtil.getScreenWidth(getActivity());
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_choice);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mAdapter = new HomeUIAdapter(getActivity(), channelList,
+        mAdapter = new HomeUIAdapter(getActivity(), DateEnage.getTvChannelList(),
                 coverList, editList, editList2, sportsList, tvList, movieList,
                 dongManList, zongYiList, education, weiMovieList, musicList,
                 overViewList, overViewList2, itemWidth);
@@ -92,14 +92,13 @@ public class ChoiceFragment extends BaseFragment {
     @Override
     public void initData() {
         if (!isLoaded) {
-          //  LoadData();
+            LoadData();
             isLoaded = true;
         }
     }
 
     private void LoadData() {
         showLoadingDialog("", false, null);
-        channelList = DateEnage.getChannelList();
         MainUIAction.searchCoverData(getActivity(), Config.BAO_FENG_URL, new ActionCallBack() {
             @Override
             public void ok(Object object) {

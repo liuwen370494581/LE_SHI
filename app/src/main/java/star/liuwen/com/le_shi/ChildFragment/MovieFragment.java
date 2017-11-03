@@ -75,7 +75,7 @@ public class MovieFragment extends BaseFragment {
         itemWidth = DensityUtil.getScreenWidth(getActivity());
         mRecyclerView = (RecyclerView) view.findViewById(R.id.movie_recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mAdapter = new MovieAdapter(getActivity(), DateEnage.getChannelList(),
+        mAdapter = new MovieAdapter(getActivity(), DateEnage.getMovieChannelList(),
                 coverList, vipList, vipList2, mostPopularList, mostPopularList2,
                 huaYuList, huaYuList2, ouMeiList,
                 ouMeiList2, whiteLoveList, dongHuaList, itemWidth);

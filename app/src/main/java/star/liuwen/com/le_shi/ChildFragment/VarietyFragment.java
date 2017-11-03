@@ -67,7 +67,7 @@ public class VarietyFragment extends BaseFragment {
         itemWidth = DensityUtil.getScreenWidth(getActivity());
         mRecyclerView = (RecyclerView) view.findViewById(R.id.variey_recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mAdapter = new VarietyUIAdapter(getActivity(), DateEnage.getChannelList(),
+        mAdapter = new VarietyUIAdapter(getActivity(), DateEnage.getZongYiChannelList(),
                 coverList, highlightsList, highlightsList2, hotPlayList, varietyList, varietyList2,
                 baoFengList, baoFengList2, itemWidth);
         mRecyclerView.setAdapter(mAdapter);

@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -47,7 +48,7 @@ public class HomeUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     private final static int END_VIEW_TYPE = 12;//结束
 
 
-    private List<HashMap<String, Object>> channelList;//频道数据
+    private List<String> channelList;//频道数据
     private List<CoverModel> coverList;//封面数据
     private List<CoverModel> editList;//编辑推荐
     private List<CoverModel> editList2;//编辑推荐
@@ -64,7 +65,7 @@ public class HomeUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     private int itemWidth;
 
-    public HomeUIAdapter(Context context, List<HashMap<String, Object>> channelList, List<CoverModel> coverList, List<CoverModel> editList, List<CoverModel> editList2, List<CoverModel> sportsList, List<CoverModel> tvList, List<CoverModel> movieList, List<CoverModel> dongManList, List<CoverModel> zongYiList, List<CoverModel> education, List<CoverModel> weiMovieList, List<CoverModel> musicList, List<CoverModel> overViewList, List<CoverModel> overViewList2, int itemWidth) {
+    public HomeUIAdapter(Context context, List<String> channelList, List<CoverModel> coverList, List<CoverModel> editList, List<CoverModel> editList2, List<CoverModel> sportsList, List<CoverModel> tvList, List<CoverModel> movieList, List<CoverModel> dongManList, List<CoverModel> zongYiList, List<CoverModel> education, List<CoverModel> weiMovieList, List<CoverModel> musicList, List<CoverModel> overViewList, List<CoverModel> overViewList2, int itemWidth) {
         mContext = context;
         this.channelList = channelList;
         this.coverList = coverList;
@@ -323,12 +324,6 @@ public class HomeUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             channelHolder.mRecyclerView.setLayoutManager(manager);
             channelAdapter.setData(channelList);
             channelHolder.mRecyclerView.setAdapter(channelAdapter);
-            channelAdapter.setOnRVItemClickListener(new BGAOnRVItemClickListener() {
-                @Override
-                public void onRVItemClick(ViewGroup parent, View itemView, int position) {
-                    ToastUtils.showToast(mContext, channelList.get(position).get("title").toString());
-                }
-            });
         } else if (holder instanceof SportsHolder) {
             SportsHolder sportsHolder = (SportsHolder) holder;
             CommAdapter commAdapter = new CommAdapter(sportsHolder.mRecyclerView);
@@ -636,20 +631,15 @@ public class HomeUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     }
 
 
-    private class ChannelAdapter extends BGARecyclerViewAdapter<HashMap<String, Object>> {
-
+    public static class ChannelAdapter extends BGARecyclerViewAdapter<String> {
         public ChannelAdapter(RecyclerView recyclerView) {
-            super(recyclerView, R.layout.item_channel);
+            super(recyclerView, R.layout.item_channerl_2);
         }
 
         @Override
-        protected void fillData(BGAViewHolderHelper helper, int position, HashMap<String, Object> model) {
-            if (itemWidth != 0) {
-                helper.getView(R.id.id_item_layout).setLayoutParams(new ViewGroup.LayoutParams(itemWidth / 4, ViewGroup.LayoutParams.MATCH_PARENT));
-            }
-            helper.setText(R.id.tv_channel, model.get("title").toString());
-            Glide.with(mContext).load(model.get("pic")).into(helper.getImageView(R.id.iv_logo));
-
+        protected void fillData(BGAViewHolderHelper helper, int position, String model) {
+            Button btnName = helper.getView(R.id.btn_name);
+            btnName.setText(model);
         }
     }
 

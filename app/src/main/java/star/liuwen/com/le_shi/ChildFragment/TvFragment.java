@@ -75,7 +75,7 @@ public class TvFragment extends BaseFragment {
         itemWidth = DensityUtil.getScreenWidth(getActivity());
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_tv);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mAdapter = new TvUIAdapter(getActivity(), DateEnage.getChannelList(),
+        mAdapter = new TvUIAdapter(getActivity(), DateEnage.getTvChannelList(),
                 coverList, hotPlayList, popularList, popularList2, cityLoveList,
                 cityLoveList2, xuanNingList, xuanNingList2,
                 netWorkList, kangWarList, itemWidth);

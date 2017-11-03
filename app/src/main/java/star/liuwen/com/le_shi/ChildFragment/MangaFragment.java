@@ -71,7 +71,7 @@ public class MangaFragment extends BaseFragment {
         itemWidth = DensityUtil.getScreenWidth(getActivity());
         mRecyclerView = (RecyclerView) view.findViewById(R.id.dongman_recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mAdapter = new DongManUiAdapter(getActivity(), DateEnage.getChannelList(),
+        mAdapter = new DongManUiAdapter(getActivity(), DateEnage.getDongManChannelList(),
                 coverList, hotPlayList, baoFengList, qinZiList, reviewClassicList,
                 everyDateUpdateList, itemWidth);
         mRecyclerView.setAdapter(mAdapter);
