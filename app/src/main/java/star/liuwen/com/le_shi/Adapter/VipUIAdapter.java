@@ -261,10 +261,9 @@ public class VipUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             setBanner(bannerHolder);
         } else if (holder instanceof HomeUIAdapter.ChannelHolder) {
             HomeUIAdapter.ChannelHolder channelHolder = (HomeUIAdapter.ChannelHolder) holder;
-            HomeUIAdapter.ChannelAdapter channelAdapter = new HomeUIAdapter.ChannelAdapter(channelHolder.mRecyclerView);
+            ChannelAdapter channelAdapter = new ChannelAdapter(channelList,mContext);
             final GridLayoutManager manager = new GridLayoutManager(mContext, 4, LinearLayoutManager.VERTICAL, false);
             channelHolder.mRecyclerView.setLayoutManager(manager);
-            channelAdapter.setData(channelList);
             channelHolder.mRecyclerView.setAdapter(channelAdapter);
         } else if (holder instanceof TvUIAdapter.PopularHolder) {
             TvUIAdapter.PopularHolder popularHolder = (TvUIAdapter.PopularHolder) holder;

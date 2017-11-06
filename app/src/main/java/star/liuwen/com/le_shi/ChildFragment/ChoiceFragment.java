@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -19,9 +20,11 @@ import star.liuwen.com.le_shi.Base.Config;
 import star.liuwen.com.le_shi.DataEnage.DateEnage;
 import star.liuwen.com.le_shi.Jsoup.Action.ActionCallBack;
 import star.liuwen.com.le_shi.Jsoup.Action.MainUIAction;
+import star.liuwen.com.le_shi.Listener.OnChoiceListener;
 import star.liuwen.com.le_shi.Model.CoverModel;
 import star.liuwen.com.le_shi.R;
 import star.liuwen.com.le_shi.Utils.DensityUtil;
+import star.liuwen.com.le_shi.Utils.ToastUtils;
 
 /**
  * Created by liuwen on 2017/10/13.
@@ -30,10 +33,11 @@ import star.liuwen.com.le_shi.Utils.DensityUtil;
 public class ChoiceFragment extends BaseFragment {
 
     private RecyclerView mRecyclerView;
+    private ImageView btnClickMe;
     private int itemWidth;
     private HomeUIAdapter mAdapter;
 
-    private List<HashMap<String, Object>> channelList;
+    private List<String> channelList;
     private List<CoverModel> coverList;//封面数据
     private List<CoverModel> editList;//编辑推荐
     private List<CoverModel> editList2;
@@ -48,6 +52,7 @@ public class ChoiceFragment extends BaseFragment {
     private List<CoverModel> overViewList;//全景
     private List<CoverModel> overViewList2;
     private boolean isLoaded = false;
+    private LinearLayoutManager mLayoutManager;
 
 
     @Nullable
@@ -56,8 +61,10 @@ public class ChoiceFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_choice, container, false);
         init();
         initView(view);
+        setListener();
         return view;
     }
+
 
     private void init() {
         channelList = new ArrayList<>();
@@ -79,15 +86,56 @@ public class ChoiceFragment extends BaseFragment {
     private void initView(View view) {
         itemWidth = DensityUtil.getScreenWidth(getActivity());
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_choice);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mAdapter = new HomeUIAdapter(getActivity(), DateEnage.getTvChannelList(),
+        btnClickMe = (ImageView) view.findViewById(R.id.img_click_me);
+        mLayoutManager = new LinearLayoutManager(getActivity());
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mAdapter = new HomeUIAdapter(getActivity(), DateEnage.getChoiceChannelList(),
                 coverList, editList, editList2, sportsList, tvList, movieList,
                 dongManList, zongYiList, education, weiMovieList, musicList,
                 overViewList, overViewList2, itemWidth);
         mRecyclerView.setAdapter(mAdapter);
-
     }
 
+
+    private void setListener() {
+        mAdapter.setListener(new OnChoiceListener() {
+            @Override
+            public void onItemClickListener(int position) {
+                mRecyclerView.smoothScrollToPosition(position + 3);
+                btnClickMe.setVisibility(View.VISIBLE);
+            }
+        });
+        /**
+         * dx > 0 时为手指向左滚动,列表滚动显示右面的内容
+         dx < 0 时为手指向右滚动,列表滚动显示左面的内容
+         dy > 0 时为手指向上滚动,列表滚动显示下面的内容
+         dy < 0 时为手指向下滚动,列表滚动显示上面的内容
+         */
+        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                if (dy > 0 || dy == 0) //向下滚动
+                {
+                    int visibleItemCount = mLayoutManager.getChildCount();
+                    int totalItemCount = mLayoutManager.getItemCount();
+                    int pastVisibleItems = mLayoutManager.findFirstVisibleItemPosition();
+
+                    if ((visibleItemCount + pastVisibleItems) >= totalItemCount) {
+                        btnClickMe.setVisibility(View.VISIBLE);
+                    }
+                } else {
+                    btnClickMe.setVisibility(View.GONE);
+                }
+            }
+        });
+
+        btnClickMe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mRecyclerView.smoothScrollToPosition(0);
+            }
+        });
+    }
 
     @Override
     public void initData() {
@@ -99,6 +147,8 @@ public class ChoiceFragment extends BaseFragment {
 
     private void LoadData() {
         showLoadingDialog("", false, null);
+        channelList.addAll(DateEnage.getChoiceChannelList());
+        mAdapter.updateChannelList(channelList);
         MainUIAction.searchCoverData(getActivity(), Config.BAO_FENG_URL, new ActionCallBack() {
             @Override
             public void ok(Object object) {

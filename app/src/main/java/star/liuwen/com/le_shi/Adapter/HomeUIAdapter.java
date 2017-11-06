@@ -19,9 +19,12 @@ import com.hejunlin.superindicatorlibray.LoopViewPager;
 import java.util.HashMap;
 import java.util.List;
 
+import cn.bingoogolapple.androidcommon.adapter.BGAOnItemChildClickListener;
 import cn.bingoogolapple.androidcommon.adapter.BGAOnRVItemClickListener;
 import cn.bingoogolapple.androidcommon.adapter.BGARecyclerViewAdapter;
 import cn.bingoogolapple.androidcommon.adapter.BGAViewHolderHelper;
+import star.liuwen.com.le_shi.Listener.OnChoiceListener;
+import star.liuwen.com.le_shi.Listener.OnCommonListener;
 import star.liuwen.com.le_shi.Model.CoverModel;
 import star.liuwen.com.le_shi.R;
 import star.liuwen.com.le_shi.Utils.GlideUtils;
@@ -47,7 +50,7 @@ public class HomeUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     private final static int OVER_VIEW_TYPE = 11;//全景
     private final static int END_VIEW_TYPE = 12;//结束
 
-
+    private List<HashMap<String, Object>> channelList2;
     private List<String> channelList;//频道数据
     private List<CoverModel> coverList;//封面数据
     private List<CoverModel> editList;//编辑推荐
@@ -64,6 +67,11 @@ public class HomeUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     private List<CoverModel> overViewList2;
 
     private int itemWidth;
+    private OnChoiceListener mListener;
+
+    public void setListener(OnChoiceListener listener) {
+        mListener = listener;
+    }
 
     public HomeUIAdapter(Context context, List<String> channelList, List<CoverModel> coverList, List<CoverModel> editList, List<CoverModel> editList2, List<CoverModel> sportsList, List<CoverModel> tvList, List<CoverModel> movieList, List<CoverModel> dongManList, List<CoverModel> zongYiList, List<CoverModel> education, List<CoverModel> weiMovieList, List<CoverModel> musicList, List<CoverModel> overViewList, List<CoverModel> overViewList2, int itemWidth) {
         mContext = context;
@@ -109,6 +117,15 @@ public class HomeUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         notifyDataSetChanged();
     }
 
+
+    public void updateChannelList(List<String> list) {
+        if (isListNotEmpty(list)) {
+            channelList = list;
+        } else {
+            channelList.clear();
+        }
+        notifyDataSetChanged();
+    }
 
     public void updateSports(List<CoverModel> list) {
         if (isListNotEmpty(list)) {
@@ -313,17 +330,24 @@ public class HomeUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         if (holder instanceof BannerHolder) {
             BannerHolder bannerHolder = (BannerHolder) holder;
             setBanner(bannerHolder);
         } else if (holder instanceof ChannelHolder) {
             ChannelHolder channelHolder = (ChannelHolder) holder;
-            ChannelAdapter channelAdapter = new ChannelAdapter(channelHolder.mRecyclerView);
+            ChannelAdapter channelAdapter = new ChannelAdapter(channelList, mContext);
             final GridLayoutManager manager = new GridLayoutManager(mContext, 4, LinearLayoutManager.VERTICAL, false);
             channelHolder.mRecyclerView.setLayoutManager(manager);
-            channelAdapter.setData(channelList);
             channelHolder.mRecyclerView.setAdapter(channelAdapter);
+            channelAdapter.setListener(new OnCommonListener() {
+                @Override
+                public void onItemClickListener(int position, List<String> list) {
+                    if (mListener != null) {
+                        mListener.onItemClickListener(position);
+                    }
+                }
+            });
         } else if (holder instanceof SportsHolder) {
             SportsHolder sportsHolder = (SportsHolder) holder;
             CommAdapter commAdapter = new CommAdapter(sportsHolder.mRecyclerView);
@@ -540,6 +564,7 @@ public class HomeUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         }
     }
 
+
     public static class DongManHolder extends RecyclerView.ViewHolder {
         RecyclerView mRecyclerView;
         RelativeLayout ReHead;
@@ -630,18 +655,6 @@ public class HomeUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         }
     }
 
-
-    public static class ChannelAdapter extends BGARecyclerViewAdapter<String> {
-        public ChannelAdapter(RecyclerView recyclerView) {
-            super(recyclerView, R.layout.item_channerl_2);
-        }
-
-        @Override
-        protected void fillData(BGAViewHolderHelper helper, int position, String model) {
-            Button btnName = helper.getView(R.id.btn_name);
-            btnName.setText(model);
-        }
-    }
 
     private static class CommAdapter extends BGARecyclerViewAdapter<CoverModel> {
 

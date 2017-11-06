@@ -198,10 +198,9 @@ public class VarietyUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             setBanner(bannerHolder);
         } else if (holder instanceof HomeUIAdapter.ChannelHolder) {
             HomeUIAdapter.ChannelHolder channelHolder = (HomeUIAdapter.ChannelHolder) holder;
-            HomeUIAdapter.ChannelAdapter channelAdapter = new HomeUIAdapter.ChannelAdapter(channelHolder.mRecyclerView);
+            ChannelAdapter channelAdapter = new ChannelAdapter(channelList,mContext);
             final GridLayoutManager manager = new GridLayoutManager(mContext, 4, LinearLayoutManager.VERTICAL, false);
             channelHolder.mRecyclerView.setLayoutManager(manager);
-            channelAdapter.setData(channelList);
             channelHolder.mRecyclerView.setAdapter(channelAdapter);
         } else if (holder instanceof HighlightHolder) {
             HighlightHolder highlightHolder = (HighlightHolder) holder;

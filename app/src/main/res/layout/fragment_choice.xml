@@ -10,4 +10,13 @@
         android:layout_height="wrap_content">
     </android.support.v7.widget.RecyclerView>
 
+    <ImageView
+        android:id="@+id/img_click_me"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="40dp"
+        android:src="@mipmap/icon_click_me"
+        android:visibility="gone"/>
 </RelativeLayout>

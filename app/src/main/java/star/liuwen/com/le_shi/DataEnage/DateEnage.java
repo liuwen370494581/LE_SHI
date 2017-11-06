@@ -34,6 +34,19 @@ public class DateEnage {
     }
 
 
+    public static List<String> getChoiceChannelList() {
+        List<String> list = new ArrayList<>();
+        list.add("电视剧");
+        list.add("电影");
+        list.add("动漫");
+        list.add("综艺");
+        list.add("体育");
+        list.add("教育");
+        list.add("微电影");
+        list.add("音乐");
+        return list;
+    }
+
     public static List<String> getTvChannelList() {
         List<String> list = new ArrayList<>();
         list.add("同步热播");
@@ -44,7 +57,6 @@ public class DateEnage {
         list.add("排行");
         list.add("片花");
         list.add("筛选");
-
         return list;
     }
 
