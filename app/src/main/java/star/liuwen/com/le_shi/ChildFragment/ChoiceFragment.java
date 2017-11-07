@@ -11,7 +11,6 @@ import android.widget.ImageView;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
 
 import star.liuwen.com.le_shi.Adapter.HomeUIAdapter;
@@ -24,7 +23,6 @@ import star.liuwen.com.le_shi.Listener.OnChoiceListener;
 import star.liuwen.com.le_shi.Model.CoverModel;
 import star.liuwen.com.le_shi.R;
 import star.liuwen.com.le_shi.Utils.DensityUtil;
-import star.liuwen.com.le_shi.Utils.ToastUtils;
 
 /**
  * Created by liuwen on 2017/10/13.
@@ -140,7 +138,7 @@ public class ChoiceFragment extends BaseFragment {
     @Override
     public void initData() {
         if (!isLoaded) {
-            LoadData();
+         //   LoadData();
             isLoaded = true;
         }
     }

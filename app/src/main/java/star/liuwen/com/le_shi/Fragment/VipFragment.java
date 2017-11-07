@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
 
 import star.liuwen.com.le_shi.Adapter.VipUIAdapter;
@@ -72,11 +71,11 @@ public class VipFragment extends BaseFragment {
 
 
     private void init() {
-        LoadData();
+        //LoadData();
     }
 
     private void LoadData() {
-        showLoadingDialog("", false, null);
+        showLoadingDialog("", true, null);
         MainUIAction.searchCoverData(getActivity(), Config.BAO_FENG_VIP_URL, new ActionCallBack() {
             @Override
             public void ok(Object object) {

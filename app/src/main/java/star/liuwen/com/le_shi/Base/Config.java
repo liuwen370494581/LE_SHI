@@ -14,4 +14,5 @@ public class Config {
     public static final String BAO_FENG_ZI_XUN_URL = "http://www.baofeng.com/micvideo.html";
     public static final String BAO_FENG_WEI_MOVIE_URL = "http://hd.baofeng.com/mv/29/list-type-70-ishot-1-sid-1-p-1.shtml";
     public static final String BAO_FENG_VIP_URL = "http://vip.baofeng.com/";
+    public static final String BAO_FENG_BBS_ALL="http://bbs.baofeng.com/forum-179-1.html";
 }

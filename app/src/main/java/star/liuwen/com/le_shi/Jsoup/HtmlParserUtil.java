@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import star.liuwen.com.le_shi.Base.Config;
+import star.liuwen.com.le_shi.Model.BbsModel;
 import star.liuwen.com.le_shi.Model.CoverModel;
 
 
@@ -714,4 +715,62 @@ public class HtmlParserUtil {
         }
         return list;
     }
+
+    //搜索bbs资源
+    public static List<BbsModel> searchBBSDate(String url) {
+        List<BbsModel> list = new ArrayList<>();
+
+        try {
+            Document document = Jsoup.connect(url)
+                    .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31").timeout(40000).get();
+            Elements elements = document.select("th.common");
+
+            Elements elements2 = elements.select("div.tl_ct");
+            for (int i = 0; i < elements2.size(); i++) {
+                BbsModel model = new BbsModel();
+                Log.e(Config.TAG, "url===" + elements2.get(i).select("a").last().attr("href"));
+                Log.e(Config.TAG, "发表日期===" + elements2.get(i).select("span").last().text());
+                model.setUrl(elements2.get(i).select("a").last().attr("href"));
+                model.setStartDate(elements2.get(i).select("span").last().text());
+                for (int j = 0; j < elements2.get(i).select("a").size(); j++) {
+                    Log.e(Config.TAG, "views===" + elements2.get(i).select("a").get(j).text());
+                    model.setHideTop(elements2.get(i).select("a").get(0).text());
+                    model.setViews(elements2.get(i).select("a").get(1).text());
+                    model.setLookView(elements2.get(i).select("a").get(2).text());
+                    model.setTitle(elements2.get(i).select("a").get(3).text());
+                    model.setUserName(elements2.get(i).select("a").get(4).text());
+                    model.setEndDate(elements2.get(i).select("a").get(5).text());
+                    model.setTop(elements2.get(i).select("a").get(6).text());
+                    list.add(model);
+                      break;
+                }
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return list;
+    }
+
+
+    public static List<String> searchBBSImgData(String url) {
+        List<String> list = new ArrayList<>();
+        try {
+            Document document = Jsoup.connect(url)
+                    .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31").timeout(40000).get();
+            Elements elements = document.select("th.common");
+            Elements elements3 = elements.select("div.avatarbox");
+
+            for (int i = 0; i < elements3.size(); i++) {
+                Log.e(Config.TAG, "img===" + elements3.get(i).select("a").select("img").attr("src"));
+                list.add(elements3.get(i).select("a").select("img").attr("src"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return list;
+    }
+
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import star.liuwen.com.le_shi.Model.IndexModel;
 import star.liuwen.com.le_shi.R;
 
 /**
@@ -111,5 +112,32 @@ public class DateEnage {
         list.add("悬疑");
         list.add("筛选");
         return list;
+    }
+
+    public static List<IndexModel> getBBSDate() {
+        List<IndexModel> list = new ArrayList<>();
+        list.add(new IndexModel("全部", "http://bbs.baofeng.com/forum-179-1.html"));
+        list.add(new IndexModel("左眼键", "http://bbs.baofeng.com/forum.php?mod=forumdisplay&fid=179&filter=typeid&typeid=37"));
+        list.add(new IndexModel("3D专区", "http://bbs.baofeng.com/forum.php?mod=forumdisplay&fid=179&filter=typeid&typeid=106"));
+        list.add(new IndexModel("功能", "http://bbs.baofeng.com/forum.php?mod=forumdisplay&fid=179&filter=typeid&typeid=38"));
+        list.add(new IndexModel("画质", "http://bbs.baofeng.com/forum.php?mod=forumdisplay&fid=179&filter=typeid&typeid=39"));
+        list.add(new IndexModel("错误代码", "http://bbs.baofeng.com/forum.php?mod=forumdisplay&fid=179&filter=typeid&typeid=42"));
+        list.add(new IndexModel("盒子展现", "http://bbs.baofeng.com/forum.php?mod=forumdisplay&fid=179&filter=typeid&typeid=44"));
+        list.add(new IndexModel("宝贵建议", "http://bbs.baofeng.com/forum.php?mod=forumdisplay&fid=179&filter=typeid&typeid=53"));
+        list.add(new IndexModel("画面卡", "http://bbs.baofeng.com/forum.php?mod=forumdisplay&fid=179&filter=typeid&typeid=73"));
+        list.add(new IndexModel("飞屏", "http://bbs.baofeng.com/forum.php?mod=forumdisplay&fid=179&filter=typeid&typeid=286"));
+        list.add(new IndexModel("推广联盟", "http://bbs.baofeng.com/forum.php?mod=forumdisplay&fid=179&filter=typeid&typeid=144"));
+        list.add(new IndexModel("软件无法使用", "http://bbs.baofeng.com/forum.php?mod=forumdisplay&fid=179&filter=typeid&typeid=40"));
+        list.add(new IndexModel("在线内容", "http://bbs.baofeng.com/forum.php?mod=forumdisplay&fid=179&filter=typeid&typeid=45"));
+        list.add(new IndexModel("字幕", "http://bbs.baofeng.com/forum.php?mod=forumdisplay&fid=179&filter=typeid&typeid=47"));
+        list.add(new IndexModel("不可播", "http://bbs.baofeng.com/forum.php?mod=forumdisplay&fid=179&filter=typeid&typeid=48"));
+        list.add(new IndexModel("广告", "http://bbs.baofeng.com/forum.php?mod=forumdisplay&fid=179&filter=typeid&typeid=76"));
+        list.add(new IndexModel("下载", "http://bbs.baofeng.com/forum.php?mod=forumdisplay&fid=179&filter=typeid&typeid=75"));
+        list.add(new IndexModel("缓冲卡", "http://bbs.baofeng.com/forum.php?mod=forumdisplay&fid=179&filter=typeid&typeid=74"));
+        list.add(new IndexModel("其他", "http://bbs.baofeng.com/forum.php?mod=forumdisplay&fid=179&filter=typeid&typeid=90"));
+        list.add(new IndexModel("声音", "http://bbs.baofeng.com/forum.php?mod=forumdisplay&fid=179&filter=typeid&typeid=43"));
+        list.add(new IndexModel("新闻播报", "http://bbs.baofeng.com/forum.php?mod=forumdisplay&fid=179&filter=typeid&typeid=55"));
+        return list;
+
     }
 }

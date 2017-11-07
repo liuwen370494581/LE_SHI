@@ -44,8 +44,8 @@
         android:gravity="center"
         android:maxLength="12"
         android:singleLine="true"
-        android:text="@null"
-        android:textColor="@color/white"
+        android:text="fddfffffff"
+        android:textColor="@color/font_dark_gray"
         android:textSize="18sp"/>
 
     <LinearLayout
