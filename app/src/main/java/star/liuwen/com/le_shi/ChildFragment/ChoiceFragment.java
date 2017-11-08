@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.github.nukc.stateview.StateView;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -23,6 +25,7 @@ import star.liuwen.com.le_shi.Listener.OnChoiceListener;
 import star.liuwen.com.le_shi.Model.CoverModel;
 import star.liuwen.com.le_shi.R;
 import star.liuwen.com.le_shi.Utils.DensityUtil;
+import star.liuwen.com.le_shi.Utils.NetUtil;
 
 /**
  * Created by liuwen on 2017/10/13.
@@ -35,7 +38,6 @@ public class ChoiceFragment extends BaseFragment {
     private int itemWidth;
     private HomeUIAdapter mAdapter;
 
-    private List<String> channelList;
     private List<CoverModel> coverList;//封面数据
     private List<CoverModel> editList;//编辑推荐
     private List<CoverModel> editList2;
@@ -51,6 +53,7 @@ public class ChoiceFragment extends BaseFragment {
     private List<CoverModel> overViewList2;
     private boolean isLoaded = false;
     private LinearLayoutManager mLayoutManager;
+    private StateView mStateView;
 
 
     @Nullable
@@ -63,9 +66,7 @@ public class ChoiceFragment extends BaseFragment {
         return view;
     }
 
-
     private void init() {
-        channelList = new ArrayList<>();
         coverList = new ArrayList<>();
         editList = new ArrayList<>();
         editList2 = new ArrayList<>();
@@ -82,6 +83,9 @@ public class ChoiceFragment extends BaseFragment {
     }
 
     private void initView(View view) {
+        mStateView = StateView.inject(view);
+        mStateView.setLoadingResource(R.layout.loading);
+        mStateView.setRetryResource(R.layout.base_retry);
         itemWidth = DensityUtil.getScreenWidth(getActivity());
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_choice);
         btnClickMe = (ImageView) view.findViewById(R.id.img_click_me);
@@ -133,20 +137,28 @@ public class ChoiceFragment extends BaseFragment {
                 mRecyclerView.smoothScrollToPosition(0);
             }
         });
+        mStateView.setOnRetryClickListener(new StateView.OnRetryClickListener() {
+            @Override
+            public void onRetryClick() {
+                LoadData();
+            }
+        });
     }
 
     @Override
     public void initData() {
         if (!isLoaded) {
-         //   LoadData();
+          //  LoadData();
             isLoaded = true;
         }
     }
 
     private void LoadData() {
-        showLoadingDialog("", false, null);
-        channelList.addAll(DateEnage.getChoiceChannelList());
-        mAdapter.updateChannelList(channelList);
+        mStateView.showLoading();
+        if (!NetUtil.checkNet(getActivity())) {
+            mStateView.showRetry();
+            return;
+        }
         MainUIAction.searchCoverData(getActivity(), Config.BAO_FENG_URL, new ActionCallBack() {
             @Override
             public void ok(Object object) {
@@ -156,6 +168,7 @@ public class ChoiceFragment extends BaseFragment {
 
             @Override
             public void failed(Object object) {
+                mStateView.showRetry();
 
             }
         });
@@ -165,12 +178,11 @@ public class ChoiceFragment extends BaseFragment {
             public void ok(Object object) {
                 sportsList.addAll((Collection<? extends CoverModel>) object);
                 mAdapter.updateSports(sportsList);
-                hideLoadingDialog();
+                mStateView.showContent();
             }
 
             @Override
             public void failed(Object object) {
-                hideLoadingDialog();
             }
         });
 
@@ -301,7 +313,6 @@ public class ChoiceFragment extends BaseFragment {
 
             @Override
             public void failed(Object object) {
-                hideLoadingDialog();
             }
         });
 
@@ -314,7 +325,6 @@ public class ChoiceFragment extends BaseFragment {
 
             @Override
             public void failed(Object object) {
-                hideLoadingDialog();
             }
         });
     }

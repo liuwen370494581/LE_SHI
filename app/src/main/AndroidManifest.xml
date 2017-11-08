@@ -30,6 +30,12 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden"
             />
+        <activity
+            android:name=".Activity.WebActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden|navigation"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden"
+            />
     </application>
 
 </manifest>

@@ -18,7 +18,6 @@ import star.liuwen.com.le_shi.R;
 import star.liuwen.com.le_shi.Utils.ActivityKiller;
 import star.liuwen.com.le_shi.Utils.StatusBarUtils;
 import star.liuwen.com.le_shi.Utils.ToastUtils;
-import star.liuwen.com.le_shi.View.LoadingProgressDialog;
 
 
 /**
@@ -27,7 +26,6 @@ import star.liuwen.com.le_shi.View.LoadingProgressDialog;
 public abstract class BaseActivity extends AppCompatActivity {
     private LinearLayout lyCommonBar;
     private TextView mTvCenter;//toobar中间文字
-    private LoadingProgressDialog mLoadingDialog;
     private App mApp;
     private Context mActivityContext, mAppContext;//尽量地采用 Application Context 避免内存泄漏
 
@@ -137,22 +135,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         mTvCenter.setVisibility(View.VISIBLE);
     }
 
-    public void showLoadingDialog(String loadingText, boolean isCanCancel, LoadingProgressDialog.ILoadingDialogListener listener) {
-        if (mLoadingDialog == null) {
-            mLoadingDialog = new LoadingProgressDialog(this, loadingText);
-            mLoadingDialog.show();
-            if (isCanCancel) {
-                mLoadingDialog.setCannotCancel();
-                mLoadingDialog.setListener(listener);
-            }
-        }
-    }
-
-    public void hideLoadingDialog() {
-        if (null != mLoadingDialog && mLoadingDialog.isShowing()) {
-            mLoadingDialog.closeDialog();
-        }
-    }
 
 
     /**

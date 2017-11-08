@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.github.nukc.stateview.StateView;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -24,6 +26,7 @@ import star.liuwen.com.le_shi.Jsoup.Action.TvAction;
 import star.liuwen.com.le_shi.Model.CoverModel;
 import star.liuwen.com.le_shi.R;
 import star.liuwen.com.le_shi.Utils.DensityUtil;
+import star.liuwen.com.le_shi.Utils.NetUtil;
 
 /**
  * Created by liuwen on 2017/10/12.
@@ -46,6 +49,7 @@ public class MovieFragment extends BaseFragment {
     private RecyclerView mRecyclerView;
     private boolean isLoad = false;
     private MovieAdapter mAdapter;
+    private StateView mStateView;
 
 
     @Nullable
@@ -54,7 +58,17 @@ public class MovieFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_movie, container, false);
         init();
         initView(view);
+        setListener();
         return view;
+    }
+
+    private void setListener() {
+        mStateView.setOnRetryClickListener(new StateView.OnRetryClickListener() {
+            @Override
+            public void onRetryClick() {
+                LoadData();
+            }
+        });
     }
 
     private void init() {
@@ -72,6 +86,9 @@ public class MovieFragment extends BaseFragment {
     }
 
     private void initView(View view) {
+        mStateView = StateView.inject(view);
+        mStateView.setLoadingResource(R.layout.loading);
+        mStateView.setRetryResource(R.layout.base_retry);
         itemWidth = DensityUtil.getScreenWidth(getActivity());
         mRecyclerView = (RecyclerView) view.findViewById(R.id.movie_recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -90,7 +107,11 @@ public class MovieFragment extends BaseFragment {
     }
 
     private void LoadData() {
-        showLoadingDialog("", true, null);
+        mStateView.showLoading();
+        if (!NetUtil.checkNet(getActivity())) {
+            mStateView.showRetry();
+            return;
+        }
         MainUIAction.searchCoverData(getActivity(), Config.BAO_FENG_MOIVE_URL, new ActionCallBack() {
             @Override
             public void ok(Object object) {
@@ -108,7 +129,7 @@ public class MovieFragment extends BaseFragment {
             public void ok(Object object) {
                 vipList = (List<CoverModel>) object;
                 mAdapter.updateVipList(vipList);
-                hideLoadingDialog();
+                mStateView.showContent();
             }
 
             @Override
@@ -121,7 +142,7 @@ public class MovieFragment extends BaseFragment {
             public void ok(Object object) {
                 vipList2 = (List<CoverModel>) object;
                 mAdapter.updateVipList2(vipList2);
-                hideLoadingDialog();
+
             }
 
             @Override
@@ -160,7 +181,7 @@ public class MovieFragment extends BaseFragment {
         TvAction.searchTvHotPlayData(getActivity(), Config.BAO_FENG_MOIVE_URL, 14, 20, true, false, "华语", new ActionCallBack() {
             @Override
             public void ok(Object object) {
-              huaYuList= (List<CoverModel>) object;
+                huaYuList = (List<CoverModel>) object;
                 mAdapter.updateHuaYuList(huaYuList);
             }
 
@@ -172,7 +193,7 @@ public class MovieFragment extends BaseFragment {
         TvAction.searchTvHotPlayData(getActivity(), Config.BAO_FENG_MOIVE_URL, 14, 20, false, true, "华语", new ActionCallBack() {
             @Override
             public void ok(Object object) {
-                huaYuList2= (List<CoverModel>) object;
+                huaYuList2 = (List<CoverModel>) object;
                 mAdapter.updateHuaYuList2(huaYuList2);
             }
 
@@ -186,7 +207,7 @@ public class MovieFragment extends BaseFragment {
         TvAction.searchTvHotPlayData(getActivity(), Config.BAO_FENG_MOIVE_URL, 20, 26, true, false, "欧美", new ActionCallBack() {
             @Override
             public void ok(Object object) {
-                ouMeiList= (List<CoverModel>) object;
+                ouMeiList = (List<CoverModel>) object;
                 mAdapter.updateOuMeiList(ouMeiList);
             }
 
@@ -198,7 +219,7 @@ public class MovieFragment extends BaseFragment {
         TvAction.searchTvHotPlayData(getActivity(), Config.BAO_FENG_MOIVE_URL, 20, 26, false, true, "欧美", new ActionCallBack() {
             @Override
             public void ok(Object object) {
-                ouMeiList2= (List<CoverModel>) object;
+                ouMeiList2 = (List<CoverModel>) object;
                 mAdapter.updateOuMeiList2(ouMeiList2);
             }
 
@@ -211,7 +232,7 @@ public class MovieFragment extends BaseFragment {
         TvAction.searchAllMovieData(getActivity(), Config.BAO_FENG_MOIVE_URL, 0, 2, "白色爱情", new ActionCallBack() {
             @Override
             public void ok(Object object) {
-                whiteLoveList= (List<CoverModel>) object;
+                whiteLoveList = (List<CoverModel>) object;
                 mAdapter.updateWhiteLoveList(whiteLoveList);
             }
 
@@ -224,7 +245,7 @@ public class MovieFragment extends BaseFragment {
         TvAction.searchAllMovieData(getActivity(), Config.BAO_FENG_MOIVE_URL, 2, 9, "动画", new ActionCallBack() {
             @Override
             public void ok(Object object) {
-                dongHuaList= (List<CoverModel>) object;
+                dongHuaList = (List<CoverModel>) object;
                 mAdapter.updateDongHuaList(dongHuaList);
             }
 

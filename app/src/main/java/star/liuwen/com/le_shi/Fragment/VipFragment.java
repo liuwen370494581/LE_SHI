@@ -7,6 +7,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
+
+import com.github.nukc.stateview.StateView;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -22,7 +25,7 @@ import star.liuwen.com.le_shi.Jsoup.Action.TvAction;
 import star.liuwen.com.le_shi.Model.CoverModel;
 import star.liuwen.com.le_shi.R;
 import star.liuwen.com.le_shi.Utils.DensityUtil;
-import star.liuwen.com.le_shi.Utils.ToastUtils;
+import star.liuwen.com.le_shi.Utils.NetUtil;
 
 /**
  * Created by liuwen on 2017/10/12.
@@ -46,6 +49,8 @@ public class VipFragment extends BaseFragment {
 
     private RecyclerView mRecyclerView;
     private VipUIAdapter mAdapter;
+    private StateView mStateView;
+    private FrameLayout mFrameLayout;
 
     @Nullable
     @Override
@@ -53,11 +58,25 @@ public class VipFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_vip, container, false);
         initView(view);
         init();
+        setListener();
         return view;
+    }
+
+    private void setListener() {
+        mStateView.setOnRetryClickListener(new StateView.OnRetryClickListener() {
+            @Override
+            public void onRetryClick() {
+                LoadData();
+            }
+        });
     }
 
 
     private void initView(View view) {
+        mFrameLayout = (FrameLayout) view.findViewById(R.id.frame_layout);
+        mStateView = StateView.inject(mFrameLayout);
+        mStateView.setLoadingResource(R.layout.loading);
+        mStateView.setRetryResource(R.layout.base_retry);
         itemWidth = DensityUtil.getScreenWidth(getActivity());
         mRecyclerView = (RecyclerView) view.findViewById(R.id.vip_recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -71,11 +90,15 @@ public class VipFragment extends BaseFragment {
 
 
     private void init() {
-        //LoadData();
+      //  LoadData();
     }
 
     private void LoadData() {
-        showLoadingDialog("", true, null);
+        mStateView.showLoading();
+        if (!NetUtil.checkNet(getActivity())) {
+            mStateView.showRetry();
+            return;
+        }
         MainUIAction.searchCoverData(getActivity(), Config.BAO_FENG_VIP_URL, new ActionCallBack() {
             @Override
             public void ok(Object object) {
@@ -94,13 +117,12 @@ public class VipFragment extends BaseFragment {
             public void ok(Object object) {
                 mostPopularList.addAll((Collection<? extends CoverModel>) object);
                 mAdapter.updateMostPopularList(mostPopularList);
-                hideLoadingDialog();
+                mStateView.showContent();
             }
 
             @Override
             public void failed(Object object) {
-                hideLoadingDialog();
-                ToastUtils.showToast(getActivity(), object.toString());
+                mStateView.showRetry();
             }
         });
 

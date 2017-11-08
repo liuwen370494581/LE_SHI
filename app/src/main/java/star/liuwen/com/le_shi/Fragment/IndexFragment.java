@@ -25,7 +25,7 @@ import star.liuwen.com.le_shi.R;
 /**
  * Created by liuwen on 2017/10/12.
  */
-public class IndexFragment extends BaseFragment {
+public class IndexFragment extends Fragment {
 
 
     private String[] mTabTitles = new String[]{};
@@ -91,11 +91,6 @@ public class IndexFragment extends BaseFragment {
             }
             return super.getPageTitle(position);
         }
-
-    }
-
-    @Override
-    public void initData() {
 
     }
 }

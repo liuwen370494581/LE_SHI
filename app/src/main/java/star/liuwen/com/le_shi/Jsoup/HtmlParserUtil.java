@@ -27,7 +27,7 @@ public class HtmlParserUtil {
         List<CoverModel> list = new ArrayList<>();
         try {
             Document document = Jsoup.connect(url)
-                    .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31").timeout(40000).get();
+                    .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31").timeout(4000).get();
             Element element = document.getElementsByAttributeValue("class", "change-pic-list").first();
             Elements links = element.getElementsByTag("a");
             Log.e(Config.TAG, links.toString());
@@ -49,7 +49,7 @@ public class HtmlParserUtil {
         List<CoverModel> list = new ArrayList<>();
         try {
             Document document = Jsoup.connect(url)
-                    .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31").timeout(40000).get();
+                    .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31").timeout(4000).get();
             Elements elements = document.select("div.news-list-picbox");
             Log.e(Config.TAG, elements.size() + "");
             for (Element element : elements) {
@@ -73,7 +73,7 @@ public class HtmlParserUtil {
         List<CoverModel> list = new ArrayList<>();
         try {
             Document document = Jsoup.connect(url)
-                    .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31").timeout(40000).get();
+                    .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31").timeout(4000).get();
             Elements elements = document.select("ul.js-guest-like-list").select("div.js-collect");
             //  Log.e(Config.TAG, elements.toString());
             Log.e(Config.TAG, elements.size() + "");
@@ -100,7 +100,7 @@ public class HtmlParserUtil {
         List<CoverModel> list = new ArrayList<>();
         try {
             Document document = Jsoup.connect(url)
-                    .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31").timeout(40000).get();
+                    .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31").timeout(4000).get();
             Elements elements = document.select("div.js-editor-recommend").select("div.js-collect");
             Log.e(Config.TAG, elements.size() + "");
 
@@ -125,7 +125,7 @@ public class HtmlParserUtil {
         List<CoverModel> list = new ArrayList<>();
         try {
             Document document = Jsoup.connect(url)
-                    .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31").timeout(40000).get();
+                    .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31").timeout(4000).get();
             Elements elements = document.select("div.js-editor-recommend").select("div.hot-pic-text-box");
             Log.e(Config.TAG, elements.size() + "");
 
@@ -149,7 +149,7 @@ public class HtmlParserUtil {
         List<CoverModel> list = new ArrayList<>();
         try {
             Document document = Jsoup.connect(url)
-                    .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31").timeout(40000).get();
+                    .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31").timeout(4000).get();
             Elements elements = document.select("div.tv-landscape-con");
             for (int i = start; i < size; i++) {
                 CoverModel model = new CoverModel();
@@ -178,7 +178,7 @@ public class HtmlParserUtil {
         List<CoverModel> list = new ArrayList<>();
         try {
             Document document = Jsoup.connect(url)
-                    .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31").timeout(40000).get();
+                    .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31").timeout(4000).get();
             Elements elements = document.select("div.tv-landscape-con");
 //           Log.e(Config.TAG, elements.toString());
 //            Log.e(Config.TAG, elements.size() + "");
@@ -209,7 +209,7 @@ public class HtmlParserUtil {
         List<CoverModel> list = new ArrayList<>();
         try {
             Document document = Jsoup.connect(url)
-                    .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31").timeout(40000).get();
+                    .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31").timeout(4000).get();
             Elements elements = document.select("div.tv-landscape-con");
 //           Log.e(Config.TAG, elements.toString());
 //            Log.e(Config.TAG, elements.size() + "");
@@ -240,7 +240,7 @@ public class HtmlParserUtil {
         List<CoverModel> list = new ArrayList<>();
         try {
             Document document = Jsoup.connect(url)
-                    .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31").timeout(40000).get();
+                    .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31").timeout(4000).get();
             Elements elements = document.select("div.tv-landscape-con");
 //           Log.e(Config.TAG, elements.toString());
 //            Log.e(Config.TAG, elements.size() + "");
@@ -272,7 +272,7 @@ public class HtmlParserUtil {
         List<CoverModel> list = new ArrayList<>();
         try {
             Document document = Jsoup.connect(url)
-                    .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31").timeout(40000).get();
+                    .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31").timeout(4000).get();
             Elements elements = document.select("div.tv-landscape-con");
 //           Log.e(Config.TAG, elements.toString());
 //            Log.e(Config.TAG, elements.size() + "");
@@ -303,7 +303,7 @@ public class HtmlParserUtil {
         List<CoverModel> list = new ArrayList<>();
         try {
             Document document = Jsoup.connect(url)
-                    .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31").timeout(40000).get();
+                    .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31").timeout(4000).get();
             Elements elements = document.select("div.tv-landscape-con");
 //           Log.e(Config.TAG, elements.toString());
 //            Log.e(Config.TAG, elements.size() + "");
@@ -333,7 +333,7 @@ public class HtmlParserUtil {
         List<CoverModel> list = new ArrayList<>();
         try {
             Document document = Jsoup.connect(url)
-                    .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31").timeout(40000).get();
+                    .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31").timeout(4000).get();
             Elements elements = document.select("div.tv-landscape-con");
 //           Log.e(Config.TAG, elements.toString());
 //            Log.e(Config.TAG, elements.size() + "");
@@ -364,7 +364,7 @@ public class HtmlParserUtil {
         List<CoverModel> list = new ArrayList<>();
         try {
             Document document = Jsoup.connect(url)
-                    .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31").timeout(40000).get();
+                    .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31").timeout(4000).get();
             Elements elements = document.select("ul.education-list").select("div.js-collect");
 //            Log.e(Config.TAG, elements.toString());
 //            Log.e(Config.TAG, elements.size() + "");
@@ -392,7 +392,7 @@ public class HtmlParserUtil {
         List<CoverModel> list = new ArrayList<>();
         try {
             Document document = Jsoup.connect(url)
-                    .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31").timeout(40000).get();
+                    .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31").timeout(4000).get();
             Elements elements = document.select("ul.education-list").select("div.js-collect");
 //            Log.e(Config.TAG, elements.toString());
 //            Log.e(Config.TAG, elements.size() + "");
@@ -421,7 +421,7 @@ public class HtmlParserUtil {
         List<CoverModel> list = new ArrayList<>();
         try {
             Document document = Jsoup.connect(url)
-                    .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31").timeout(40000).get();
+                    .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31").timeout(4000).get();
             Elements elements1 = document.select("ul.education-list").select("div.hot-pic-text-box");
             for (int i = 7; i < 13; i++) {
                 CoverModel model = new CoverModel();
@@ -443,7 +443,7 @@ public class HtmlParserUtil {
         List<CoverModel> list = new ArrayList<>();
         try {
             Document document = Jsoup.connect(url)
-                    .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31").timeout(40000).get();
+                    .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31").timeout(4000).get();
             Elements elements1 = document.select("ul.movie-guesslike-list");
             Elements elements2 = elements1.select("div.js-collect");
             Elements elements4 = elements1.select("div.hot-pic-text-box");
@@ -484,7 +484,7 @@ public class HtmlParserUtil {
         List<CoverModel> list = new ArrayList<>();
         try {
             Document document = Jsoup.connect(url)
-                    .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31").timeout(40000).get();
+                    .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31").timeout(4000).get();
             Elements elements = document.select("div.tv-landscape-con");
             for (int i = start; i < size; i++) {
                 CoverModel model = new CoverModel();
@@ -512,7 +512,7 @@ public class HtmlParserUtil {
         List<CoverModel> list = new ArrayList<>();
         try {
             Document document = Jsoup.connect(url)
-                    .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31").timeout(40000).get();
+                    .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31").timeout(4000).get();
             Element element = document.getElementsByAttributeValue("class", "channel-pic-list").first();
             Elements links = element.getElementsByTag("a");
             // Log.e(Config.TAG, links.toString());
@@ -538,7 +538,7 @@ public class HtmlParserUtil {
         List<CoverModel> list = new ArrayList<>();
         try {
             Document document = Jsoup.connect(url)
-                    .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31").timeout(40000).get();
+                    .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31").timeout(4000).get();
             Elements elements = document.select("ul.update-list");
             for (int i = start; i < size; i++) {
                 Elements links = elements.get(i).getElementsByTag("li");
@@ -567,7 +567,7 @@ public class HtmlParserUtil {
         List<CoverModel> list = new ArrayList<>();
         try {
             Document document = Jsoup.connect(url)
-                    .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31").timeout(40000).get();
+                    .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31").timeout(4000).get();
             Elements elements = document.select("div.tv-landscape-con");
             for (int i = start; i < size; i++) {
                 CoverModel model = new CoverModel();
@@ -597,7 +597,7 @@ public class HtmlParserUtil {
         List<CoverModel> list = new ArrayList<>();
         try {
             Document document = Jsoup.connect(url)
-                    .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31").timeout(40000).get();
+                    .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31").timeout(4000).get();
             Element element = document.getElementsByAttributeValue("class", "hd-info-pic").first();
             Elements links = element.getElementsByTag("a");
             for (Element link : links) {
@@ -617,7 +617,7 @@ public class HtmlParserUtil {
         List<CoverModel> list = new ArrayList<>();
         try {
             Document document = Jsoup.connect(url)
-                    .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31").timeout(40000).get();
+                    .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31").timeout(4000).get();
             Elements elements = document.select("div.tv-landscape-con");
             for (int i = start; i < size; i++) {
                 CoverModel model = new CoverModel();
@@ -641,7 +641,7 @@ public class HtmlParserUtil {
         List<CoverModel> list = new ArrayList<>();
         try {
             Document document = Jsoup.connect(url)
-                    .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31").timeout(40000).get();
+                    .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31").timeout(4000).get();
             Elements elements1 = document.select("ul.hd-sort-list");
             Elements elements2 = elements1.select("div.js-collect");
             Elements elements4 = elements1.select("div.hot-pic-text-box");
@@ -681,7 +681,7 @@ public class HtmlParserUtil {
         List<CoverModel> list = new ArrayList<>();
         try {
             Document document = Jsoup.connect(url)
-                    .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31").timeout(40000).get();
+                    .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31").timeout(4000).get();
             Elements elements1 = document.select("ul.vipcenter-list");
             Elements elements2 = elements1.select("div.js-collect");
             Elements elements4 = elements1.select("div.hot-pic-text-box");
@@ -721,33 +721,43 @@ public class HtmlParserUtil {
         List<BbsModel> list = new ArrayList<>();
 
         try {
+            Log.e(Config.TAG, 0 + "");
             Document document = Jsoup.connect(url)
-                    .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31").timeout(40000).get();
-            Elements elements = document.select("th.common");
-
-            Elements elements2 = elements.select("div.tl_ct");
+                    .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31").timeout(10000).get();
+//             Elements elements = document.select("th.common");
+            Log.e(Config.TAG, 1 + "");
+            Elements elements2 = document.select("div.tl_ct");
+            Log.e(Config.TAG, 2 + "");
             for (int i = 0; i < elements2.size(); i++) {
                 BbsModel model = new BbsModel();
+                Log.e(Config.TAG, 3 + "");
                 Log.e(Config.TAG, "url===" + elements2.get(i).select("a").last().attr("href"));
                 Log.e(Config.TAG, "发表日期===" + elements2.get(i).select("span").last().text());
                 model.setUrl(elements2.get(i).select("a").last().attr("href"));
                 model.setStartDate(elements2.get(i).select("span").last().text());
+                Log.e(Config.TAG, "views===" + elements2.get(i).select("a").text());
+                //views===533 预览 求大神指点 2017-2-24 10:31
+                //views===321 预览 电影演员的显示 回味以后_weixin_170 2017-10-23 18:42
+                // views===隐藏置顶帖 44768 预览 亲，看这里哦~关于暴风影片无字幕和字幕乱码的解决方案 Elvira_qq_155 2017-2-18 17:45 置顶
                 for (int j = 0; j < elements2.get(i).select("a").size(); j++) {
-                    Log.e(Config.TAG, "views===" + elements2.get(i).select("a").get(j).text());
+                   // Log.e(Config.TAG, "views===" + elements2.get(i).select("a").get(j).text());
                     model.setHideTop(elements2.get(i).select("a").get(0).text());
                     model.setViews(elements2.get(i).select("a").get(1).text());
                     model.setLookView(elements2.get(i).select("a").get(2).text());
                     model.setTitle(elements2.get(i).select("a").get(3).text());
                     model.setUserName(elements2.get(i).select("a").get(4).text());
-                    model.setEndDate(elements2.get(i).select("a").get(5).text());
-                    model.setTop(elements2.get(i).select("a").get(6).text());
+                    Log.e(Config.TAG, 5 + "");
+                    //model.setEndDate(elements2.get(i).select("a").get(5).text());
+                    Log.e(Config.TAG, 6 + "");
+                   // model.setTop(elements2.get(i).select("a").get(6).text());
                     list.add(model);
-                      break;
+                    break;
                 }
 
             }
         } catch (Exception e) {
             e.printStackTrace();
+            Log.e(Config.TAG, "网络错误码" + e.getLocalizedMessage());
         }
 
         return list;
@@ -758,7 +768,7 @@ public class HtmlParserUtil {
         List<String> list = new ArrayList<>();
         try {
             Document document = Jsoup.connect(url)
-                    .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31").timeout(40000).get();
+                    .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31").timeout(4000).get();
             Elements elements = document.select("th.common");
             Elements elements3 = elements.select("div.avatarbox");
 

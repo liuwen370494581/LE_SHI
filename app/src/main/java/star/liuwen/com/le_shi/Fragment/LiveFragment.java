@@ -1,5 +1,6 @@
 package star.liuwen.com.le_shi.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
@@ -8,6 +9,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+
+import com.github.nukc.stateview.StateView;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -17,15 +21,19 @@ import cn.bingoogolapple.androidcommon.adapter.BGADivider;
 import cn.bingoogolapple.androidcommon.adapter.BGAOnRVItemClickListener;
 import cn.bingoogolapple.androidcommon.adapter.BGARecyclerViewAdapter;
 import cn.bingoogolapple.androidcommon.adapter.BGAViewHolderHelper;
+import star.liuwen.com.le_shi.Activity.WebActivity;
 import star.liuwen.com.le_shi.Adapter.BbsAdapter;
 import star.liuwen.com.le_shi.Base.BaseFragment;
 import star.liuwen.com.le_shi.Base.Config;
 import star.liuwen.com.le_shi.DataEnage.DateEnage;
 import star.liuwen.com.le_shi.Jsoup.Action.ActionCallBack;
 import star.liuwen.com.le_shi.Jsoup.Action.BbsAction;
+import star.liuwen.com.le_shi.Listener.OnBbsListener;
 import star.liuwen.com.le_shi.Model.BbsModel;
 import star.liuwen.com.le_shi.Model.IndexModel;
 import star.liuwen.com.le_shi.R;
+import star.liuwen.com.le_shi.Utils.NetUtil;
+import star.liuwen.com.le_shi.Utils.ToastUtils;
 
 /**
  * Created by liuwen on 2017/10/12.
@@ -37,6 +45,8 @@ public class LiveFragment extends BaseFragment {
     private BbsAdapter bbsAdapter;
     private List<BbsModel> mList = new ArrayList<>();
     private List<String> picList = new ArrayList<>();
+    private StateView mStateView;
+    private LinearLayout lyShow;
 
     @Nullable
     @Override
@@ -47,8 +57,12 @@ public class LiveFragment extends BaseFragment {
     }
 
     private void initView(View view) {
+        lyShow = (LinearLayout) view.findViewById(R.id.ly_show);
         oneRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_one);
         twoRecycleView = (RecyclerView) view.findViewById(R.id.recycler_two);
+        mStateView = StateView.inject(lyShow);
+        mStateView.setLoadingResource(R.layout.loading);
+        mStateView.setRetryResource(R.layout.base_retry);
         LinearLayoutManager manager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         oneRecyclerView.setLayoutManager(manager);
         twoRecycleView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -65,18 +79,22 @@ public class LiveFragment extends BaseFragment {
 
 
     private void LoadDate(String url) {
-        showLoadingDialog("", true, null);
+        mStateView.showLoading();
+        if (!NetUtil.checkNet(getActivity())) {
+            mStateView.showRetry();
+            return;
+        }
         BbsAction.searchBBSData(getActivity(), url, new ActionCallBack() {
             @Override
             public void ok(Object object) {
                 mList.addAll((Collection<? extends BbsModel>) object);
                 bbsAdapter.updateList(mList);
-                hideLoadingDialog();
+                mStateView.showContent();
             }
 
             @Override
             public void failed(Object object) {
-                hideLoadingDialog();
+                mStateView.showRetry();
             }
         });
 
@@ -90,10 +108,22 @@ public class LiveFragment extends BaseFragment {
 
             @Override
             public void failed(Object object) {
-                hideLoadingDialog();
+                mStateView.showRetry();
             }
         });
 
+
+//        BbsAction.searchBBSData(getActivity(), "http://bbs.baofeng.com/forum.php?mod=forumdisplay&fid=179&filter=typeid&typeid=37", new ActionCallBack() {
+//            @Override
+//            public void ok(Object object) {
+//                mStateView.showContent();
+//            }
+//
+//            @Override
+//            public void failed(Object object) {
+//               // mStateView.showRetry();
+//            }
+//        });
 
     }
 
@@ -108,6 +138,24 @@ public class LiveFragment extends BaseFragment {
                 LoadDate(DateEnage.getBBSDate().get(position).getUrl());
             }
         });
+
+        mStateView.setOnRetryClickListener(new StateView.OnRetryClickListener() {
+            @Override
+            public void onRetryClick() {
+                LoadDate(Config.BAO_FENG_BBS_ALL);
+            }
+        });
+
+
+        bbsAdapter.setListener(new OnBbsListener() {
+            @Override
+            public void onItemClickListener(int position, List<BbsModel> models) {
+                Intent intent = new Intent(getActivity(), WebActivity.class);
+                intent.putExtra(Config.INTENT_BBS_URL, models.get(position).getUrl());
+                startActivity(intent);
+            }
+        });
+
     }
 
 

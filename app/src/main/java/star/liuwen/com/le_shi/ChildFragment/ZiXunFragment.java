@@ -8,20 +8,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.github.nukc.stateview.StateView;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import star.liuwen.com.le_shi.Adapter.VarietyUIAdapter;
 import star.liuwen.com.le_shi.Adapter.ZiXunUIAdapter;
 import star.liuwen.com.le_shi.Base.BaseFragment;
 import star.liuwen.com.le_shi.Base.Config;
-import star.liuwen.com.le_shi.DataEnage.DateEnage;
 import star.liuwen.com.le_shi.Jsoup.Action.ActionCallBack;
 import star.liuwen.com.le_shi.Jsoup.Action.TvAction;
 import star.liuwen.com.le_shi.Model.CoverModel;
 import star.liuwen.com.le_shi.R;
-import star.liuwen.com.le_shi.Utils.DensityUtil;
+import star.liuwen.com.le_shi.Utils.NetUtil;
 
 /**
  * Created by liuwen on 2017/10/23.
@@ -42,6 +42,7 @@ public class ZiXunFragment extends BaseFragment {
     private RecyclerView mRecyclerView;
     private ZiXunUIAdapter mAdapter;
     private boolean isLoad = false;
+    protected StateView mStateView;
 
     @Nullable
     @Override
@@ -67,6 +68,9 @@ public class ZiXunFragment extends BaseFragment {
     }
 
     private void initView(View view) {
+        mStateView = StateView.inject(view);
+        mStateView.setLoadingResource(R.layout.loading);
+        mStateView.setRetryResource(R.layout.base_retry);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.zi_xun_recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mAdapter = new ZiXunUIAdapter(getActivity(),
@@ -83,7 +87,11 @@ public class ZiXunFragment extends BaseFragment {
     }
 
     private void loadDate() {
-        showLoadingDialog("", true, null);
+        mStateView.showLoading();
+        if (!NetUtil.checkNet(getActivity())) {
+            mStateView.showRetry();
+            return;
+        }
         TvAction.searchZiXunCoverData(getActivity(), Config.BAO_FENG_ZI_XUN_URL, new ActionCallBack() {
             @Override
             public void ok(Object object) {
@@ -102,12 +110,12 @@ public class ZiXunFragment extends BaseFragment {
             public void ok(Object object) {
                 ziXunRecommendList.addAll((Collection<? extends CoverModel>) object);
                 mAdapter.updateZiXunRecommendList(ziXunRecommendList);
-                hideLoadingDialog();
+                mStateView.showContent();
             }
 
             @Override
             public void failed(Object object) {
-
+                mStateView.showRetry();
             }
         });
 
@@ -156,7 +164,6 @@ public class ZiXunFragment extends BaseFragment {
             public void ok(Object object) {
                 funList.addAll((Collection<? extends CoverModel>) object);
                 mAdapter.updateFunList(funList);
-                hideLoadingDialog();
 
             }
 

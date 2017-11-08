@@ -1,29 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/ly_body"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:orientation="horizontal">
 
 
     <star.liuwen.com.le_shi.View.CircleImageView
-        android:layout_gravity="center"
         android:id="@+id/img_user"
         android:layout_width="48dp"
         android:layout_height="48dp"
+        android:layout_gravity="center"
         android:padding="10dp"/>
 
     <RelativeLayout
-        android:layout_marginLeft="2dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="2dp"
         android:padding="2dp">
 
         <TextView
-            android:textColor="@color/font_dark_gray"
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="2dp"
+            android:textColor="@color/font_dark_gray"
             android:textSize="14sp"/>
 
         <TextView
@@ -53,12 +54,12 @@
             android:textSize="12sp"/>
 
         <TextView
-            android:textColor="@color/font_dark_gray"
             android:id="@+id/tv_views"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_end_date"
             android:padding="2dp"
+            android:textColor="@color/font_dark_gray"
             android:textSize="12sp"
             />
     </RelativeLayout>

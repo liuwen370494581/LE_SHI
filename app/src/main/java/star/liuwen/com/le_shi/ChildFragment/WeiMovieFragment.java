@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.github.nukc.stateview.StateView;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -21,6 +23,7 @@ import star.liuwen.com.le_shi.Jsoup.Action.ActionCallBack;
 import star.liuwen.com.le_shi.Jsoup.Action.TvAction;
 import star.liuwen.com.le_shi.Model.CoverModel;
 import star.liuwen.com.le_shi.R;
+import star.liuwen.com.le_shi.Utils.NetUtil;
 import star.liuwen.com.le_shi.Utils.ToastUtils;
 import star.liuwen.com.le_shi.View.DefineBAGRefreshWithLoadView;
 
@@ -37,6 +40,7 @@ public class WeiMovieFragment extends BaseFragment implements BGARefreshLayout.B
     private PopAndCityLoveAndXuanningAdapter mAdapter;
     private List<CoverModel> mList;
     private List<CoverModel> mList2;
+    private StateView mStateView;
 
     @Nullable
     @Override
@@ -54,6 +58,9 @@ public class WeiMovieFragment extends BaseFragment implements BGARefreshLayout.B
 
 
     private void initView(View view) {
+        mStateView = StateView.inject(view);
+        mStateView.setLoadingResource(R.layout.loading);
+        mStateView.setRetryResource(R.layout.base_retry);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.wei_movie_recycler_view);
         mBGARefreshLayout = (BGARefreshLayout) view.findViewById(R.id.define_bga_refresh_with_load);
         final GridLayoutManager gridLayoutManager = new GridLayoutManager(mContext, 3, LinearLayoutManager.VERTICAL, false);
@@ -71,6 +78,12 @@ public class WeiMovieFragment extends BaseFragment implements BGARefreshLayout.B
         mDefineBAGRefreshWithLoadView.setRefreshingText("正在加载中...");
         mDefineBAGRefreshWithLoadView.setPullDownRefreshText("正在加载中...");
         mDefineBAGRefreshWithLoadView.setReleaseRefreshText("下拉刷新中...");
+        mStateView.setOnRetryClickListener(new StateView.OnRetryClickListener() {
+            @Override
+            public void onRetryClick() {
+                loadDate();
+            }
+        });
     }
 
 
@@ -82,19 +95,24 @@ public class WeiMovieFragment extends BaseFragment implements BGARefreshLayout.B
     }
 
     private void loadDate() {
-        showLoadingDialog("", true, null);
+
+        mStateView.showLoading();
+        if (!NetUtil.checkNet(getActivity())) {
+            mStateView.showRetry();
+            return;
+        }
         TvAction.searchAllWeiMovieData(getActivity(), Config.BAO_FENG_WEI_MOVIE_URL, true, false, "微电影", new ActionCallBack() {
             @Override
             public void ok(Object object) {
                 mList.addAll((Collection<? extends CoverModel>) object);
                 mAdapter.updateList(mList);
-                hideLoadingDialog();
+               mStateView.showContent();
             }
 
             @Override
             public void failed(Object object) {
                 ToastUtils.showToast(getActivity(), object.toString());
-                hideLoadingDialog();
+
             }
         });
 
@@ -108,7 +126,6 @@ public class WeiMovieFragment extends BaseFragment implements BGARefreshLayout.B
             @Override
             public void failed(Object object) {
                 ToastUtils.showToast(getActivity(), object.toString());
-                hideLoadingDialog();
             }
         });
     }

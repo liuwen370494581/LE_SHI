@@ -7,20 +7,16 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.hejunlin.superindicatorlibray.CircleIndicator;
 import com.hejunlin.superindicatorlibray.LoopViewPager;
 
 import java.util.HashMap;
 import java.util.List;
 
-import cn.bingoogolapple.androidcommon.adapter.BGAOnItemChildClickListener;
-import cn.bingoogolapple.androidcommon.adapter.BGAOnRVItemClickListener;
 import cn.bingoogolapple.androidcommon.adapter.BGARecyclerViewAdapter;
 import cn.bingoogolapple.androidcommon.adapter.BGAViewHolderHelper;
 import star.liuwen.com.le_shi.Listener.OnChoiceListener;
@@ -28,7 +24,6 @@ import star.liuwen.com.le_shi.Listener.OnCommonListener;
 import star.liuwen.com.le_shi.Model.CoverModel;
 import star.liuwen.com.le_shi.R;
 import star.liuwen.com.le_shi.Utils.GlideUtils;
-import star.liuwen.com.le_shi.Utils.ToastUtils;
 
 /**
  * Created by liuwen on 2017/10/16.
@@ -117,15 +112,6 @@ public class HomeUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         notifyDataSetChanged();
     }
 
-
-    public void updateChannelList(List<String> list) {
-        if (isListNotEmpty(list)) {
-            channelList = list;
-        } else {
-            channelList.clear();
-        }
-        notifyDataSetChanged();
-    }
 
     public void updateSports(List<CoverModel> list) {
         if (isListNotEmpty(list)) {

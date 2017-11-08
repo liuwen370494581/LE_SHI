@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.github.nukc.stateview.StateView;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -22,6 +24,7 @@ import star.liuwen.com.le_shi.Jsoup.Action.TvAction;
 import star.liuwen.com.le_shi.Model.CoverModel;
 import star.liuwen.com.le_shi.R;
 import star.liuwen.com.le_shi.Utils.DensityUtil;
+import star.liuwen.com.le_shi.Utils.NetUtil;
 
 /**
  * Created by liuwen on 2017/10/12.
@@ -41,6 +44,7 @@ public class VarietyFragment extends BaseFragment {
 
     private RecyclerView mRecyclerView;
     private VarietyUIAdapter mAdapter;
+    private StateView mStateView;
 
     @Nullable
     @Override
@@ -48,7 +52,17 @@ public class VarietyFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_variey, container, false);
         init();
         initView(view);
+        setListener();
         return view;
+    }
+
+    private void setListener() {
+        mStateView.setOnRetryClickListener(new StateView.OnRetryClickListener() {
+            @Override
+            public void onRetryClick() {
+                loadData();
+            }
+        });
     }
 
     private void init() {
@@ -64,13 +78,13 @@ public class VarietyFragment extends BaseFragment {
 
 
     private void initView(View view) {
+        mStateView = StateView.inject(view);
+        mStateView.setLoadingResource(R.layout.loading);
+        mStateView.setRetryResource(R.layout.base_retry);
         itemWidth = DensityUtil.getScreenWidth(getActivity());
         mRecyclerView = (RecyclerView) view.findViewById(R.id.variey_recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mAdapter = new VarietyUIAdapter(getActivity(), DateEnage.getZongYiChannelList(),
-                coverList, highlightsList, highlightsList2, hotPlayList, varietyList, varietyList2,
-                baoFengList, baoFengList2, itemWidth);
-        mRecyclerView.setAdapter(mAdapter);
+
     }
 
     @Override
@@ -78,11 +92,18 @@ public class VarietyFragment extends BaseFragment {
         if (!isLoad)
             loadData();
         isLoad = true;
-
+        mAdapter = new VarietyUIAdapter(getActivity(), DateEnage.getZongYiChannelList(),
+                coverList, highlightsList, highlightsList2, hotPlayList, varietyList, varietyList2,
+                baoFengList, baoFengList2, itemWidth);
+        mRecyclerView.setAdapter(mAdapter);
     }
 
     private void loadData() {
-        showLoadingDialog("", false, null);
+        mStateView.showLoading();
+        if (!NetUtil.checkNet(getActivity())) {
+            mStateView.showRetry();
+            return;
+        }
         TvAction.searchZiYiCoverData(getActivity(), Config.BAO_FENG_ZONG_YI_URL, new ActionCallBack() {
             @Override
             public void ok(Object object) {
@@ -101,12 +122,12 @@ public class VarietyFragment extends BaseFragment {
                     public void ok(Object object) {
                         highlightsList.addAll((Collection<? extends CoverModel>) object);
                         mAdapter.updateHighlightsList(highlightsList);
-                        hideLoadingDialog();
+                        mStateView.showContent();
                     }
 
                     @Override
                     public void failed(Object object) {
-                        hideLoadingDialog();
+                        mStateView.showRetry();
                     }
                 });
 

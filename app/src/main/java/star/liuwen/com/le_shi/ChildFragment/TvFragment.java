@@ -8,12 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.github.nukc.stateview.StateView;
+
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
 
-import star.liuwen.com.le_shi.Adapter.HomeUIAdapter;
 import star.liuwen.com.le_shi.Adapter.TvUIAdapter;
 import star.liuwen.com.le_shi.Base.BaseFragment;
 import star.liuwen.com.le_shi.Base.Config;
@@ -24,6 +24,7 @@ import star.liuwen.com.le_shi.Jsoup.Action.TvAction;
 import star.liuwen.com.le_shi.Model.CoverModel;
 import star.liuwen.com.le_shi.R;
 import star.liuwen.com.le_shi.Utils.DensityUtil;
+import star.liuwen.com.le_shi.Utils.NetUtil;
 
 /**
  * Created by liuwen on 2017/10/12.
@@ -46,6 +47,7 @@ public class TvFragment extends BaseFragment {
     private List<CoverModel> netWorkList;
     private List<CoverModel> kangWarList;
     private boolean isLoaded = false;
+    private StateView mStateView;
 
 
     @Nullable
@@ -54,7 +56,17 @@ public class TvFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_tv, container, false);
         init();
         initView(view);
+        setListener();
         return view;
+    }
+
+    private void setListener() {
+        mStateView.setOnRetryClickListener(new StateView.OnRetryClickListener() {
+            @Override
+            public void onRetryClick() {
+                LoadData();
+            }
+        });
     }
 
 
@@ -72,6 +84,9 @@ public class TvFragment extends BaseFragment {
     }
 
     private void initView(View view) {
+        mStateView = StateView.inject(view);
+        mStateView.setLoadingResource(R.layout.loading);
+        mStateView.setRetryResource(R.layout.base_retry);
         itemWidth = DensityUtil.getScreenWidth(getActivity());
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_tv);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -91,7 +106,11 @@ public class TvFragment extends BaseFragment {
     }
 
     private void LoadData() {
-        showLoadingDialog("", true, null);
+        mStateView.showLoading();
+        if (!NetUtil.checkNet(getActivity())) {
+            mStateView.showRetry();
+            return;
+        }
         MainUIAction.searchCoverData(getActivity(), Config.BAO_FENG_TV_URL, new ActionCallBack() {
             @Override
             public void ok(Object object) {
@@ -115,6 +134,7 @@ public class TvFragment extends BaseFragment {
 
                     @Override
                     public void failed(Object object) {
+                        mStateView.showRetry();
 
                     }
                 });
@@ -193,7 +213,7 @@ public class TvFragment extends BaseFragment {
             public void ok(Object object) {
                 hotPlayList.addAll((Collection<? extends CoverModel>) object);
                 mAdapter.updateHotPlayList(hotPlayList);
-                hideLoadingDialog();
+                mStateView.showContent();
             }
 
             @Override
