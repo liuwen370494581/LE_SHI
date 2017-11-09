@@ -17,7 +17,6 @@ import java.util.List;
 import star.liuwen.com.le_shi.Adapter.TvUIAdapter;
 import star.liuwen.com.le_shi.Base.BaseFragment;
 import star.liuwen.com.le_shi.Base.Config;
-import star.liuwen.com.le_shi.DataEnage.DateEnage;
 import star.liuwen.com.le_shi.Jsoup.Action.ActionCallBack;
 import star.liuwen.com.le_shi.Jsoup.Action.MainUIAction;
 import star.liuwen.com.le_shi.Jsoup.Action.TvAction;
@@ -35,7 +34,7 @@ public class TvFragment extends BaseFragment {
     private RecyclerView mRecyclerView;
     private int itemWidth;
     private TvUIAdapter mAdapter;
-
+    private List<String> channelList;
     private List<CoverModel> coverList;//封面数据
     private List<CoverModel> hotPlayList;
     private List<CoverModel> popularList;
@@ -71,6 +70,7 @@ public class TvFragment extends BaseFragment {
 
 
     private void init() {
+        channelList = new ArrayList<>();
         coverList = new ArrayList<>();//封面数据
         hotPlayList = new ArrayList<>();
         popularList = new ArrayList<>();
@@ -90,11 +90,7 @@ public class TvFragment extends BaseFragment {
         itemWidth = DensityUtil.getScreenWidth(getActivity());
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_tv);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mAdapter = new TvUIAdapter(getActivity(), DateEnage.getTvChannelList(),
-                coverList, hotPlayList, popularList, popularList2, cityLoveList,
-                cityLoveList2, xuanNingList, xuanNingList2,
-                netWorkList, kangWarList, itemWidth);
-        mRecyclerView.setAdapter(mAdapter);
+
     }
 
     @Override
@@ -103,6 +99,11 @@ public class TvFragment extends BaseFragment {
             LoadData();
             isLoaded = true;
         }
+        mAdapter = new TvUIAdapter(getActivity(), channelList,
+                coverList, hotPlayList, popularList, popularList2, cityLoveList,
+                cityLoveList2, xuanNingList, xuanNingList2,
+                netWorkList, kangWarList, itemWidth);
+        mRecyclerView.setAdapter(mAdapter);
     }
 
     private void LoadData() {
@@ -238,6 +239,18 @@ public class TvFragment extends BaseFragment {
             public void ok(Object object) {
                 kangWarList.addAll((Collection<? extends CoverModel>) object);
                 mAdapter.updateKangWarList(kangWarList);
+            }
+
+            @Override
+            public void failed(Object object) {
+
+            }
+        });
+        MainUIAction.searchChannelDate(getActivity(), Config.CHANNEL_TV, new ActionCallBack() {
+            @Override
+            public void ok(Object object) {
+                channelList.addAll((Collection<? extends String>) object);
+                mAdapter.updateChannelList(channelList);
             }
 
             @Override

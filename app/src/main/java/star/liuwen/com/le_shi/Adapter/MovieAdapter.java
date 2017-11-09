@@ -99,6 +99,16 @@ public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         notifyDataSetChanged();
     }
 
+    public void updateChannelList(List<String> list) {
+        if (isListNotEmpty(list)) {
+            channelList = list;
+        } else {
+            channelList.clear();
+        }
+        notifyDataSetChanged();
+    }
+
+
     public void updateVipList(List<CoverModel> list) {
         if (isListNotEmpty(list)) {
             vipList = list;

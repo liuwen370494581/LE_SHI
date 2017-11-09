@@ -18,7 +18,6 @@ import java.util.List;
 import star.liuwen.com.le_shi.Adapter.HomeUIAdapter;
 import star.liuwen.com.le_shi.Base.BaseFragment;
 import star.liuwen.com.le_shi.Base.Config;
-import star.liuwen.com.le_shi.DataEnage.DateEnage;
 import star.liuwen.com.le_shi.Jsoup.Action.ActionCallBack;
 import star.liuwen.com.le_shi.Jsoup.Action.MainUIAction;
 import star.liuwen.com.le_shi.Listener.OnChoiceListener;
@@ -38,6 +37,7 @@ public class ChoiceFragment extends BaseFragment {
     private int itemWidth;
     private HomeUIAdapter mAdapter;
 
+    private List<String> channelList;
     private List<CoverModel> coverList;//封面数据
     private List<CoverModel> editList;//编辑推荐
     private List<CoverModel> editList2;
@@ -67,6 +67,7 @@ public class ChoiceFragment extends BaseFragment {
     }
 
     private void init() {
+        channelList = new ArrayList<>();
         coverList = new ArrayList<>();
         editList = new ArrayList<>();
         editList2 = new ArrayList<>();
@@ -91,7 +92,7 @@ public class ChoiceFragment extends BaseFragment {
         btnClickMe = (ImageView) view.findViewById(R.id.img_click_me);
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter = new HomeUIAdapter(getActivity(), DateEnage.getChoiceChannelList(),
+        mAdapter = new HomeUIAdapter(getActivity(), channelList,
                 coverList, editList, editList2, sportsList, tvList, movieList,
                 dongManList, zongYiList, education, weiMovieList, musicList,
                 overViewList, overViewList2, itemWidth);
@@ -148,7 +149,7 @@ public class ChoiceFragment extends BaseFragment {
     @Override
     public void initData() {
         if (!isLoaded) {
-          //  LoadData();
+              LoadData();
             isLoaded = true;
         }
     }
@@ -325,6 +326,19 @@ public class ChoiceFragment extends BaseFragment {
 
             @Override
             public void failed(Object object) {
+            }
+        });
+
+        MainUIAction.searchChannelDate(getActivity(), Config.CHANNEL_CHOICE, new ActionCallBack() {
+            @Override
+            public void ok(Object object) {
+                channelList.addAll((Collection<? extends String>) object);
+                mAdapter.updateChannelList(channelList);
+            }
+
+            @Override
+            public void failed(Object object) {
+
             }
         });
     }

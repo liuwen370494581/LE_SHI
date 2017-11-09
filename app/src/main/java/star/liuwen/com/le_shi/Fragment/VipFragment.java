@@ -18,7 +18,6 @@ import java.util.List;
 import star.liuwen.com.le_shi.Adapter.VipUIAdapter;
 import star.liuwen.com.le_shi.Base.BaseFragment;
 import star.liuwen.com.le_shi.Base.Config;
-import star.liuwen.com.le_shi.DataEnage.DateEnage;
 import star.liuwen.com.le_shi.Jsoup.Action.ActionCallBack;
 import star.liuwen.com.le_shi.Jsoup.Action.MainUIAction;
 import star.liuwen.com.le_shi.Jsoup.Action.TvAction;
@@ -31,7 +30,7 @@ import star.liuwen.com.le_shi.Utils.NetUtil;
  * Created by liuwen on 2017/10/12.
  */
 public class VipFragment extends BaseFragment {
-
+    private List<String> channelList = new ArrayList<>();
     private List<CoverModel> coverList = new ArrayList<>();//封面数据
     private List<CoverModel> mostPopularList = new ArrayList<>();//最受欢迎
     private List<CoverModel> mostPopularList2 = new ArrayList<>();//最受欢迎
@@ -80,7 +79,7 @@ public class VipFragment extends BaseFragment {
         itemWidth = DensityUtil.getScreenWidth(getActivity());
         mRecyclerView = (RecyclerView) view.findViewById(R.id.vip_recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mAdapter = new VipUIAdapter(getActivity(), DateEnage.getVipChannelList(),
+        mAdapter = new VipUIAdapter(getActivity(), channelList,
                 coverList, mostPopularList, mostPopularList2, newFilmRecommendList, newFilmRecommendList2, choiceList,
                 choiceList2, educationList, educationList2, qinZiList, qinZiList2,
                 horrorFilmList, horrorFilmList2, itemWidth);
@@ -90,7 +89,7 @@ public class VipFragment extends BaseFragment {
 
 
     private void init() {
-      //  LoadData();
+         LoadData();
     }
 
     private void LoadData() {
@@ -261,6 +260,19 @@ public class VipFragment extends BaseFragment {
             public void ok(Object object) {
                 horrorFilmList2.addAll((Collection<? extends CoverModel>) object);
                 mAdapter.updateHorrorFilmList2(horrorFilmList2);
+            }
+
+            @Override
+            public void failed(Object object) {
+
+            }
+        });
+
+        MainUIAction.searchChannelDate(getActivity(), Config.CHANNEL_VIP, new ActionCallBack() {
+            @Override
+            public void ok(Object object) {
+               channelList.addAll((Collection<? extends String>) object);
+                mAdapter.updateChannelList(channelList);
             }
 
             @Override

@@ -12,14 +12,13 @@ import com.github.nukc.stateview.StateView;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
 
 import star.liuwen.com.le_shi.Adapter.VarietyUIAdapter;
 import star.liuwen.com.le_shi.Base.BaseFragment;
 import star.liuwen.com.le_shi.Base.Config;
-import star.liuwen.com.le_shi.DataEnage.DateEnage;
 import star.liuwen.com.le_shi.Jsoup.Action.ActionCallBack;
+import star.liuwen.com.le_shi.Jsoup.Action.MainUIAction;
 import star.liuwen.com.le_shi.Jsoup.Action.TvAction;
 import star.liuwen.com.le_shi.Model.CoverModel;
 import star.liuwen.com.le_shi.R;
@@ -31,6 +30,7 @@ import star.liuwen.com.le_shi.Utils.NetUtil;
  * 综艺
  */
 public class VarietyFragment extends BaseFragment {
+    private List<String> channelList;
     private List<CoverModel> coverList;//封面数据
     private List<CoverModel> highlightsList;//精彩看点
     private List<CoverModel> highlightsList2;
@@ -66,6 +66,7 @@ public class VarietyFragment extends BaseFragment {
     }
 
     private void init() {
+        channelList = new ArrayList<>();
         coverList = new ArrayList<>();//封面数据
         highlightsList = new ArrayList<>();
         highlightsList2 = new ArrayList<>();
@@ -92,7 +93,7 @@ public class VarietyFragment extends BaseFragment {
         if (!isLoad)
             loadData();
         isLoad = true;
-        mAdapter = new VarietyUIAdapter(getActivity(), DateEnage.getZongYiChannelList(),
+        mAdapter = new VarietyUIAdapter(getActivity(), channelList,
                 coverList, highlightsList, highlightsList2, hotPlayList, varietyList, varietyList2,
                 baoFengList, baoFengList2, itemWidth);
         mRecyclerView.setAdapter(mAdapter);
@@ -209,6 +210,19 @@ public class VarietyFragment extends BaseFragment {
             public void ok(Object object) {
                 hotPlayList.addAll((Collection<? extends CoverModel>) object);
                 mAdapter.updateHotPlayList(hotPlayList);
+            }
+
+            @Override
+            public void failed(Object object) {
+
+            }
+        });
+
+        MainUIAction.searchChannelDate(getActivity(), Config.CHANNEL_ZONG_YI, new ActionCallBack() {
+            @Override
+            public void ok(Object object) {
+                channelList.addAll((Collection<? extends String>) object);
+                mAdapter.updateChannelList(channelList);
             }
 
             @Override

@@ -35,6 +35,8 @@ public class DateEnage {
     }
 
 
+
+    //精选
     public static List<String> getChoiceChannelList() {
         List<String> list = new ArrayList<>();
         list.add("电视剧");
@@ -47,7 +49,7 @@ public class DateEnage {
         list.add("音乐");
         return list;
     }
-
+   //电视剧
     public static List<String> getTvChannelList() {
         List<String> list = new ArrayList<>();
         list.add("同步热播");
@@ -60,7 +62,7 @@ public class DateEnage {
         list.add("筛选");
         return list;
     }
-
+ //电影
     public static List<String> getMovieChannelList() {
         List<String> list = new ArrayList<>();
         list.add("精选");
@@ -74,7 +76,7 @@ public class DateEnage {
 
         return list;
     }
-
+  //综艺
     public static List<String> getZongYiChannelList() {
         List<String> list = new ArrayList<>();
         list.add("全部");
@@ -87,7 +89,7 @@ public class DateEnage {
         list.add("节目单");
         return list;
     }
-
+ //动漫
     public static List<String> getDongManChannelList() {
         List<String> list = new ArrayList<>();
         list.add("热播");
@@ -101,6 +103,7 @@ public class DateEnage {
         return list;
     }
 
+    //vip
     public static List<String> getVipChannelList() {
         List<String> list = new ArrayList<>();
         list.add("独播");

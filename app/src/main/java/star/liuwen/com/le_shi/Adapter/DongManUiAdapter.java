@@ -9,16 +9,13 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import java.util.HashMap;
 import java.util.List;
 
-import cn.bingoogolapple.androidcommon.adapter.BGAOnRVItemClickListener;
 import cn.bingoogolapple.androidcommon.adapter.BGARecyclerViewAdapter;
 import cn.bingoogolapple.androidcommon.adapter.BGAViewHolderHelper;
 import star.liuwen.com.le_shi.Model.CoverModel;
 import star.liuwen.com.le_shi.R;
 import star.liuwen.com.le_shi.Utils.GlideUtils;
-import star.liuwen.com.le_shi.Utils.ToastUtils;
 
 /**
  * Created by liuwen on 2017/10/23.
@@ -79,6 +76,14 @@ public class DongManUiAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         }
     }
 
+    public void updateChannelList(List<String> list) {
+        if (isListNotEmpty(list)) {
+            channelList = list;
+        } else {
+            channelList.clear();
+        }
+        notifyDataSetChanged();
+    }
 
     public void updateCoverList(List<CoverModel> list) {
         if (isListNotEmpty(list)) {

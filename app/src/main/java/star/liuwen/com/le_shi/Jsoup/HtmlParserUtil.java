@@ -724,9 +724,9 @@ public class HtmlParserUtil {
             Log.e(Config.TAG, 0 + "");
             Document document = Jsoup.connect(url)
                     .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31").timeout(10000).get();
-//             Elements elements = document.select("th.common");
+            Elements elements = document.select("th.common");
             Log.e(Config.TAG, 1 + "");
-            Elements elements2 = document.select("div.tl_ct");
+            Elements elements2 = elements.select("div.tl_ct");
             Log.e(Config.TAG, 2 + "");
             for (int i = 0; i < elements2.size(); i++) {
                 BbsModel model = new BbsModel();

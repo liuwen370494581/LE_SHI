@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import com.github.nukc.stateview.StateView;
@@ -46,7 +47,7 @@ public class LiveFragment extends BaseFragment {
     private List<BbsModel> mList = new ArrayList<>();
     private List<String> picList = new ArrayList<>();
     private StateView mStateView;
-    private LinearLayout lyShow;
+    private FrameLayout mFrameLayout;
 
     @Nullable
     @Override
@@ -57,10 +58,10 @@ public class LiveFragment extends BaseFragment {
     }
 
     private void initView(View view) {
-        lyShow = (LinearLayout) view.findViewById(R.id.ly_show);
+        mFrameLayout = (FrameLayout) view.findViewById(R.id.frame_layout);
         oneRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_one);
         twoRecycleView = (RecyclerView) view.findViewById(R.id.recycler_two);
-        mStateView = StateView.inject(lyShow);
+        mStateView = StateView.inject(mFrameLayout);
         mStateView.setLoadingResource(R.layout.loading);
         mStateView.setRetryResource(R.layout.base_retry);
         LinearLayoutManager manager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);

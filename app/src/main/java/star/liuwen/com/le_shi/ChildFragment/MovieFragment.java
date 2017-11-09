@@ -11,15 +11,12 @@ import android.view.ViewGroup;
 import com.github.nukc.stateview.StateView;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Collection;
 import java.util.List;
 
 import star.liuwen.com.le_shi.Adapter.MovieAdapter;
-import star.liuwen.com.le_shi.Adapter.TvUIAdapter;
 import star.liuwen.com.le_shi.Base.BaseFragment;
 import star.liuwen.com.le_shi.Base.Config;
-import star.liuwen.com.le_shi.DataEnage.DateEnage;
-import star.liuwen.com.le_shi.EventBus.C;
 import star.liuwen.com.le_shi.Jsoup.Action.ActionCallBack;
 import star.liuwen.com.le_shi.Jsoup.Action.MainUIAction;
 import star.liuwen.com.le_shi.Jsoup.Action.TvAction;
@@ -33,6 +30,7 @@ import star.liuwen.com.le_shi.Utils.NetUtil;
  * 电影
  */
 public class MovieFragment extends BaseFragment {
+    private List<String> channelList;
     private List<CoverModel> coverList;//封面数据
     private List<CoverModel> vipList;//会员
     private List<CoverModel> vipList2;
@@ -72,6 +70,7 @@ public class MovieFragment extends BaseFragment {
     }
 
     private void init() {
+        channelList = new ArrayList<>();
         coverList = new ArrayList<>();
         vipList = new ArrayList<>();
         vipList2 = new ArrayList<>();
@@ -92,18 +91,20 @@ public class MovieFragment extends BaseFragment {
         itemWidth = DensityUtil.getScreenWidth(getActivity());
         mRecyclerView = (RecyclerView) view.findViewById(R.id.movie_recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mAdapter = new MovieAdapter(getActivity(), DateEnage.getMovieChannelList(),
-                coverList, vipList, vipList2, mostPopularList, mostPopularList2,
-                huaYuList, huaYuList2, ouMeiList,
-                ouMeiList2, whiteLoveList, dongHuaList, itemWidth);
-        mRecyclerView.setAdapter(mAdapter);
+
     }
 
     @Override
     public void initData() {
-        if (!isLoad)
+        if (!isLoad) {
             LoadData();
-        isLoad = true;
+            isLoad = true;
+        }
+        mAdapter = new MovieAdapter(getActivity(), channelList,
+                coverList, vipList, vipList2, mostPopularList, mostPopularList2,
+                huaYuList, huaYuList2, ouMeiList,
+                ouMeiList2, whiteLoveList, dongHuaList, itemWidth);
+        mRecyclerView.setAdapter(mAdapter);
     }
 
     private void LoadData() {
@@ -247,6 +248,19 @@ public class MovieFragment extends BaseFragment {
             public void ok(Object object) {
                 dongHuaList = (List<CoverModel>) object;
                 mAdapter.updateDongHuaList(dongHuaList);
+            }
+
+            @Override
+            public void failed(Object object) {
+
+            }
+        });
+
+        MainUIAction.searchChannelDate(getActivity(), Config.CHANNEL_MOVIE, new ActionCallBack() {
+            @Override
+            public void ok(Object object) {
+                channelList.addAll((Collection<? extends String>) object);
+                mAdapter.updateChannelList(channelList);
             }
 
             @Override

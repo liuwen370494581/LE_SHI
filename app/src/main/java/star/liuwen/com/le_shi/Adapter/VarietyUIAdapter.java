@@ -77,6 +77,16 @@ public class VarietyUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         }
     }
 
+    public void updateChannelList(List<String> list) {
+        if (isListNotEmpty(list)) {
+            channelList = list;
+        } else {
+            channelList.clear();
+        }
+        notifyDataSetChanged();
+    }
+
+
     public void updateCoverList(List<CoverModel> list) {
         if (isListNotEmpty(list)) {
             coverList = list;

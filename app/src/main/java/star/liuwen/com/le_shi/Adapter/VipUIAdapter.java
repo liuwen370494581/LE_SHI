@@ -12,10 +12,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.bingoogolapple.androidcommon.adapter.BGAOnRVItemClickListener;
 import star.liuwen.com.le_shi.Model.CoverModel;
 import star.liuwen.com.le_shi.R;
-import star.liuwen.com.le_shi.Utils.ToastUtils;
 
 /**
  * Created by liuwen on 2017/10/25.
@@ -67,6 +65,17 @@ public class VipUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         this.horrorFilmList2 = horrorFilmList2;
         this.itemWidth = itemWidth;
     }
+
+
+    public void updateChannelList(List<String> list) {
+        if (isListNotEmpty(list)) {
+            channelList = list;
+        } else {
+            channelList.clear();
+        }
+        notifyDataSetChanged();
+    }
+
 
     public void updateCoverList(List<CoverModel> list) {
         if (isListNotEmpty(list)) {

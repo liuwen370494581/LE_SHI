@@ -90,6 +90,15 @@ public class TvUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
 
+    public void updateChannelList(List<String> list) {
+        if (isListNotEmpty(list)) {
+            channelList = list;
+        } else {
+            channelList.clear();
+        }
+        notifyDataSetChanged();
+    }
+
     public void updateCoverList(List<CoverModel> list) {
         if (isListNotEmpty(list)) {
             coverList = list;
@@ -236,7 +245,7 @@ public class TvUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             setBanner(bannerHolder);
         } else if (holder instanceof HomeUIAdapter.ChannelHolder) {
             HomeUIAdapter.ChannelHolder channelHolder = (HomeUIAdapter.ChannelHolder) holder;
-            ChannelAdapter channelAdapter = new ChannelAdapter(channelList,mContext);
+            ChannelAdapter channelAdapter = new ChannelAdapter(channelList, mContext);
             final GridLayoutManager manager = new GridLayoutManager(mContext, 4, LinearLayoutManager.VERTICAL, false);
             channelHolder.mRecyclerView.setLayoutManager(manager);
             channelHolder.mRecyclerView.setAdapter(channelAdapter);
@@ -407,8 +416,6 @@ public class TvUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             tvType = (TextView) itemView.findViewById(R.id.tv_title);
         }
     }
-
-
 
 
     private static class CommAdapter extends BGARecyclerViewAdapter<CoverModel> {

@@ -19,4 +19,16 @@ public class Config {
 
     //Intent mark
     public static final String INTENT_BBS_URL = "BBS_URL";
+
+
+    //channel mark
+
+    public static final String CHANNEL_CHOICE = "choice";
+    public static final String CHANNEL_TV = "tv";
+    public static final String CHANNEL_MOVIE = "moive";
+    public static final String CHANNEL_ZONG_YI = "zongyi";
+    public static final String CHANNEL_DONG_MAN = "dongMan";
+    public static final String CHANNEL_VIP = "vip";
+
+
 }

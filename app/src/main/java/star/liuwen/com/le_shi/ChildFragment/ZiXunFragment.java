@@ -73,17 +73,19 @@ public class ZiXunFragment extends BaseFragment {
         mStateView.setRetryResource(R.layout.base_retry);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.zi_xun_recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mAdapter = new ZiXunUIAdapter(getActivity(),
-                coverList, ziXunRecommendList, headlinesList, baoXiaoRecommendList, strangeList, funList,
-                starList, sportList, scienceList, musicList, gameList);
-        mRecyclerView.setAdapter(mAdapter);
+
     }
 
     @Override
     public void initData() {
-        if (!isLoad)
+        if (!isLoad) {
             loadDate();
-        isLoad = true;
+            isLoad = true;
+        }
+        mAdapter = new ZiXunUIAdapter(getActivity(),
+                coverList, ziXunRecommendList, headlinesList, baoXiaoRecommendList, strangeList, funList,
+                starList, sportList, scienceList, musicList, gameList);
+        mRecyclerView.setAdapter(mAdapter);
     }
 
     private void loadDate() {

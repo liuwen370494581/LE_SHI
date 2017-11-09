@@ -15,6 +15,7 @@ import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import star.liuwen.com.le_shi.Base.Config;
+import star.liuwen.com.le_shi.DataEnage.DateEnage;
 import star.liuwen.com.le_shi.Jsoup.HtmlParserUtil;
 import star.liuwen.com.le_shi.Model.CoverModel;
 import star.liuwen.com.le_shi.R;
@@ -279,4 +280,40 @@ public class MainUIAction {
             }
         });
     }
+
+    //commenAction
+
+    public static void searchChannelDate(final Context context,final String type,final ActionCallBack callBack){
+
+        Observable.create(new ObservableOnSubscribe<List<String>>() {
+            @Override
+            public void subscribe(ObservableEmitter<List<String>> e) throws Exception {
+                if(type.equals(Config.CHANNEL_CHOICE)){
+                    e.onNext(DateEnage.getChoiceChannelList());
+                }else if(type.equals(Config.CHANNEL_TV)){
+                    e.onNext(DateEnage.getTvChannelList());
+                }else if(type.equals(Config.CHANNEL_MOVIE)){
+                    e.onNext(DateEnage.getMovieChannelList());
+                }else if(type.equals(Config.CHANNEL_DONG_MAN)){
+                    e.onNext(DateEnage.getDongManChannelList());
+                }else if(type.equals(Config.CHANNEL_ZONG_YI)){
+                    e.onNext(DateEnage.getZongYiChannelList());
+                }else if(type.equals(Config.CHANNEL_VIP)){
+                    e.onNext(DateEnage.getVipChannelList());
+                }
+
+            }
+        }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<List<String>>() {
+            @Override
+            public void accept(@NonNull List<String> models) throws Exception {
+                if (models != null && models.size() != 0) {
+                    callBack.ok(models);
+                } else {
+                    callBack.failed(context.getResources().getString(R.string.find_no_result));
+                }
+            }
+        });
+
+    }
+
 }

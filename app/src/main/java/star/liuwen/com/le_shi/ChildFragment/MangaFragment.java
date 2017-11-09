@@ -20,6 +20,7 @@ import star.liuwen.com.le_shi.Base.BaseFragment;
 import star.liuwen.com.le_shi.Base.Config;
 import star.liuwen.com.le_shi.DataEnage.DateEnage;
 import star.liuwen.com.le_shi.Jsoup.Action.ActionCallBack;
+import star.liuwen.com.le_shi.Jsoup.Action.MainUIAction;
 import star.liuwen.com.le_shi.Jsoup.Action.TvAction;
 import star.liuwen.com.le_shi.Model.CoverModel;
 import star.liuwen.com.le_shi.R;
@@ -32,6 +33,7 @@ import star.liuwen.com.le_shi.Utils.NetUtil;
  * 动漫
  */
 public class MangaFragment extends BaseFragment {
+    private List<String> channelList;
     private List<CoverModel> coverList;//封面数据
     private List<CoverModel> hotPlayList;
     private List<CoverModel> baoFengList;
@@ -69,6 +71,7 @@ public class MangaFragment extends BaseFragment {
     }
 
     private void init() {
+        channelList = new ArrayList<>();
         hotPlayList = new ArrayList<>();
         coverList = new ArrayList<>();//封面数据
         baoFengList = new ArrayList<>();
@@ -85,20 +88,20 @@ public class MangaFragment extends BaseFragment {
         itemWidth = DensityUtil.getScreenWidth(getActivity());
         mRecyclerView = (RecyclerView) view.findViewById(R.id.dongman_recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mAdapter = new DongManUiAdapter(getActivity(), DateEnage.getDongManChannelList(),
-                coverList, hotPlayList, baoFengList, qinZiList, reviewClassicList,
-                everyDateUpdateList, itemWidth);
-        mRecyclerView.setAdapter(mAdapter);
+
         initSizeAndDate();
     }
 
     @Override
     public void initData() {
-        if (!isLoad)
+        if (!isLoad) {
             LoadDate();
-        isLoad = true;
-
-
+            isLoad = true;
+        }
+        mAdapter = new DongManUiAdapter(getActivity(), channelList,
+                coverList, hotPlayList, baoFengList, qinZiList, reviewClassicList,
+                everyDateUpdateList, itemWidth);
+        mRecyclerView.setAdapter(mAdapter);
     }
 
     private void LoadDate() {
@@ -189,6 +192,19 @@ public class MangaFragment extends BaseFragment {
 
             }
         });
+
+        MainUIAction.searchChannelDate(getActivity(), Config.CHANNEL_DONG_MAN, new ActionCallBack() {
+            @Override
+            public void ok(Object object) {
+                channelList.addAll((Collection<? extends String>) object);
+                mAdapter.updateChannelList(channelList);
+            }
+
+            @Override
+            public void failed(Object object) {
+
+            }
+        });
     }
 
     private void initSizeAndDate() {
@@ -227,4 +243,6 @@ public class MangaFragment extends BaseFragment {
             e.printStackTrace();
         }
     }
+
+
 }
