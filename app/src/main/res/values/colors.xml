@@ -17,4 +17,5 @@
     <color name="subscribe_category_bar_bg_night">#cc363636</color>
     <color name="news_tag_border_blue">#3091D8</color>
     <color name="selector_grey">#DDDDDD</color>
+    <color name="background">#F0EFF3</color>
 </resources>

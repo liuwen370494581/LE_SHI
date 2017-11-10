@@ -7,8 +7,10 @@
 
 
     <TextView
-        android:textColor="@color/text_color_66"
         android:id="@+id/tv_bbs"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="middle"
+        android:maxLines="1"
+        android:textColor="@color/text_color_66"/>
 </LinearLayout>

@@ -70,7 +70,8 @@ public class BbsAdapter extends RecyclerView.Adapter<BbsAdapter.MyViewHolder> {
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         holder.tvTitle.setText(mList.get(position).getTitle());
-        holder.tvUserName.setText(mList.get(position).getUserName());
+
+        holder.tvUserName.setText(mList.get(position).getUserName() != null ? mList.get(position).getUserName() : "匿名");
         holder.startDate.setText("于 " + mList.get(position).getStartDate() + " 发表");
         holder.endDate.setText("最后回复:" + mList.get(position).getEndDate());
         holder.views.setText("观看次数:" + mList.get(position).getViews());

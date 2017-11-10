@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 
 import com.github.nukc.stateview.StateView;
 
@@ -34,7 +33,6 @@ import star.liuwen.com.le_shi.Model.BbsModel;
 import star.liuwen.com.le_shi.Model.IndexModel;
 import star.liuwen.com.le_shi.R;
 import star.liuwen.com.le_shi.Utils.NetUtil;
-import star.liuwen.com.le_shi.Utils.ToastUtils;
 
 /**
  * Created by liuwen on 2017/10/12.
@@ -48,6 +46,7 @@ public class LiveFragment extends BaseFragment {
     private List<String> picList = new ArrayList<>();
     private StateView mStateView;
     private FrameLayout mFrameLayout;
+    private int pos = 0;
 
     @Nullable
     @Override
@@ -112,20 +111,6 @@ public class LiveFragment extends BaseFragment {
                 mStateView.showRetry();
             }
         });
-
-
-//        BbsAction.searchBBSData(getActivity(), "http://bbs.baofeng.com/forum.php?mod=forumdisplay&fid=179&filter=typeid&typeid=37", new ActionCallBack() {
-//            @Override
-//            public void ok(Object object) {
-//                mStateView.showContent();
-//            }
-//
-//            @Override
-//            public void failed(Object object) {
-//               // mStateView.showRetry();
-//            }
-//        });
-
     }
 
     private void setListener() {
@@ -134,6 +119,7 @@ public class LiveFragment extends BaseFragment {
             @Override
             public void onRVItemClick(ViewGroup parent, View itemView, int position) {
                 mAdapter.setPosition(position);
+                pos = position;
                 mList.clear();
                 picList.clear();
                 LoadDate(DateEnage.getBBSDate().get(position).getUrl());
@@ -143,10 +129,9 @@ public class LiveFragment extends BaseFragment {
         mStateView.setOnRetryClickListener(new StateView.OnRetryClickListener() {
             @Override
             public void onRetryClick() {
-                LoadDate(Config.BAO_FENG_BBS_ALL);
+                LoadDate(DateEnage.getBBSDate().get(pos).getUrl());
             }
         });
-
 
         bbsAdapter.setListener(new OnBbsListener() {
             @Override
@@ -156,7 +141,6 @@ public class LiveFragment extends BaseFragment {
                 startActivity(intent);
             }
         });
-
     }
 
 

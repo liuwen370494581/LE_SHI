@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">LE_SHI</string>
+    <string name="app_name">优软科技</string>
 
     <string name="find_no_result">没有找到相应的资源</string>
     <string name="loading">正在加载</string>
@@ -7,7 +7,7 @@
         <item>首页</item>
         <item>商城</item>
         <item>会员</item>
-        <item>直播</item>
+        <item>论坛</item>
         <item>我的</item>
     </string-array>
 

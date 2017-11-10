@@ -29,9 +29,11 @@
 
         <TextView
             android:id="@+id/tv_user_name"
-            android:layout_width="wrap_content"
+            android:layout_width="40dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_title"
+            android:ellipsize="middle"
+            android:maxLines="1"
             android:padding="2dp"
             android:textSize="12sp"/>
 

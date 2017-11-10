@@ -1,5 +1,6 @@
 package star.liuwen.com.le_shi.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -7,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.FrameLayout;
 
 import com.github.nukc.stateview.StateView;
@@ -15,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import star.liuwen.com.le_shi.Activity.OpenVipActivity;
 import star.liuwen.com.le_shi.Adapter.VipUIAdapter;
 import star.liuwen.com.le_shi.Base.BaseFragment;
 import star.liuwen.com.le_shi.Base.Config;
@@ -50,6 +53,7 @@ public class VipFragment extends BaseFragment {
     private VipUIAdapter mAdapter;
     private StateView mStateView;
     private FrameLayout mFrameLayout;
+    private Button btnOpenVip;
 
     @Nullable
     @Override
@@ -68,11 +72,18 @@ public class VipFragment extends BaseFragment {
                 LoadData();
             }
         });
+        btnOpenVip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+             startActivity(new Intent(getActivity(), OpenVipActivity.class));
+            }
+        });
     }
 
 
     private void initView(View view) {
         mFrameLayout = (FrameLayout) view.findViewById(R.id.frame_layout);
+        btnOpenVip= (Button) view.findViewById(R.id.head_open);
         mStateView = StateView.inject(mFrameLayout);
         mStateView.setLoadingResource(R.layout.loading);
         mStateView.setRetryResource(R.layout.base_retry);
@@ -89,7 +100,7 @@ public class VipFragment extends BaseFragment {
 
 
     private void init() {
-         LoadData();
+        //LoadData();
     }
 
     private void LoadData() {
@@ -271,7 +282,7 @@ public class VipFragment extends BaseFragment {
         MainUIAction.searchChannelDate(getActivity(), Config.CHANNEL_VIP, new ActionCallBack() {
             @Override
             public void ok(Object object) {
-               channelList.addAll((Collection<? extends String>) object);
+                channelList.addAll((Collection<? extends String>) object);
                 mAdapter.updateChannelList(channelList);
             }
 
