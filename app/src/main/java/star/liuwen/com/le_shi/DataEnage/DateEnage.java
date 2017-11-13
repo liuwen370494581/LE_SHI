@@ -55,6 +55,19 @@ public class DateEnage {
     }
 
 
+public static List<String> getMalChannelList(){
+    List<String> list = new ArrayList<>();
+    list.add("暴风TV");
+    list.add("暴风魔镜");
+    list.add("暴风VIP");
+    list.add("娱乐周边");
+    list.add("超值套餐");
+    list.add("汽车车品");
+    list.add("运动户外");
+    list.add("鞋靴箱包");
+    return list;
+}
+
 
     //精选
     public static List<String> getChoiceChannelList() {

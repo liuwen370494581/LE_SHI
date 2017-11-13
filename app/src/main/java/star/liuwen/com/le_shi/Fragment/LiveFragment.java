@@ -73,7 +73,7 @@ public class LiveFragment extends BaseFragment {
         mAdapter.setData(DateEnage.getBBSDate());
         oneRecyclerView.setAdapter(mAdapter);
         twoRecycleView.setAdapter(bbsAdapter);
-        LoadDate(Config.BAO_FENG_BBS_ALL);
+        //LoadDate(Config.BAO_FENG_BBS_ALL);
         setListener();
     }
 

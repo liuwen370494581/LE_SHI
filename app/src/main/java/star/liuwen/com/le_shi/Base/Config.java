@@ -15,6 +15,7 @@ public class Config {
     public static final String BAO_FENG_WEI_MOVIE_URL = "http://hd.baofeng.com/mv/29/list-type-70-ishot-1-sid-1-p-1.shtml";
     public static final String BAO_FENG_VIP_URL = "http://vip.baofeng.com/";
     public static final String BAO_FENG_BBS_ALL = "http://bbs.baofeng.com/forum-179-1.html";
+    public static final String BAO_FENG_MAL_URL = "http://mall.baofeng.com/?order_ad=10096";
 
 
     //Intent mark
@@ -29,6 +30,7 @@ public class Config {
     public static final String CHANNEL_ZONG_YI = "zongyi";
     public static final String CHANNEL_DONG_MAN = "dongMan";
     public static final String CHANNEL_VIP = "vip";
+    public static final String CHANNEL_MAL = "mal";
 
 
 }

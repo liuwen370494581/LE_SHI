@@ -300,6 +300,8 @@ public class MainUIAction {
                     e.onNext(DateEnage.getZongYiChannelList());
                 }else if(type.equals(Config.CHANNEL_VIP)){
                     e.onNext(DateEnage.getVipChannelList());
+                }else if(type.equals(Config.CHANNEL_MAL)){
+                    e.onNext(DateEnage.getMalChannelList());
                 }
 
             }

@@ -1,6 +1,7 @@
 package star.liuwen.com.le_shi.Jsoup;
 
 import android.util.Log;
+import android.widget.ListPopupWindow;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Comment;
@@ -778,4 +779,169 @@ public class HtmlParserUtil {
 
         return list;
     }
+
+    //商城资源
+    public static List<CoverModel> searchMalDate(String url) {
+        List<CoverModel> list = new ArrayList<>();
+        try {
+            Document document = Jsoup.connect(url)
+                    .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31").timeout(4000).get();
+            Elements elements = document.select("div.slides-ul").select("div.item");
+            for (int i = 0; i < elements.size(); i++) {
+                CoverModel model = new CoverModel();
+                String str = elements.get(i).attr("style");
+                model.setCoverUrl(str.substring(str.indexOf("(") + 1, str.lastIndexOf(")")));
+                model.setCoverVideoUrl(elements.get(i).select("a").attr("href"));
+                model.setCoverTitle(elements.get(i).select("a").last().text());
+                Log.e(Config.TAG, "Video====" + elements.get(i).select("a").attr("href"));
+                Log.e(Config.TAG, "title====" + elements.get(i).select("a").last().text());
+                Log.e(Config.TAG, "sub===" + str.substring(str.indexOf("(") + 1, str.lastIndexOf(")")));
+                list.add(model);
+
+            }
+        } catch (IndexOutOfBoundsException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return list;
+    }
+
+    public static List<CoverModel> searchMalImgDate(String url, String type) {
+        List<CoverModel> list = new ArrayList<>();
+        try {
+            Document document = Jsoup.connect(url)
+                    .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31").timeout(4000).get();
+            Elements elements = document.select("div.s-banner").select("li.banner-category");
+            Log.e(Config.TAG, "banner===" + elements.size());
+            for (int i = 0; i < elements.size(); i++) {
+                CoverModel model = new CoverModel();
+//                Log.e(Config.TAG, "url====" + elements.get(i).select("a").select("img").attr("src"));
+//                Log.e(Config.TAG, "video===" + elements.get(i).select("a").attr("href"));
+                model.setCoverUrl(elements.get(i).select("a").select("img").attr("src"));
+                model.setCoverVideoUrl(elements.get(i).select("a").attr("href"));
+                list.add(model);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    ///商城今日特价
+    public static List<CoverModel> searchMalDailySpecialDate(String url, String type, boolean isDate1, boolean isDate2) {
+        List<CoverModel> list = new ArrayList<>();
+        try {
+            Document document = Jsoup.connect(url)
+                    .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31").timeout(4000).get();
+            Elements elements = document.select("ul.news-list-wrap").select("li.item");
+            Elements elements1 = elements.select("div.pro-info");
+            if (isDate1)
+                for (int i = 0; i < elements.size(); i++) {
+                    CoverModel model = new CoverModel();
+                    Log.e(Config.TAG, "url====" + elements.get(i).select("a").select("img").attr("src"));
+                    Log.e(Config.TAG, "video===" + elements.get(i).select("a").attr("href"));
+                    model.setCoverUrl(elements.get(i).select("a").select("img").attr("src"));
+                    model.setCoverVideoUrl(elements.get(i).select("a").attr("href"));
+                    model.setCoverType(type);
+                    list.add(model);
+                }
+
+            if (isDate2)
+                for (int j = 0; j < elements1.size(); j++) {
+                    CoverModel model = new CoverModel();
+                    Log.e(Config.TAG, "title====" + elements.get(j).select("a").text());
+                    Log.e(Config.TAG, "Dprice===" + elements.get(j).select("div.price").select("span.price-value").text());
+                    Log.e(Config.TAG, "price===" + elements.get(j).select("div.price").select("del.ori-price-value").text());
+                    model.setCoverTitle(elements.get(j).select("a").text());
+                    model.setCoverScore(elements.get(j).select("div.price").select("span.price-value").text());
+                    model.setCoverPage(elements.get(j).select("div.price").select("del.ori-price-value").text());
+                    model.setCoverType(type);
+                    list.add(model);
+                }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    //暴风TV
+    public static List<CoverModel> searchMalTVDate(String url, String type, boolean isDate1, boolean isDate2) {
+        List<CoverModel> list = new ArrayList<>();
+        try {
+            Document document = Jsoup.connect(url)
+                    .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31").timeout(4000).get();
+            Elements elements = document.select("div.index-box-list").select("a");
+            Elements elements1 = elements.select("a");
+            Elements elements2 = elements.select("div.info");
+            Log.e(Config.TAG, elements.size() + "");
+            if (isDate1)
+                for (int i = 0; i < 4; i++) {
+                    CoverModel model = new CoverModel();
+                    Log.e(Config.TAG, "url====" + elements1.get(i).select("a").select("img").attr("src"));
+                    model.setCoverUrl(elements1.get(i).select("a").select("img").attr("src"));
+                    model.setCoverType(type);
+                    list.add(model);
+                }
+            if (isDate2)
+                for (int j = 0; j < 4; j++) {
+                    CoverModel model = new CoverModel();
+                    Log.e(Config.TAG, "video===" + elements1.get(j).select("a").attr("href"));
+                    Log.e(Config.TAG, "price====" + elements2.get(j).select("span.price").text());
+                    Log.e(Config.TAG, "title===" + elements1.get(j).select("span.name").text());
+                    Log.e(Config.TAG, "desc===" + elements1.get(j).select("span.intro").text());
+                    model.setCoverTitle(elements1.get(j).select("span.name").text());
+                    model.setCoverDesc(elements1.get(j).select("span.intro").text());
+                    model.setCoverScore(elements2.get(j).select("span.price").text());
+                    model.setCoverVideoUrl(elements1.get(j).select("a").attr("href"));
+                    model.setCoverType(type);
+                    list.add(model);
+                }
+
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    public static List<CoverModel> searchMalAllDate(String url, String type, int start, int end, boolean isDate1, boolean isDate2) {
+        List<CoverModel> list = new ArrayList<>();
+        try {
+            Document document = Jsoup.connect(url)
+                    .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31").timeout(4000).get();
+            Elements elements = document.select("ul.center-side");
+            Elements elements1 = elements.select("a").select("img");
+            Elements elements2 = elements.select("a.product-info");
+            if (isDate1)
+                for (int i = start; i < end; i++) {
+                    CoverModel model = new CoverModel();
+                    Log.e(Config.TAG, "url====" + elements1.get(i).attr("src"));
+                    model.setCoverUrl(elements1.get(i).attr("src"));
+                    model.setCoverType(type);
+                    list.add(model);
+                }
+            if (isDate2)
+                for (int j = start; j < end; j++) {
+                    CoverModel model = new CoverModel();
+                    Log.e(Config.TAG, "Videourl====" + elements2.get(j).attr("href"));
+                    Log.e(Config.TAG, "title===" + elements2.get(j).select("span.name").text());
+                    Log.e(Config.TAG, "price===" + elements2.get(j).select("span.activity").text());
+                    model.setCoverVideoUrl(elements2.get(j).attr("href"));
+                    model.setCoverTitle(elements2.get(j).select("span.name").text());
+                    model.setCoverScore(elements2.get(j).select("span.activity").text());
+                    model.setCoverType(type);
+                    list.add(model);
+                }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
 }
