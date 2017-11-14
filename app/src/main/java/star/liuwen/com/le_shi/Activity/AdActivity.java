@@ -25,7 +25,7 @@ public class AdActivity extends BaseActivity {
 
     private TextView tvName;
     private Timer mTimer;
-    private int count = 5;
+    private int count = 3;
 
 
     @Override

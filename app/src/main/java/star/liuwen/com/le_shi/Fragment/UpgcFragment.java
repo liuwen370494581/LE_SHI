@@ -38,6 +38,7 @@ public class UpgcFragment extends BaseFragment {
 
     private List<CoverModel> mCoverList = new ArrayList<>();
     private List<String> channelList = new ArrayList<>();
+    private List<CoverModel> bannerList = new ArrayList<>();
     private List<CoverModel> dailySpecialList = new ArrayList<>(); //今日特价
     private List<CoverModel> dailySpecialList2 = new ArrayList<>();
     private List<CoverModel> baoFengTVList = new ArrayList<>();
@@ -50,6 +51,8 @@ public class UpgcFragment extends BaseFragment {
     private List<CoverModel> clothesList2 = new ArrayList<>();
     private List<CoverModel> sportsList = new ArrayList<>();
     private List<CoverModel> sportsList2 = new ArrayList<>();
+    private List<CoverModel> milkList = new ArrayList<>();
+    private List<CoverModel> milkList2 = new ArrayList<>();
     private MalUIAdapter mAdapter;
 
 
@@ -78,8 +81,8 @@ public class UpgcFragment extends BaseFragment {
         mStateView.setLoadingResource(R.layout.loading);
         mStateView.setRetryResource(R.layout.base_retry);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mAdapter = new MalUIAdapter(mCoverList, channelList, dailySpecialList, dailySpecialList2, baoFengTVList, baoFengTVList2,
-                baofengMirror, baofengMirror2, funList, funList2, clothesList, clothesList2, sportsList, sportsList2, getActivity(), itemWidth);
+        mAdapter = new MalUIAdapter(mCoverList, channelList, bannerList,dailySpecialList, dailySpecialList2, baoFengTVList, baoFengTVList2,
+                baofengMirror, baofengMirror2, funList, funList2, clothesList, clothesList2, sportsList, sportsList2,milkList,milkList2, getActivity(), itemWidth);
 
         mRecyclerView.setAdapter(mAdapter);
     }
@@ -127,9 +130,11 @@ public class UpgcFragment extends BaseFragment {
             }
         });
 
-        MalAction.searchMalImgData(getActivity(), Config.BAO_FENG_MAL_URL,"", new ActionCallBack() {
+        MalAction.searchMalImgData(getActivity(), Config.BAO_FENG_MAL_URL, "", new ActionCallBack() {
             @Override
             public void ok(Object object) {
+                bannerList.addAll((Collection<? extends CoverModel>) object);
+                mAdapter.updateBannerList(bannerList);
                 mStateView.showContent();
             }
 
@@ -139,7 +144,7 @@ public class UpgcFragment extends BaseFragment {
             }
         });
 
-        MalAction.searchMalDailySpecialData(getActivity(), Config.BAO_FENG_MAL_URL,"今日特价", true, false, new ActionCallBack() {
+        MalAction.searchMalDailySpecialData(getActivity(), Config.BAO_FENG_MAL_URL, "今日特价", true, false, new ActionCallBack() {
             @Override
             public void ok(Object object) {
                 dailySpecialList.addAll((Collection<? extends CoverModel>) object);
@@ -153,7 +158,7 @@ public class UpgcFragment extends BaseFragment {
             }
         });
 
-        MalAction.searchMalDailySpecialData(getActivity(), Config.BAO_FENG_MAL_URL,"今日特价", false, true, new ActionCallBack() {
+        MalAction.searchMalDailySpecialData(getActivity(), Config.BAO_FENG_MAL_URL, "今日特价", false, true, new ActionCallBack() {
             @Override
             public void ok(Object object) {
                 dailySpecialList2.addAll((Collection<? extends CoverModel>) object);
@@ -168,7 +173,7 @@ public class UpgcFragment extends BaseFragment {
         });
 
 
-        MalAction.searchMalTVData(getActivity(), Config.BAO_FENG_MAL_URL, "暴风TV",true, false, new ActionCallBack() {
+        MalAction.searchMalTVData(getActivity(), Config.BAO_FENG_MAL_URL, "暴风TV", true, false, new ActionCallBack() {
             @Override
             public void ok(Object object) {
                 baoFengTVList.addAll((Collection<? extends CoverModel>) object);
@@ -180,7 +185,7 @@ public class UpgcFragment extends BaseFragment {
 
             }
         });
-        MalAction.searchMalTVData(getActivity(), Config.BAO_FENG_MAL_URL, "暴风TV",false, true, new ActionCallBack() {
+        MalAction.searchMalTVData(getActivity(), Config.BAO_FENG_MAL_URL, "暴风TV", false, true, new ActionCallBack() {
             @Override
             public void ok(Object object) {
                 baoFengTVList2.addAll((Collection<? extends CoverModel>) object);
@@ -195,7 +200,7 @@ public class UpgcFragment extends BaseFragment {
 
 
         //暴风魔镜
-        MalAction.searchMalAllData(getActivity(), Config.BAO_FENG_MAL_URL, "暴风魔镜",0, 6, true, false, new ActionCallBack() {
+        MalAction.searchMalAllData(getActivity(), Config.BAO_FENG_MAL_URL, "暴风魔镜", 0, 6, true, false, new ActionCallBack() {
             @Override
             public void ok(Object object) {
                 baofengMirror.addAll((Collection<? extends CoverModel>) object);
@@ -208,7 +213,7 @@ public class UpgcFragment extends BaseFragment {
             }
         });
         //暴风魔镜
-        MalAction.searchMalAllData(getActivity(), Config.BAO_FENG_MAL_URL,"暴风魔镜", 0, 6, false, true, new ActionCallBack() {
+        MalAction.searchMalAllData(getActivity(), Config.BAO_FENG_MAL_URL, "暴风魔镜", 0, 6, false, true, new ActionCallBack() {
             @Override
             public void ok(Object object) {
                 baofengMirror2.addAll((Collection<? extends CoverModel>) object);
@@ -222,20 +227,21 @@ public class UpgcFragment extends BaseFragment {
         });
 
         //娱乐周边
-        MalAction.searchMalAllData(getActivity(), Config.BAO_FENG_MAL_URL, "娱乐周边",6, 12, true, false, new ActionCallBack() {
+        MalAction.searchMalAllData(getActivity(), Config.BAO_FENG_MAL_URL, "娱乐周边", 6, 12, true, false, new ActionCallBack() {
             @Override
             public void ok(Object object) {
                 funList.addAll((Collection<? extends CoverModel>) object);
                 mAdapter.updateFunList(funList);
 
             }
+
             @Override
             public void failed(Object object) {
 
             }
         });
         //娱乐周边
-        MalAction.searchMalAllData(getActivity(), Config.BAO_FENG_MAL_URL, "娱乐周边",6, 12, false, true, new ActionCallBack() {
+        MalAction.searchMalAllData(getActivity(), Config.BAO_FENG_MAL_URL, "娱乐周边", 6, 12, false, true, new ActionCallBack() {
             @Override
             public void ok(Object object) {
                 funList2.addAll((Collection<? extends CoverModel>) object);
@@ -249,7 +255,7 @@ public class UpgcFragment extends BaseFragment {
         });
 
         //服饰鞋帽
-        MalAction.searchMalAllData(getActivity(), Config.BAO_FENG_MAL_URL,"服饰鞋帽", 12, 18, true, false, new ActionCallBack() {
+        MalAction.searchMalAllData(getActivity(), Config.BAO_FENG_MAL_URL, "服饰鞋帽", 12, 18, true, false, new ActionCallBack() {
             @Override
             public void ok(Object object) {
                 clothesList.addAll((Collection<? extends CoverModel>) object);
@@ -262,7 +268,7 @@ public class UpgcFragment extends BaseFragment {
             }
         });
         //服饰鞋帽
-        MalAction.searchMalAllData(getActivity(), Config.BAO_FENG_MAL_URL, "服饰鞋帽",12, 18, false, true, new ActionCallBack() {
+        MalAction.searchMalAllData(getActivity(), Config.BAO_FENG_MAL_URL, "服饰鞋帽", 12, 18, false, true, new ActionCallBack() {
             @Override
             public void ok(Object object) {
                 clothesList2.addAll((Collection<? extends CoverModel>) object);
@@ -276,7 +282,7 @@ public class UpgcFragment extends BaseFragment {
         });
 
         //运动户外
-        MalAction.searchMalAllData(getActivity(), Config.BAO_FENG_MAL_URL, "运动户外",18, 24, true, false, new ActionCallBack() {
+        MalAction.searchMalAllData(getActivity(), Config.BAO_FENG_MAL_URL, "运动户外", 18, 24, true, false, new ActionCallBack() {
             @Override
             public void ok(Object object) {
                 sportsList.addAll((Collection<? extends CoverModel>) object);
@@ -289,7 +295,7 @@ public class UpgcFragment extends BaseFragment {
             }
         });
         //运动户外
-        MalAction.searchMalAllData(getActivity(), Config.BAO_FENG_MAL_URL, "运动户外",18, 24, false, true, new ActionCallBack() {
+        MalAction.searchMalAllData(getActivity(), Config.BAO_FENG_MAL_URL, "运动户外", 18, 24, false, true, new ActionCallBack() {
             @Override
             public void ok(Object object) {
                 sportsList2.addAll((Collection<? extends CoverModel>) object);
@@ -301,29 +307,34 @@ public class UpgcFragment extends BaseFragment {
                 mStateView.showRetry();
             }
         });
-        //母婴玩具
-//        MalAction.searchMalAllData(getActivity(), Config.BAO_FENG_MAL_URL,"母婴玩具" 24, 30, true, false, new ActionCallBack() {
-//            @Override
-//            public void ok(Object object) {
-//                mStateView.showContent();
-//            }
-//
-//            @Override
-//            public void failed(Object object) {
-//                mStateView.showRetry();
-//            }
-//        });
-//        MalAction.searchMalAllData(getActivity(), Config.BAO_FENG_MAL_URL,"母婴玩具" 24, 30, false, true, new ActionCallBack() {
-//            @Override
-//            public void ok(Object object) {
-//                mStateView.showContent();
-//            }
-//
-//            @Override
-//            public void failed(Object object) {
-//                mStateView.showRetry();
-//            }
-//        });
+        // 母婴玩具
+        MalAction.searchMalAllData(getActivity(), Config.BAO_FENG_MAL_URL, "母婴玩具", 24, 30, true, false, new ActionCallBack() {
+            @Override
+            public void ok(Object object) {
+                milkList.addAll((Collection<? extends CoverModel>) object);
+                mAdapter.updateMilkList(milkList);
+
+                mStateView.showContent();
+            }
+
+            @Override
+            public void failed(Object object) {
+
+            }
+        });
+        MalAction.searchMalAllData(getActivity(), Config.BAO_FENG_MAL_URL, "母婴玩具", 24, 30, false, true, new ActionCallBack() {
+            @Override
+            public void ok(Object object) {
+                milkList2.addAll((Collection<? extends CoverModel>) object);
+                mAdapter.updateMilkList2(milkList2);
+                mStateView.showContent();
+            }
+
+            @Override
+            public void failed(Object object) {
+                mStateView.showRetry();
+            }
+        });
     }
 
     @Override

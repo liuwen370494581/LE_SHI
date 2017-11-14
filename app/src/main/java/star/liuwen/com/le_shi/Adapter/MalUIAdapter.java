@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import star.liuwen.com.le_shi.Model.CoverModel;
@@ -21,6 +22,7 @@ public class MalUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     private List<CoverModel> mCoverList;
     private List<String> channelList;
+    private List<CoverModel> bannerList;
     private List<CoverModel> dailySpecialList; //今日特价
     private List<CoverModel> dailySpecialList2;
     private List<CoverModel> baoFengTVList;
@@ -33,18 +35,22 @@ public class MalUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     private List<CoverModel> clothesList2;
     private List<CoverModel> sportsList;
     private List<CoverModel> sportsList2;
+    private List<CoverModel> milkList = new ArrayList<>();
+    private List<CoverModel> milkList2 = new ArrayList<>();
 
     private Context mContext;
     private int itemWidth;
     private final static int BANNER_VIEW_TYPE = 0;//轮播图
     private final static int CHANNEL_VIEW_TYPE = 1;//频道
-    private final static int DAILY_SPECIAL_VIEW_TYPE = 2;//今日特价
-    private final static int TV_TYPE = 3;// 电视
-    private final static int MIRROR_TYPE = 4;//暴风魔镜
-    private final static int FUN_TYPE = 5; //娱乐
-    private final static int CLOTHES_TYPE = 6; //衣服
-    private final static int SPORTS_TYPE = 7;//体育
-    private final static int END_VIEW_TYPE = 8;//结束
+    private final static int DAO_BANNER_VIEW_TYPE = 2;
+    private final static int DAILY_SPECIAL_VIEW_TYPE = 3;//今日特价
+    private final static int TV_TYPE = 4;// 电视
+    private final static int MIRROR_TYPE = 5;//暴风魔镜
+    private final static int FUN_TYPE = 6; //娱乐
+    private final static int CLOTHES_TYPE = 7; //衣服
+    private final static int SPORTS_TYPE = 8;//体育
+    private final static int MILK_TYPE = 9;//奶粉
+    private final static int END_VIEW_TYPE = 10;//结束
 
 
     public MalUIAdapter(List<CoverModel> coverList, List<String> channelList, List<CoverModel> dailySpecialList, List<CoverModel> dailySpecialList2, List<CoverModel> baoFengTVList, List<CoverModel> baoFengTVList2, List<CoverModel> baofengMirror, List<CoverModel> baofengMirror2, List<CoverModel> funList, List<CoverModel> funList2, List<CoverModel> clothesList, List<CoverModel> clothesList2, List<CoverModel> sportsList, List<CoverModel> sportsList2, Context context, int itemWidth) {
@@ -66,6 +72,28 @@ public class MalUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         this.itemWidth = itemWidth;
     }
 
+    public MalUIAdapter(List<CoverModel> coverList, List<String> channelList, List<CoverModel> bannerList, List<CoverModel> dailySpecialList, List<CoverModel> dailySpecialList2, List<CoverModel> baoFengTVList, List<CoverModel> baoFengTVList2, List<CoverModel> baofengMirror, List<CoverModel> baofengMirror2, List<CoverModel> funList, List<CoverModel> funList2, List<CoverModel> clothesList, List<CoverModel> clothesList2, List<CoverModel> sportsList, List<CoverModel> sportsList2, List<CoverModel> milkList, List<CoverModel> milkList2, Context context, int itemWidth) {
+        mCoverList = coverList;
+        this.channelList = channelList;
+        this.bannerList = bannerList;
+        this.dailySpecialList = dailySpecialList;
+        this.dailySpecialList2 = dailySpecialList2;
+        this.baoFengTVList = baoFengTVList;
+        this.baoFengTVList2 = baoFengTVList2;
+        this.baofengMirror = baofengMirror;
+        this.baofengMirror2 = baofengMirror2;
+        this.funList = funList;
+        this.funList2 = funList2;
+        this.clothesList = clothesList;
+        this.clothesList2 = clothesList2;
+        this.sportsList = sportsList;
+        this.sportsList2 = sportsList2;
+        this.milkList = milkList;
+        this.milkList2 = milkList2;
+        mContext = context;
+        this.itemWidth = itemWidth;
+    }
+
     public void updateChannelList(List<String> list) {
         if (isListNotEmpty(list)) {
             channelList = list;
@@ -81,6 +109,15 @@ public class MalUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             mCoverList = list;
         } else {
             mCoverList.clear();
+        }
+        notifyDataSetChanged();
+    }
+
+    public void updateBannerList(List<CoverModel> list) {
+        if (isListNotEmpty(list)) {
+            bannerList = list;
+        } else {
+            bannerList.clear();
         }
         notifyDataSetChanged();
     }
@@ -196,6 +233,25 @@ public class MalUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         notifyDataSetChanged();
     }
 
+    public void updateMilkList(List<CoverModel> list) {
+        if (isListNotEmpty(list)) {
+            milkList = list;
+        } else {
+            milkList.clear();
+        }
+        notifyDataSetChanged();
+    }
+
+
+    public void updateMilkList2(List<CoverModel> list) {
+        if (isListNotEmpty(list)) {
+            milkList2 = list;
+        } else {
+            milkList2.clear();
+        }
+        notifyDataSetChanged();
+    }
+
 
     public static boolean isListNotEmpty(List list) {
         return list != null && !list.isEmpty();
@@ -209,17 +265,21 @@ public class MalUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         } else if (position == 1) {
             return CHANNEL_VIEW_TYPE;
         } else if (position == 2) {
-            return DAILY_SPECIAL_VIEW_TYPE;
+            return DAO_BANNER_VIEW_TYPE;
         } else if (position == 3) {
-            return TV_TYPE;
+            return DAILY_SPECIAL_VIEW_TYPE;
         } else if (position == 4) {
-            return MIRROR_TYPE;
+            return TV_TYPE;
         } else if (position == 5) {
-            return FUN_TYPE;
+            return MIRROR_TYPE;
         } else if (position == 6) {
-            return CLOTHES_TYPE;
+            return FUN_TYPE;
         } else if (position == 7) {
+            return CLOTHES_TYPE;
+        } else if (position == 8) {
             return SPORTS_TYPE;
+        } else if (position == 9) {
+            return MILK_TYPE;
         } else {
             return END_VIEW_TYPE;
         }
@@ -237,6 +297,9 @@ public class MalUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             view = getView(R.layout.channel_recycler_view);
             HomeUIAdapter.ChannelHolder holder = new HomeUIAdapter.ChannelHolder(view);
             return holder;
+        } else if (viewType == DAO_BANNER_VIEW_TYPE) {
+            view = getView(R.layout.item_common);
+            return new BannerViewHolder(view);
         } else if (viewType == DAILY_SPECIAL_VIEW_TYPE) {
             view = getView(R.layout.item_common);
             return new DailySpecialViewHolder(view);
@@ -255,6 +318,9 @@ public class MalUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         } else if (viewType == SPORTS_TYPE) {
             view = getView(R.layout.item_common);
             return new SportsViewHolder(view);
+        } else if (viewType == MILK_TYPE) {
+            view = getView(R.layout.item_common);
+            return new MilkViewHolder(view);
         } else {
             view = getView(R.layout.item_end);
             return new HomeUIAdapter.EndHolder(view);
@@ -285,6 +351,13 @@ public class MalUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 //                    }
 //                }
 //            });
+        } else if (holder instanceof BannerViewHolder) {
+            BannerViewHolder bannerViewHolder = (BannerViewHolder) holder;
+            MalAdapter mAdapter = new MalAdapter(mContext, bannerList, bannerList, false);
+            final GridLayoutManager gridLayoutManager = new GridLayoutManager(mContext, 2, LinearLayoutManager.VERTICAL, false);
+            bannerViewHolder.mRecyclerView.setLayoutManager(gridLayoutManager);
+            bannerViewHolder.mRecyclerView.setAdapter(mAdapter);
+
         } else if (holder instanceof SportsViewHolder) {
             SportsViewHolder sportsHolder = (SportsViewHolder) holder;
             MalAdapter mAdapter = new MalAdapter(mContext, sportsList, sportsList2);
@@ -298,24 +371,24 @@ public class MalUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
         } else if (holder instanceof DailySpecialViewHolder) {
             DailySpecialViewHolder dailySpecialViewHolder = (DailySpecialViewHolder) holder;
-            MalAdapter mAdapter = new MalAdapter(mContext, dailySpecialList, dailySpecialList2);
-            final GridLayoutManager gridLayoutManager = new GridLayoutManager(mContext, 3, LinearLayoutManager.VERTICAL, false);
+            MalAdapter mAdapter = new MalAdapter(mContext, dailySpecialList, dailySpecialList2, false);
+            final GridLayoutManager gridLayoutManager = new GridLayoutManager(mContext, 2, LinearLayoutManager.VERTICAL, false);
             dailySpecialViewHolder.mRecyclerView.setLayoutManager(gridLayoutManager);
             dailySpecialViewHolder.mRecyclerView.setAdapter(mAdapter);
 
             if (dailySpecialList.size() != 0) {
                 dailySpecialViewHolder.ReHead.setVisibility(View.VISIBLE);
-                 dailySpecialViewHolder.tvType.setText(dailySpecialList.get(0).getCoverType());
+                dailySpecialViewHolder.tvType.setText(dailySpecialList.get(0).getCoverType());
             }
         } else if (holder instanceof TvViewHolder) {
             TvViewHolder tvViewHolder = (TvViewHolder) holder;
-            MalAdapter mAdapter = new MalAdapter(mContext, baoFengTVList, baoFengTVList2);
-            final GridLayoutManager gridLayoutManager = new GridLayoutManager(mContext, 3, LinearLayoutManager.VERTICAL, false);
+            MalAdapter mAdapter = new MalAdapter(mContext, baoFengTVList, baoFengTVList2, false);
+            final GridLayoutManager gridLayoutManager = new GridLayoutManager(mContext, 2, LinearLayoutManager.VERTICAL, false);
             tvViewHolder.mRecyclerView.setLayoutManager(gridLayoutManager);
             tvViewHolder.mRecyclerView.setAdapter(mAdapter);
             if (baoFengTVList.size() != 0) {
                 tvViewHolder.ReHead.setVisibility(View.VISIBLE);
-                 tvViewHolder.tvType.setText(baoFengTVList.get(0).getCoverType());
+                tvViewHolder.tvType.setText(baoFengTVList.get(0).getCoverType());
             }
 
         } else if (holder instanceof MirrorViewHolder) {
@@ -350,16 +423,16 @@ public class MalUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 clothesViewHolder.tvType.setText(clothesList.get(0).getCoverType());
             }
 
-//        } else if (holder instanceof SportsViewHolder) {
-//            SportsViewHolder sportsViewHolder = (SportsViewHolder) holder;
-//            MalAdapter mAdapter = new MalAdapter(mContext, sportsList, sportsList2);
-//            final GridLayoutManager gridLayoutManager = new GridLayoutManager(mContext, 3, LinearLayoutManager.VERTICAL, false);
-//            sportsViewHolder.mRecyclerView.setLayoutManager(gridLayoutManager);
-//            sportsViewHolder.mRecyclerView.setAdapter(mAdapter);
-//            if (sportsList.size() != 0) {
-//                sportsViewHolder.ReHead.setVisibility(View.VISIBLE);
-//                //sportsViewHolder.tvType.setText(sportsList.get(0).getCoverType());
-//            }
+        } else if (holder instanceof MilkViewHolder) {
+            MilkViewHolder milkViewHolder = (MilkViewHolder) holder;
+            MalAdapter mAdapter = new MalAdapter(mContext, milkList, milkList2);
+            final GridLayoutManager gridLayoutManager = new GridLayoutManager(mContext, 3, LinearLayoutManager.VERTICAL, false);
+            milkViewHolder.mRecyclerView.setLayoutManager(gridLayoutManager);
+            milkViewHolder.mRecyclerView.setAdapter(mAdapter);
+            if (milkList.size() != 0) {
+                milkViewHolder.ReHead.setVisibility(View.VISIBLE);
+                milkViewHolder.tvType.setText(milkList.get(0).getCoverType());
+            }
         } else if (holder instanceof HomeUIAdapter.EndHolder) {
             HomeUIAdapter.EndHolder endHolder = (HomeUIAdapter.EndHolder) holder;
 //            if (itemWidth != 0) {
@@ -381,7 +454,7 @@ public class MalUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     @Override
     public int getItemCount() {
-        return 8;
+        return 10;
     }
 
 
@@ -391,6 +464,19 @@ public class MalUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         private TextView tvType;
 
         public DailySpecialViewHolder(View itemView) {
+            super(itemView);
+            mRecyclerView = (RecyclerView) itemView.findViewById(R.id.common_recycler_view);
+            ReHead = (RelativeLayout) itemView.findViewById(R.id.re_show);
+            tvType = (TextView) itemView.findViewById(R.id.tv_title);
+        }
+    }
+
+    private static class BannerViewHolder extends RecyclerView.ViewHolder {
+        RecyclerView mRecyclerView;
+        RelativeLayout ReHead;
+        private TextView tvType;
+
+        public BannerViewHolder(View itemView) {
             super(itemView);
             mRecyclerView = (RecyclerView) itemView.findViewById(R.id.common_recycler_view);
             ReHead = (RelativeLayout) itemView.findViewById(R.id.re_show);
@@ -457,6 +543,19 @@ public class MalUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         private TextView tvType;
 
         public SportsViewHolder(View itemView) {
+            super(itemView);
+            mRecyclerView = (RecyclerView) itemView.findViewById(R.id.common_recycler_view);
+            ReHead = (RelativeLayout) itemView.findViewById(R.id.re_show);
+            tvType = (TextView) itemView.findViewById(R.id.tv_title);
+        }
+    }
+
+    private static class MilkViewHolder extends RecyclerView.ViewHolder {
+        RecyclerView mRecyclerView;
+        RelativeLayout ReHead;
+        private TextView tvType;
+
+        public MilkViewHolder(View itemView) {
             super(itemView);
             mRecyclerView = (RecyclerView) itemView.findViewById(R.id.common_recycler_view);
             ReHead = (RelativeLayout) itemView.findViewById(R.id.re_show);

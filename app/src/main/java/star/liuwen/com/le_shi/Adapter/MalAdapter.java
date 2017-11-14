@@ -23,6 +23,7 @@ public class MalAdapter extends RecyclerView.Adapter<MalAdapter.MyViewHolder> {
     private Context mContext;
     private List<CoverModel> mList;
     private List<CoverModel> mList2;
+    private boolean isBannerOrTV = true;
 
 
     public MalAdapter(Context context, List<CoverModel> list, List<CoverModel> list2) {
@@ -31,11 +32,19 @@ public class MalAdapter extends RecyclerView.Adapter<MalAdapter.MyViewHolder> {
         mList2 = list2;
     }
 
+    public MalAdapter(Context context, List<CoverModel> list, List<CoverModel> list2, boolean isBannerOrTV) {
+        mContext = context;
+        mList = list;
+        mList2 = list2;
+        this.isBannerOrTV = isBannerOrTV;
+    }
+
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.item_mal, parent, false);
+        View view = LayoutInflater.from(mContext).inflate(isBannerOrTV ? R.layout.item_mal : R.layout.item_mal_2, parent, false);
         MyViewHolder holder = new MyViewHolder(view);
         return holder;
+
 
     }
 
@@ -43,8 +52,25 @@ public class MalAdapter extends RecyclerView.Adapter<MalAdapter.MyViewHolder> {
     public void onBindViewHolder(MyViewHolder holder, int position) {
         GlideUtils.loadImage(holder.imgUrl, mList.get(position).getCoverUrl(), R.mipmap.defalut_img, R.mipmap.defalut_img);
         if (mList2.size() != 0 && mList2.size() == mList.size()) {
-            holder.tvVideoDesc.setText(mList2.get(position).getCoverDesc());
-            holder.tvVideoName.setText(mList2.get(position).getCoverTitle());
+            if (mList.get(position).getCoverType() != null) {
+                if (mList2.get(position).getCoverType().equals("今日特价")) {
+                    holder.tvPrice.setText("原价：" + mList2.get(position).getCoverPage());
+                    holder.tvName.setText(mList2.get(position).getCoverTitle());
+                    holder.tvDesc.setText("折后价:" + mList2.get(position).getCoverScore());
+                } else if (mList2.get(position).getCoverType().equals("暴风TV")) {
+                    holder.tvName.setText(mList2.get(position).getCoverTitle());
+                    holder.tvDesc.setText(mList2.get(position).getCoverDesc());
+                    holder.tvPrice.setText(mList2.get(position).getCoverScore());
+                } else {
+                    holder.tvName.setText(mList2.get(position).getCoverTitle());
+                    holder.tvDesc.setText(mList2.get(position).getCoverScore());
+                    holder.tvPrice.setVisibility(View.GONE);
+                }
+            } else {
+                holder.tvPrice.setVisibility(View.GONE);
+                holder.tvDesc.setVisibility(View.GONE);
+                holder.tvName.setVisibility(View.GONE);
+            }
         }
     }
 
@@ -54,20 +80,20 @@ public class MalAdapter extends RecyclerView.Adapter<MalAdapter.MyViewHolder> {
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView tvVideoName;
-        TextView tvVideoDesc;
-        TextView tvVideoPage;
+        TextView tvName;
+        TextView tvDesc;
         ImageView imgUrl;
-        private CornerLabelView cvTitle;
+        CornerLabelView cvTitle;
+        TextView tvPrice;
 
 
         public MyViewHolder(View view) {
             super(view);
             imgUrl = (ImageView) view.findViewById(R.id.image_hot);
-            tvVideoDesc = (TextView) view.findViewById(R.id.txt_desc);
-            tvVideoName = (TextView) view.findViewById(R.id.txt_name);
-            tvVideoPage = (TextView) view.findViewById(R.id.tv_page);
+            tvDesc = (TextView) view.findViewById(R.id.txt_desc);
+            tvName = (TextView) view.findViewById(R.id.txt_name);
             cvTitle = (CornerLabelView) view.findViewById(R.id.label);
+            tvPrice = (TextView) view.findViewById(R.id.txt_price);
         }
     }
 }
