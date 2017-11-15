@@ -152,11 +152,12 @@ public class HtmlParserUtil {
             Document document = Jsoup.connect(url)
                     .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31").timeout(4000).get();
             Elements elements = document.select("div.tv-landscape-con");
+            Log.e(Config.TAG, "电视剧" + elements.toString());
             for (int i = start; i < size; i++) {
                 CoverModel model = new CoverModel();
                 model.setCoverUrl(elements.get(i).select("div.js-collect").select("a").select("img").attr("data-ersrc"));
                 model.setCoverTitle(elements.get(i).select("div.js-collect").select("a").attr("title"));
-                model.setCoverVideoUrl(elements.get(i).select("div.js-collect").select("a").select("img").attr("src"));
+                model.setCoverVideoUrl(elements.get(i).select("div.js-collect").select("a").attr("href"));
                 model.setCoverDesc(elements.get(i).select("div.hot-pic-text-box").select("p.hot-pic-tip").text());
                 model.setCoverPage(elements.get(i).select("div.js-collect").select("p.hot-pic-text").select("a").text());
                 model.setCoverType(tvType);
@@ -189,7 +190,7 @@ public class HtmlParserUtil {
                 model.setCoverType(type);
                 model.setCoverUrl(elements.get(i).select("div.js-collect").select("a").select("img").attr("data-ersrc"));
                 model.setCoverTitle(elements.get(i).select("div.js-collect").select("a").attr("title"));
-                model.setCoverVideoUrl(elements.get(i).select("div.js-collect").select("a").select("img").attr("src"));
+                model.setCoverVideoUrl(elements.get(i).select("div.js-collect").select("a").attr("href"));
                 model.setCoverDesc(elements.get(i).select("div.hot-pic-text-box").select("p.hot-pic-tip").text());
                 // model.setCoverPage(elements.get(i).select("div.js-collect").select("p.hot-pic-text").select("a").text());
                 Log.e(Config.TAG, "videoUrl====" + elements.get(i).select("div.js-collect").select("a").attr("href"));
@@ -220,7 +221,7 @@ public class HtmlParserUtil {
                 model.setCoverType(type);
                 model.setCoverUrl(elements.get(i).select("div.js-collect").select("a").select("img").attr("data-ersrc"));
                 model.setCoverTitle(elements.get(i).select("div.js-collect").select("a").attr("title"));
-                model.setCoverVideoUrl(elements.get(i).select("div.js-collect").select("a").select("img").attr("src"));
+                model.setCoverVideoUrl(elements.get(i).select("div.js-collect").select("a").attr("href"));
                 model.setCoverDesc(elements.get(i).select("div.hot-pic-text-box").select("p.hot-pic-tip").text());
                 model.setCoverPage(elements.get(i).select("div.js-collect").select("p.hot-pic-text").select("a").text());
                 Log.e(Config.TAG, "videoUrl====" + elements.get(i).select("div.js-collect").select("a").attr("href"));
@@ -251,7 +252,7 @@ public class HtmlParserUtil {
                 model.setCoverType(type);
                 model.setCoverUrl(elements.get(i).select("div.js-collect").select("a").select("img").attr("data-ersrc"));
                 model.setCoverTitle(elements.get(i).select("div.js-collect").select("a").attr("title"));
-                model.setCoverVideoUrl(elements.get(i).select("div.js-collect").select("a").select("img").attr("src"));
+                model.setCoverVideoUrl(elements.get(i).select("div.js-collect").select("a").attr("href"));
                 model.setCoverDesc(elements.get(i).select("div.hot-pic-text-box").select("p.hot-pic-tip").text());
                 model.setCoverPage(elements.get(i).select("div.js-collect").select("p.hot-pic-text").select("a").text());
                 Log.e(Config.TAG, "videoUrl====" + elements.get(i).select("div.js-collect").select("a").attr("href"));
@@ -283,7 +284,7 @@ public class HtmlParserUtil {
                 model.setCoverType(type);
                 model.setCoverUrl(elements.get(i).select("div.js-collect").select("a").select("img").attr("data-ersrc"));
                 model.setCoverTitle(elements.get(i).select("div.js-collect").select("a").attr("title"));
-                model.setCoverVideoUrl(elements.get(i).select("div.js-collect").select("a").select("img").attr("src"));
+                model.setCoverVideoUrl(elements.get(i).select("div.js-collect").select("a").attr("href"));
                 model.setCoverDesc(elements.get(i).select("div.hot-pic-text-box").select("p.hot-pic-tip").text());
                 // model.setCoverPage(elements.get(i).select("div.js-collect").select("p.hot-pic-text").select("a").text());
                 Log.e(Config.TAG, "videoUrl====" + elements.get(i).select("div.js-collect").select("a").attr("href"));
@@ -314,7 +315,7 @@ public class HtmlParserUtil {
                 model.setCoverType(type);
                 model.setCoverUrl(elements.get(i).select("div.js-collect").select("a").select("img").attr("data-ersrc"));
                 model.setCoverTitle(elements.get(i).select("div.js-collect").select("a").attr("title"));
-                model.setCoverVideoUrl(elements.get(i).select("div.js-collect").select("a").select("img").attr("src"));
+                model.setCoverVideoUrl(elements.get(i).select("div.js-collect").select("a").attr("href"));
                 model.setCoverDesc(elements.get(i).select("div.hot-pic-text-box").select("p.hot-pic-tip").text());
                 // model.setCoverPage(elements.get(i).select("div.js-collect").select("p.hot-pic-text").select("a").text());
                 Log.e(Config.TAG, "videoUrl====" + elements.get(i).select("div.js-collect").select("a").attr("href"));
@@ -344,7 +345,7 @@ public class HtmlParserUtil {
                 model.setCoverType(type);
                 model.setCoverUrl(elements.get(i).select("div.js-collect").select("a").select("img").attr("data-ersrc"));
                 model.setCoverTitle(elements.get(i).select("div.js-collect").select("a").attr("title"));
-                model.setCoverVideoUrl(elements.get(i).select("div.js-collect").select("a").select("img").attr("src"));
+                model.setCoverVideoUrl(elements.get(i).select("div.js-collect").select("a").attr("href"));
                 Log.e(Config.TAG, "videoUrl====" + elements.get(i).select("div.js-collect").select("a").attr("href"));
                 model.setCoverDesc(elements.get(i).select("div.hot-pic-text-box").select("p.hot-pic-tip").text());
                 // model.setCoverPage(elements.get(i).select("div.js-collect").select("p.hot-pic-text").select("a").text());
@@ -375,7 +376,7 @@ public class HtmlParserUtil {
                 model.setCoverType(type);
                 model.setCoverUrl(elements.get(i).select("a").select("img").attr("data-ersrc"));
                 model.setCoverTitle(elements.get(i).select("a").attr("title"));
-                model.setCoverVideoUrl(elements.get(i).select("a").select("img").attr("src"));
+                model.setCoverVideoUrl(elements.get(i).select("a").attr("href"));
                 Log.e(Config.TAG, "videoUrl====" + elements.get(i).select("a").attr("href"));
                 Log.e(Config.TAG, "title====" + elements.get(i).select("a").attr("title"));
                 Log.e(Config.TAG, "image====" + elements.get(i).select("a").select("img").attr("data-ersrc"));
@@ -403,7 +404,7 @@ public class HtmlParserUtil {
                 model.setCoverType(type);
                 model.setCoverUrl(elements.get(i).select("a").select("img").attr("data-ersrc"));
                 model.setCoverTitle(elements.get(i).select("a").attr("title"));
-                model.setCoverVideoUrl(elements.get(i).select("a").select("img").attr("src"));
+                model.setCoverVideoUrl(elements.get(i).select("a").attr("href"));
                 model.setCoverPage(elements.get(i).select("p").last().text());
                 Log.e(Config.TAG, "videoUrl====" + elements.get(i).select("a").attr("href"));
                 Log.e(Config.TAG, "title====" + elements.get(i).select("a").attr("title"));
@@ -491,7 +492,7 @@ public class HtmlParserUtil {
                 CoverModel model = new CoverModel();
                 model.setCoverUrl(elements.get(i).select("div.js-collect").select("a").select("img").attr("data-ersrc"));
                 model.setCoverTitle(elements.get(i).select("div.js-collect").select("a").attr("title"));
-                model.setCoverVideoUrl(elements.get(i).select("div.js-collect").select("a").select("img").attr("src"));
+                model.setCoverVideoUrl(elements.get(i).select("div.js-collect").select("a").attr("href"));
                 model.setCoverDesc(elements.get(i).select("div.hot-pic-text-box").select("p.hot-pic-tip").text());
                 model.setCoverScore(elements.get(i).select("div.hot-pic-text-box").select("p.hot-pic-tit").select("span").first().text());
                 model.setCoverType(tvType);
@@ -574,7 +575,7 @@ public class HtmlParserUtil {
                 CoverModel model = new CoverModel();
                 model.setCoverUrl(elements.get(i).select("div.js-collect").select("a").select("img").attr("data-ersrc"));
                 model.setCoverTitle(elements.get(i).select("div.js-collect").select("a").attr("title"));
-                model.setCoverVideoUrl(elements.get(i).select("div.js-collect").select("a").select("img").attr("src"));
+                model.setCoverVideoUrl(elements.get(i).select("div.js-collect").select("a").attr("href"));
                 model.setCoverDesc(elements.get(i).select("div.hot-pic-text-box").select("p.hot-pic-tip").text());
                 model.setCoverScore(elements.get(i).select("div.hot-pic-text-box").select("p.hot-pic-tit").select("span").first().text());
                 model.setCoverType(tvType);

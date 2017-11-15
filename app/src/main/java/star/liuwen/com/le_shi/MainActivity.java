@@ -18,6 +18,7 @@ import star.liuwen.com.le_shi.Fragment.MyFragment;
 import star.liuwen.com.le_shi.Fragment.UpgcFragment;
 import star.liuwen.com.le_shi.Fragment.VipFragment;
 import star.liuwen.com.le_shi.View.MyViewPager;
+import star.liuwen.com.le_shi.View.NoPreloadViewPager;
 
 public class MainActivity extends BaseActivity {
 
@@ -56,7 +57,7 @@ public class MainActivity extends BaseActivity {
         fragmentList.add(mMyFragment);
         final MainAdapter mAdapter = new MainAdapter(fragmentList, getSupportFragmentManager());
         mMyViewPager.setAdapter(mAdapter);
-        mMyViewPager.setOffscreenPageLimit(1);
+        mMyViewPager.setOffscreenPageLimit(0);
         mMyViewPager.setSlipping(false);
         mTableLayout.setTabMode(TabLayout.MODE_FIXED);
         mTableLayout.addTab(mTableLayout.newTab().setCustomView(getTabView(0)));
@@ -67,7 +68,7 @@ public class MainActivity extends BaseActivity {
         mTableLayout.getTabAt(0).getCustomView().findViewById(R.id.id_oval_red_img).setVisibility(View.VISIBLE);
         mTableLayout.getTabAt(3).getCustomView().findViewById(R.id.id_oval_red_img).setVisibility(View.VISIBLE);
         mTableLayout.getTabAt(4).getCustomView().findViewById(R.id.id_oval_red_img).setVisibility(View.VISIBLE);
-        mMyViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        mMyViewPager.setOnPageChangeListener(new NoPreloadViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 

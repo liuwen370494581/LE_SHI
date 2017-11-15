@@ -9,7 +9,7 @@ import android.view.MotionEvent;
 /**
  * Created by liuwen on 2017/9/20.
  */
-public class MyViewPager extends ViewPager {
+public class MyViewPager extends NoPreloadViewPager {
 
 
     private boolean isSlipping = true;// 可滑动标志位

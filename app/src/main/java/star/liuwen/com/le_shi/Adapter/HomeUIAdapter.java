@@ -388,7 +388,7 @@ public class HomeUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 @Override
                 public void onRVItemClick(ViewGroup parent, View itemView, int position) {
                     Intent intent = new Intent(mContext, WebActivity.class);
-                    intent.putExtra(Config.INTENT_BBS_URL, tvList.get(position).getCoverVideoUrl());
+                    intent.putExtra(Config.INTENT_BBS_URL, Config.BAO_FENG_URL_2+tvList.get(position).getCoverVideoUrl());
                     mContext.startActivity(intent);
                 }
             });

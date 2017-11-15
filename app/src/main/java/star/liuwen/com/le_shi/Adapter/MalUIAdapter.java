@@ -473,14 +473,14 @@ public class MalUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     private static class BannerViewHolder extends RecyclerView.ViewHolder {
         RecyclerView mRecyclerView;
-        RelativeLayout ReHead;
-        private TextView tvType;
+//        RelativeLayout ReHead;
+//        private TextView tvType;
 
         public BannerViewHolder(View itemView) {
             super(itemView);
             mRecyclerView = (RecyclerView) itemView.findViewById(R.id.common_recycler_view);
-            ReHead = (RelativeLayout) itemView.findViewById(R.id.re_show);
-            tvType = (TextView) itemView.findViewById(R.id.tv_title);
+//            ReHead = (RelativeLayout) itemView.findViewById(R.id.re_show);
+//            tvType = (TextView) itemView.findViewById(R.id.tv_title);
         }
     }
 

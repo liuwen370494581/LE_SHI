@@ -181,6 +181,7 @@ public class SharedPreferencesUtil {
             os.writeObject(obj);
             SharedPreferencesUtil.setStringPreferences(context, key, EncryptUtil.bytesToHexString(bos.toByteArray()));
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

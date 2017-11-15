@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -73,7 +74,7 @@ public class LiveFragment extends BaseFragment {
         mAdapter.setData(DateEnage.getBBSDate());
         oneRecyclerView.setAdapter(mAdapter);
         twoRecycleView.setAdapter(bbsAdapter);
-        //LoadDate(Config.BAO_FENG_BBS_ALL);
+        LoadDate(Config.BAO_FENG_BBS_ALL);
         setListener();
     }
 
@@ -171,6 +172,6 @@ public class LiveFragment extends BaseFragment {
 
     @Override
     public void initData() {
-
+        Log.e(Config.TAG, "live=====懒加载");
     }
 }

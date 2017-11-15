@@ -419,7 +419,6 @@ public class TvUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
 
     private static class CommAdapter extends BGARecyclerViewAdapter<CoverModel> {
-
         public CommAdapter(RecyclerView recyclerView) {
             super(recyclerView, R.layout.hot_item);
         }

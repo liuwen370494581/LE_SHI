@@ -13,7 +13,6 @@ import java.util.List;
 import star.liuwen.com.le_shi.Model.CoverModel;
 import star.liuwen.com.le_shi.R;
 import star.liuwen.com.le_shi.Utils.GlideUtils;
-import star.liuwen.com.le_shi.View.CornerLabelView;
 
 /**
  * Created by liuwen on 2017/11/10.
@@ -83,7 +82,7 @@ public class MalAdapter extends RecyclerView.Adapter<MalAdapter.MyViewHolder> {
         TextView tvName;
         TextView tvDesc;
         ImageView imgUrl;
-        CornerLabelView cvTitle;
+        //CornerLabelView cvTitle;
         TextView tvPrice;
 
 
@@ -92,7 +91,7 @@ public class MalAdapter extends RecyclerView.Adapter<MalAdapter.MyViewHolder> {
             imgUrl = (ImageView) view.findViewById(R.id.image_hot);
             tvDesc = (TextView) view.findViewById(R.id.txt_desc);
             tvName = (TextView) view.findViewById(R.id.txt_name);
-            cvTitle = (CornerLabelView) view.findViewById(R.id.label);
+            //cvTitle = (CornerLabelView) view.findViewById(R.id.label);
             tvPrice = (TextView) view.findViewById(R.id.txt_price);
         }
     }

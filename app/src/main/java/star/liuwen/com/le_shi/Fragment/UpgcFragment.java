@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -81,8 +82,8 @@ public class UpgcFragment extends BaseFragment {
         mStateView.setLoadingResource(R.layout.loading);
         mStateView.setRetryResource(R.layout.base_retry);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mAdapter = new MalUIAdapter(mCoverList, channelList, bannerList,dailySpecialList, dailySpecialList2, baoFengTVList, baoFengTVList2,
-                baofengMirror, baofengMirror2, funList, funList2, clothesList, clothesList2, sportsList, sportsList2,milkList,milkList2, getActivity(), itemWidth);
+        mAdapter = new MalUIAdapter(mCoverList, channelList, bannerList, dailySpecialList, dailySpecialList2, baoFengTVList, baoFengTVList2,
+                baofengMirror, baofengMirror2, funList, funList2, clothesList, clothesList2, sportsList, sportsList2, milkList, milkList2, getActivity(), itemWidth);
 
         mRecyclerView.setAdapter(mAdapter);
     }
@@ -339,6 +340,6 @@ public class UpgcFragment extends BaseFragment {
 
     @Override
     public void initData() {
-
+        Log.e(Config.TAG, "综艺=====懒加载");
     }
 }
