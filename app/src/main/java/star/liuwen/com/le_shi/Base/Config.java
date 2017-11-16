@@ -21,6 +21,7 @@ public class Config {
 
     //Intent mark
     public static final String INTENT_BBS_URL = "BBS_URL";
+    public static final String INTENT_COMM_MODEL = "COMM_MODEL";
 
 
     //channel mark

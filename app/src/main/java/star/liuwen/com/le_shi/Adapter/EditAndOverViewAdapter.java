@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import star.liuwen.com.le_shi.Listener.OnCommonListener;
 import star.liuwen.com.le_shi.Model.CoverModel;
 import star.liuwen.com.le_shi.R;
 import star.liuwen.com.le_shi.Utils.GlideUtils;
@@ -24,6 +25,11 @@ public class EditAndOverViewAdapter extends RecyclerView.Adapter<EditAndOverView
     private List<CoverModel> mList;
     private List<CoverModel> mList2;
     private Context mContext;
+    private OnCommonListener mListener;
+
+    public void setListener(OnCommonListener listener) {
+        this.mListener = listener;
+    }
 
 
     public EditAndOverViewAdapter(Context context, List<CoverModel> list, List<CoverModel> list2) {
@@ -41,13 +47,22 @@ public class EditAndOverViewAdapter extends RecyclerView.Adapter<EditAndOverView
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(MyViewHolder holder, final int position) {
         holder.tvVideoName.setText(mList.get(position).getCoverTitle());
         GlideUtils.loadImage(holder.imgUrl, mList.get(position).getCoverUrl(), R.mipmap.defalut_img, R.mipmap.defalut_img);
-        if (mList2.size() != 0&&mList2.size()==mList.size()) {
+        if (mList2.size() != 0 && mList2.size() == mList.size()) {
             holder.tvVideoDesc.setText(mList2.get(position).getCoverDesc());
-            holder.tvVideoPage.setText(mList2.get(position).getCoverScore()+"分");
+            holder.tvVideoPage.setText(mList2.get(position).getCoverScore() + "分");
         }
+        holder.imgUrl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mListener != null) {
+                    mListener.onItemClickListener(position, mList, mList2);
+                }
+            }
+        });
+
     }
 
     @Override

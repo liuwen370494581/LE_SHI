@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import star.liuwen.com.le_shi.Listener.OnCommonListener;
 import star.liuwen.com.le_shi.Model.CoverModel;
 import star.liuwen.com.le_shi.R;
 import star.liuwen.com.le_shi.Utils.GlideUtils;
@@ -23,6 +24,11 @@ public class MalAdapter extends RecyclerView.Adapter<MalAdapter.MyViewHolder> {
     private List<CoverModel> mList;
     private List<CoverModel> mList2;
     private boolean isBannerOrTV = true;
+    private OnCommonListener mListener;
+
+    public void setListener(OnCommonListener listener) {
+        this.mListener = listener;
+    }
 
 
     public MalAdapter(Context context, List<CoverModel> list, List<CoverModel> list2) {
@@ -48,7 +54,7 @@ public class MalAdapter extends RecyclerView.Adapter<MalAdapter.MyViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(MyViewHolder holder, final int position) {
         GlideUtils.loadImage(holder.imgUrl, mList.get(position).getCoverUrl(), R.mipmap.defalut_img, R.mipmap.defalut_img);
         if (mList2.size() != 0 && mList2.size() == mList.size()) {
             if (mList.get(position).getCoverType() != null) {
@@ -71,6 +77,14 @@ public class MalAdapter extends RecyclerView.Adapter<MalAdapter.MyViewHolder> {
                 holder.tvName.setVisibility(View.GONE);
             }
         }
+        holder.imgUrl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mListener != null) {
+                    mListener.onItemClickListener(position, mList, mList2);
+                }
+            }
+        });
     }
 
     @Override

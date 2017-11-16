@@ -1,6 +1,7 @@
 package star.liuwen.com.le_shi.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -18,9 +19,12 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import star.liuwen.com.le_shi.Activity.WebActivity;
+import star.liuwen.com.le_shi.Base.Config;
 import star.liuwen.com.le_shi.Model.CoverModel;
 import star.liuwen.com.le_shi.R;
 import star.liuwen.com.le_shi.Utils.GlideUtils;
+import star.liuwen.com.le_shi.Utils.ToastUtils;
 
 /**
  * Created by liuwen on 2017/7/11.
@@ -28,9 +32,9 @@ import star.liuwen.com.le_shi.Utils.GlideUtils;
  */
 public class BannerAdapter extends PagerAdapter {
 
-   // private int mSize;
+    // private int mSize;
     private Context mActivity;
-   // private float mImageCorner = -1F;
+    // private float mImageCorner = -1F;
     private List<CoverModel> mList;
 
     public BannerAdapter(Context activity, List<CoverModel> list) {
@@ -62,7 +66,7 @@ public class BannerAdapter extends PagerAdapter {
     }
 
     @Override
-    public Object instantiateItem(ViewGroup container, int position) {
+    public Object instantiateItem(ViewGroup container, final int position) {
         View view = LayoutInflater.from(mActivity.getApplicationContext()).inflate(R.layout.recommend_page_item, container, false);
         if (mList.size() != 0) {
             CoverModel model = mList.get(position);
@@ -75,6 +79,16 @@ public class BannerAdapter extends PagerAdapter {
             ImageView imageView2 = new ImageView(view.getContext());
             imageView2.setImageBitmap(newimage);
             container.addView(view);
+            //监听事件
+            imageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(mActivity, WebActivity.class);
+                    intent.putExtra(Config.INTENT_COMM_MODEL, mList.get(position));
+                    intent.putExtra(Config.INTENT_BBS_URL, Config.BAO_FENG_URL_2 + mList.get(position).getCoverVideoUrl());
+                    mActivity.startActivity(intent);
+                }
+            });
             return view;
         }
         return view;

@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import star.liuwen.com.le_shi.Listener.OnCommonListener;
 import star.liuwen.com.le_shi.Model.CoverModel;
 import star.liuwen.com.le_shi.R;
 import star.liuwen.com.le_shi.Utils.GlideUtils;
@@ -25,6 +26,13 @@ public class PopAndCityLoveAndXuanningAdapter extends RecyclerView.Adapter<PopAn
     private List<CoverModel> mList;
     private List<CoverModel> mList2;
     private boolean isTvOrMovieView;
+
+    private OnCommonListener mListener;
+
+    public void setListener(OnCommonListener listener) {
+        this.mListener = listener;
+    }
+
 
     public PopAndCityLoveAndXuanningAdapter(Context context, List<CoverModel> list, List<CoverModel> list2) {
         mContext = context;
@@ -46,6 +54,7 @@ public class PopAndCityLoveAndXuanningAdapter extends RecyclerView.Adapter<PopAn
         return holder;
 
     }
+
 
     public void updateList(List<CoverModel> list) {
         if (isListNotEmpty(list)) {
@@ -70,7 +79,7 @@ public class PopAndCityLoveAndXuanningAdapter extends RecyclerView.Adapter<PopAn
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(MyViewHolder holder, final int position) {
         holder.tvVideoName.setText(mList.get(position).getCoverTitle());
         GlideUtils.loadImage(holder.imgUrl, mList.get(position).getCoverUrl(), R.mipmap.defalut_img, R.mipmap.defalut_img);
         if (mList2.size() != 0 && mList2.size() == mList.size()) {
@@ -81,6 +90,14 @@ public class PopAndCityLoveAndXuanningAdapter extends RecyclerView.Adapter<PopAn
             holder.cvTitle.setVisibility(View.VISIBLE);
             holder.cvTitle.setText1(mList.get(position).getCoverType());
         }
+        holder.imgUrl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mListener != null) {
+                    mListener.onItemClickListener(position, mList, mList2);
+                }
+            }
+        });
     }
 
     @Override

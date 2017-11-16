@@ -1,6 +1,7 @@
 package star.liuwen.com.le_shi.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,8 +12,11 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import cn.bingoogolapple.androidcommon.adapter.BGAOnRVItemClickListener;
 import cn.bingoogolapple.androidcommon.adapter.BGARecyclerViewAdapter;
 import cn.bingoogolapple.androidcommon.adapter.BGAViewHolderHelper;
+import star.liuwen.com.le_shi.Activity.WebActivity;
+import star.liuwen.com.le_shi.Base.Config;
 import star.liuwen.com.le_shi.Model.CoverModel;
 import star.liuwen.com.le_shi.R;
 import star.liuwen.com.le_shi.Utils.GlideUtils;
@@ -262,6 +266,15 @@ public class ZiXunUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 headLinesHolder.ReHead.setVisibility(View.VISIBLE);
                 headLinesHolder.tvType.setText(headlinesList.get(0).getCoverType());
             }
+            commAdapter.setOnRVItemClickListener(new BGAOnRVItemClickListener() {
+                @Override
+                public void onRVItemClick(ViewGroup parent, View itemView, int position) {
+                    Intent intent = new Intent(mContext, WebActivity.class);
+                    intent.putExtra(Config.INTENT_COMM_MODEL, headlinesList.get(position));
+                    intent.putExtra(Config.INTENT_BBS_URL, Config.BAO_FENG_URL_2 + headlinesList.get(position).getCoverVideoUrl());
+                    mContext.startActivity(intent);
+                }
+            });
         } else if (holder instanceof ZiXunRecommendHolder) {
             ZiXunRecommendHolder highlightHolder = (ZiXunRecommendHolder) holder;
             CommAdapter commAdapter = new CommAdapter(highlightHolder.mRecyclerView);
@@ -273,6 +286,15 @@ public class ZiXunUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 highlightHolder.ReHead.setVisibility(View.VISIBLE);
                 highlightHolder.tvType.setText(ziXunRecommendList.get(0).getCoverType());
             }
+            commAdapter.setOnRVItemClickListener(new BGAOnRVItemClickListener() {
+                @Override
+                public void onRVItemClick(ViewGroup parent, View itemView, int position) {
+                    Intent intent = new Intent(mContext, WebActivity.class);
+                    intent.putExtra(Config.INTENT_COMM_MODEL, ziXunRecommendList.get(position));
+                    intent.putExtra(Config.INTENT_BBS_URL, Config.BAO_FENG_URL_2 + ziXunRecommendList.get(position).getCoverVideoUrl());
+                    mContext.startActivity(intent);
+                }
+            });
         } else if (holder instanceof BaoXiaoRecommendHolder) {
             BaoXiaoRecommendHolder baoXiaoRecommendHolder = (BaoXiaoRecommendHolder) holder;
             CommAdapter commAdapter = new CommAdapter(baoXiaoRecommendHolder.mRecyclerView);
@@ -284,6 +306,15 @@ public class ZiXunUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 baoXiaoRecommendHolder.ReHead.setVisibility(View.VISIBLE);
                 baoXiaoRecommendHolder.tvType.setText(baoXiaoRecommendList.get(0).getCoverType());
             }
+            commAdapter.setOnRVItemClickListener(new BGAOnRVItemClickListener() {
+                @Override
+                public void onRVItemClick(ViewGroup parent, View itemView, int position) {
+                    Intent intent = new Intent(mContext, WebActivity.class);
+                    intent.putExtra(Config.INTENT_COMM_MODEL, baoXiaoRecommendList.get(position));
+                    intent.putExtra(Config.INTENT_BBS_URL, Config.BAO_FENG_URL_2 + baoXiaoRecommendList.get(position).getCoverVideoUrl());
+                    mContext.startActivity(intent);
+                }
+            });
 
         } else if (holder instanceof StrangeHolder) {
             StrangeHolder strangeHolder = (StrangeHolder) holder;
@@ -296,6 +327,15 @@ public class ZiXunUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 strangeHolder.ReHead.setVisibility(View.VISIBLE);
                 strangeHolder.tvType.setText(strangeList.get(0).getCoverType());
             }
+            commAdapter.setOnRVItemClickListener(new BGAOnRVItemClickListener() {
+                @Override
+                public void onRVItemClick(ViewGroup parent, View itemView, int position) {
+                    Intent intent = new Intent(mContext, WebActivity.class);
+                    intent.putExtra(Config.INTENT_COMM_MODEL, strangeList.get(position));
+                    intent.putExtra(Config.INTENT_BBS_URL, Config.BAO_FENG_URL_2 + strangeList.get(position).getCoverVideoUrl());
+                    mContext.startActivity(intent);
+                }
+            });
         } else if (holder instanceof FunnyHolder) {
             FunnyHolder funnyHolder = (FunnyHolder) holder;
             CommAdapter commAdapter = new CommAdapter(funnyHolder.mRecyclerView);
@@ -307,6 +347,15 @@ public class ZiXunUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 funnyHolder.ReHead.setVisibility(View.VISIBLE);
                 funnyHolder.tvType.setText(funList.get(0).getCoverType());
             }
+            commAdapter.setOnRVItemClickListener(new BGAOnRVItemClickListener() {
+                @Override
+                public void onRVItemClick(ViewGroup parent, View itemView, int position) {
+                    Intent intent = new Intent(mContext, WebActivity.class);
+                    intent.putExtra(Config.INTENT_COMM_MODEL, funList.get(position));
+                    intent.putExtra(Config.INTENT_BBS_URL, Config.BAO_FENG_URL_2 + funList.get(position).getCoverVideoUrl());
+                    mContext.startActivity(intent);
+                }
+            });
         } else if (holder instanceof StarHolder) {
             StarHolder starHolder = (StarHolder) holder;
             CommAdapter commAdapter = new CommAdapter(starHolder.mRecyclerView);
@@ -318,6 +367,15 @@ public class ZiXunUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 starHolder.ReHead.setVisibility(View.VISIBLE);
                 starHolder.tvType.setText(starList.get(0).getCoverType());
             }
+            commAdapter.setOnRVItemClickListener(new BGAOnRVItemClickListener() {
+                @Override
+                public void onRVItemClick(ViewGroup parent, View itemView, int position) {
+                    Intent intent = new Intent(mContext, WebActivity.class);
+                    intent.putExtra(Config.INTENT_COMM_MODEL, starList.get(position));
+                    intent.putExtra(Config.INTENT_BBS_URL, Config.BAO_FENG_URL_2 + starList.get(position).getCoverVideoUrl());
+                    mContext.startActivity(intent);
+                }
+            });
         } else if (holder instanceof SportsHolder) {
             SportsHolder sportsHolder = (SportsHolder) holder;
             CommAdapter commAdapter = new CommAdapter(sportsHolder.mRecyclerView);
@@ -329,6 +387,15 @@ public class ZiXunUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 sportsHolder.ReHead.setVisibility(View.VISIBLE);
                 sportsHolder.tvType.setText(sportList.get(0).getCoverType());
             }
+            commAdapter.setOnRVItemClickListener(new BGAOnRVItemClickListener() {
+                @Override
+                public void onRVItemClick(ViewGroup parent, View itemView, int position) {
+                    Intent intent = new Intent(mContext, WebActivity.class);
+                    intent.putExtra(Config.INTENT_COMM_MODEL, sportList.get(position));
+                    intent.putExtra(Config.INTENT_BBS_URL, Config.BAO_FENG_URL_2 + sportList.get(position).getCoverVideoUrl());
+                    mContext.startActivity(intent);
+                }
+            });
         } else if (holder instanceof ScienceHolder) {
             ScienceHolder scienceHolder = (ScienceHolder) holder;
             CommAdapter commAdapter = new CommAdapter(scienceHolder.mRecyclerView);
@@ -340,6 +407,15 @@ public class ZiXunUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 scienceHolder.ReHead.setVisibility(View.VISIBLE);
                 scienceHolder.tvType.setText(scienceList.get(0).getCoverType());
             }
+            commAdapter.setOnRVItemClickListener(new BGAOnRVItemClickListener() {
+                @Override
+                public void onRVItemClick(ViewGroup parent, View itemView, int position) {
+                    Intent intent = new Intent(mContext, WebActivity.class);
+                    intent.putExtra(Config.INTENT_COMM_MODEL, scienceList.get(position));
+                    intent.putExtra(Config.INTENT_BBS_URL, Config.BAO_FENG_URL_2 + scienceList.get(position).getCoverVideoUrl());
+                    mContext.startActivity(intent);
+                }
+            });
 
         } else if (holder instanceof MusicHolder) {
             MusicHolder musicHolder = (MusicHolder) holder;
@@ -352,6 +428,15 @@ public class ZiXunUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 musicHolder.ReHead.setVisibility(View.VISIBLE);
                 musicHolder.tvType.setText(musicList.get(0).getCoverType());
             }
+            commAdapter.setOnRVItemClickListener(new BGAOnRVItemClickListener() {
+                @Override
+                public void onRVItemClick(ViewGroup parent, View itemView, int position) {
+                    Intent intent = new Intent(mContext, WebActivity.class);
+                    intent.putExtra(Config.INTENT_COMM_MODEL, musicList.get(position));
+                    intent.putExtra(Config.INTENT_BBS_URL, Config.BAO_FENG_URL_2 + musicList.get(position).getCoverVideoUrl());
+                    mContext.startActivity(intent);
+                }
+            });
         } else if (holder instanceof GameHolder) {
             GameHolder gameHolder = (GameHolder) holder;
             CommAdapter commAdapter = new CommAdapter(gameHolder.mRecyclerView);
@@ -363,6 +448,15 @@ public class ZiXunUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 gameHolder.ReHead.setVisibility(View.VISIBLE);
                 gameHolder.tvType.setText(gameList.get(0).getCoverType());
             }
+            commAdapter.setOnRVItemClickListener(new BGAOnRVItemClickListener() {
+                @Override
+                public void onRVItemClick(ViewGroup parent, View itemView, int position) {
+                    Intent intent = new Intent(mContext, WebActivity.class);
+                    intent.putExtra(Config.INTENT_COMM_MODEL, gameList.get(position));
+                    intent.putExtra(Config.INTENT_BBS_URL, Config.BAO_FENG_URL_2 + gameList.get(position).getCoverVideoUrl());
+                    mContext.startActivity(intent);
+                }
+            });
         } else if (holder instanceof HomeUIAdapter.EndHolder) {
             HomeUIAdapter.EndHolder endHolder = (HomeUIAdapter.EndHolder) holder;
 //            if (itemWidth != 0) {

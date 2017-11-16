@@ -1,6 +1,7 @@
 package star.liuwen.com.le_shi.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,8 +12,12 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import cn.bingoogolapple.androidcommon.adapter.BGAOnRVItemClickListener;
 import cn.bingoogolapple.androidcommon.adapter.BGARecyclerViewAdapter;
 import cn.bingoogolapple.androidcommon.adapter.BGAViewHolderHelper;
+import star.liuwen.com.le_shi.Activity.WebActivity;
+import star.liuwen.com.le_shi.Base.Config;
+import star.liuwen.com.le_shi.Listener.OnChannelListener;
 import star.liuwen.com.le_shi.Model.CoverModel;
 import star.liuwen.com.le_shi.R;
 import star.liuwen.com.le_shi.Utils.GlideUtils;
@@ -41,7 +46,11 @@ public class DongManUiAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     private final static int QIN_ZI_VIEW_TYPE = 5;//亲子
     private final static int REVIEW_CLASSICLIST_VIEW_TYPE = 6;//重温经典
     private final static int END_VIEW_TYPE = 7;
+    private OnChannelListener mOnChannelListener;
 
+    public void setListener(OnChannelListener listener) {
+        mOnChannelListener = listener;
+    }
 
     public DongManUiAdapter(Context context, List<String> channelList, List<CoverModel> coverList, List<CoverModel> hotPlayList, List<CoverModel> baoFengList, List<CoverModel> qinZiList, List<CoverModel> reviewClassicList, List<CoverModel> everyDateUpdateList, int itemWidth) {
         mContext = context;
@@ -187,44 +196,79 @@ public class DongManUiAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             setBanner(bannerHolder);
         } else if (holder instanceof HomeUIAdapter.ChannelHolder) {
             HomeUIAdapter.ChannelHolder channelHolder = (HomeUIAdapter.ChannelHolder) holder;
-            ChannelAdapter channelAdapter = new ChannelAdapter(channelList,mContext);
+            ChannelAdapter channelAdapter = new ChannelAdapter(channelList, mContext);
             final GridLayoutManager manager = new GridLayoutManager(mContext, 4, LinearLayoutManager.VERTICAL, false);
             channelHolder.mRecyclerView.setLayoutManager(manager);
             channelHolder.mRecyclerView.setAdapter(channelAdapter);
+            channelAdapter.setListener(new OnChannelListener() {
+                @Override
+                public void onItemClickListener(int position, List<String> list) {
+                    if (mOnChannelListener != null) {
+                        mOnChannelListener.onItemClickListener(position, list);
+                    }
+                }
+            });
         } else if (holder instanceof QinZiPlayHolder) {
             QinZiPlayHolder qinZiPlayHolder = (QinZiPlayHolder) holder;
             final GridLayoutManager gridLayoutManager = new GridLayoutManager(mContext, 2, LinearLayoutManager.VERTICAL, false);
             qinZiPlayHolder.mRecyclerView.setLayoutManager(gridLayoutManager);
-            CommAdapter mAdapter = new CommAdapter(qinZiPlayHolder.mRecyclerView);
-            mAdapter.setData(qinZiList);
-            qinZiPlayHolder.mRecyclerView.setAdapter(mAdapter);
+            CommAdapter commAdapter = new CommAdapter(qinZiPlayHolder.mRecyclerView);
+            commAdapter.setData(qinZiList);
+            qinZiPlayHolder.mRecyclerView.setAdapter(commAdapter);
             if (qinZiList.size() != 0) {
                 qinZiPlayHolder.ReHead.setVisibility(View.VISIBLE);
                 qinZiPlayHolder.tvType.setText(qinZiList.get(0).getCoverType());
             }
+            commAdapter.setOnRVItemClickListener(new BGAOnRVItemClickListener() {
+                @Override
+                public void onRVItemClick(ViewGroup parent, View itemView, int position) {
+                    Intent intent = new Intent(mContext, WebActivity.class);
+                    intent.putExtra(Config.INTENT_COMM_MODEL, qinZiList.get(position));
+                    intent.putExtra(Config.INTENT_BBS_URL, Config.BAO_FENG_URL_2 + qinZiList.get(position).getCoverVideoUrl());
+                    mContext.startActivity(intent);
+                }
+            });
         } else if (holder instanceof ReviewClassicHolder) {
             ReviewClassicHolder reviewClassicHolder = (ReviewClassicHolder) holder;
-            CommAdapter mAdapter = new CommAdapter(reviewClassicHolder.mRecyclerView);
+            CommAdapter commAdapter = new CommAdapter(reviewClassicHolder.mRecyclerView);
             final GridLayoutManager gridLayoutManager = new GridLayoutManager(mContext, 2, LinearLayoutManager.VERTICAL, false);
             reviewClassicHolder.mRecyclerView.setLayoutManager(gridLayoutManager);
-            mAdapter.setData(reviewClassicList);
-            reviewClassicHolder.mRecyclerView.setAdapter(mAdapter);
+            commAdapter.setData(reviewClassicList);
+            reviewClassicHolder.mRecyclerView.setAdapter(commAdapter);
             if (reviewClassicList.size() != 0) {
                 reviewClassicHolder.ReHead.setVisibility(View.VISIBLE);
                 reviewClassicHolder.tvType.setText(reviewClassicList.get(0).getCoverType());
             }
+            commAdapter.setOnRVItemClickListener(new BGAOnRVItemClickListener() {
+                @Override
+                public void onRVItemClick(ViewGroup parent, View itemView, int position) {
+                    Intent intent = new Intent(mContext, WebActivity.class);
+                    intent.putExtra(Config.INTENT_COMM_MODEL, reviewClassicList.get(position));
+                    intent.putExtra(Config.INTENT_BBS_URL, Config.BAO_FENG_URL_2 + reviewClassicList.get(position).getCoverVideoUrl());
+                    mContext.startActivity(intent);
+                }
+            });
 
         } else if (holder instanceof VarietyUIAdapter.BaoFengHolder) {
             VarietyUIAdapter.BaoFengHolder baoFengHolder = (VarietyUIAdapter.BaoFengHolder) holder;
             final GridLayoutManager gridLayoutManager = new GridLayoutManager(mContext, 2, LinearLayoutManager.VERTICAL, false);
             baoFengHolder.mRecyclerView.setLayoutManager(gridLayoutManager);
-            CommAdapter mAdapter = new CommAdapter(baoFengHolder.mRecyclerView);
-            mAdapter.setData(baoFengList);
-            baoFengHolder.mRecyclerView.setAdapter(mAdapter);
+            CommAdapter commAdapter = new CommAdapter(baoFengHolder.mRecyclerView);
+            commAdapter.setData(baoFengList);
+            baoFengHolder.mRecyclerView.setAdapter(commAdapter);
             if (baoFengList.size() != 0) {
                 baoFengHolder.ReHead.setVisibility(View.VISIBLE);
                 baoFengHolder.tvType.setText(baoFengList.get(0).getCoverType());
             }
+            commAdapter.setOnRVItemClickListener(new BGAOnRVItemClickListener() {
+                @Override
+                public void onRVItemClick(ViewGroup parent, View itemView, int position) {
+                    Intent intent = new Intent(mContext, WebActivity.class);
+                    intent.putExtra(Config.INTENT_COMM_MODEL, baoFengList.get(position));
+                    intent.putExtra(Config.INTENT_BBS_URL, Config.BAO_FENG_URL_2 + baoFengList.get(position).getCoverVideoUrl());
+                    mContext.startActivity(intent);
+                }
+            });
         } else if (holder instanceof TvUIAdapter.HotPlayHolder) {
             TvUIAdapter.HotPlayHolder hotPlayHolder = (TvUIAdapter.HotPlayHolder) holder;
             CommAdapter commAdapter = new CommAdapter(hotPlayHolder.mRecyclerView);
@@ -236,19 +280,37 @@ public class DongManUiAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 hotPlayHolder.ReHead.setVisibility(View.VISIBLE);
                 hotPlayHolder.tvType.setText(hotPlayList.get(0).getCoverType());
             }
+            commAdapter.setOnRVItemClickListener(new BGAOnRVItemClickListener() {
+                @Override
+                public void onRVItemClick(ViewGroup parent, View itemView, int position) {
+                    Intent intent = new Intent(mContext, WebActivity.class);
+                    intent.putExtra(Config.INTENT_COMM_MODEL, hotPlayList.get(position));
+                    intent.putExtra(Config.INTENT_BBS_URL, Config.BAO_FENG_URL_2 + hotPlayList.get(position).getCoverVideoUrl());
+                    mContext.startActivity(intent);
+                }
+            });
         } else if (holder instanceof EveryDateUpdateHolder) {
             EveryDateUpdateHolder everyDateUpdateHolder = (EveryDateUpdateHolder) holder;
-            EveryDateUpdateAdapter mAdapter = new EveryDateUpdateAdapter(everyDateUpdateHolder.mRecyclerView);
-            mAdapter.setData(everyDateUpdateList);
+            EveryDateUpdateAdapter commAdapter = new EveryDateUpdateAdapter(everyDateUpdateHolder.mRecyclerView);
+            commAdapter.setData(everyDateUpdateList);
             final GridLayoutManager gridLayoutManager = new GridLayoutManager(mContext, 5, LinearLayoutManager.VERTICAL, false);
             everyDateUpdateHolder.mRecyclerView.setLayoutManager(gridLayoutManager);
-            everyDateUpdateHolder.mRecyclerView.setAdapter(mAdapter);
+            everyDateUpdateHolder.mRecyclerView.setAdapter(commAdapter);
 
             if (everyDateUpdateList.size() != 0) {
                 everyDateUpdateHolder.ReHead.setVisibility(View.VISIBLE);
                 everyDateUpdateHolder.tvType.setText(everyDateUpdateList.get(0).getCoverType());
             }
 
+            commAdapter.setOnRVItemClickListener(new BGAOnRVItemClickListener() {
+                @Override
+                public void onRVItemClick(ViewGroup parent, View itemView, int position) {
+                    Intent intent = new Intent(mContext, WebActivity.class);
+                    intent.putExtra(Config.INTENT_COMM_MODEL, everyDateUpdateList.get(position));
+                    intent.putExtra(Config.INTENT_BBS_URL, Config.BAO_FENG_URL_2 + everyDateUpdateList.get(position).getCoverVideoUrl());
+                    mContext.startActivity(intent);
+                }
+            });
         } else if (holder instanceof HomeUIAdapter.EndHolder) {
             HomeUIAdapter.EndHolder endHolder = (HomeUIAdapter.EndHolder) holder;
 //            if (itemWidth != 0) {
@@ -313,7 +375,6 @@ public class DongManUiAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             tvType = (TextView) itemView.findViewById(R.id.tv_title);
         }
     }
-
 
 
     private static class CommAdapter extends BGARecyclerViewAdapter<CoverModel> {

@@ -9,9 +9,8 @@ import android.widget.Button;
 
 import java.util.List;
 
-import star.liuwen.com.le_shi.Listener.OnCommonListener;
+import star.liuwen.com.le_shi.Listener.OnChannelListener;
 import star.liuwen.com.le_shi.R;
-import star.liuwen.com.le_shi.Utils.ToastUtils;
 
 /**
  * Created by liuwen on 2017/11/3.
@@ -21,9 +20,9 @@ public class ChannelAdapter extends RecyclerView.Adapter<ChannelAdapter.MyViewHo
     private List<String> mList;
     private Context mContext;
     private LayoutInflater mInflater;
-    private OnCommonListener mListener;
+    private OnChannelListener mListener;
 
-    public void setListener(OnCommonListener listener) {
+    public void setListener(OnChannelListener listener) {
         this.mListener = listener;
     }
 

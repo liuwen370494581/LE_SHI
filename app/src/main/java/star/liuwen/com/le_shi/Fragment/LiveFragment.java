@@ -172,6 +172,5 @@ public class LiveFragment extends BaseFragment {
 
     @Override
     public void initData() {
-        Log.e(Config.TAG, "live=====懒加载");
     }
 }

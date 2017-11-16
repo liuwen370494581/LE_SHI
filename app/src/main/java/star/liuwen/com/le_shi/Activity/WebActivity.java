@@ -11,6 +11,7 @@ import android.widget.ProgressBar;
 
 import star.liuwen.com.le_shi.Base.BaseActivity;
 import star.liuwen.com.le_shi.Base.Config;
+import star.liuwen.com.le_shi.Model.CoverModel;
 import star.liuwen.com.le_shi.R;
 
 /**
@@ -28,7 +29,7 @@ public class WebActivity extends BaseActivity {
     @Override
     protected void initView() {
         showLeftView();
-        setCenterText("暴风bbs");
+
         mPbLoading = (ProgressBar) findViewById(R.id.pb_loading);
         mWvContent = (WebView) findViewById(R.id.wv_content);
 
@@ -36,7 +37,13 @@ public class WebActivity extends BaseActivity {
 
     @Override
     protected void initData() {
+        CoverModel model = (CoverModel) getIntent().getSerializableExtra(Config.INTENT_COMM_MODEL);
         String url = getIntent().getStringExtra(Config.INTENT_BBS_URL);
+        if (model != null) {
+            setCenterText(model.getCoverTitle());
+        } else {
+            setCenterText("暴风bbs");
+        }
         mWvContent.loadUrl(url);
 
     }

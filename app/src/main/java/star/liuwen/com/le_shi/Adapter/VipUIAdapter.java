@@ -1,6 +1,7 @@
 package star.liuwen.com.le_shi.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,6 +13,10 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import star.liuwen.com.le_shi.Activity.WebActivity;
+import star.liuwen.com.le_shi.Base.Config;
+import star.liuwen.com.le_shi.Listener.OnChannelListener;
+import star.liuwen.com.le_shi.Listener.OnCommonListener;
 import star.liuwen.com.le_shi.Model.CoverModel;
 import star.liuwen.com.le_shi.R;
 
@@ -45,6 +50,12 @@ public class VipUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     private final static int QIN_ZI_VIEW_TYPE = 6;//亲子
     private final static int HORROR_FILM_TYPE = 7;//恐怖
     private final static int END_VIEW_TYPE = 8;
+
+    private OnChannelListener mOnChannelListener;
+
+    public void setListener(OnChannelListener listener) {
+        mOnChannelListener = listener;
+    }
 
 
     public VipUIAdapter(Context context, List<String> channelList, List<CoverModel> coverList, List<CoverModel> mostPopularList, List<CoverModel> mostPopularList2, List<CoverModel> newFilmRecommendList, List<CoverModel> newFilmRecommendList2, List<CoverModel> choiceList, List<CoverModel> choiceList2, List<CoverModel> educationList, List<CoverModel> educationList2, List<CoverModel> qinZiList, List<CoverModel> qinZiList2, List<CoverModel> horrorFilmList, List<CoverModel> horrorFilmList2, int itemWidth) {
@@ -270,10 +281,18 @@ public class VipUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             setBanner(bannerHolder);
         } else if (holder instanceof HomeUIAdapter.ChannelHolder) {
             HomeUIAdapter.ChannelHolder channelHolder = (HomeUIAdapter.ChannelHolder) holder;
-            ChannelAdapter channelAdapter = new ChannelAdapter(channelList,mContext);
+            ChannelAdapter channelAdapter = new ChannelAdapter(channelList, mContext);
             final GridLayoutManager manager = new GridLayoutManager(mContext, 4, LinearLayoutManager.VERTICAL, false);
             channelHolder.mRecyclerView.setLayoutManager(manager);
             channelHolder.mRecyclerView.setAdapter(channelAdapter);
+            channelAdapter.setListener(new OnChannelListener() {
+                @Override
+                public void onItemClickListener(int position, List<String> list) {
+                    if (mOnChannelListener != null) {
+                        mOnChannelListener.onItemClickListener(position, list);
+                    }
+                }
+            });
         } else if (holder instanceof TvUIAdapter.PopularHolder) {
             TvUIAdapter.PopularHolder popularHolder = (TvUIAdapter.PopularHolder) holder;
             PopAndCityLoveAndXuanningAdapter mAdapter = new PopAndCityLoveAndXuanningAdapter(mContext, mostPopularList, mostPopularList2, false);
@@ -284,6 +303,15 @@ public class VipUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 popularHolder.ReHead.setVisibility(View.VISIBLE);
                 popularHolder.tvType.setText(mostPopularList.get(0).getCoverType());
             }
+            mAdapter.setListener(new OnCommonListener() {
+                @Override
+                public void onItemClickListener(int position, List<CoverModel> listOne, List<CoverModel> listTwo) {
+                    Intent intent = new Intent(mContext, WebActivity.class);
+                    intent.putExtra(Config.INTENT_COMM_MODEL, listOne.get(position));
+                    intent.putExtra(Config.INTENT_BBS_URL, Config.BAO_FENG_URL_2 + listOne.get(position).getCoverVideoUrl());
+                    mContext.startActivity(intent);
+                }
+            });
         } else if (holder instanceof NewFilmRecommendHolder) {
             NewFilmRecommendHolder newFilmRecommendHolder = (NewFilmRecommendHolder) holder;
             PopAndCityLoveAndXuanningAdapter mAdapter = new PopAndCityLoveAndXuanningAdapter(mContext, newFilmRecommendList, newFilmRecommendList2, false);
@@ -294,6 +322,15 @@ public class VipUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 newFilmRecommendHolder.ReHead.setVisibility(View.VISIBLE);
                 newFilmRecommendHolder.tvType.setText(newFilmRecommendList.get(0).getCoverType());
             }
+            mAdapter.setListener(new OnCommonListener() {
+                @Override
+                public void onItemClickListener(int position, List<CoverModel> listOne, List<CoverModel> listTwo) {
+                    Intent intent = new Intent(mContext, WebActivity.class);
+                    intent.putExtra(Config.INTENT_COMM_MODEL, listOne.get(position));
+                    intent.putExtra(Config.INTENT_BBS_URL, Config.BAO_FENG_URL_2 + listOne.get(position).getCoverVideoUrl());
+                    mContext.startActivity(intent);
+                }
+            });
         } else if (holder instanceof ChoiceHolder) {
             ChoiceHolder choiceHolder = (ChoiceHolder) holder;
             PopAndCityLoveAndXuanningAdapter mAdapter = new PopAndCityLoveAndXuanningAdapter(mContext, choiceList, choiceList2, false);
@@ -304,6 +341,15 @@ public class VipUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 choiceHolder.ReHead.setVisibility(View.VISIBLE);
                 choiceHolder.tvType.setText(choiceList.get(0).getCoverType());
             }
+            mAdapter.setListener(new OnCommonListener() {
+                @Override
+                public void onItemClickListener(int position, List<CoverModel> listOne, List<CoverModel> listTwo) {
+                    Intent intent = new Intent(mContext, WebActivity.class);
+                    intent.putExtra(Config.INTENT_COMM_MODEL, listOne.get(position));
+                    intent.putExtra(Config.INTENT_BBS_URL, Config.BAO_FENG_URL_2 + listOne.get(position).getCoverVideoUrl());
+                    mContext.startActivity(intent);
+                }
+            });
         } else if (holder instanceof HomeUIAdapter.EducationHolder) {
             HomeUIAdapter.EducationHolder educationHolder = (HomeUIAdapter.EducationHolder) holder;
             PopAndCityLoveAndXuanningAdapter mAdapter = new PopAndCityLoveAndXuanningAdapter(mContext, educationList, educationList2, true);
@@ -314,6 +360,15 @@ public class VipUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 educationHolder.ReHead.setVisibility(View.VISIBLE);
                 educationHolder.tvType.setText(educationList.get(0).getCoverType());
             }
+            mAdapter.setListener(new OnCommonListener() {
+                @Override
+                public void onItemClickListener(int position, List<CoverModel> listOne, List<CoverModel> listTwo) {
+                    Intent intent = new Intent(mContext, WebActivity.class);
+                    intent.putExtra(Config.INTENT_COMM_MODEL, listOne.get(position));
+                    intent.putExtra(Config.INTENT_BBS_URL, Config.BAO_FENG_URL_2 + listOne.get(position).getCoverVideoUrl());
+                    mContext.startActivity(intent);
+                }
+            });
         } else if (holder instanceof DongManUiAdapter.QinZiPlayHolder) {
             DongManUiAdapter.QinZiPlayHolder qinZiPlayHolder = (DongManUiAdapter.QinZiPlayHolder) holder;
             PopAndCityLoveAndXuanningAdapter mAdapter = new PopAndCityLoveAndXuanningAdapter(mContext, qinZiList, qinZiList2, false);
@@ -324,6 +379,15 @@ public class VipUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 qinZiPlayHolder.ReHead.setVisibility(View.VISIBLE);
                 qinZiPlayHolder.tvType.setText(qinZiList.get(0).getCoverType());
             }
+            mAdapter.setListener(new OnCommonListener() {
+                @Override
+                public void onItemClickListener(int position, List<CoverModel> listOne, List<CoverModel> listTwo) {
+                    Intent intent = new Intent(mContext, WebActivity.class);
+                    intent.putExtra(Config.INTENT_COMM_MODEL, listOne.get(position));
+                    intent.putExtra(Config.INTENT_BBS_URL, Config.BAO_FENG_URL_2 + listOne.get(position).getCoverVideoUrl());
+                    mContext.startActivity(intent);
+                }
+            });
         } else if (holder instanceof HorrorFilmHolder) {
             HorrorFilmHolder horrorFilmHolder = (HorrorFilmHolder) holder;
             PopAndCityLoveAndXuanningAdapter mAdapter = new PopAndCityLoveAndXuanningAdapter(mContext, horrorFilmList, horrorFilmList2, false);
@@ -334,6 +398,15 @@ public class VipUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 horrorFilmHolder.ReHead.setVisibility(View.VISIBLE);
                 horrorFilmHolder.tvType.setText(horrorFilmList.get(0).getCoverType());
             }
+            mAdapter.setListener(new OnCommonListener() {
+                @Override
+                public void onItemClickListener(int position, List<CoverModel> listOne, List<CoverModel> listTwo) {
+                    Intent intent = new Intent(mContext, WebActivity.class);
+                    intent.putExtra(Config.INTENT_COMM_MODEL, listOne.get(position));
+                    intent.putExtra(Config.INTENT_BBS_URL, Config.BAO_FENG_URL_2 + listOne.get(position).getCoverVideoUrl());
+                    mContext.startActivity(intent);
+                }
+            });
         } else if (holder instanceof HomeUIAdapter.EndHolder) {
             HomeUIAdapter.EndHolder endHolder = (HomeUIAdapter.EndHolder) holder;
 //            if (itemWidth != 0) {

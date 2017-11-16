@@ -1,6 +1,7 @@
 package star.liuwen.com.le_shi.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,6 +13,10 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import star.liuwen.com.le_shi.Activity.WebActivity;
+import star.liuwen.com.le_shi.Base.Config;
+import star.liuwen.com.le_shi.Listener.OnChannelListener;
+import star.liuwen.com.le_shi.Listener.OnCommonListener;
 import star.liuwen.com.le_shi.Model.CoverModel;
 import star.liuwen.com.le_shi.R;
 
@@ -35,8 +40,8 @@ public class MalUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     private List<CoverModel> clothesList2;
     private List<CoverModel> sportsList;
     private List<CoverModel> sportsList2;
-    private List<CoverModel> milkList = new ArrayList<>();
-    private List<CoverModel> milkList2 = new ArrayList<>();
+    private List<CoverModel> milkList;
+    private List<CoverModel> milkList2;
 
     private Context mContext;
     private int itemWidth;
@@ -51,6 +56,12 @@ public class MalUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     private final static int SPORTS_TYPE = 8;//体育
     private final static int MILK_TYPE = 9;//奶粉
     private final static int END_VIEW_TYPE = 10;//结束
+
+    private OnChannelListener mOnChannelListener;
+
+    public void setListener(OnChannelListener listener) {
+        mOnChannelListener = listener;
+    }
 
 
     public MalUIAdapter(List<CoverModel> coverList, List<String> channelList, List<CoverModel> dailySpecialList, List<CoverModel> dailySpecialList2, List<CoverModel> baoFengTVList, List<CoverModel> baoFengTVList2, List<CoverModel> baofengMirror, List<CoverModel> baofengMirror2, List<CoverModel> funList, List<CoverModel> funList2, List<CoverModel> clothesList, List<CoverModel> clothesList2, List<CoverModel> sportsList, List<CoverModel> sportsList2, Context context, int itemWidth) {
@@ -92,6 +103,10 @@ public class MalUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         this.milkList2 = milkList2;
         mContext = context;
         this.itemWidth = itemWidth;
+    }
+
+    public void clearAllData() {
+
     }
 
     public void updateChannelList(List<String> list) {
@@ -343,14 +358,14 @@ public class MalUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             final GridLayoutManager manager = new GridLayoutManager(mContext, 4, LinearLayoutManager.VERTICAL, false);
             channelHolder.mRecyclerView.setLayoutManager(manager);
             channelHolder.mRecyclerView.setAdapter(channelAdapter);
-//            channelAdapter.setListener(new OnCommonListener() {
-//                @Override
-//                public void onItemClickListener(int position, List<String> list) {
-//                    if (mListener != null) {
-//                        mListener.onItemClickListener(position);
-//                    }
-//                }
-//            });
+            channelAdapter.setListener(new OnChannelListener() {
+                @Override
+                public void onItemClickListener(int position, List<String> list) {
+                    if (mOnChannelListener != null) {
+                        mOnChannelListener.onItemClickListener(position, list);
+                    }
+                }
+            });
         } else if (holder instanceof BannerViewHolder) {
             BannerViewHolder bannerViewHolder = (BannerViewHolder) holder;
             MalAdapter mAdapter = new MalAdapter(mContext, bannerList, bannerList, false);
@@ -368,6 +383,15 @@ public class MalUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 sportsHolder.ReHead.setVisibility(View.VISIBLE);
                 sportsHolder.tvType.setText(sportsList.get(0).getCoverType());
             }
+            mAdapter.setListener(new OnCommonListener() {
+                @Override
+                public void onItemClickListener(int position, List<CoverModel> listOne, List<CoverModel> listTwo) {
+                    Intent intent = new Intent(mContext, WebActivity.class);
+                    intent.putExtra(Config.INTENT_COMM_MODEL, sportsList2.get(position));
+                    intent.putExtra(Config.INTENT_BBS_URL, Config.BAO_FENG_URL_2 + sportsList.get(position).getCoverVideoUrl());
+                    mContext.startActivity(intent);
+                }
+            });
 
         } else if (holder instanceof DailySpecialViewHolder) {
             DailySpecialViewHolder dailySpecialViewHolder = (DailySpecialViewHolder) holder;
@@ -380,6 +404,15 @@ public class MalUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 dailySpecialViewHolder.ReHead.setVisibility(View.VISIBLE);
                 dailySpecialViewHolder.tvType.setText(dailySpecialList.get(0).getCoverType());
             }
+            mAdapter.setListener(new OnCommonListener() {
+                @Override
+                public void onItemClickListener(int position, List<CoverModel> listOne, List<CoverModel> listTwo) {
+                    Intent intent = new Intent(mContext, WebActivity.class);
+                    intent.putExtra(Config.INTENT_COMM_MODEL, dailySpecialList2.get(position));
+                    intent.putExtra(Config.INTENT_BBS_URL, Config.BAO_FENG_URL_2 + dailySpecialList.get(position).getCoverVideoUrl());
+                    mContext.startActivity(intent);
+                }
+            });
         } else if (holder instanceof TvViewHolder) {
             TvViewHolder tvViewHolder = (TvViewHolder) holder;
             MalAdapter mAdapter = new MalAdapter(mContext, baoFengTVList, baoFengTVList2, false);
@@ -390,6 +423,15 @@ public class MalUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 tvViewHolder.ReHead.setVisibility(View.VISIBLE);
                 tvViewHolder.tvType.setText(baoFengTVList.get(0).getCoverType());
             }
+            mAdapter.setListener(new OnCommonListener() {
+                @Override
+                public void onItemClickListener(int position, List<CoverModel> listOne, List<CoverModel> listTwo) {
+                    Intent intent = new Intent(mContext, WebActivity.class);
+                    intent.putExtra(Config.INTENT_COMM_MODEL, baoFengTVList2.get(position));
+                    intent.putExtra(Config.INTENT_BBS_URL, Config.BAO_FENG_URL_2 + baoFengTVList.get(position).getCoverVideoUrl());
+                    mContext.startActivity(intent);
+                }
+            });
 
         } else if (holder instanceof MirrorViewHolder) {
             MirrorViewHolder mirrorViewHolder = (MirrorViewHolder) holder;
@@ -401,6 +443,15 @@ public class MalUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 mirrorViewHolder.ReHead.setVisibility(View.VISIBLE);
                 mirrorViewHolder.tvType.setText(baofengMirror.get(0).getCoverType());
             }
+            mAdapter.setListener(new OnCommonListener() {
+                @Override
+                public void onItemClickListener(int position, List<CoverModel> listOne, List<CoverModel> listTwo) {
+                    Intent intent = new Intent(mContext, WebActivity.class);
+                    intent.putExtra(Config.INTENT_COMM_MODEL, baofengMirror2.get(position));
+                    intent.putExtra(Config.INTENT_BBS_URL, Config.BAO_FENG_URL_2 + baofengMirror.get(position).getCoverVideoUrl());
+                    mContext.startActivity(intent);
+                }
+            });
         } else if (holder instanceof FunViewHolder) {
             FunViewHolder funViewHolder = (FunViewHolder) holder;
             MalAdapter mAdapter = new MalAdapter(mContext, funList, funList2);
@@ -411,6 +462,15 @@ public class MalUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 funViewHolder.ReHead.setVisibility(View.VISIBLE);
                 funViewHolder.tvType.setText(funList.get(0).getCoverType());
             }
+            mAdapter.setListener(new OnCommonListener() {
+                @Override
+                public void onItemClickListener(int position, List<CoverModel> listOne, List<CoverModel> listTwo) {
+                    Intent intent = new Intent(mContext, WebActivity.class);
+                    intent.putExtra(Config.INTENT_COMM_MODEL, funList2.get(position));
+                    intent.putExtra(Config.INTENT_BBS_URL, Config.BAO_FENG_URL_2 + funList.get(position).getCoverVideoUrl());
+                    mContext.startActivity(intent);
+                }
+            });
 
         } else if (holder instanceof ClothesViewHolder) {
             ClothesViewHolder clothesViewHolder = (ClothesViewHolder) holder;
@@ -422,6 +482,15 @@ public class MalUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 clothesViewHolder.ReHead.setVisibility(View.VISIBLE);
                 clothesViewHolder.tvType.setText(clothesList.get(0).getCoverType());
             }
+            mAdapter.setListener(new OnCommonListener() {
+                @Override
+                public void onItemClickListener(int position, List<CoverModel> listOne, List<CoverModel> listTwo) {
+                    Intent intent = new Intent(mContext, WebActivity.class);
+                    intent.putExtra(Config.INTENT_COMM_MODEL, clothesList2.get(position));
+                    intent.putExtra(Config.INTENT_BBS_URL, Config.BAO_FENG_URL_2 + clothesList.get(position).getCoverVideoUrl());
+                    mContext.startActivity(intent);
+                }
+            });
 
         } else if (holder instanceof MilkViewHolder) {
             MilkViewHolder milkViewHolder = (MilkViewHolder) holder;
@@ -433,6 +502,15 @@ public class MalUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 milkViewHolder.ReHead.setVisibility(View.VISIBLE);
                 milkViewHolder.tvType.setText(milkList.get(0).getCoverType());
             }
+            mAdapter.setListener(new OnCommonListener() {
+                @Override
+                public void onItemClickListener(int position, List<CoverModel> listOne, List<CoverModel> listTwo) {
+                    Intent intent = new Intent(mContext, WebActivity.class);
+                    intent.putExtra(Config.INTENT_COMM_MODEL, milkList2.get(position));
+                    intent.putExtra(Config.INTENT_BBS_URL, Config.BAO_FENG_URL_2 + milkList.get(position).getCoverVideoUrl());
+                    mContext.startActivity(intent);
+                }
+            });
         } else if (holder instanceof HomeUIAdapter.EndHolder) {
             HomeUIAdapter.EndHolder endHolder = (HomeUIAdapter.EndHolder) holder;
 //            if (itemWidth != 0) {

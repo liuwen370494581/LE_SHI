@@ -17,6 +17,7 @@ import star.liuwen.com.le_shi.R;
 
 /**
  * Created by liuwen on 2017/11/10.
+ * 商城资源
  */
 public class MalAction {
 

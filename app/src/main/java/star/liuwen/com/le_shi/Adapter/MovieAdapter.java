@@ -1,6 +1,7 @@
 package star.liuwen.com.le_shi.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,6 +15,9 @@ import java.util.List;
 import cn.bingoogolapple.androidcommon.adapter.BGAOnRVItemClickListener;
 import cn.bingoogolapple.androidcommon.adapter.BGARecyclerViewAdapter;
 import cn.bingoogolapple.androidcommon.adapter.BGAViewHolderHelper;
+import star.liuwen.com.le_shi.Activity.WebActivity;
+import star.liuwen.com.le_shi.Base.Config;
+import star.liuwen.com.le_shi.Listener.OnCommonListener;
 import star.liuwen.com.le_shi.Model.CoverModel;
 import star.liuwen.com.le_shi.R;
 import star.liuwen.com.le_shi.Utils.GlideUtils;
@@ -269,6 +273,15 @@ public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 vipHolder.ReHead.setVisibility(View.VISIBLE);
                 vipHolder.tvType.setText(vipList.get(0).getCoverType());
             }
+            mAdapter.setListener(new OnCommonListener() {
+                @Override
+                public void onItemClickListener(int position, List<CoverModel> listOne, List<CoverModel> listTwo) {
+                    Intent intent = new Intent(mContext, WebActivity.class);
+                    intent.putExtra(Config.INTENT_COMM_MODEL, listOne.get(position));
+                    intent.putExtra(Config.INTENT_BBS_URL, Config.BAO_FENG_URL_2 + listOne.get(position).getCoverVideoUrl());
+                    mContext.startActivity(intent);
+                }
+            });
         } else if (holder instanceof PopularHolder) {
             PopularHolder popularHolder = (PopularHolder) holder;
             PopAndCityLoveAndXuanningAdapter mAdapter = new PopAndCityLoveAndXuanningAdapter(mContext, mostPopularList, mostPopularList2, false);
@@ -279,6 +292,15 @@ public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 popularHolder.ReHead.setVisibility(View.VISIBLE);
                 popularHolder.tvType.setText(mostPopularList.get(0).getCoverType());
             }
+            mAdapter.setListener(new OnCommonListener() {
+                @Override
+                public void onItemClickListener(int position, List<CoverModel> listOne, List<CoverModel> listTwo) {
+                    Intent intent = new Intent(mContext, WebActivity.class);
+                    intent.putExtra(Config.INTENT_COMM_MODEL, listOne.get(position));
+                    intent.putExtra(Config.INTENT_BBS_URL, Config.BAO_FENG_URL_2 + listOne.get(position).getCoverVideoUrl());
+                    mContext.startActivity(intent);
+                }
+            });
 
         } else if (holder instanceof HuaYuHolder) {
             HuaYuHolder huaYuHolder = (HuaYuHolder) holder;
@@ -290,6 +312,15 @@ public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 huaYuHolder.ReHead.setVisibility(View.VISIBLE);
                 huaYuHolder.tvType.setText(huaYuList.get(0).getCoverType());
             }
+            mAdapter.setListener(new OnCommonListener() {
+                @Override
+                public void onItemClickListener(int position, List<CoverModel> listOne, List<CoverModel> listTwo) {
+                    Intent intent = new Intent(mContext, WebActivity.class);
+                    intent.putExtra(Config.INTENT_COMM_MODEL, listOne.get(position));
+                    intent.putExtra(Config.INTENT_BBS_URL, Config.BAO_FENG_URL_2 + listOne.get(position).getCoverVideoUrl());
+                    mContext.startActivity(intent);
+                }
+            });
         } else if (holder instanceof OuMeiHolder) {
             OuMeiHolder ouMeiHolder = (OuMeiHolder) holder;
             PopAndCityLoveAndXuanningAdapter mAdapter = new PopAndCityLoveAndXuanningAdapter(mContext, ouMeiList, ouMeiList2, false);
@@ -300,6 +331,15 @@ public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 ouMeiHolder.ReHead.setVisibility(View.VISIBLE);
                 ouMeiHolder.tvType.setText(ouMeiList.get(0).getCoverType());
             }
+            mAdapter.setListener(new OnCommonListener() {
+                @Override
+                public void onItemClickListener(int position, List<CoverModel> listOne, List<CoverModel> listTwo) {
+                    Intent intent = new Intent(mContext, WebActivity.class);
+                    intent.putExtra(Config.INTENT_COMM_MODEL, listOne.get(position));
+                    intent.putExtra(Config.INTENT_BBS_URL, Config.BAO_FENG_URL_2 + listOne.get(position).getCoverVideoUrl());
+                    mContext.startActivity(intent);
+                }
+            });
         } else if (holder instanceof WhiteLoveHolder) {
             WhiteLoveHolder whiteLoveHolder = (WhiteLoveHolder) holder;
             CommAdapter commAdapter = new CommAdapter(whiteLoveHolder.mRecyclerView);
@@ -311,6 +351,15 @@ public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 whiteLoveHolder.tvType.setText(whiteLoveList.get(0).getCoverType());
             }
             whiteLoveHolder.mRecyclerView.setAdapter(commAdapter);
+            commAdapter.setOnRVItemClickListener(new BGAOnRVItemClickListener() {
+                @Override
+                public void onRVItemClick(ViewGroup parent, View itemView, int position) {
+                    Intent intent = new Intent(mContext, WebActivity.class);
+                    intent.putExtra(Config.INTENT_COMM_MODEL, whiteLoveList.get(position));
+                    intent.putExtra(Config.INTENT_BBS_URL, Config.BAO_FENG_URL_2 + whiteLoveList.get(position).getCoverVideoUrl());
+                    mContext.startActivity(intent);
+                }
+            });
         } else if (holder instanceof DongHuaHolder) {
             DongHuaHolder dongHuaHolder = (DongHuaHolder) holder;
             CommAdapter commAdapter = new CommAdapter(dongHuaHolder.mRecyclerView);
@@ -322,6 +371,15 @@ public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 dongHuaHolder.ReHead.setVisibility(View.VISIBLE);
                 dongHuaHolder.tvType.setText(dongHuaList.get(0).getCoverType());
             }
+            commAdapter.setOnRVItemClickListener(new BGAOnRVItemClickListener() {
+                @Override
+                public void onRVItemClick(ViewGroup parent, View itemView, int position) {
+                    Intent intent = new Intent(mContext, WebActivity.class);
+                    intent.putExtra(Config.INTENT_COMM_MODEL, dongHuaList.get(position));
+                    intent.putExtra(Config.INTENT_BBS_URL, Config.BAO_FENG_URL_2 + dongHuaList.get(position).getCoverVideoUrl());
+                    mContext.startActivity(intent);
+                }
+            });
         } else if (holder instanceof HomeUIAdapter.EndHolder) {
             HomeUIAdapter.EndHolder endHolder = (HomeUIAdapter.EndHolder) holder;
 //            if (itemWidth != 0) {

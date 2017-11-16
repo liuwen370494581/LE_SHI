@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -23,11 +24,12 @@ import cn.bingoogolapple.androidcommon.adapter.BGARecyclerViewAdapter;
 import cn.bingoogolapple.androidcommon.adapter.BGAViewHolderHelper;
 import star.liuwen.com.le_shi.Activity.WebActivity;
 import star.liuwen.com.le_shi.Base.Config;
-import star.liuwen.com.le_shi.Listener.OnChoiceListener;
+import star.liuwen.com.le_shi.Listener.OnChannelListener;
 import star.liuwen.com.le_shi.Listener.OnCommonListener;
 import star.liuwen.com.le_shi.Model.CoverModel;
 import star.liuwen.com.le_shi.R;
 import star.liuwen.com.le_shi.Utils.GlideUtils;
+import star.liuwen.com.le_shi.Utils.ToastUtils;
 
 /**
  * Created by liuwen on 2017/10/16.
@@ -66,10 +68,10 @@ public class HomeUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     private List<CoverModel> overViewList2;
 
     private int itemWidth;
-    private OnChoiceListener mListener;
+    private OnChannelListener mChannelListener;
 
-    public void setListener(OnChoiceListener listener) {
-        mListener = listener;
+    public void setListener(OnChannelListener listener) {
+        mChannelListener = listener;
     }
 
     public HomeUIAdapter(Context context, List<String> channelList, List<CoverModel> coverList, List<CoverModel> editList, List<CoverModel> editList2, List<CoverModel> sportsList, List<CoverModel> tvList, List<CoverModel> movieList, List<CoverModel> dongManList, List<CoverModel> zongYiList, List<CoverModel> education, List<CoverModel> weiMovieList, List<CoverModel> musicList, List<CoverModel> overViewList, List<CoverModel> overViewList2, int itemWidth) {
@@ -105,6 +107,7 @@ public class HomeUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         musicList.clear();//音乐
         overViewList.clear();//全景
         overViewList2.clear();
+        channelList.clear();
     }
 
 
@@ -341,11 +344,11 @@ public class HomeUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             final GridLayoutManager manager = new GridLayoutManager(mContext, 4, LinearLayoutManager.VERTICAL, false);
             channelHolder.mRecyclerView.setLayoutManager(manager);
             channelHolder.mRecyclerView.setAdapter(channelAdapter);
-            channelAdapter.setListener(new OnCommonListener() {
+            channelAdapter.setListener(new OnChannelListener() {
                 @Override
                 public void onItemClickListener(int position, List<String> list) {
-                    if (mListener != null) {
-                        mListener.onItemClickListener(position);
+                    if (mChannelListener != null) {
+                        mChannelListener.onItemClickListener(position, channelList);
                     }
                 }
             });
@@ -360,6 +363,15 @@ public class HomeUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 sportsHolder.ReHead.setVisibility(View.VISIBLE);
                 sportsHolder.tvType.setText(sportsList.get(0).getCoverType());
             }
+            commAdapter.setOnRVItemClickListener(new BGAOnRVItemClickListener() {
+                @Override
+                public void onRVItemClick(ViewGroup parent, View itemView, int position) {
+                    Intent intent = new Intent(mContext, WebActivity.class);
+                    intent.putExtra(Config.INTENT_COMM_MODEL, sportsList.get(position));
+                    intent.putExtra(Config.INTENT_BBS_URL, Config.BAO_FENG_URL_2 + sportsList.get(position).getCoverVideoUrl());
+                    mContext.startActivity(intent);
+                }
+            });
 
         } else if (holder instanceof EditHolder) {
             EditHolder editHolder = (EditHolder) holder;
@@ -371,7 +383,15 @@ public class HomeUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 editHolder.ReHead.setVisibility(View.VISIBLE);
                 editHolder.tvType.setText(editList.get(0).getCoverType());
             }
-
+            editAndOverViewAdapter.setListener(new OnCommonListener() {
+                @Override
+                public void onItemClickListener(int position, List<CoverModel> listOne, List<CoverModel> listTwo) {
+                    Intent intent = new Intent(mContext, WebActivity.class);
+                    intent.putExtra(Config.INTENT_COMM_MODEL, listOne.get(position));
+                    intent.putExtra(Config.INTENT_BBS_URL, Config.BAO_FENG_URL_2 + listOne.get(position).getCoverVideoUrl());
+                    mContext.startActivity(intent);
+                }
+            });
 
         } else if (holder instanceof TvHolder) {
             TvHolder tvHolder = (TvHolder) holder;
@@ -388,7 +408,8 @@ public class HomeUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 @Override
                 public void onRVItemClick(ViewGroup parent, View itemView, int position) {
                     Intent intent = new Intent(mContext, WebActivity.class);
-                    intent.putExtra(Config.INTENT_BBS_URL, Config.BAO_FENG_URL_2+tvList.get(position).getCoverVideoUrl());
+                    intent.putExtra(Config.INTENT_COMM_MODEL, tvList.get(position));
+                    intent.putExtra(Config.INTENT_BBS_URL, Config.BAO_FENG_URL_2 + tvList.get(position).getCoverVideoUrl());
                     mContext.startActivity(intent);
                 }
             });
@@ -408,7 +429,8 @@ public class HomeUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 @Override
                 public void onRVItemClick(ViewGroup parent, View itemView, int position) {
                     Intent intent = new Intent(mContext, WebActivity.class);
-                    intent.putExtra(Config.INTENT_BBS_URL, movieList.get(position).getCoverVideoUrl());
+                    intent.putExtra(Config.INTENT_COMM_MODEL, movieList.get(position));
+                    intent.putExtra(Config.INTENT_BBS_URL, Config.BAO_FENG_URL_2 + movieList.get(position).getCoverVideoUrl());
                     mContext.startActivity(intent);
                 }
             });
@@ -427,7 +449,8 @@ public class HomeUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 @Override
                 public void onRVItemClick(ViewGroup parent, View itemView, int position) {
                     Intent intent = new Intent(mContext, WebActivity.class);
-                    intent.putExtra(Config.INTENT_BBS_URL, dongManList.get(position).getCoverVideoUrl());
+                    intent.putExtra(Config.INTENT_COMM_MODEL, dongManList.get(position));
+                    intent.putExtra(Config.INTENT_BBS_URL, Config.BAO_FENG_URL_2 + dongManList.get(position).getCoverVideoUrl());
                     mContext.startActivity(intent);
                 }
             });
@@ -446,7 +469,8 @@ public class HomeUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 @Override
                 public void onRVItemClick(ViewGroup parent, View itemView, int position) {
                     Intent intent = new Intent(mContext, WebActivity.class);
-                    intent.putExtra(Config.INTENT_BBS_URL, zongYiList.get(position).getCoverVideoUrl());
+                    intent.putExtra(Config.INTENT_COMM_MODEL, zongYiList.get(position));
+                    intent.putExtra(Config.INTENT_BBS_URL, Config.BAO_FENG_URL_2 + zongYiList.get(position).getCoverVideoUrl());
                     mContext.startActivity(intent);
                 }
             });
@@ -466,7 +490,8 @@ public class HomeUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 @Override
                 public void onRVItemClick(ViewGroup parent, View itemView, int position) {
                     Intent intent = new Intent(mContext, WebActivity.class);
-                    intent.putExtra(Config.INTENT_BBS_URL, education.get(position).getCoverVideoUrl());
+                    intent.putExtra(Config.INTENT_COMM_MODEL, education.get(position));
+                    intent.putExtra(Config.INTENT_BBS_URL, Config.BAO_FENG_URL_2 + education.get(position).getCoverVideoUrl());
                     mContext.startActivity(intent);
                 }
             });
@@ -486,7 +511,8 @@ public class HomeUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 @Override
                 public void onRVItemClick(ViewGroup parent, View itemView, int position) {
                     Intent intent = new Intent(mContext, WebActivity.class);
-                    intent.putExtra(Config.INTENT_BBS_URL, weiMovieList.get(position).getCoverVideoUrl());
+                    intent.putExtra(Config.INTENT_COMM_MODEL, weiMovieList.get(position));
+                    intent.putExtra(Config.INTENT_BBS_URL, Config.BAO_FENG_URL_2 + weiMovieList.get(position).getCoverVideoUrl());
                     mContext.startActivity(intent);
                 }
             });
@@ -506,7 +532,8 @@ public class HomeUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 @Override
                 public void onRVItemClick(ViewGroup parent, View itemView, int position) {
                     Intent intent = new Intent(mContext, WebActivity.class);
-                    intent.putExtra(Config.INTENT_BBS_URL, musicList.get(position).getCoverVideoUrl());
+                    intent.putExtra(Config.INTENT_COMM_MODEL, musicList.get(position));
+                    intent.putExtra(Config.INTENT_BBS_URL, Config.BAO_FENG_URL_2 + musicList.get(position).getCoverVideoUrl());
                     mContext.startActivity(intent);
                 }
             });
@@ -521,6 +548,8 @@ public class HomeUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 overViewHolder.ReHead.setVisibility(View.VISIBLE);
                 overViewHolder.tvType.setText(overViewList.get(0).getCoverType());
             }
+
+
         } else if (holder instanceof EndHolder) {
             EndHolder endHolder = (EndHolder) holder;
             if (itemWidth != 0) {

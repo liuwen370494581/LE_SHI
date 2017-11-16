@@ -20,7 +20,7 @@ import star.liuwen.com.le_shi.Base.BaseFragment;
 import star.liuwen.com.le_shi.Base.Config;
 import star.liuwen.com.le_shi.Jsoup.Action.ActionCallBack;
 import star.liuwen.com.le_shi.Jsoup.Action.MainUIAction;
-import star.liuwen.com.le_shi.Listener.OnChoiceListener;
+import star.liuwen.com.le_shi.Listener.OnChannelListener;
 import star.liuwen.com.le_shi.Model.CoverModel;
 import star.liuwen.com.le_shi.R;
 import star.liuwen.com.le_shi.Utils.DensityUtil;
@@ -101,9 +101,10 @@ public class ChoiceFragment extends BaseFragment {
 
 
     private void setListener() {
-        mAdapter.setListener(new OnChoiceListener() {
+
+        mAdapter.setListener(new OnChannelListener() {
             @Override
-            public void onItemClickListener(int position) {
+            public void onItemClickListener(int position, List<String> list) {
                 mRecyclerView.smoothScrollToPosition(position + 3);
                 btnClickMe.setVisibility(View.VISIBLE);
             }
@@ -141,6 +142,7 @@ public class ChoiceFragment extends BaseFragment {
         mStateView.setOnRetryClickListener(new StateView.OnRetryClickListener() {
             @Override
             public void onRetryClick() {
+                mAdapter.clearAllData();
                 LoadData();
             }
         });

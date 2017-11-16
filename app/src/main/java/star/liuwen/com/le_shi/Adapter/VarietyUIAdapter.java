@@ -1,6 +1,7 @@
 package star.liuwen.com.le_shi.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,10 +15,13 @@ import java.util.List;
 import cn.bingoogolapple.androidcommon.adapter.BGAOnRVItemClickListener;
 import cn.bingoogolapple.androidcommon.adapter.BGARecyclerViewAdapter;
 import cn.bingoogolapple.androidcommon.adapter.BGAViewHolderHelper;
+import star.liuwen.com.le_shi.Activity.WebActivity;
+import star.liuwen.com.le_shi.Base.Config;
+import star.liuwen.com.le_shi.Listener.OnChannelListener;
+import star.liuwen.com.le_shi.Listener.OnCommonListener;
 import star.liuwen.com.le_shi.Model.CoverModel;
 import star.liuwen.com.le_shi.R;
 import star.liuwen.com.le_shi.Utils.GlideUtils;
-import star.liuwen.com.le_shi.Utils.ToastUtils;
 
 /**
  * Created by liuwen on 2017/10/19.
@@ -42,6 +46,12 @@ public class VarietyUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     private final static int BAO_FENG_VIEW_TYPE = 5;//暴风出品
     private final static int END_VIEW_TYPE = 6;
     private Context mContext;
+
+    private OnChannelListener mOnChannelListener;
+
+    public void setListener(OnChannelListener listener) {
+        mOnChannelListener = listener;
+    }
 
 
     public VarietyUIAdapter(Context context, List<String> channelList, List<CoverModel> coverList, List<CoverModel> highlightsList, List<CoverModel> highlightsList2, List<CoverModel> hotPlayList, List<CoverModel> varietyList, List<CoverModel> varietyList2, List<CoverModel> baoFengList, List<CoverModel> baoFengList2, int itemWidth) {
@@ -208,10 +218,18 @@ public class VarietyUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             setBanner(bannerHolder);
         } else if (holder instanceof HomeUIAdapter.ChannelHolder) {
             HomeUIAdapter.ChannelHolder channelHolder = (HomeUIAdapter.ChannelHolder) holder;
-            ChannelAdapter channelAdapter = new ChannelAdapter(channelList,mContext);
+            ChannelAdapter channelAdapter = new ChannelAdapter(channelList, mContext);
             final GridLayoutManager manager = new GridLayoutManager(mContext, 4, LinearLayoutManager.VERTICAL, false);
             channelHolder.mRecyclerView.setLayoutManager(manager);
             channelHolder.mRecyclerView.setAdapter(channelAdapter);
+            channelAdapter.setListener(new OnChannelListener() {
+                @Override
+                public void onItemClickListener(int position, List<String> list) {
+                    if (mOnChannelListener != null) {
+                        mOnChannelListener.onItemClickListener(position, list);
+                    }
+                }
+            });
         } else if (holder instanceof HighlightHolder) {
             HighlightHolder highlightHolder = (HighlightHolder) holder;
             PopAndCityLoveAndXuanningAdapter mAdapter = new PopAndCityLoveAndXuanningAdapter(mContext, highlightsList, highlightsList2, true);
@@ -222,6 +240,15 @@ public class VarietyUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 highlightHolder.ReHead.setVisibility(View.VISIBLE);
                 highlightHolder.tvType.setText(highlightsList.get(0).getCoverType());
             }
+            mAdapter.setListener(new OnCommonListener() {
+                @Override
+                public void onItemClickListener(int position, List<CoverModel> listOne, List<CoverModel> listTwo) {
+                    Intent intent = new Intent(mContext, WebActivity.class);
+                    intent.putExtra(Config.INTENT_COMM_MODEL, listOne.get(position));
+                    intent.putExtra(Config.INTENT_BBS_URL, Config.BAO_FENG_URL_2 + listOne.get(position).getCoverVideoUrl());
+                    mContext.startActivity(intent);
+                }
+            });
         } else if (holder instanceof VarietyHolder) {
             VarietyHolder varietyHolder = (VarietyHolder) holder;
             PopAndCityLoveAndXuanningAdapter mAdapter = new PopAndCityLoveAndXuanningAdapter(mContext, varietyList, varietyList2, true);
@@ -232,6 +259,15 @@ public class VarietyUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 varietyHolder.ReHead.setVisibility(View.VISIBLE);
                 varietyHolder.tvType.setText(varietyList.get(0).getCoverType());
             }
+            mAdapter.setListener(new OnCommonListener() {
+                @Override
+                public void onItemClickListener(int position, List<CoverModel> listOne, List<CoverModel> listTwo) {
+                    Intent intent = new Intent(mContext, WebActivity.class);
+                    intent.putExtra(Config.INTENT_COMM_MODEL, listOne.get(position));
+                    intent.putExtra(Config.INTENT_BBS_URL, Config.BAO_FENG_URL_2 + listOne.get(position).getCoverVideoUrl());
+                    mContext.startActivity(intent);
+                }
+            });
 
         } else if (holder instanceof BaoFengHolder) {
             BaoFengHolder baoFengHolder = (BaoFengHolder) holder;
@@ -243,6 +279,15 @@ public class VarietyUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 baoFengHolder.ReHead.setVisibility(View.VISIBLE);
                 baoFengHolder.tvType.setText(baoFengList.get(0).getCoverType());
             }
+            mAdapter.setListener(new OnCommonListener() {
+                @Override
+                public void onItemClickListener(int position, List<CoverModel> listOne, List<CoverModel> listTwo) {
+                    Intent intent = new Intent(mContext, WebActivity.class);
+                    intent.putExtra(Config.INTENT_COMM_MODEL, listOne.get(position));
+                    intent.putExtra(Config.INTENT_BBS_URL, Config.BAO_FENG_URL_2 + listOne.get(position).getCoverVideoUrl());
+                    mContext.startActivity(intent);
+                }
+            });
         } else if (holder instanceof TvUIAdapter.HotPlayHolder) {
             TvUIAdapter.HotPlayHolder hotPlayHolder = (TvUIAdapter.HotPlayHolder) holder;
             CommAdapter commAdapter = new CommAdapter(hotPlayHolder.mRecyclerView);
@@ -254,6 +299,15 @@ public class VarietyUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 hotPlayHolder.ReHead.setVisibility(View.VISIBLE);
                 hotPlayHolder.tvType.setText(hotPlayList.get(0).getCoverType());
             }
+            commAdapter.setOnRVItemClickListener(new BGAOnRVItemClickListener() {
+                @Override
+                public void onRVItemClick(ViewGroup parent, View itemView, int position) {
+                    Intent intent = new Intent(mContext, WebActivity.class);
+                    intent.putExtra(Config.INTENT_COMM_MODEL, hotPlayList.get(position));
+                    intent.putExtra(Config.INTENT_BBS_URL, Config.BAO_FENG_URL_2 + hotPlayList.get(position).getCoverVideoUrl());
+                    mContext.startActivity(intent);
+                }
+            });
         } else if (holder instanceof HomeUIAdapter.EndHolder) {
             HomeUIAdapter.EndHolder endHolder = (HomeUIAdapter.EndHolder) holder;
 //            if (itemWidth != 0) {
