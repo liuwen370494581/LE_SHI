@@ -26,7 +26,6 @@ public class PopAndCityLoveAndXuanningAdapter extends RecyclerView.Adapter<PopAn
     private List<CoverModel> mList;
     private List<CoverModel> mList2;
     private boolean isTvOrMovieView;
-
     private OnCommonListener mListener;
 
     public void setListener(OnCommonListener listener) {
@@ -45,6 +44,11 @@ public class PopAndCityLoveAndXuanningAdapter extends RecyclerView.Adapter<PopAn
         mList = list;
         mList2 = list2;
         this.isTvOrMovieView = isTvOrMovieView;
+    }
+
+    public void clearAllData() {
+        mList.clear();
+        mList2.clear();
     }
 
     @Override

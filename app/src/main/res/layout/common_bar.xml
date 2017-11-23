@@ -54,7 +54,8 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:orientation="horizontal"
-        android:paddingRight="10dp">
+        android:paddingRight="10dp"
+        android:visibility="gone">
 
         <TextView
             android:id="@+id/toolbar_righ_tv"
@@ -71,7 +72,6 @@
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_gravity="center"
-            android:src="@null"
-            android:visibility="gone"/>
+            android:src="@mipmap/icon_choice"/>
     </LinearLayout>
 </RelativeLayout>

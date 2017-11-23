@@ -425,13 +425,11 @@ public class VipUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     }
 
     private void setBanner(HomeUIAdapter.BannerHolder channelHolder) {
-        BannerAdapter mBannerAdapter = new BannerAdapter(mContext, coverList);
+        BannerAdapter mBannerAdapter = new BannerAdapter(mContext.getApplicationContext(), coverList);
         channelHolder.viewpager.setAdapter(mBannerAdapter);
         channelHolder.viewpager.setLooperPic(true);
         channelHolder.indicator.setViewPager(channelHolder.viewpager);
     }
-
-
     public static class NewFilmRecommendHolder extends RecyclerView.ViewHolder {
         RecyclerView mRecyclerView;
         RelativeLayout ReHead;

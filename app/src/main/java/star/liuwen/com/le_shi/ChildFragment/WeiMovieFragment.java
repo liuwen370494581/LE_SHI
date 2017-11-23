@@ -81,6 +81,7 @@ public class WeiMovieFragment extends BaseFragment implements BGARefreshLayout.B
         mStateView.setOnRetryClickListener(new StateView.OnRetryClickListener() {
             @Override
             public void onRetryClick() {
+                mAdapter.clearAllData();
                 loadDate();
             }
         });

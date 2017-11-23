@@ -154,7 +154,7 @@ public class LiveFragment extends BaseFragment {
 
         public void setPosition(int position) {
             this.mPosition = position;
-            mAdapter.notifyDataSetChanged();
+            notifyDataSetChanged();
 
         }
 

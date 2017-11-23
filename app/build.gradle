@@ -40,5 +40,8 @@ dependencies {
     //动画库
     compile 'com.nineoldandroids:library:2.4.0'
     compile 'com.github.nukc.stateview:library:1.2.1'
+    //内存检测工具
+    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5'
+    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
 
 }

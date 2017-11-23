@@ -64,6 +64,7 @@ public class MovieFragment extends BaseFragment {
         mStateView.setOnRetryClickListener(new StateView.OnRetryClickListener() {
             @Override
             public void onRetryClick() {
+                mAdapter.clearAllData();
                 LoadData();
             }
         });

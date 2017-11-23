@@ -171,7 +171,17 @@ public class VarietyUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         }
         notifyDataSetChanged();
     }
-
+    public void clearAllData() {
+        channelList.clear();
+        coverList.clear();
+        highlightsList.clear();
+        highlightsList2.clear();
+        hotPlayList.clear();
+        varietyList.clear();
+        varietyList2.clear();
+        baoFengList.clear();
+        baoFengList2.clear();
+    }
 
     public static boolean isListNotEmpty(List list) {
         return list != null && !list.isEmpty();

@@ -207,6 +207,21 @@ public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         notifyDataSetChanged();
     }
 
+    public void clearAllData() {
+        channelList.clear();
+        coverList.clear();
+        vipList.clear();
+        vipList2.clear();
+        mostPopularList.clear();
+        mostPopularList2.clear();
+        huaYuList.clear();
+        huaYuList2.clear();
+        ouMeiList.clear();
+        ouMeiList2.clear();
+        whiteLoveList.clear();
+        dongHuaList.clear();
+    }
+
     public static boolean isListNotEmpty(List list) {
         return list != null && !list.isEmpty();
     }
@@ -259,7 +274,7 @@ public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             setBanner(bannerHolder);
         } else if (holder instanceof HomeUIAdapter.ChannelHolder) {
             HomeUIAdapter.ChannelHolder channelHolder = (HomeUIAdapter.ChannelHolder) holder;
-            ChannelAdapter channelAdapter = new ChannelAdapter(channelList,mContext);
+            ChannelAdapter channelAdapter = new ChannelAdapter(channelList, mContext);
             final GridLayoutManager manager = new GridLayoutManager(mContext, 4, LinearLayoutManager.VERTICAL, false);
             channelHolder.mRecyclerView.setLayoutManager(manager);
             channelHolder.mRecyclerView.setAdapter(channelAdapter);
@@ -399,7 +414,7 @@ public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
 
     private void setBanner(HomeUIAdapter.BannerHolder channelHolder) {
-        BannerAdapter mBannerAdapter = new BannerAdapter(mContext, coverList);
+        BannerAdapter mBannerAdapter = new BannerAdapter(mContext.getApplicationContext(), coverList);
         channelHolder.viewpager.setAdapter(mBannerAdapter);
         channelHolder.viewpager.setLooperPic(true);
         channelHolder.indicator.setViewPager(channelHolder.viewpager);

@@ -147,7 +147,15 @@ public class DongManUiAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         }
         notifyDataSetChanged();
     }
-
+    public void clearAllData() {
+        channelList.clear();
+        coverList.clear();
+        hotPlayList.clear();
+        baoFengList.clear();
+        qinZiList.clear();
+        reviewClassicList.clear();
+        everyDateUpdateList.clear();
+    }
     public static boolean isListNotEmpty(List list) {
         return list != null && !list.isEmpty();
     }
@@ -330,7 +338,7 @@ public class DongManUiAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
 
     private void setBanner(HomeUIAdapter.BannerHolder channelHolder) {
-        BannerAdapter mBannerAdapter = new BannerAdapter(mContext, coverList);
+        BannerAdapter mBannerAdapter = new BannerAdapter(mContext.getApplicationContext(), coverList);
         channelHolder.viewpager.setAdapter(mBannerAdapter);
         channelHolder.viewpager.setLooperPic(true);
         channelHolder.indicator.setViewPager(channelHolder.viewpager);

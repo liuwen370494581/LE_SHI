@@ -1,9 +1,11 @@
 package star.liuwen.com.le_shi.ChildFragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,12 +16,14 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import star.liuwen.com.le_shi.Activity.ChoiceActivity;
 import star.liuwen.com.le_shi.Adapter.TvUIAdapter;
 import star.liuwen.com.le_shi.Base.BaseFragment;
 import star.liuwen.com.le_shi.Base.Config;
 import star.liuwen.com.le_shi.Jsoup.Action.ActionCallBack;
 import star.liuwen.com.le_shi.Jsoup.Action.MainUIAction;
 import star.liuwen.com.le_shi.Jsoup.Action.TvAction;
+import star.liuwen.com.le_shi.Listener.OnChannelListener;
 import star.liuwen.com.le_shi.Model.CoverModel;
 import star.liuwen.com.le_shi.R;
 import star.liuwen.com.le_shi.Utils.DensityUtil;
@@ -63,6 +67,7 @@ public class TvFragment extends BaseFragment {
         mStateView.setOnRetryClickListener(new StateView.OnRetryClickListener() {
             @Override
             public void onRetryClick() {
+                mAdapter.clearAllData();
                 LoadData();
             }
         });
@@ -258,5 +263,11 @@ public class TvFragment extends BaseFragment {
 
             }
         });
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.e(Config.TAG, "销毁了");
     }
 }

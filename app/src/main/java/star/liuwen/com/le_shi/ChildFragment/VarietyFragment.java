@@ -60,6 +60,7 @@ public class VarietyFragment extends BaseFragment {
         mStateView.setOnRetryClickListener(new StateView.OnRetryClickListener() {
             @Override
             public void onRetryClick() {
+                mAdapter.clearAllData();
                 loadData();
             }
         });

@@ -100,6 +100,7 @@ public class MalAdapter extends RecyclerView.Adapter<MalAdapter.MyViewHolder> {
         TextView tvPrice;
 
 
+
         public MyViewHolder(View view) {
             super(view);
             imgUrl = (ImageView) view.findViewById(R.id.image_hot);

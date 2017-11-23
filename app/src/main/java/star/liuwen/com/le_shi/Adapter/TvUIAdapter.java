@@ -15,6 +15,7 @@ import java.util.List;
 import cn.bingoogolapple.androidcommon.adapter.BGAOnRVItemClickListener;
 import cn.bingoogolapple.androidcommon.adapter.BGARecyclerViewAdapter;
 import cn.bingoogolapple.androidcommon.adapter.BGAViewHolderHelper;
+import star.liuwen.com.le_shi.Activity.ChoiceActivity;
 import star.liuwen.com.le_shi.Activity.WebActivity;
 import star.liuwen.com.le_shi.Base.Config;
 import star.liuwen.com.le_shi.Listener.OnChannelListener;
@@ -203,6 +204,20 @@ public class TvUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         notifyDataSetChanged();
     }
 
+    public void clearAllData() {
+        channelList.clear();
+        coverList.clear();
+        hotPlayList.clear();
+        popularList.clear();
+        popularList2.clear();
+        cityLoveList.clear();
+        cityLoveList2.clear();
+        xuanNingList.clear();
+        xuanNingList2.clear();
+        netWorkList.clear();
+        kangWarList.clear();
+    }
+
     public static boolean isListNotEmpty(List list) {
         return list != null && !list.isEmpty();
     }
@@ -262,9 +277,8 @@ public class TvUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             channelAdapter.setListener(new OnChannelListener() {
                 @Override
                 public void onItemClickListener(int position, List<String> list) {
-                    if (mOnChannelListener != null) {
-                        mOnChannelListener.onItemClickListener(position, list);
-                    }
+                    Intent intent = new Intent(mContext.getApplicationContext(), ChoiceActivity.class);
+                    mContext.startActivity(intent);
                 }
             });
         } else if (holder instanceof HotPlayHolder) {
@@ -397,8 +411,9 @@ public class TvUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 //            }
         }
     }
+
     private void setBanner(HomeUIAdapter.BannerHolder channelHolder) {
-        BannerAdapter mBannerAdapter = new BannerAdapter(mContext, coverList);
+        BannerAdapter mBannerAdapter = new BannerAdapter(mContext.getApplicationContext(), coverList);
         channelHolder.viewpager.setAdapter(mBannerAdapter);
         channelHolder.viewpager.setLooperPic(true);
         channelHolder.indicator.setViewPager(channelHolder.viewpager);

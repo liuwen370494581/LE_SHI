@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
+import com.squareup.leakcanary.RefWatcher;
+
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
@@ -72,7 +74,6 @@ public abstract class BaseFragment extends Fragment {
     public abstract void initData();
 
 
-
     protected void openActivity(Class toActivity) {
         Intent intent = new Intent(getActivity(), toActivity);
         startActivity(intent);
@@ -98,6 +99,9 @@ public abstract class BaseFragment extends Fragment {
         if (isRegisterEventBus()) {
             EventBusUtil.unregister(this);
         }
+        //内存检测器
+        RefWatcher refWatcher = App.getRefWatcher(getActivity());
+        refWatcher.watch(this);
     }
 
     protected boolean isRegisterEventBus() {

@@ -62,7 +62,6 @@ public class UpgcFragment extends BaseFragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_upgc, container, false);
-
         initView(view);
         init();
         setListener();
@@ -84,7 +83,6 @@ public class UpgcFragment extends BaseFragment {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mAdapter = new MalUIAdapter(mCoverList, channelList, bannerList, dailySpecialList, dailySpecialList2, baoFengTVList, baoFengTVList2,
                 baofengMirror, baofengMirror2, funList, funList2, clothesList, clothesList2, sportsList, sportsList2, milkList, milkList2, getActivity(), itemWidth);
-
         mRecyclerView.setAdapter(mAdapter);
     }
 
@@ -340,6 +338,5 @@ public class UpgcFragment extends BaseFragment {
 
     @Override
     public void initData() {
-        Log.e(Config.TAG, "综艺=====懒加载");
     }
 }

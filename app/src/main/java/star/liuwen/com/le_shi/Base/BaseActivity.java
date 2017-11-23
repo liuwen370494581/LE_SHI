@@ -9,11 +9,14 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.squareup.leakcanary.RefWatcher;
+
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import star.liuwen.com.le_shi.EventBus.Event;
 import star.liuwen.com.le_shi.EventBus.EventBusUtil;
+import star.liuwen.com.le_shi.Listener.OnCommonBarListener;
 import star.liuwen.com.le_shi.R;
 import star.liuwen.com.le_shi.Utils.ActivityKiller;
 import star.liuwen.com.le_shi.Utils.StatusBarUtils;
@@ -24,7 +27,7 @@ import star.liuwen.com.le_shi.Utils.ToastUtils;
  * Created by liuwen on 2017/6/21.
  */
 public abstract class BaseActivity extends AppCompatActivity {
-    private LinearLayout lyCommonBar;
+    private LinearLayout lyCommonBar, lyRightBar;
     private TextView mTvCenter;//toobar中间文字
     private App mApp;
     private Context mActivityContext, mAppContext;//尽量地采用 Application Context 避免内存泄漏
@@ -110,6 +113,9 @@ public abstract class BaseActivity extends AppCompatActivity {
         if (isRegisterEventBus()) {
             EventBusUtil.unregister(this);
         }
+        //内存检测器
+        RefWatcher refWatcher = App.getRefWatcher(this);
+        refWatcher.watch(this);
     }
 
     protected void showLeftView() {
@@ -126,6 +132,22 @@ public abstract class BaseActivity extends AppCompatActivity {
         });
     }
 
+    protected void setRightListener(final OnCommonBarListener listener) {
+        lyRightBar = getView(R.id.right_view);
+        if (lyRightBar == null) {
+            return;
+        }
+        lyRightBar.setVisibility(View.VISIBLE);
+        lyRightBar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (listener != null) {
+                    listener.onRightChoiceListener();
+                }
+            }
+        });
+    }
+
     protected void setCenterText(String str) {
         mTvCenter = getView(R.id.title);
         if (mTvCenter == null) {
@@ -134,7 +156,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         mTvCenter.setText(str);
         mTvCenter.setVisibility(View.VISIBLE);
     }
-
 
 
     /**

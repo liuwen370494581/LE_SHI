@@ -524,7 +524,7 @@ public class MalUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     }
 
     private void setBanner(HomeUIAdapter.BannerHolder channelHolder) {
-        BannerAdapter mBannerAdapter = new BannerAdapter(mContext, mCoverList);
+        BannerAdapter mBannerAdapter = new BannerAdapter(mContext.getApplicationContext(), mCoverList);
         channelHolder.viewpager.setAdapter(mBannerAdapter);
         channelHolder.viewpager.setLooperPic(true);
         channelHolder.indicator.setViewPager(channelHolder.viewpager);

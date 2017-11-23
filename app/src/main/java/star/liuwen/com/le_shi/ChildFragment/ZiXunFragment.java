@@ -50,7 +50,18 @@ public class ZiXunFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_zi_xun, container, false);
         init();
         initView(view);
+        setListener();
         return view;
+    }
+
+    private void setListener() {
+        mStateView.setOnRetryClickListener(new StateView.OnRetryClickListener() {
+            @Override
+            public void onRetryClick() {
+                mAdapter.clearAllData();
+                loadDate();
+            }
+        });
     }
 
     private void init() {
@@ -78,6 +89,8 @@ public class ZiXunFragment extends BaseFragment {
 
     @Override
     public void initData() {
+
+
         if (!isLoad) {
             loadDate();
             isLoad = true;

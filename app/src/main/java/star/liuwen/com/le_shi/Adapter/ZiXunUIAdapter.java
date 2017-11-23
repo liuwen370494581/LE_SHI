@@ -195,6 +195,19 @@ public class ZiXunUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         }
         notifyDataSetChanged();
     }
+    public void clearAllData() {
+        coverList.clear();
+        ziXunRecommendList.clear();
+        headlinesList.clear();
+        baoXiaoRecommendList.clear();
+        strangeList.clear();
+        funList.clear();
+        starList.clear();
+        sportList.clear();
+        scienceList.clear();
+        musicList.clear();
+        gameList.clear();
+    }
 
     public static boolean isListNotEmpty(List list) {
         return list != null && !list.isEmpty();
@@ -476,7 +489,7 @@ public class ZiXunUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
 
     private void setBanner(HomeUIAdapter.BannerHolder channelHolder) {
-        BannerAdapter mBannerAdapter = new BannerAdapter(mContext, coverList);
+        BannerAdapter mBannerAdapter = new BannerAdapter(mContext.getApplicationContext(), coverList);
         channelHolder.viewpager.setAdapter(mBannerAdapter);
         channelHolder.viewpager.setLooperPic(true);
         channelHolder.indicator.setViewPager(channelHolder.viewpager);

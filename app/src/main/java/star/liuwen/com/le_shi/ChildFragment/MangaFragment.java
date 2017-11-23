@@ -11,20 +11,18 @@ import android.view.ViewGroup;
 import com.github.nukc.stateview.StateView;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 
 import star.liuwen.com.le_shi.Adapter.DongManUiAdapter;
 import star.liuwen.com.le_shi.Base.BaseFragment;
 import star.liuwen.com.le_shi.Base.Config;
-import star.liuwen.com.le_shi.DataEnage.DateEnage;
 import star.liuwen.com.le_shi.Jsoup.Action.ActionCallBack;
 import star.liuwen.com.le_shi.Jsoup.Action.MainUIAction;
 import star.liuwen.com.le_shi.Jsoup.Action.TvAction;
 import star.liuwen.com.le_shi.Model.CoverModel;
 import star.liuwen.com.le_shi.R;
-import star.liuwen.com.le_shi.Utils.DateTimeUtils;
 import star.liuwen.com.le_shi.Utils.DensityUtil;
 import star.liuwen.com.le_shi.Utils.NetUtil;
 
@@ -65,6 +63,7 @@ public class MangaFragment extends BaseFragment {
         mStateView.setOnRetryClickListener(new StateView.OnRetryClickListener() {
             @Override
             public void onRetryClick() {
+                mAdapter.clearAllData();
                 LoadDate();
             }
         });
@@ -88,8 +87,7 @@ public class MangaFragment extends BaseFragment {
         itemWidth = DensityUtil.getScreenWidth(getActivity());
         mRecyclerView = (RecyclerView) view.findViewById(R.id.dongman_recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-        initSizeAndDate();
+        getWeek();
     }
 
     @Override
@@ -207,42 +205,51 @@ public class MangaFragment extends BaseFragment {
         });
     }
 
-    private void initSizeAndDate() {
+    private void getWeek() {
         try {
-            String currentWeek = DateTimeUtils.getWeekOfDate(getActivity(), new Date());
-            if (currentWeek.equals(mContext.getString(R.string.mon))) {
-                start = 0;
-                size = 1;
-                date = "周一更新";
-            } else if (currentWeek.equals(getString(R.string.tue))) {
-                start = 1;
-                size = 2;
-                date = "周二更新";
-            } else if (currentWeek.equals(mContext.getString(R.string.wed))) {
-                start = 2;
-                size = 3;
-                date = "周三更新";
-            } else if (currentWeek.equals(mContext.getString(R.string.thu))) {
-                start = 3;
-                size = 4;
-                date = "周四更新";
-            } else if (currentWeek.equals(mContext.getString(R.string.wed))) {
-                start = 4;
-                size = 5;
-                date = "周五更新";
-            } else if (currentWeek.equals(mContext.getString(R.string.sun))) {
-                start = 5;
-                size = 6;
-                date = "周六更新";
-            } else if (currentWeek.equals(mContext.getString(R.string.sat))) {
-                start = 6;
-                size = 7;
-                date = "周日更新";
+            Calendar cal = Calendar.getInstance();
+            int i = cal.get(Calendar.DAY_OF_WEEK);
+            switch (i) {
+                case 1:
+                    start = 6;
+                    size = 7;
+                    date = "周日更新";
+                    break;
+                case 2:
+                    start = 0;
+                    size = 1;
+                    date = "周一更新";
+                    break;
+                case 3:
+                    start = 1;
+                    size = 2;
+                    date = "周二更新";
+                    break;
+                case 4:
+                    start = 2;
+                    size = 3;
+                    date = "周三更新";
+                    break;
+                case 5:
+                    start = 3;
+                    size = 4;
+                    date = "周四更新";
+                    break;
+                case 6:
+                    start = 4;
+                    size = 5;
+                    date = "周五更新";
+                    break;
+                case 7:
+                    start = 5;
+                    size = 6;
+                    date = "周六更新";
+                    break;
+                default:
+                    break;
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
-
 }

@@ -21,13 +21,4 @@
         <item>音乐</item>
         <item>微电影</item>
     </string-array>
-
-    <string name="sun">周日</string>
-    <string name="mon">周一</string>
-    <string name="tue">周二</string>
-    <string name="wed">周三</string>
-    <string name="thu">周四</string>
-    <string name="fri">周五</string>
-    <string name="sat">周六</string>
-
 </resources>
