@@ -13,6 +13,100 @@ import star.liuwen.com.le_shi.R;
 public class DateEnage {
 
 
+    public static List<String> getContentDate() {
+        List<String> list = new ArrayList<>();
+        list.add("电影");
+        list.add("电视剧");
+        list.add("动漫");
+        list.add("纪录片");
+        return list;
+    }
+
+    public static List<String> getSortDate() {
+        List<String> list = new ArrayList<>();
+        list.add("最热");
+        list.add("最新");
+        list.add("好评");
+        return list;
+    }
+
+    public static List<String> getTypeDate() {
+        List<String> list = new ArrayList<>();
+        list.add("全部");
+        list.add("喜剧");
+        list.add("动作");
+        list.add("恐怖");
+        list.add("动画");
+        list.add("警匪");
+        list.add("武侠");
+        list.add("战争");
+        list.add("短片");
+        list.add("爱情");
+        list.add("科幻");
+        list.add("奇幻");
+        list.add("犯罪");
+        list.add("冒险");
+        list.add("灾难");
+        list.add("伦理");
+        list.add("传记");
+        list.add("家庭");
+        list.add("记录");
+        list.add("惊悚");
+        list.add("历史");
+        list.add("悬疑");
+        list.add("歌舞");
+        list.add("体育");
+        return list;
+    }
+
+    public static List<String> getMoneyDate() {
+        List<String> list = new ArrayList<>();
+        list.add("全部");
+        list.add("免费");
+        list.add("影视会员");
+        return list;
+    }
+
+    public static List<String> getLocDate() {
+        List<String> list = new ArrayList<>();
+        list.add("全部");
+        list.add("内地");
+        list.add("美国");
+        list.add("香港");
+        list.add("英国");
+        list.add("法国");
+        list.add("俄罗斯");
+        list.add("新加坡");
+        list.add("加拿大");
+        list.add("台湾");
+        list.add("韩国");
+        list.add("泰国");
+        list.add("印度");
+        list.add("冒险");
+        list.add("日本");
+        list.add("西班牙");
+        list.add("马来西亚");
+        return list;
+    }
+
+    public static List<String> getYearDate() {
+        List<String> list = new ArrayList<>();
+        list.add("全部");
+        list.add("2017");
+        list.add("2016");
+        list.add("2015");
+        list.add("2014");
+        list.add("2013");
+        list.add("2012");
+        list.add("2011");
+        list.add("2010");
+        list.add("00年代");
+        list.add("90年代");
+        list.add("更早");
+        return list;
+    }
+
+
     public static List<HashMap<String, Object>> getChannelList() {
         List<HashMap<String, Object>> list = new ArrayList<>();
         HashMap<String, Object> map1 = new HashMap<>();
@@ -55,18 +149,18 @@ public class DateEnage {
     }
 
 
-public static List<String> getMalChannelList(){
-    List<String> list = new ArrayList<>();
-    list.add("暴风TV");
-    list.add("暴风魔镜");
-    list.add("暴风VIP");
-    list.add("娱乐周边");
-    list.add("超值套餐");
-    list.add("汽车车品");
-    list.add("运动户外");
-    list.add("鞋靴箱包");
-    return list;
-}
+    public static List<String> getMalChannelList() {
+        List<String> list = new ArrayList<>();
+        list.add("暴风TV");
+        list.add("暴风魔镜");
+        list.add("暴风VIP");
+        list.add("娱乐周边");
+        list.add("超值套餐");
+        list.add("汽车车品");
+        list.add("运动户外");
+        list.add("鞋靴箱包");
+        return list;
+    }
 
 
     //精选
@@ -82,7 +176,8 @@ public static List<String> getMalChannelList(){
         list.add("音乐");
         return list;
     }
-   //电视剧
+
+    //电视剧
     public static List<String> getTvChannelList() {
         List<String> list = new ArrayList<>();
         list.add("同步热播");
@@ -95,7 +190,8 @@ public static List<String> getMalChannelList(){
         list.add("筛选");
         return list;
     }
- //电影
+
+    //电影
     public static List<String> getMovieChannelList() {
         List<String> list = new ArrayList<>();
         list.add("精选");
@@ -109,7 +205,8 @@ public static List<String> getMalChannelList(){
 
         return list;
     }
-  //综艺
+
+    //综艺
     public static List<String> getZongYiChannelList() {
         List<String> list = new ArrayList<>();
         list.add("全部");
@@ -122,7 +219,8 @@ public static List<String> getMalChannelList(){
         list.add("节目单");
         return list;
     }
- //动漫
+
+    //动漫
     public static List<String> getDongManChannelList() {
         List<String> list = new ArrayList<>();
         list.add("热播");
