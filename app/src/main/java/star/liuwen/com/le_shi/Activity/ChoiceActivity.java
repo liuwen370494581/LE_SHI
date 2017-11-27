@@ -22,12 +22,6 @@ public class ChoiceActivity extends BaseActivity {
     private RecyclerView conditionRecyclerView;
     private ChoiceConditionAdapter mAdapter;
     private RelativeLayout mRelativeLayout;
-    private List<String> contentList;
-    private List<String> sortList;
-    private List<String> moneyList = new ArrayList<>();
-    private List<String> typeList;
-    private List<String> locList;
-    private List<String> yearList;
     private int itemWidth;
 
     @Override
