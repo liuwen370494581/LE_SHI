@@ -1,5 +1,6 @@
 package star.liuwen.com.le_shi.Activity;
 
+import android.support.v4.util.ArrayMap;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -7,11 +8,9 @@ import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
 
-import java.util.HashMap;
 
 import cn.bingoogolapple.androidcommon.adapter.BGARecyclerViewAdapter;
 import cn.bingoogolapple.androidcommon.adapter.BGAViewHolderHelper;
-import star.liuwen.com.le_shi.Adapter.ChannelAdapter;
 import star.liuwen.com.le_shi.Base.BaseActivity;
 import star.liuwen.com.le_shi.DataEnage.DateEnage;
 import star.liuwen.com.le_shi.R;
@@ -54,20 +53,19 @@ public class OpenVipActivity extends BaseActivity {
 
     }
 
-    private static class VipChannelAdapter extends BGARecyclerViewAdapter<HashMap<String, Object>> {
+    private static class VipChannelAdapter extends BGARecyclerViewAdapter<ArrayMap<String, Object>> {
         private int itemWidth;
 
         public VipChannelAdapter(RecyclerView recyclerView) {
             super(recyclerView, R.layout.item_channel);
         }
 
-
         public void setItemWidth(int itemWidth) {
             this.itemWidth = itemWidth;
         }
 
         @Override
-        protected void fillData(BGAViewHolderHelper helper, int position, HashMap<String, Object> model) {
+        protected void fillData(BGAViewHolderHelper helper, int position, ArrayMap<String, Object> model) {
             if (itemWidth != 0) {
                 helper.getView(R.id.id_item_layout).setLayoutParams(new ViewGroup.LayoutParams(itemWidth / 3, ViewGroup.LayoutParams.WRAP_CONTENT));
             }

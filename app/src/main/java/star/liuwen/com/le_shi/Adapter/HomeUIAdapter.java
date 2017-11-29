@@ -14,8 +14,6 @@ import android.widget.TextView;
 
 import com.hejunlin.superindicatorlibray.CircleIndicator;
 import com.hejunlin.superindicatorlibray.LoopViewPager;
-
-import java.util.HashMap;
 import java.util.List;
 
 import cn.bingoogolapple.androidcommon.adapter.BGAOnRVItemClickListener;
@@ -49,7 +47,6 @@ public class HomeUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     private final static int OVER_VIEW_TYPE = 11;//全景
     private final static int END_VIEW_TYPE = 12;//结束
 
-    private List<HashMap<String, Object>> channelList2;
     private List<String> channelList;//频道数据
     private List<CoverModel> coverList;//封面数据
     private List<CoverModel> editList;//编辑推荐

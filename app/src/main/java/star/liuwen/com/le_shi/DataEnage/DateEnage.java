@@ -1,7 +1,8 @@
 package star.liuwen.com.le_shi.DataEnage;
 
+import android.support.v4.util.ArrayMap;
+
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import star.liuwen.com.le_shi.Model.IndexModel;
@@ -107,33 +108,33 @@ public class DateEnage {
     }
 
 
-    public static List<HashMap<String, Object>> getChannelList() {
-        List<HashMap<String, Object>> list = new ArrayList<>();
-        HashMap<String, Object> map1 = new HashMap<>();
+    public static List<ArrayMap<String, Object>> getChannelList() {
+        List<ArrayMap<String, Object>> list = new ArrayList<>();
+        ArrayMap<String, Object> map1 = new ArrayMap<>();
         map1.put("title", "热门独享");
         map1.put("pic", R.mipmap.icon_video);
-        HashMap<String, Object> map2 = new HashMap<>();
+        ArrayMap<String, Object> map2 = new ArrayMap<>();
         map2.put("title", "跳过广告");
         map2.put("pic", R.mipmap.icon_add);
-        HashMap<String, Object> map3 = new HashMap<>();
+        ArrayMap<String, Object> map3 = new ArrayMap<>();
         map3.put("title", "大剧抢先看");
         map3.put("pic", R.mipmap.icon_daju);
-        HashMap<String, Object> map4 = new HashMap<>();
+        ArrayMap<String, Object> map4 = new ArrayMap<>();
         map4.put("title", "加速通道");
         map4.put("pic", R.mipmap.icon_speed);
-        HashMap<String, Object> map5 = new HashMap<>();
+        ArrayMap<String, Object> map5 = new ArrayMap<>();
         map5.put("title", "独享缓存");
         map5.put("pic", R.mipmap.icon_huancun);
-        HashMap<String, Object> map6 = new HashMap<>();
+        ArrayMap<String, Object> map6 = new ArrayMap<>();
         map6.put("title", "多视频缓存");
         map6.put("pic", R.mipmap.icon_duo_mei_ti);
-        HashMap<String, Object> map7 = new HashMap<>();
+        ArrayMap<String, Object> map7 = new ArrayMap<>();
         map7.put("title", "1080p高清");
         map7.put("pic", R.mipmap.icon_hd);
-        HashMap<String, Object> map8 = new HashMap<>();
+        ArrayMap<String, Object> map8 = new ArrayMap<>();
         map8.put("title", "多屏同步");
         map8.put("pic", R.mipmap.icon_duo);
-        HashMap<String, Object> map9 = new HashMap<>();
+        ArrayMap<String, Object> map9 = new ArrayMap<>();
         map9.put("title", "生态福利");
         map9.put("pic", R.mipmap.icon_fu_li);
         list.add(map1);
