@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import star.liuwen.com.le_shi.Activity.WebActivity;
@@ -106,7 +105,23 @@ public class MalUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     }
 
     public void clearAllData() {
-
+        mCoverList.clear();
+        channelList.clear();
+        bannerList.clear();
+        dailySpecialList.clear(); //今日特价
+        dailySpecialList2.clear();
+        baoFengTVList.clear();
+        baoFengTVList2.clear();
+        baofengMirror.clear();
+        baofengMirror2.clear();
+        funList.clear();
+        funList2.clear();
+        clothesList.clear();
+        clothesList2.clear();
+        sportsList.clear();
+        sportsList2.clear();
+        milkList.clear();
+        milkList2.clear();
     }
 
     public void updateChannelList(List<String> list) {
@@ -268,7 +283,7 @@ public class MalUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     }
 
 
-    public static boolean isListNotEmpty(List list) {
+    private static boolean isListNotEmpty(List list) {
         return list != null && !list.isEmpty();
     }
 

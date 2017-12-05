@@ -207,7 +207,7 @@ public class VipUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         notifyDataSetChanged();
     }
 
-    public static boolean isListNotEmpty(List list) {
+    private static boolean isListNotEmpty(List list) {
         return list != null && !list.isEmpty();
     }
 

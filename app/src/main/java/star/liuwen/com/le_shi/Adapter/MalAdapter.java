@@ -49,8 +49,6 @@ public class MalAdapter extends RecyclerView.Adapter<MalAdapter.MyViewHolder> {
         View view = LayoutInflater.from(mContext).inflate(isBannerOrTV ? R.layout.item_mal : R.layout.item_mal_2, parent, false);
         MyViewHolder holder = new MyViewHolder(view);
         return holder;
-
-
     }
 
     @Override

@@ -218,7 +218,7 @@ public class TvUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         kangWarList.clear();
     }
 
-    public static boolean isListNotEmpty(List list) {
+    private static boolean isListNotEmpty(List list) {
         return list != null && !list.isEmpty();
     }
 

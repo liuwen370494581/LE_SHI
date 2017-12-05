@@ -240,7 +240,7 @@ public class HomeUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     }
 
 
-    public static boolean isListNotEmpty(List list) {
+    private static boolean isListNotEmpty(List list) {
         return list != null && !list.isEmpty();
     }
 

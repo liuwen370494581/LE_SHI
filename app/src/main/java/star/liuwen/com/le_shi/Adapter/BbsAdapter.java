@@ -56,7 +56,7 @@ public class BbsAdapter extends RecyclerView.Adapter<BbsAdapter.MyViewHolder> {
     }
 
 
-    public static boolean isListNotEmpty(List list) {
+    private static boolean isListNotEmpty(List list) {
         return list != null && !list.isEmpty();
     }
 

@@ -156,7 +156,7 @@ public class DongManUiAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         reviewClassicList.clear();
         everyDateUpdateList.clear();
     }
-    public static boolean isListNotEmpty(List list) {
+    private static boolean isListNotEmpty(List list) {
         return list != null && !list.isEmpty();
     }
 

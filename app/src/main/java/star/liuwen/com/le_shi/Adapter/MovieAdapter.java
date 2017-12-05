@@ -21,7 +21,6 @@ import star.liuwen.com.le_shi.Listener.OnCommonListener;
 import star.liuwen.com.le_shi.Model.CoverModel;
 import star.liuwen.com.le_shi.R;
 import star.liuwen.com.le_shi.Utils.GlideUtils;
-import star.liuwen.com.le_shi.Utils.ToastUtils;
 
 /**
  * Created by liuwen on 2017/10/19.
@@ -222,7 +221,7 @@ public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         dongHuaList.clear();
     }
 
-    public static boolean isListNotEmpty(List list) {
+    private static boolean isListNotEmpty(List list) {
         return list != null && !list.isEmpty();
     }
 

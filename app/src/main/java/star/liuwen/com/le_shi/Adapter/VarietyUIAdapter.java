@@ -183,7 +183,7 @@ public class VarietyUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         baoFengList2.clear();
     }
 
-    public static boolean isListNotEmpty(List list) {
+    private static boolean isListNotEmpty(List list) {
         return list != null && !list.isEmpty();
     }
 
