@@ -332,7 +332,7 @@ public class HomeUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         if (holder instanceof BannerHolder) {
             BannerHolder bannerHolder = (BannerHolder) holder;
-            setBanner(bannerHolder);
+            setBanner(mContext,bannerHolder);
         } else if (holder instanceof ChannelHolder) {
             ChannelHolder channelHolder = (ChannelHolder) holder;
             ChannelAdapter channelAdapter = new ChannelAdapter(channelList, mContext);
@@ -568,8 +568,8 @@ public class HomeUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     }
 
 
-    private void setBanner(BannerHolder channelHolder) {
-        BannerAdapter mBannerAdapter = new BannerAdapter(mContext.getApplicationContext(), coverList);
+    private void setBanner(Context context,BannerHolder channelHolder) {
+        BannerAdapter mBannerAdapter = new BannerAdapter(context, coverList);
         channelHolder.viewpager.setAdapter(mBannerAdapter);
         channelHolder.viewpager.setLooperPic(true);
         channelHolder.indicator.setViewPager(channelHolder.viewpager);

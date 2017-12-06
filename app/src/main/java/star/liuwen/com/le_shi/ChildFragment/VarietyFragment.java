@@ -94,7 +94,7 @@ public class VarietyFragment extends BaseFragment {
         if (!isLoad)
             loadData();
         isLoad = true;
-        mAdapter = new VarietyUIAdapter(getActivity(), channelList,
+        mAdapter = new VarietyUIAdapter(getContext(), channelList,
                 coverList, highlightsList, highlightsList2, hotPlayList, varietyList, varietyList2,
                 baoFengList, baoFengList2, itemWidth);
         mRecyclerView.setAdapter(mAdapter);

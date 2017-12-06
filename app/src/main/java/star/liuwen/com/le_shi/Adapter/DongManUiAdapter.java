@@ -147,6 +147,7 @@ public class DongManUiAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         }
         notifyDataSetChanged();
     }
+
     public void clearAllData() {
         channelList.clear();
         coverList.clear();
@@ -156,6 +157,7 @@ public class DongManUiAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         reviewClassicList.clear();
         everyDateUpdateList.clear();
     }
+
     private static boolean isListNotEmpty(List list) {
         return list != null && !list.isEmpty();
     }
@@ -201,7 +203,7 @@ public class DongManUiAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof HomeUIAdapter.BannerHolder) {
             HomeUIAdapter.BannerHolder bannerHolder = (HomeUIAdapter.BannerHolder) holder;
-            setBanner(bannerHolder);
+            setBanner(mContext,bannerHolder);
         } else if (holder instanceof HomeUIAdapter.ChannelHolder) {
             HomeUIAdapter.ChannelHolder channelHolder = (HomeUIAdapter.ChannelHolder) holder;
             ChannelAdapter channelAdapter = new ChannelAdapter(channelList, mContext);
@@ -337,8 +339,8 @@ public class DongManUiAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
 
-    private void setBanner(HomeUIAdapter.BannerHolder channelHolder) {
-        BannerAdapter mBannerAdapter = new BannerAdapter(mContext.getApplicationContext(), coverList);
+    private void setBanner(Context context,HomeUIAdapter.BannerHolder channelHolder) {
+        BannerAdapter mBannerAdapter = new BannerAdapter(context, coverList);
         channelHolder.viewpager.setAdapter(mBannerAdapter);
         channelHolder.viewpager.setLooperPic(true);
         channelHolder.indicator.setViewPager(channelHolder.viewpager);

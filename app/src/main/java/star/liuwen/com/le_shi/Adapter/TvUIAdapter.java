@@ -413,7 +413,7 @@ public class TvUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     private void setBanner(HomeUIAdapter.BannerHolder channelHolder) {
-        BannerAdapter mBannerAdapter = new BannerAdapter(mContext.getApplicationContext(), coverList);
+        BannerAdapter mBannerAdapter = new BannerAdapter(mContext, coverList);
         channelHolder.viewpager.setAdapter(mBannerAdapter);
         channelHolder.viewpager.setLooperPic(true);
         channelHolder.indicator.setViewPager(channelHolder.viewpager);

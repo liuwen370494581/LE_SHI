@@ -267,7 +267,7 @@ public class ZiXunUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof HomeUIAdapter.BannerHolder) {
             HomeUIAdapter.BannerHolder bannerHolder = (HomeUIAdapter.BannerHolder) holder;
-            setBanner(bannerHolder);
+            setBanner(mContext,bannerHolder);
         } else if (holder instanceof HeadLinesHolder) {
             HeadLinesHolder headLinesHolder = (HeadLinesHolder) holder;
             CommAdapter commAdapter = new CommAdapter(headLinesHolder.mRecyclerView);
@@ -488,8 +488,8 @@ public class ZiXunUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     }
 
 
-    private void setBanner(HomeUIAdapter.BannerHolder channelHolder) {
-        BannerAdapter mBannerAdapter = new BannerAdapter(mContext.getApplicationContext(), coverList);
+    private void setBanner(Context context,HomeUIAdapter.BannerHolder channelHolder) {
+        BannerAdapter mBannerAdapter = new BannerAdapter(context, coverList);
         channelHolder.viewpager.setAdapter(mBannerAdapter);
         channelHolder.viewpager.setLooperPic(true);
         channelHolder.indicator.setViewPager(channelHolder.viewpager);

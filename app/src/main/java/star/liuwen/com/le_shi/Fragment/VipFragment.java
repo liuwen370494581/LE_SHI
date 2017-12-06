@@ -91,7 +91,7 @@ public class VipFragment extends BaseFragment {
         itemWidth = DensityUtil.getScreenWidth(getActivity());
         mRecyclerView = (RecyclerView) view.findViewById(R.id.vip_recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mAdapter = new VipUIAdapter(getActivity(), channelList,
+        mAdapter = new VipUIAdapter(getContext(), channelList,
                 coverList, mostPopularList, mostPopularList2, newFilmRecommendList, newFilmRecommendList2, choiceList,
                 choiceList2, educationList, educationList2, qinZiList, qinZiList2,
                 horrorFilmList, horrorFilmList2, itemWidth);

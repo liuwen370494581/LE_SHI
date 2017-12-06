@@ -1,6 +1,5 @@
 package star.liuwen.com.le_shi.ChildFragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,14 +15,12 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import star.liuwen.com.le_shi.Activity.ChoiceActivity;
 import star.liuwen.com.le_shi.Adapter.TvUIAdapter;
 import star.liuwen.com.le_shi.Base.BaseFragment;
 import star.liuwen.com.le_shi.Base.Config;
 import star.liuwen.com.le_shi.Jsoup.Action.ActionCallBack;
 import star.liuwen.com.le_shi.Jsoup.Action.MainUIAction;
 import star.liuwen.com.le_shi.Jsoup.Action.TvAction;
-import star.liuwen.com.le_shi.Listener.OnChannelListener;
 import star.liuwen.com.le_shi.Model.CoverModel;
 import star.liuwen.com.le_shi.R;
 import star.liuwen.com.le_shi.Utils.DensityUtil;
@@ -104,7 +101,7 @@ public class TvFragment extends BaseFragment {
             LoadData();
             isLoaded = true;
         }
-        mAdapter = new TvUIAdapter(getActivity(), channelList,
+        mAdapter = new TvUIAdapter(getContext(), channelList,
                 coverList, hotPlayList, popularList, popularList2, cityLoveList,
                 cityLoveList2, xuanNingList, xuanNingList2,
                 netWorkList, kangWarList, itemWidth);

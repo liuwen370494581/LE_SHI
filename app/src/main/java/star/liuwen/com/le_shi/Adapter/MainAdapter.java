@@ -15,8 +15,8 @@ import java.util.List;
  */
 public class MainAdapter extends PagerAdapter {
 
-    List<Fragment> fragmentList;
-    private FragmentManager mFragmentManager;
+    List<Fragment> fragmentList = null;
+    private FragmentManager mFragmentManager = null;
 
 
     public MainAdapter(List<Fragment> fragmentList, FragmentManager fragmentManager) {
@@ -52,6 +52,6 @@ public class MainAdapter extends PagerAdapter {
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
-        container.removeView(fragmentList.get(position).getView());
+       container.removeView(fragmentList.get(position).getView());
     }
 }

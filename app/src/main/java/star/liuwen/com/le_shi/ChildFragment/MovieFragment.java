@@ -101,7 +101,7 @@ public class MovieFragment extends BaseFragment {
             LoadData();
             isLoad = true;
         }
-        mAdapter = new MovieAdapter(getActivity(), channelList,
+        mAdapter = new MovieAdapter(getContext(), channelList,
                 coverList, vipList, vipList2, mostPopularList, mostPopularList2,
                 huaYuList, huaYuList2, ouMeiList,
                 ouMeiList2, whiteLoveList, dongHuaList, itemWidth);

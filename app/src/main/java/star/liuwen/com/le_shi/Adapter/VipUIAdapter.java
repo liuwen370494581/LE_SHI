@@ -278,7 +278,7 @@ public class VipUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof HomeUIAdapter.BannerHolder) {
             HomeUIAdapter.BannerHolder bannerHolder = (HomeUIAdapter.BannerHolder) holder;
-            setBanner(bannerHolder);
+            setBanner(mContext,bannerHolder);
         } else if (holder instanceof HomeUIAdapter.ChannelHolder) {
             HomeUIAdapter.ChannelHolder channelHolder = (HomeUIAdapter.ChannelHolder) holder;
             ChannelAdapter channelAdapter = new ChannelAdapter(channelList, mContext);
@@ -424,8 +424,8 @@ public class VipUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         return 8;
     }
 
-    private void setBanner(HomeUIAdapter.BannerHolder channelHolder) {
-        BannerAdapter mBannerAdapter = new BannerAdapter(mContext.getApplicationContext(), coverList);
+    private void setBanner(Context context,HomeUIAdapter.BannerHolder channelHolder) {
+        BannerAdapter mBannerAdapter = new BannerAdapter(context, coverList);
         channelHolder.viewpager.setAdapter(mBannerAdapter);
         channelHolder.viewpager.setLooperPic(true);
         channelHolder.indicator.setViewPager(channelHolder.viewpager);

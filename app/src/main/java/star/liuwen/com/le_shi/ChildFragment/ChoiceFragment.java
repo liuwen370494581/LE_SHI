@@ -92,7 +92,7 @@ public class ChoiceFragment extends BaseFragment {
         btnClickMe = (ImageView) view.findViewById(R.id.img_click_me);
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter = new HomeUIAdapter(getActivity(), channelList,
+        mAdapter = new HomeUIAdapter(getContext(), channelList,
                 coverList, editList, editList2, sportsList, tvList, movieList,
                 dongManList, zongYiList, education, weiMovieList, musicList,
                 overViewList, overViewList2, itemWidth);

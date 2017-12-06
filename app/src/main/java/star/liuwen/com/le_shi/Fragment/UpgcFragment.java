@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +15,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import star.liuwen.com.le_shi.Adapter.MalAdapter;
 import star.liuwen.com.le_shi.Adapter.MalUIAdapter;
 import star.liuwen.com.le_shi.Base.BaseFragment;
 import star.liuwen.com.le_shi.Base.Config;
@@ -82,7 +80,7 @@ public class UpgcFragment extends BaseFragment {
         mStateView.setRetryResource(R.layout.base_retry);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mAdapter = new MalUIAdapter(mCoverList, channelList, bannerList, dailySpecialList, dailySpecialList2, baoFengTVList, baoFengTVList2,
-                baofengMirror, baofengMirror2, funList, funList2, clothesList, clothesList2, sportsList, sportsList2, milkList, milkList2, getActivity(), itemWidth);
+                baofengMirror, baofengMirror2, funList, funList2, clothesList, clothesList2, sportsList, sportsList2, milkList, milkList2, getContext(), itemWidth);
         mRecyclerView.setAdapter(mAdapter);
     }
 
