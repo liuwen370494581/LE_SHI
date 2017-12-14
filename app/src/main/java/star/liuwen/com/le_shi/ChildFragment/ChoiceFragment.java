@@ -156,6 +156,7 @@ public class ChoiceFragment extends BaseFragment {
         }
     }
 
+
     private void LoadData() {
         mStateView.showLoading();
         if (!NetUtil.checkNet(getActivity())) {

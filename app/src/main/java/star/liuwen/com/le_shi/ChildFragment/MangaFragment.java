@@ -96,7 +96,7 @@ public class MangaFragment extends BaseFragment {
             LoadDate();
             isLoad = true;
         }
-        mAdapter = new DongManUiAdapter(getContext(), channelList,
+        mAdapter = new DongManUiAdapter(getFragmentContext(), channelList,
                 coverList, hotPlayList, baoFengList, qinZiList, reviewClassicList,
                 everyDateUpdateList, itemWidth);
         mRecyclerView.setAdapter(mAdapter);

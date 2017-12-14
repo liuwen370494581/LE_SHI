@@ -95,7 +95,7 @@ public class ZiXunFragment extends BaseFragment {
             loadDate();
             isLoad = true;
         }
-        mAdapter = new ZiXunUIAdapter(getContext(),
+        mAdapter = new ZiXunUIAdapter(getFragmentContext(),
                 coverList, ziXunRecommendList, headlinesList, baoXiaoRecommendList, strangeList, funList,
                 starList, sportList, scienceList, musicList, gameList);
         mRecyclerView.setAdapter(mAdapter);

@@ -65,7 +65,7 @@ public class WeiMovieFragment extends BaseFragment implements BGARefreshLayout.B
         mBGARefreshLayout = (BGARefreshLayout) view.findViewById(R.id.define_bga_refresh_with_load);
         final GridLayoutManager gridLayoutManager = new GridLayoutManager(mContext, 3, LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(gridLayoutManager);
-        mAdapter = new PopAndCityLoveAndXuanningAdapter(getActivity(), mList, mList2, false);
+        mAdapter = new PopAndCityLoveAndXuanningAdapter(getFragmentContext(), mList, mList2, false);
         mRecyclerView.setAdapter(mAdapter);
         setListener();
     }

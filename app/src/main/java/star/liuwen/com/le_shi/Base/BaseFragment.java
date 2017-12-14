@@ -11,6 +11,8 @@ import com.squareup.leakcanary.RefWatcher;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.lang.ref.WeakReference;
+
 import star.liuwen.com.le_shi.EventBus.Event;
 import star.liuwen.com.le_shi.EventBus.EventBusUtil;
 import star.liuwen.com.le_shi.Utils.ToastUtils;
@@ -19,10 +21,9 @@ import star.liuwen.com.le_shi.Utils.ToastUtils;
  * Created by liuwen on 2017/6/21.
  */
 public abstract class BaseFragment extends Fragment {
-
-    public Context mContext;
     protected boolean isVisible;
     private boolean isPrepared;
+    private static WeakReference<Context> context;
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
@@ -39,12 +40,17 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mContext = getActivity();
+        context = new WeakReference<Context>(getActivity());
         setHasOptionsMenu(true);
         //加入EventBus
         if (isRegisterEventBus()) {
             EventBusUtil.register(this);
         }
+    }
+
+
+    public static Context getFragmentContext() {
+        return context.get();
     }
 
     @Override

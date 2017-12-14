@@ -101,7 +101,7 @@ public class TvFragment extends BaseFragment {
             LoadData();
             isLoaded = true;
         }
-        mAdapter = new TvUIAdapter(getContext(), channelList,
+        mAdapter = new TvUIAdapter(getFragmentContext(), channelList,
                 coverList, hotPlayList, popularList, popularList2, cityLoveList,
                 cityLoveList2, xuanNingList, xuanNingList2,
                 netWorkList, kangWarList, itemWidth);

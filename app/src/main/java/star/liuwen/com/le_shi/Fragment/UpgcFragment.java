@@ -80,7 +80,7 @@ public class UpgcFragment extends BaseFragment {
         mStateView.setRetryResource(R.layout.base_retry);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mAdapter = new MalUIAdapter(mCoverList, channelList, bannerList, dailySpecialList, dailySpecialList2, baoFengTVList, baoFengTVList2,
-                baofengMirror, baofengMirror2, funList, funList2, clothesList, clothesList2, sportsList, sportsList2, milkList, milkList2, getContext(), itemWidth);
+                baofengMirror, baofengMirror2, funList, funList2, clothesList, clothesList2, sportsList, sportsList2, milkList, milkList2, getFragmentContext(), itemWidth);
         mRecyclerView.setAdapter(mAdapter);
     }
 

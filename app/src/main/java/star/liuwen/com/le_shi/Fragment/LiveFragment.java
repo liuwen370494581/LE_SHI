@@ -6,7 +6,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -68,7 +67,7 @@ public class LiveFragment extends BaseFragment {
         oneRecyclerView.setLayoutManager(manager);
         twoRecycleView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mAdapter = new oneAdapter(oneRecyclerView);
-        bbsAdapter = new BbsAdapter(getActivity(), mList, picList);
+        bbsAdapter = new BbsAdapter(getFragmentContext(), mList, picList);
         twoRecycleView.addItemDecoration(BGADivider.newShapeDivider());
         oneRecyclerView.addItemDecoration(BGADivider.newShapeDivider());
         mAdapter.setData(DateEnage.getBBSDate());
