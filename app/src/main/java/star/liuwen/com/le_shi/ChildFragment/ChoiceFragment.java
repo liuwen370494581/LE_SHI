@@ -25,6 +25,7 @@ import star.liuwen.com.le_shi.Model.CoverModel;
 import star.liuwen.com.le_shi.R;
 import star.liuwen.com.le_shi.Utils.DensityUtil;
 import star.liuwen.com.le_shi.Utils.NetUtil;
+import star.liuwen.com.le_shi.Utils.UIUtils;
 
 /**
  * Created by liuwen on 2017/10/13.
@@ -92,7 +93,7 @@ public class ChoiceFragment extends BaseFragment {
         btnClickMe = (ImageView) view.findViewById(R.id.img_click_me);
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter = new HomeUIAdapter(getContext(), channelList,
+        mAdapter = new HomeUIAdapter(UIUtils.getContext(), channelList,
                 coverList, editList, editList2, sportsList, tvList, movieList,
                 dongManList, zongYiList, education, weiMovieList, musicList,
                 overViewList, overViewList2, itemWidth);

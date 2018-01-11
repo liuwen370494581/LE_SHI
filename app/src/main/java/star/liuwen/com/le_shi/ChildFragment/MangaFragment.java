@@ -25,6 +25,7 @@ import star.liuwen.com.le_shi.Model.CoverModel;
 import star.liuwen.com.le_shi.R;
 import star.liuwen.com.le_shi.Utils.DensityUtil;
 import star.liuwen.com.le_shi.Utils.NetUtil;
+import star.liuwen.com.le_shi.Utils.UIUtils;
 
 /**
  * Created by liuwen on 2017/10/13.
@@ -96,7 +97,7 @@ public class MangaFragment extends BaseFragment {
             LoadDate();
             isLoad = true;
         }
-        mAdapter = new DongManUiAdapter(getFragmentContext(), channelList,
+        mAdapter = new DongManUiAdapter(UIUtils.getContext(), channelList,
                 coverList, hotPlayList, baoFengList, qinZiList, reviewClassicList,
                 everyDateUpdateList, itemWidth);
         mRecyclerView.setAdapter(mAdapter);

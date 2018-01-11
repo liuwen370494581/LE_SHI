@@ -24,6 +24,7 @@ import star.liuwen.com.le_shi.Model.CoverModel;
 import star.liuwen.com.le_shi.R;
 import star.liuwen.com.le_shi.Utils.DensityUtil;
 import star.liuwen.com.le_shi.Utils.NetUtil;
+import star.liuwen.com.le_shi.Utils.UIUtils;
 
 /**
  * Created by liuwen on 2017/10/12.
@@ -101,7 +102,7 @@ public class MovieFragment extends BaseFragment {
             LoadData();
             isLoad = true;
         }
-        mAdapter = new MovieAdapter(getFragmentContext(), channelList,
+        mAdapter = new MovieAdapter(UIUtils.getContext(), channelList,
                 coverList, vipList, vipList2, mostPopularList, mostPopularList2,
                 huaYuList, huaYuList2, ouMeiList,
                 ouMeiList2, whiteLoveList, dongHuaList, itemWidth);

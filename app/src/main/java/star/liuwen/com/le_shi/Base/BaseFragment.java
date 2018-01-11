@@ -1,5 +1,6 @@
 package star.liuwen.com.le_shi.Base;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -24,6 +25,15 @@ public abstract class BaseFragment extends Fragment {
     protected boolean isVisible;
     private boolean isPrepared;
     private static WeakReference<Context> context;
+    protected Activity mActivity;//解决Fragment中getActivity的空指针问题
+    //这个问题原因是大部分在于Fragment已经和Activity接触了关联 给Activity赋值 就可以解决此问题
+
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mActivity = (Activity) context;
+    }
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {

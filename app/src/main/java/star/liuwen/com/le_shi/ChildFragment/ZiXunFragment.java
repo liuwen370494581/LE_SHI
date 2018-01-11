@@ -22,6 +22,7 @@ import star.liuwen.com.le_shi.Jsoup.Action.TvAction;
 import star.liuwen.com.le_shi.Model.CoverModel;
 import star.liuwen.com.le_shi.R;
 import star.liuwen.com.le_shi.Utils.NetUtil;
+import star.liuwen.com.le_shi.Utils.UIUtils;
 
 /**
  * Created by liuwen on 2017/10/23.
@@ -95,7 +96,7 @@ public class ZiXunFragment extends BaseFragment {
             loadDate();
             isLoad = true;
         }
-        mAdapter = new ZiXunUIAdapter(getFragmentContext(),
+        mAdapter = new ZiXunUIAdapter(UIUtils.getContext(),
                 coverList, ziXunRecommendList, headlinesList, baoXiaoRecommendList, strangeList, funList,
                 starList, sportList, scienceList, musicList, gameList);
         mRecyclerView.setAdapter(mAdapter);

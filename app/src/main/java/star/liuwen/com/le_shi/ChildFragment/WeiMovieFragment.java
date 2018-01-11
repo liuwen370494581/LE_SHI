@@ -25,6 +25,7 @@ import star.liuwen.com.le_shi.Model.CoverModel;
 import star.liuwen.com.le_shi.R;
 import star.liuwen.com.le_shi.Utils.NetUtil;
 import star.liuwen.com.le_shi.Utils.ToastUtils;
+import star.liuwen.com.le_shi.Utils.UIUtils;
 import star.liuwen.com.le_shi.View.DefineBAGRefreshWithLoadView;
 
 /**
@@ -63,9 +64,9 @@ public class WeiMovieFragment extends BaseFragment implements BGARefreshLayout.B
         mStateView.setRetryResource(R.layout.base_retry);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.wei_movie_recycler_view);
         mBGARefreshLayout = (BGARefreshLayout) view.findViewById(R.id.define_bga_refresh_with_load);
-        final GridLayoutManager gridLayoutManager = new GridLayoutManager(mContext, 3, LinearLayoutManager.VERTICAL, false);
+        final GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 3, LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(gridLayoutManager);
-        mAdapter = new PopAndCityLoveAndXuanningAdapter(getFragmentContext(), mList, mList2, false);
+        mAdapter = new PopAndCityLoveAndXuanningAdapter(UIUtils.getContext(), mList, mList2, false);
         mRecyclerView.setAdapter(mAdapter);
         setListener();
     }

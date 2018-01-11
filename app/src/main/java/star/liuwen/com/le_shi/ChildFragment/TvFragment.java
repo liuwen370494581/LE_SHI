@@ -25,6 +25,7 @@ import star.liuwen.com.le_shi.Model.CoverModel;
 import star.liuwen.com.le_shi.R;
 import star.liuwen.com.le_shi.Utils.DensityUtil;
 import star.liuwen.com.le_shi.Utils.NetUtil;
+import star.liuwen.com.le_shi.Utils.UIUtils;
 
 /**
  * Created by liuwen on 2017/10/12.
@@ -101,7 +102,7 @@ public class TvFragment extends BaseFragment {
             LoadData();
             isLoaded = true;
         }
-        mAdapter = new TvUIAdapter(getFragmentContext(), channelList,
+        mAdapter = new TvUIAdapter(UIUtils.getContext(), channelList,
                 coverList, hotPlayList, popularList, popularList2, cityLoveList,
                 cityLoveList2, xuanNingList, xuanNingList2,
                 netWorkList, kangWarList, itemWidth);
