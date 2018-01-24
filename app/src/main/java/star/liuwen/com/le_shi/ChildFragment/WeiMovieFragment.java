@@ -10,12 +10,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.github.nukc.stateview.StateView;
+import com.liaoinstan.springview.container.DefaultFooter;
+import com.liaoinstan.springview.container.DefaultHeader;
+import com.liaoinstan.springview.widget.SpringView;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
 import star.liuwen.com.le_shi.Adapter.PopAndCityLoveAndXuanningAdapter;
 import star.liuwen.com.le_shi.Base.BaseFragment;
 import star.liuwen.com.le_shi.Base.Config;
@@ -26,22 +28,19 @@ import star.liuwen.com.le_shi.R;
 import star.liuwen.com.le_shi.Utils.NetUtil;
 import star.liuwen.com.le_shi.Utils.ToastUtils;
 import star.liuwen.com.le_shi.Utils.UIUtils;
-import star.liuwen.com.le_shi.View.DefineBAGRefreshWithLoadView;
 
 /**
  * Created by liuwen on 2017/10/23.
  */
-public class WeiMovieFragment extends BaseFragment implements BGARefreshLayout.BGARefreshLayoutDelegate {
+public class WeiMovieFragment extends BaseFragment {
     private boolean isLoad;
-
-    //下拉刷新控件
-    private DefineBAGRefreshWithLoadView mDefineBAGRefreshWithLoadView = null;
-    private BGARefreshLayout mBGARefreshLayout;
     private RecyclerView mRecyclerView;
     private PopAndCityLoveAndXuanningAdapter mAdapter;
     private List<CoverModel> mList;
     private List<CoverModel> mList2;
     private StateView mStateView;
+    //下拉刷新控件
+    private SpringView mSpringView;
 
     @Nullable
     @Override
@@ -62,8 +61,8 @@ public class WeiMovieFragment extends BaseFragment implements BGARefreshLayout.B
         mStateView = StateView.inject(view);
         mStateView.setLoadingResource(R.layout.loading);
         mStateView.setRetryResource(R.layout.base_retry);
+        mSpringView = (SpringView) view.findViewById(R.id.my_springView);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.wei_movie_recycler_view);
-        mBGARefreshLayout = (BGARefreshLayout) view.findViewById(R.id.define_bga_refresh_with_load);
         final GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 3, LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(gridLayoutManager);
         mAdapter = new PopAndCityLoveAndXuanningAdapter(UIUtils.getContext(), mList, mList2, false);
@@ -72,13 +71,24 @@ public class WeiMovieFragment extends BaseFragment implements BGARefreshLayout.B
     }
 
     private void setListener() {
-        mBGARefreshLayout.setDelegate(this);
-        mDefineBAGRefreshWithLoadView = new DefineBAGRefreshWithLoadView(getActivity(), true, true);
-        //设置刷新样式
-        mBGARefreshLayout.setRefreshViewHolder(mDefineBAGRefreshWithLoadView);
-        mDefineBAGRefreshWithLoadView.setRefreshingText("正在加载中...");
-        mDefineBAGRefreshWithLoadView.setPullDownRefreshText("正在加载中...");
-        mDefineBAGRefreshWithLoadView.setReleaseRefreshText("下拉刷新中...");
+        mSpringView.setHeader(new DefaultHeader(getFragmentContext()));
+        mSpringView.setFooter(new DefaultFooter(getFragmentContext()));
+        mSpringView.setType(SpringView.Type.FOLLOW);
+        mSpringView.setListener(new SpringView.OnFreshListener() {
+            @Override
+            public void onRefresh() {
+                mAdapter.clearAllData();
+                loadDate();
+                mSpringView.onFinishFreshAndLoad();
+            }
+
+            @Override
+            public void onLoadmore() {
+                UIUtils.showToast("暂无数据");
+                mSpringView.onFinishFreshAndLoad();
+
+            }
+        });
         mStateView.setOnRetryClickListener(new StateView.OnRetryClickListener() {
             @Override
             public void onRetryClick() {
@@ -108,7 +118,7 @@ public class WeiMovieFragment extends BaseFragment implements BGARefreshLayout.B
             public void ok(Object object) {
                 mList.addAll((Collection<? extends CoverModel>) object);
                 mAdapter.updateList(mList);
-               mStateView.showContent();
+                mStateView.showContent();
             }
 
             @Override
@@ -132,18 +142,4 @@ public class WeiMovieFragment extends BaseFragment implements BGARefreshLayout.B
         });
     }
 
-    @Override
-    public void onBGARefreshLayoutBeginRefreshing(BGARefreshLayout refreshLayout) {
-        mDefineBAGRefreshWithLoadView.showLoadingMoreImg();
-        //  page = 1;
-        mList.clear();
-        mList2.clear();
-        loadDate();
-        mBGARefreshLayout.endRefreshing();
-    }
-
-    @Override
-    public boolean onBGARefreshLayoutBeginLoadingMore(BGARefreshLayout refreshLayout) {
-        return false;
-    }
 }

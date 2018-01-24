@@ -3,9 +3,11 @@ package star.liuwen.com.le_shi.Base;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.view.View;
 
 import com.squareup.leakcanary.RefWatcher;
 
@@ -49,6 +51,10 @@ public abstract class BaseFragment extends Fragment {
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            //设置系统的bar全部显示出来
+            getActivity().getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        }
         super.onCreate(savedInstanceState);
         context = new WeakReference<Context>(getActivity());
         setHasOptionsMenu(true);

@@ -33,7 +33,7 @@ public class AdActivity extends BaseActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        //  GlideUtils.loadImage((ImageView) findViewById(R.id.id_ad_img), Config.AdUrl, R.mipmap.icon_net_work, R.mipmap.icon_net_work);
+        // GlideUtils.loadImage((ImageView) findViewById(R.id.id_ad_img), Config.AdUrl, R.mipmap.icon_net_work, R.mipmap.icon_net_work);
     }
 
     @Override

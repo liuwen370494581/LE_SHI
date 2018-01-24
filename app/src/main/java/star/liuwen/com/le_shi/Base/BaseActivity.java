@@ -2,6 +2,7 @@ package star.liuwen.com.le_shi.Base;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -19,7 +20,6 @@ import star.liuwen.com.le_shi.EventBus.EventBusUtil;
 import star.liuwen.com.le_shi.Listener.OnCommonBarListener;
 import star.liuwen.com.le_shi.R;
 import star.liuwen.com.le_shi.Utils.ActivityKiller;
-import star.liuwen.com.le_shi.Utils.StatusBarUtils;
 import star.liuwen.com.le_shi.Utils.ToastUtils;
 
 
@@ -35,6 +35,10 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            //设置系统的bar全部显示出来
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        }
         super.onCreate(savedInstanceState);
         setContentView(setLayoutRes());
         initView();
@@ -46,8 +50,8 @@ public abstract class BaseActivity extends AppCompatActivity {
         if (isRegisterEventBus()) {
             EventBusUtil.register(this);
         }
-        //大于android 4.4版本才有这种沉侵式状态
-        StatusBarUtils.setWindowStatusBarColor(this, R.color.bg_color);
+//        //大于android 4.4版本才有这种沉侵式状态
+//        StatusBarUtils.setWindowStatusBarColor(this, R.color.bg_color);
         ActivityKiller.getInstance().addActivity(this);
     }
 
