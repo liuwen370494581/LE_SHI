@@ -77,6 +77,23 @@ public class VipUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         this.itemWidth = itemWidth;
     }
 
+    public void clearAllDate() {
+        channelList.clear();
+        coverList.clear();//封面数据
+        mostPopularList.clear();//最受欢迎
+        mostPopularList2.clear();//最受欢迎
+        newFilmRecommendList.clear();//新片推荐
+        newFilmRecommendList2.clear();//新片推荐
+        choiceList.clear();//精选
+        choiceList2.clear();//精选
+        educationList.clear();//教育
+        educationList2.clear();//教育
+        qinZiList.clear();//亲子
+        qinZiList2.clear();//亲子
+        horrorFilmList.clear();//恐怖片
+        horrorFilmList2.clear();//恐怖片
+    }
+
 
     public void updateChannelList(List<String> list) {
         if (isListNotEmpty(list)) {
@@ -278,7 +295,7 @@ public class VipUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof HomeUIAdapter.BannerHolder) {
             HomeUIAdapter.BannerHolder bannerHolder = (HomeUIAdapter.BannerHolder) holder;
-            setBanner(mContext,bannerHolder);
+            setBanner(mContext, bannerHolder);
         } else if (holder instanceof HomeUIAdapter.ChannelHolder) {
             HomeUIAdapter.ChannelHolder channelHolder = (HomeUIAdapter.ChannelHolder) holder;
             ChannelAdapter channelAdapter = new ChannelAdapter(channelList, mContext);
@@ -424,12 +441,13 @@ public class VipUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         return 8;
     }
 
-    private void setBanner(Context context,HomeUIAdapter.BannerHolder channelHolder) {
+    private void setBanner(Context context, HomeUIAdapter.BannerHolder channelHolder) {
         BannerAdapter mBannerAdapter = new BannerAdapter(context, coverList);
         channelHolder.viewpager.setAdapter(mBannerAdapter);
         channelHolder.viewpager.setLooperPic(true);
         channelHolder.indicator.setViewPager(channelHolder.viewpager);
     }
+
     public static class NewFilmRecommendHolder extends RecyclerView.ViewHolder {
         RecyclerView mRecyclerView;
         RelativeLayout ReHead;

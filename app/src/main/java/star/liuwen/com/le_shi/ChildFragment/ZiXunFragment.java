@@ -9,6 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.github.nukc.stateview.StateView;
+import com.liaoinstan.springview.container.DefaultFooter;
+import com.liaoinstan.springview.container.DefaultHeader;
+import com.liaoinstan.springview.widget.SpringView;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -45,6 +48,9 @@ public class ZiXunFragment extends BaseFragment {
     private boolean isLoad = false;
     protected StateView mStateView;
 
+    private SpringView mSpringView;
+
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -63,6 +69,25 @@ public class ZiXunFragment extends BaseFragment {
                 loadDate();
             }
         });
+
+        mSpringView.setListener(new SpringView.OnFreshListener() {
+            @Override
+            public void onRefresh() {
+                mAdapter.clearAllData();
+                loadDate();
+                mSpringView.onFinishFreshAndLoad();
+
+            }
+
+            @Override
+            public void onLoadmore() {
+                UIUtils.showToast(UIUtils.getString(R.string.no_more_data));
+                mSpringView.onFinishFreshAndLoad();
+            }
+        });
+
+        mSpringView.setHeader(new DefaultHeader(getActivity()));
+        mSpringView.setFooter(new DefaultFooter(getActivity()));
     }
 
     private void init() {
@@ -83,6 +108,7 @@ public class ZiXunFragment extends BaseFragment {
         mStateView = StateView.inject(view);
         mStateView.setLoadingResource(R.layout.loading);
         mStateView.setRetryResource(R.layout.base_retry);
+        mSpringView = (SpringView) view.findViewById(R.id.zi_xun_spring_view);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.zi_xun_recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
@@ -90,8 +116,6 @@ public class ZiXunFragment extends BaseFragment {
 
     @Override
     public void initData() {
-
-
         if (!isLoad) {
             loadDate();
             isLoad = true;

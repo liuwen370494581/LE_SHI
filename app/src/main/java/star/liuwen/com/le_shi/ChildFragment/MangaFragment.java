@@ -9,6 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.github.nukc.stateview.StateView;
+import com.liaoinstan.springview.container.DefaultFooter;
+import com.liaoinstan.springview.container.DefaultHeader;
+import com.liaoinstan.springview.widget.SpringView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -50,6 +53,8 @@ public class MangaFragment extends BaseFragment {
     private String date = "周一";
     private StateView mStateView;
 
+    private SpringView mSpringView;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -68,6 +73,24 @@ public class MangaFragment extends BaseFragment {
                 LoadDate();
             }
         });
+
+        mSpringView.setListener(new SpringView.OnFreshListener() {
+            @Override
+            public void onRefresh() {
+                mAdapter.clearAllData();
+                LoadDate();
+                mSpringView.onFinishFreshAndLoad();
+            }
+
+            @Override
+            public void onLoadmore() {
+                UIUtils.showToast(UIUtils.getString(R.string.no_more_data));
+                mSpringView.onFinishFreshAndLoad();
+            }
+        });
+
+        mSpringView.setHeader(new DefaultHeader(getFragmentContext()));
+        mSpringView.setFooter(new DefaultFooter(getFragmentContext()));
     }
 
     private void init() {
@@ -85,6 +108,7 @@ public class MangaFragment extends BaseFragment {
         mStateView = StateView.inject(view);
         mStateView.setLoadingResource(R.layout.loading);
         mStateView.setRetryResource(R.layout.base_retry);
+        mSpringView = (SpringView) view.findViewById(R.id.manage_spring_view);
         itemWidth = DensityUtil.getScreenWidth(getActivity());
         mRecyclerView = (RecyclerView) view.findViewById(R.id.dongman_recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));

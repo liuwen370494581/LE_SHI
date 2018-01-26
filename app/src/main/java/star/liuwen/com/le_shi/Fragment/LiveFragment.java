@@ -12,6 +12,9 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import com.github.nukc.stateview.StateView;
+import com.liaoinstan.springview.container.DefaultFooter;
+import com.liaoinstan.springview.container.DefaultHeader;
+import com.liaoinstan.springview.widget.SpringView;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -33,9 +36,11 @@ import star.liuwen.com.le_shi.Model.BbsModel;
 import star.liuwen.com.le_shi.Model.IndexModel;
 import star.liuwen.com.le_shi.R;
 import star.liuwen.com.le_shi.Utils.NetUtil;
+import star.liuwen.com.le_shi.Utils.UIUtils;
 
 /**
  * Created by liuwen on 2017/10/12.
+ * BBS页面
  */
 public class LiveFragment extends BaseFragment {
 
@@ -48,6 +53,8 @@ public class LiveFragment extends BaseFragment {
     private FrameLayout mFrameLayout;
     private int pos = 0;
 
+    private SpringView mSpringView;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -56,6 +63,7 @@ public class LiveFragment extends BaseFragment {
         return view;
     }
 
+
     private void initView(View view) {
         mFrameLayout = (FrameLayout) view.findViewById(R.id.frame_layout);
         oneRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_one);
@@ -63,6 +71,7 @@ public class LiveFragment extends BaseFragment {
         mStateView = StateView.inject(mFrameLayout);
         mStateView.setLoadingResource(R.layout.loading);
         mStateView.setRetryResource(R.layout.base_retry);
+        mSpringView = (SpringView) view.findViewById(R.id.live_spring_view);
         LinearLayoutManager manager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         oneRecyclerView.setLayoutManager(manager);
         twoRecycleView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -141,6 +150,24 @@ public class LiveFragment extends BaseFragment {
                 startActivity(intent);
             }
         });
+
+        mSpringView.setListener(new SpringView.OnFreshListener() {
+            @Override
+            public void onRefresh() {
+                bbsAdapter.clearAllDate();
+                LoadDate(Config.BAO_FENG_BBS_ALL);
+                mSpringView.onFinishFreshAndLoad();
+            }
+
+            @Override
+            public void onLoadmore() {
+                UIUtils.showToast(UIUtils.getString(R.string.no_more_data));
+                mSpringView.onFinishFreshAndLoad();
+            }
+        });
+
+        mSpringView.setHeader(new DefaultHeader(getActivity()));
+        mSpringView.setFooter(new DefaultFooter(getActivity()));
     }
 
 

@@ -9,6 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.github.nukc.stateview.StateView;
+import com.liaoinstan.springview.container.DefaultFooter;
+import com.liaoinstan.springview.container.DefaultHeader;
+import com.liaoinstan.springview.widget.SpringView;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -49,6 +52,7 @@ public class MovieFragment extends BaseFragment {
     private boolean isLoad = false;
     private MovieAdapter mAdapter;
     private StateView mStateView;
+    private SpringView mSpringView;
 
 
     @Nullable
@@ -69,6 +73,24 @@ public class MovieFragment extends BaseFragment {
                 LoadData();
             }
         });
+
+        mSpringView.setListener(new SpringView.OnFreshListener() {
+            @Override
+            public void onRefresh() {
+                mAdapter.clearAllData();
+                LoadData();
+                mSpringView.onFinishFreshAndLoad();
+            }
+
+            @Override
+            public void onLoadmore() {
+                UIUtils.showToast(UIUtils.getString(R.string.no_more_data));
+                mSpringView.onFinishFreshAndLoad();
+            }
+        });
+
+        mSpringView.setHeader(new DefaultHeader(getActivity()));
+        mSpringView.setFooter(new DefaultFooter(getActivity()));
     }
 
     private void init() {
@@ -90,6 +112,7 @@ public class MovieFragment extends BaseFragment {
         mStateView = StateView.inject(view);
         mStateView.setLoadingResource(R.layout.loading);
         mStateView.setRetryResource(R.layout.base_retry);
+        mSpringView = (SpringView) view.findViewById(R.id.movie_spring_view);
         itemWidth = DensityUtil.getScreenWidth(getActivity());
         mRecyclerView = (RecyclerView) view.findViewById(R.id.movie_recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));

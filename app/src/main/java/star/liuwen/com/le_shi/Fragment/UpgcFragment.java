@@ -10,6 +10,9 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import com.github.nukc.stateview.StateView;
+import com.liaoinstan.springview.container.DefaultFooter;
+import com.liaoinstan.springview.container.DefaultHeader;
+import com.liaoinstan.springview.widget.SpringView;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -25,6 +28,7 @@ import star.liuwen.com.le_shi.Model.CoverModel;
 import star.liuwen.com.le_shi.R;
 import star.liuwen.com.le_shi.Utils.DensityUtil;
 import star.liuwen.com.le_shi.Utils.NetUtil;
+import star.liuwen.com.le_shi.Utils.UIUtils;
 
 /**
  * Created by liuwen on 2017/10/12.
@@ -54,6 +58,8 @@ public class UpgcFragment extends BaseFragment {
     private List<CoverModel> milkList2 = new ArrayList<>();
     private MalUIAdapter mAdapter;
 
+    private SpringView mSpringView;//上拉刷新下拉加载控件
+
 
     @Nullable
     @Override
@@ -78,6 +84,7 @@ public class UpgcFragment extends BaseFragment {
         mStateView = StateView.inject(flameLayout);
         mStateView.setLoadingResource(R.layout.loading);
         mStateView.setRetryResource(R.layout.base_retry);
+        mSpringView = (SpringView) view.findViewById(R.id.upgc_spring_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mAdapter = new MalUIAdapter(mCoverList, channelList, bannerList, dailySpecialList, dailySpecialList2, baoFengTVList, baoFengTVList2,
                 baofengMirror, baofengMirror2, funList, funList2, clothesList, clothesList2, sportsList, sportsList2, milkList, milkList2, getFragmentContext(), itemWidth);
@@ -94,6 +101,23 @@ public class UpgcFragment extends BaseFragment {
             }
         });
 
+        mSpringView.setListener(new SpringView.OnFreshListener() {
+            @Override
+            public void onRefresh() {
+                mAdapter.clearAllData();
+                LoadDate();
+                mSpringView.onFinishFreshAndLoad();
+            }
+
+            @Override
+            public void onLoadmore() {
+                UIUtils.showToast(UIUtils.getString(R.string.no_more_data));
+                mSpringView.onFinishFreshAndLoad();
+            }
+        });
+
+        mSpringView.setHeader(new DefaultHeader(getActivity()));
+        mSpringView.setFooter(new DefaultFooter(getActivity()));
     }
 
     private void LoadDate() {
@@ -111,7 +135,7 @@ public class UpgcFragment extends BaseFragment {
 
             @Override
             public void failed(Object object) {
-
+                mStateView.showRetry();
             }
         });
 
@@ -192,7 +216,7 @@ public class UpgcFragment extends BaseFragment {
 
             @Override
             public void failed(Object object) {
-                mStateView.showRetry();
+
             }
         });
 
@@ -248,7 +272,6 @@ public class UpgcFragment extends BaseFragment {
 
             @Override
             public void failed(Object object) {
-                mStateView.showRetry();
             }
         });
 
@@ -302,7 +325,6 @@ public class UpgcFragment extends BaseFragment {
 
             @Override
             public void failed(Object object) {
-                mStateView.showRetry();
             }
         });
         // 母婴玩具
@@ -311,7 +333,6 @@ public class UpgcFragment extends BaseFragment {
             public void ok(Object object) {
                 milkList.addAll((Collection<? extends CoverModel>) object);
                 mAdapter.updateMilkList(milkList);
-
                 mStateView.showContent();
             }
 
@@ -330,7 +351,6 @@ public class UpgcFragment extends BaseFragment {
 
             @Override
             public void failed(Object object) {
-                mStateView.showRetry();
             }
         });
     }

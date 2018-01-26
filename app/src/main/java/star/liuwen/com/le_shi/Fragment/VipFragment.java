@@ -13,6 +13,9 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 
 import com.github.nukc.stateview.StateView;
+import com.liaoinstan.springview.container.DefaultFooter;
+import com.liaoinstan.springview.container.DefaultHeader;
+import com.liaoinstan.springview.widget.SpringView;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -29,6 +32,7 @@ import star.liuwen.com.le_shi.Model.CoverModel;
 import star.liuwen.com.le_shi.R;
 import star.liuwen.com.le_shi.Utils.DensityUtil;
 import star.liuwen.com.le_shi.Utils.NetUtil;
+import star.liuwen.com.le_shi.Utils.UIUtils;
 
 /**
  * Created by liuwen on 2017/10/12.
@@ -56,6 +60,8 @@ public class VipFragment extends BaseFragment {
     private FrameLayout mFrameLayout;
     private Button btnOpenVip;
 
+    private SpringView mSpringView;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -70,6 +76,7 @@ public class VipFragment extends BaseFragment {
         mStateView.setOnRetryClickListener(new StateView.OnRetryClickListener() {
             @Override
             public void onRetryClick() {
+                mAdapter.clearAllDate();
                 LoadData();
             }
         });
@@ -79,6 +86,25 @@ public class VipFragment extends BaseFragment {
                 startActivity(new Intent(getActivity(), OpenVipActivity.class));
             }
         });
+
+        mSpringView.setListener(new SpringView.OnFreshListener() {
+            @Override
+            public void onRefresh() {
+                mAdapter.clearAllDate();
+                LoadData();
+                mSpringView.onFinishFreshAndLoad();
+
+            }
+
+            @Override
+            public void onLoadmore() {
+                UIUtils.showToast(UIUtils.getString(R.string.no_more_data));
+                mSpringView.onFinishFreshAndLoad();
+            }
+        });
+
+        mSpringView.setHeader(new DefaultHeader(getActivity()));
+        mSpringView.setFooter(new DefaultFooter(getActivity()));
     }
 
 
@@ -88,6 +114,7 @@ public class VipFragment extends BaseFragment {
         mStateView = StateView.inject(mFrameLayout);
         mStateView.setLoadingResource(R.layout.loading);
         mStateView.setRetryResource(R.layout.base_retry);
+        mSpringView = (SpringView) view.findViewById(R.id.vip_spring_view);
         itemWidth = DensityUtil.getScreenWidth(getActivity());
         mRecyclerView = (RecyclerView) view.findViewById(R.id.vip_recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));

@@ -3,6 +3,7 @@
 
     <string name="find_no_result">没有找到相应的资源</string>
     <string name="loading">正在加载</string>
+    <string name="no_more_data">已经没有更多数据了</string>
     <string-array name="tabs">
         <item>首页</item>
         <item>商城</item>

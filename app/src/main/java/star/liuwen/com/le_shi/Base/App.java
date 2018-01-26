@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.multidex.MultiDexApplication;
-import android.util.Log;
 
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
@@ -29,13 +28,8 @@ public class App extends MultiDexApplication {
     @Override
     public void onCreate() {
         super.onCreate();
-        //崩溃日志记录
-        String currentProcessName = getCurrentProcessName();
-        Log.e(Config.TAG, "当前进程的名字" + currentProcessName);
         CrashHandler.getInstance().init(this);
         mRefWatcher = LeakCanary.install(this);
-
-
         //对全局属性赋值
         mContext=getApplicationContext();
         mMainThread=Thread.currentThread();

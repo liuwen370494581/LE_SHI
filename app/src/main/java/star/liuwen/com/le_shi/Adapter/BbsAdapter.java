@@ -37,6 +37,12 @@ public class BbsAdapter extends RecyclerView.Adapter<BbsAdapter.MyViewHolder> {
         mLayoutInflater = LayoutInflater.from(mContext);
     }
 
+    public void clearAllDate() {
+        picList.clear();
+        mList.clear();
+    }
+
+
     public void updateList(List<BbsModel> list) {
         if (isListNotEmpty(list)) {
             mList = list;

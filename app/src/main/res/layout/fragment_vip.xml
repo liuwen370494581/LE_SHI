@@ -7,18 +7,22 @@
 
     <include layout="@layout/head_vip"/>
 
+
     <FrameLayout
         android:id="@+id/frame_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/vip_recycler_view"
+        <com.liaoinstan.springview.widget.SpringView
+            android:id="@+id/vip_spring_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-        </android.support.v7.widget.RecyclerView>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/vip_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </android.support.v7.widget.RecyclerView>
+        </com.liaoinstan.springview.widget.SpringView>
     </FrameLayout>
-
-
 </LinearLayout>

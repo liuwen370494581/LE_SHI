@@ -166,7 +166,7 @@ public class ChoiceFragment extends BaseFragment {
 
             @Override
             public void onLoadmore() {
-                UIUtils.showToast("没有更多的数据了");
+                UIUtils.showToast(UIUtils.getString(R.string.no_more_data));
                 mSpringView.onFinishFreshAndLoad();
             }
         });

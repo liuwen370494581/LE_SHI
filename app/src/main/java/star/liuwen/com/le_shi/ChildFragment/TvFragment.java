@@ -10,6 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.github.nukc.stateview.StateView;
+import com.liaoinstan.springview.container.DefaultFooter;
+import com.liaoinstan.springview.container.DefaultHeader;
+import com.liaoinstan.springview.widget.SpringView;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -49,6 +52,9 @@ public class TvFragment extends BaseFragment {
     private List<CoverModel> kangWarList;
     private boolean isLoaded = false;
     private StateView mStateView;
+    //加入上拉刷新和下拉加载
+
+    private SpringView mSpringView;
 
 
     @Nullable
@@ -69,6 +75,24 @@ public class TvFragment extends BaseFragment {
                 LoadData();
             }
         });
+
+        mSpringView.setListener(new SpringView.OnFreshListener() {
+            @Override
+            public void onRefresh() {
+                mAdapter.clearAllData();
+                LoadData();
+                mSpringView.onFinishFreshAndLoad();
+            }
+
+            @Override
+            public void onLoadmore() {
+                UIUtils.showToast(UIUtils.getString(R.string.no_more_data));
+                mSpringView.onFinishFreshAndLoad();
+            }
+        });
+
+        mSpringView.setHeader(new DefaultHeader(getActivity()));
+        mSpringView.setFooter(new DefaultFooter(getActivity()));
     }
 
 
@@ -90,6 +114,7 @@ public class TvFragment extends BaseFragment {
         mStateView = StateView.inject(view);
         mStateView.setLoadingResource(R.layout.loading);
         mStateView.setRetryResource(R.layout.base_retry);
+        mSpringView = (SpringView) view.findViewById(R.id.tv_spring_view);
         itemWidth = DensityUtil.getScreenWidth(getActivity());
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_tv);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));

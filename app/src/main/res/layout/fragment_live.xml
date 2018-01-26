@@ -7,6 +7,14 @@
 
     <include layout="@layout/search_bar"/>
 
+
+    <com.liaoinstan.springview.widget.SpringView
+        android:id="@+id/live_spring_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+
     <LinearLayout
         android:id="@+id/ly_show"
         android:layout_width="match_parent"
@@ -41,4 +49,5 @@
             </android.support.v7.widget.RecyclerView>
         </FrameLayout>
     </LinearLayout>
+    </com.liaoinstan.springview.widget.SpringView>
 </LinearLayout>

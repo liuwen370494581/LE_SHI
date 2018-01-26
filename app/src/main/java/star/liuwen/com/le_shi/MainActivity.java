@@ -16,6 +16,7 @@ import star.liuwen.com.le_shi.Fragment.LiveFragment;
 import star.liuwen.com.le_shi.Fragment.MyFragment;
 import star.liuwen.com.le_shi.Fragment.UpgcFragment;
 import star.liuwen.com.le_shi.Fragment.VipFragment;
+import star.liuwen.com.le_shi.Utils.ActivityKiller;
 import star.liuwen.com.le_shi.View.MyViewPager;
 import star.liuwen.com.le_shi.View.NoPreloadViewPager;
 
@@ -144,4 +145,9 @@ public class MainActivity extends BaseActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        //不关闭App 直接退回到桌面 避免每次回退 都重新加载数据
+        ActivityKiller.hindActivity(this);
+    }
 }
