@@ -10,6 +10,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.github.nukc.stateview.StateView;
+import com.liaoinstan.springview.container.DefaultFooter;
+import com.liaoinstan.springview.container.DefaultHeader;
+import com.liaoinstan.springview.widget.SpringView;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -56,6 +59,9 @@ public class ChoiceFragment extends BaseFragment {
     private LinearLayoutManager mLayoutManager;
     private StateView mStateView;
 
+    //加入上拉刷新下拉加载功能
+    private SpringView mSpringView;
+
 
     @Nullable
     @Override
@@ -88,6 +94,7 @@ public class ChoiceFragment extends BaseFragment {
         mStateView = StateView.inject(view);
         mStateView.setLoadingResource(R.layout.loading);
         mStateView.setRetryResource(R.layout.base_retry);
+        mSpringView = (SpringView) view.findViewById(R.id.choice_spring_view);
         itemWidth = DensityUtil.getScreenWidth(getActivity());
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_choice);
         btnClickMe = (ImageView) view.findViewById(R.id.img_click_me);
@@ -147,6 +154,25 @@ public class ChoiceFragment extends BaseFragment {
                 LoadData();
             }
         });
+
+
+        mSpringView.setListener(new SpringView.OnFreshListener() {
+            @Override
+            public void onRefresh() {
+                mAdapter.clearAllData();
+                LoadData();
+                mSpringView.onFinishFreshAndLoad();
+            }
+
+            @Override
+            public void onLoadmore() {
+                UIUtils.showToast("没有更多的数据了");
+                mSpringView.onFinishFreshAndLoad();
+            }
+        });
+
+        mSpringView.setHeader(new DefaultHeader(getFragmentContext()));
+        mSpringView.setFooter(new DefaultFooter(getFragmentContext()));
     }
 
     @Override
