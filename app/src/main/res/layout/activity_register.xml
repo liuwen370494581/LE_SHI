@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@drawable/bg_content"
+              android:orientation="vertical">
+
+    <include
+        layout="@layout/common_bar"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg_white">
+
+        <TextView
+            android:id="@+id/id_area_code_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:gravity="center"
+            android:onClick="toAreaSelection"
+            android:padding="10dp"
+            android:text="+86"
+            android:textColor="@color/font_dark_gray"
+            android:textSize="16sp"/>
+
+        <EditText
+            android:id="@+id/id_tel_et"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:hint="@string/input_phone_num"
+            android:inputType="phone"
+            android:maxLines="1"
+            android:padding="10dp"
+            android:textColor="@color/font_dark_gray"
+            android:textCursorDrawable="@null"
+            android:textSize="16sp"/>
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@mipmap/line"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/id_sms_code_et"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:background="@drawable/bg_white"
+            android:hint="@string/ver_code"
+            android:inputType="number"
+            android:maxLength="6"
+            android:maxLines="1"
+            android:padding="10dp"
+            android:textColor="@color/font_dark_gray"
+            android:textCursorDrawable="@null"
+            android:textSize="16sp"/>
+
+        <Button
+            android:id="@+id/id_send_sms_code_btn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:background="@drawable/rectangle_blue_drawable"
+            android:clickable="true"
+            android:gravity="center"
+            android:onClick="toGetSmsCode"
+            android:padding="10dp"
+            android:text="@string/get_ver_code"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:textSize="16sp"/>
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@mipmap/line"/>
+
+    <EditText
+        android:id="@+id/id_first_psw_et"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:background="@drawable/bg_white"
+        android:hint="@string/input_new_pwd"
+        android:inputType="textPassword"
+        android:maxLength="16"
+        android:maxLines="1"
+        android:padding="10dp"
+        android:textColor="@color/font_dark_gray"
+        android:textCursorDrawable="@null"
+        android:textSize="16sp"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@mipmap/line"/>
+
+    <EditText
+        android:id="@+id/id_psw_again_et"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:background="@drawable/bg_white"
+        android:hint="@string/input_pwd_again"
+        android:inputType="textPassword"
+        android:maxLength="16"
+        android:maxLines="1"
+        android:padding="10dp"
+        android:textColor="@color/font_dark_gray"
+        android:textCursorDrawable="@null"
+        android:textSize="16sp"/>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="15dp"
+        android:gravity="center_vertical">
+
+        <CheckBox
+            android:id="@+id/id_cb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="@string/read_agreement"
+            android:textColor="@color/font_dark_gray"/>
+
+        <TextView
+            android:id="@+id/reg_agreement"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:onClick="toAgreement"
+            android:text="@string/ajb_agreement"
+            android:textColor="@color/colorPrimary"/>
+    </LinearLayout>
+
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/round_blue_drawable"
+        android:clickable="true"
+        android:gravity="center"
+        android:onClick="toReg"
+        android:padding="12dp"
+        android:text="@string/register_now"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:textSize="16sp"/>
+
+</LinearLayout>

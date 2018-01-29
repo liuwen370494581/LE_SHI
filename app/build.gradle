@@ -21,28 +21,35 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support:recyclerview-v7:25.3.1'
     compile 'com.android.support:design:25.3.1'
     compile 'com.github.bumptech.glide:glide:3.7.0'
-    compile 'org.jsoup:jsoup:1.9.2'//jsoup网络爬虫
+    compile 'org.jsoup:jsoup:1.9.2'
+    //jsoup网络爬虫
     //EventBus
     compile 'org.greenrobot:eventbus:3.0.0'
     //解决方法数65536限制
     compile 'com.android.support:multidex:1.0.1'
-    compile "io.reactivex.rxjava2:rxjava:2.0.7"//Rxjava异步任务
-    compile "io.reactivex.rxjava2:rxandroid:2.0.1"
+    compile 'io.reactivex.rxjava2:rxjava:2.0.7'
+    //Rxjava异步任务
+    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
     compile 'com.hejunlin.superindicatorlibray:superindicatorlibray:1.0.3'
-    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.18'//万能适配器
-    compile 'cn.bingoogolapple:bga-adapter:1.2.0@aar'//万能适配器
+    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.18'
+    //万能适配器
+    compile 'cn.bingoogolapple:bga-adapter:1.2.0@aar'
+    //万能适配器
     //动画库
     compile 'com.nineoldandroids:library:2.4.0'
     compile 'com.github.nukc.stateview:library:1.2.1'
     //内存检测工具
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5'
     releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
-
-    compile 'com.liaoinstan.springview:library:1.3.0'//下拉刷新和上拉加载控件
+    compile 'com.liaoinstan.springview:library:1.3.0'
+    //下拉刷新和上拉加载控件
+    compile files('libs/MobCommons-2017.1213.1552.jar')
+    compile files('libs/MobTools-2017.1213.1552.jar')
+    compile files('libs/SMSSDK-3.1.0.jar')
 }

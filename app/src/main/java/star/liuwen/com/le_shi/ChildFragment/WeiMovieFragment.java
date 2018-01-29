@@ -84,7 +84,7 @@ public class WeiMovieFragment extends BaseFragment {
 
             @Override
             public void onLoadmore() {
-                UIUtils.showToast("暂无数据");
+                UIUtils.showToast(UIUtils.getString(R.string.no_more_data));
                 mSpringView.onFinishFreshAndLoad();
 
             }
@@ -123,6 +123,7 @@ public class WeiMovieFragment extends BaseFragment {
 
             @Override
             public void failed(Object object) {
+                mStateView.showContent();
                 ToastUtils.showToast(getActivity(), object.toString());
 
             }
@@ -137,6 +138,7 @@ public class WeiMovieFragment extends BaseFragment {
 
             @Override
             public void failed(Object object) {
+                mStateView.showContent();
                 ToastUtils.showToast(getActivity(), object.toString());
             }
         });

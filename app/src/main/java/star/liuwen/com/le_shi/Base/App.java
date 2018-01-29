@@ -5,8 +5,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Looper;
-import android.support.multidex.MultiDexApplication;
 
+import com.mob.MobApplication;
+import com.mob.MobSDK;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
 
@@ -15,7 +16,7 @@ import star.liuwen.com.le_shi.Utils.CrashHandler;
 /**
  * Created by liuwen on 2017/10/12.
  */
-public class App extends MultiDexApplication {
+public class App extends MobApplication {
     private RefWatcher mRefWatcher;
     //以下是属性应用用于整个应用程序 合理利用资源 减少资源浪费
     private static Context mContext;//上下文
@@ -31,10 +32,12 @@ public class App extends MultiDexApplication {
         CrashHandler.getInstance().init(this);
         mRefWatcher = LeakCanary.install(this);
         //对全局属性赋值
-        mContext=getApplicationContext();
-        mMainThread=Thread.currentThread();
+        mContext = getApplicationContext();
+        mMainThread = Thread.currentThread();
         mMainThreadId = android.os.Process.myTid();
         mHandler = new Handler();
+        //初始化MobSDK
+        MobSDK.init(this);
 
     }
 
@@ -47,7 +50,7 @@ public class App extends MultiDexApplication {
 
 
     //重启当前应用
-    public static void restart(){
+    public static void restart() {
         Intent intent = mContext.getPackageManager().getLaunchIntentForPackage(mContext.getPackageName());
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         mContext.startActivity(intent);
@@ -95,7 +98,6 @@ public class App extends MultiDexApplication {
     }
 
 
-
     private String getCurrentProcessName() {
         String currentProcessName = "";
         int pid = android.os.Process.myPid();
@@ -108,5 +110,4 @@ public class App extends MultiDexApplication {
         }
         return currentProcessName;
     }
-
 }

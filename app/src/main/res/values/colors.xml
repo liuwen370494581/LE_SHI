@@ -6,12 +6,11 @@
 
     <color name="white">#ffffff</color>
     <color name="bg_color">#f0eff4</color>
-
+    <color name="gray0">#808080</color>
     <color name="line_color">#d0d0d0</color>
     <color name="gray2">#919191</color>
     <color name="font_dark_gray">#333333</color>
     <color name="gray_transparent">#7000</color>
-
     <color name="text_color_66">#666666</color>
     <color name="transparent">#0000</color>
     <color name="subscribe_category_bar_bg_night">#cc363636</color>

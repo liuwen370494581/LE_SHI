@@ -4,6 +4,20 @@
     <string name="find_no_result">没有找到相应的资源</string>
     <string name="loading">正在加载</string>
     <string name="no_more_data">已经没有更多数据了</string>
+    <string name="bbs">暴风Bbs</string>
+
+    <string name="input_phone_num">请输入手机号</string>
+    <string name="input_pass_word">请输入密码</string>
+    <string name="ver_code">验证码</string>
+    <string name="get_ver_code">获取</string>
+    <string name="input_new_pwd">请输入新密码(6-16位)</string>
+    <string name="input_pwd_again">请再次输入密码</string>
+    <string name="read_agreement">我已阅读并同意</string>
+    <string name="ajb_agreement">《乐视协议》</string>
+    <string name="register_now">注册</string>
+    <string name="get_ver_code_again">%s秒后重新获取</string>
+
+    <string name="get_again">重新获取</string>
     <string-array name="tabs">
         <item>首页</item>
         <item>商城</item>

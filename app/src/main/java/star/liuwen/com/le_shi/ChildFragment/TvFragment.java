@@ -53,7 +53,6 @@ public class TvFragment extends BaseFragment {
     private boolean isLoaded = false;
     private StateView mStateView;
     //加入上拉刷新和下拉加载
-
     private SpringView mSpringView;
 
 

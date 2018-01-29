@@ -71,7 +71,6 @@ public class OpenVipActivity extends BaseActivity {
             }
             helper.setText(R.id.tv_channel, model.get("title").toString());
             Glide.with(mContext).load(model.get("pic")).into(helper.getImageView(R.id.iv_logo));
-
         }
     }
 }

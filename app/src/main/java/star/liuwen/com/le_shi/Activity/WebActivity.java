@@ -9,17 +9,24 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 
+import com.liaoinstan.springview.container.DefaultFooter;
+import com.liaoinstan.springview.container.DefaultHeader;
+import com.liaoinstan.springview.widget.SpringView;
+
 import star.liuwen.com.le_shi.Base.BaseActivity;
 import star.liuwen.com.le_shi.Base.Config;
 import star.liuwen.com.le_shi.Model.CoverModel;
 import star.liuwen.com.le_shi.R;
+import star.liuwen.com.le_shi.Utils.UIUtils;
 
 /**
  * Created by liuwen on 2017/11/7.
  */
 public class WebActivity extends BaseActivity {
-    ProgressBar mPbLoading;
-    WebView mWvContent;
+    private ProgressBar mPbLoading;
+    private WebView mWvContent;
+    private SpringView mSpringView;
+    private String url;
 
     @Override
     protected int setLayoutRes() {
@@ -29,20 +36,20 @@ public class WebActivity extends BaseActivity {
     @Override
     protected void initView() {
         showLeftView();
-
         mPbLoading = (ProgressBar) findViewById(R.id.pb_loading);
         mWvContent = (WebView) findViewById(R.id.wv_content);
+        mSpringView = (SpringView) findViewById(R.id.web_view_spring_view);
 
     }
 
     @Override
     protected void initData() {
         CoverModel model = (CoverModel) getIntent().getSerializableExtra(Config.INTENT_COMM_MODEL);
-        String url = getIntent().getStringExtra(Config.INTENT_BBS_URL);
+        url = getIntent().getStringExtra(Config.INTENT_BBS_URL);
         if (model != null) {
             setCenterText(model.getCoverTitle());
         } else {
-            setCenterText("暴风bbs");
+            setCenterText(UIUtils.getString(R.string.bbs));
         }
         mWvContent.loadUrl(url);
 
@@ -84,5 +91,22 @@ public class WebActivity extends BaseActivity {
                 return false;
             }
         });
+
+        mSpringView.setListener(new SpringView.OnFreshListener() {
+            @Override
+            public void onRefresh() {
+                mWvContent.loadUrl(url);
+                mSpringView.onFinishFreshAndLoad();
+            }
+
+            @Override
+            public void onLoadmore() {
+                mSpringView.onFinishFreshAndLoad();
+                UIUtils.showToast(UIUtils.getString(R.string.no_more_data));
+            }
+        });
+        mSpringView.setHeader(new DefaultHeader(this));
+        mSpringView.setFooter(new DefaultFooter(this));
     }
+
 }

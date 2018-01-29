@@ -35,4 +35,14 @@ public class Config {
     public static final String CHANNEL_MAL = "mal";
 
 
+    //intent mark
+
+    public static final String INTENT_AREA_CODE = "AreaCode";
+
+
+    //SharedPreferences mark
+    public static final String SHARD_USER_NAME = "userName";
+    public static final String SHARD_USER_TEL = "userTel";
+    public static final String SHARD_USER_PASSWORD = "userPassWord";
+
 }

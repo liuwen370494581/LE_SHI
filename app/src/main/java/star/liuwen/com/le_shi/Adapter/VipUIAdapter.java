@@ -287,8 +287,8 @@ public class VipUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     }
 
     private View getView(int view) {
-        View view1 = View.inflate(mContext, view, null);
-        return view1;
+        View itemView = View.inflate(mContext, view, null);
+        return itemView;
     }
 
     @Override
