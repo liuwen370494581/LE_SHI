@@ -47,7 +47,8 @@ public class LoginActivity extends BaseActivity {
         tvVersion = getView(R.id.id_version_tv);
     }
 
-    private String commGetTxt(EditText editText) {
+    private String commGetTxt(EditText editText)
+    {
         return editText.getText().toString().trim();
     }
 
