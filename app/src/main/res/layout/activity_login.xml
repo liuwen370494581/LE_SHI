@@ -1,9 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="@color/bg_color"
-              android:orientation="vertical">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_login"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
+    <include
+        layout="@layout/common_bar"/>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_content"
+        android:paddingTop="20dp">
+
+        <AutoCompleteTextView
+            android:id="@+id/id_login_tel_ac_tv"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:background="@drawable/bg_white"
+            android:drawableLeft="@mipmap/icon_login_user"
+            android:drawablePadding="16dp"
+            android:gravity="center_vertical"
+            android:hint="@string/input_phone_num"
+            android:maxLines="1"
+            android:paddingLeft="14dp"
+            android:paddingRight="10dp"
+            android:textColor="@color/font_dark_gray"
+            android:textSize="16sp"/>
+
+        <ImageView
+            android:id="@+id/id_tel_clear_img"
+            android:layout_width="23dp"
+            android:layout_height="23dp"
+            android:layout_alignRight="@id/id_login_tel_ac_tv"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="14dp"
+            android:background="@mipmap/common_input_box_clear"
+            android:onClick="onClickTelClearImg"
+            android:visibility="gone"/>
+
+        <ImageView
+            android:id="@+id/id_line_img"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/id_login_tel_ac_tv"
+            android:background="@mipmap/line"/>
+
+        <EditText
+            android:id="@+id/id_psw_et"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_below="@id/id_line_img"
+            android:background="@drawable/bg_white"
+            android:drawableLeft="@mipmap/icon_login_psw"
+            android:drawablePadding="16dp"
+            android:gravity="center_vertical"
+            android:hint="@string/input_pass_word"
+            android:inputType="textPassword"
+            android:maxLength="16"
+            android:maxLines="1"
+            android:paddingLeft="14dp"
+            android:paddingRight="10dp"
+            android:textColor="@color/font_dark_gray"
+            android:textCursorDrawable="@null"
+            android:textSize="16sp"/>
+
+        <ImageView
+            android:id="@+id/id_psw_clear_img"
+            android:layout_width="23dp"
+            android:layout_height="23dp"
+            android:layout_alignRight="@id/id_psw_et"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="69dp"
+            android:background="@mipmap/common_input_box_clear"
+            android:onClick="onClickPswClearImg"
+            android:visibility="gone"/>
+
+        <Button
+            android:id="@+id/id_login_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/id_psw_et"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="26dp"
+            android:background="@drawable/round_blue_drawable"
+            android:onClick="onClickLogin"
+            android:text="@string/btn_login"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="18sp"/>
+
+        <TextView
+            android:id="@+id/id_reg_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/id_login_btn"
+            android:layout_margin="20dp"
+            android:onClick="onClickReg"
+            android:text="@string/register_new_user"
+            android:textColor="@color/colorPrimary"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:id="@+id/id_version_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="20dp"
+            android:textColor="@color/font_dark_gray"/>
+    </RelativeLayout>
 </LinearLayout>

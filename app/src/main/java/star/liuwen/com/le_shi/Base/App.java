@@ -11,6 +11,7 @@ import com.mob.MobSDK;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
 
+import star.liuwen.com.le_shi.Dao.DaoManager;
 import star.liuwen.com.le_shi.Utils.CrashHandler;
 
 /**
@@ -38,6 +39,8 @@ public class App extends MobApplication {
         mHandler = new Handler();
         //初始化MobSDK
         MobSDK.init(this);
+        //初始化greenDao3
+        DaoManager.init(this);
 
     }
 

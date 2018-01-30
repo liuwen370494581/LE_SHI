@@ -26,7 +26,6 @@ public class AdActivity extends BaseActivity {
     private Timer mTimer;
     private int count = 3;
 
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,9 +55,8 @@ public class AdActivity extends BaseActivity {
                     case 0:
                         tvName.setText(count + "s");
                         break;
-
                     case 1:
-                        startActivity(new Intent(AdActivity.this, RegisterActivity.class));
+                        startActivity(new Intent(AdActivity.this, LoginActivity.class));
                         finish();
                         break;
                     default:

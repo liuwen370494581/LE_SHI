@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'org.greenrobot.greendao'
 
 android {
     compileSdkVersion 25
@@ -17,6 +18,12 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+
+    greendao {
+        schemaVersion 1 //版本号，升级时可配置
+        daoPackage 'star.liuwen.com.le_shi.Dao'//包名
+        targetGenDir 'src/main/java'//生成目录
     }
 }
 
@@ -47,9 +54,12 @@ dependencies {
     //内存检测工具
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5'
     releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
-    compile 'com.liaoinstan.springview:library:1.3.0'
     //下拉刷新和上拉加载控件
+    compile 'com.liaoinstan.springview:library:1.3.0'
+    //mob短信验证所需要的资源lib
     compile files('libs/MobCommons-2017.1213.1552.jar')
     compile files('libs/MobTools-2017.1213.1552.jar')
     compile files('libs/SMSSDK-3.1.0.jar')
+    //greendao3
+    compile 'org.greenrobot:greendao:3.1.1'
 }

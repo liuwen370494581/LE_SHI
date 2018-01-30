@@ -17,6 +17,8 @@ import cn.smssdk.EventHandler;
 import cn.smssdk.SMSSDK;
 import star.liuwen.com.le_shi.Base.BaseActivity;
 import star.liuwen.com.le_shi.Base.Config;
+import star.liuwen.com.le_shi.Dao.DaoUserQuery;
+import star.liuwen.com.le_shi.Model.UserModel;
 import star.liuwen.com.le_shi.R;
 import star.liuwen.com.le_shi.Utils.NetUtil;
 import star.liuwen.com.le_shi.Utils.UIUtils;
@@ -36,8 +38,7 @@ public class RegisterActivity extends BaseActivity {
     private CheckBox mCheckBox;
     private Button btnSmsSend;
     private TimeCount mTimerCounter;
-    private String txtTel, txtAreaCode;
-
+    private String txtTel, txtAreaCode, edPassword;
 
     @Override
     protected int setLayoutRes() {
@@ -46,6 +47,8 @@ public class RegisterActivity extends BaseActivity {
 
     @Override
     protected void initView() {
+        setCenterText("账号注册");
+        showLeftView();
         mEdTel = getView(R.id.id_tel_et);
         mEdTelCode = getView(R.id.id_sms_code_et);
         mTvAreaCode = getView(R.id.id_area_code_tv);
@@ -68,9 +71,7 @@ public class RegisterActivity extends BaseActivity {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                UIUtils.showToast("注册成功");
-                                openActivity(LoginActivity.class);
-                                finish();
+                                registerSuccess();
                             }
                         });
                     } else if (event == SMSSDK.EVENT_GET_VERIFICATION_CODE) {
@@ -89,7 +90,7 @@ public class RegisterActivity extends BaseActivity {
                     Throwable throwable = (Throwable) data;
                     try {
                         JSONObject obj = new JSONObject(throwable.getMessage());
-                        final String des = obj.optString("detail");
+                        final String des = obj.optString("error");
                         if (!TextUtils.isEmpty(des)) {
                             runOnUiThread(new Runnable() {
                                 @Override
@@ -108,22 +109,18 @@ public class RegisterActivity extends BaseActivity {
         SMSSDK.registerEventHandler(handler);
     }
 
+    private void registerSuccess() {
+        UIUtils.showToast("注册成功");
+        UserModel moder = new UserModel(DaoUserQuery.getCount(), "", txtTel, edPassword);
+        DaoUserQuery.insert(moder);
+        openActivity(LoginActivity.class);
+        finish();
+    }
 
     @Override
     protected void setListener() {
 
     }
-
-    public void play(View view) {
-        //获取验证码
-        SMSSDK.getVerificationCode("86", "18229971814");
-    }
-
-//    public void tijiao(View view) {
-//        String number = mEdTelCode.getText().toString();
-//        SMSSDK.submitVerificationCode("86", "18229971814", number);
-//    }
-
 
     public void toGetSmsCode(View view) {
         txtTel = commGetTxt(mEdTel);
@@ -141,8 +138,8 @@ public class RegisterActivity extends BaseActivity {
     public void toReg(View view) {
         txtTel = commGetTxt(mEdTel);
         txtAreaCode = mTvAreaCode.getText().toString();
+        edPassword = commGetTxt(mEdPassWord);
         String txtSmsCode = commGetTxt(mEdTelCode);
-        String edPassword = commGetTxt(mEdPassWord);
         String edPassword_02 = commGetTxt(mEdPassWord_02);
         if (TextUtils.isEmpty(txtTel)) {
             UIUtils.showToast("请输入电话号码");
