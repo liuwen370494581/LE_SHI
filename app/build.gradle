@@ -57,9 +57,9 @@ dependencies {
     //下拉刷新和上拉加载控件
     compile 'com.liaoinstan.springview:library:1.3.0'
     //mob短信验证所需要的资源lib
+    //greendao3
+    compile 'org.greenrobot:greendao:3.1.1'
     compile files('libs/MobCommons-2017.1213.1552.jar')
     compile files('libs/MobTools-2017.1213.1552.jar')
     compile files('libs/SMSSDK-3.1.0.jar')
-    //greendao3
-    compile 'org.greenrobot:greendao:3.1.1'
 }

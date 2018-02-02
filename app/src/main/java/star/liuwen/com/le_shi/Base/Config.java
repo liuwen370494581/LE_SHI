@@ -1,5 +1,7 @@
 package star.liuwen.com.le_shi.Base;
 
+import android.os.Environment;
+
 /**
  * Created by liuwen on 2017/10/12.
  */
@@ -44,5 +46,7 @@ public class Config {
     public static final String SHARD_USER_NAME = "userName";
     public static final String SHARD_USER_TEL = "userTel";
     public static final String SHARD_USER_PASSWORD = "userPassWord";
+    public static final String SdRootPath = Environment.getExternalStorageDirectory().getPath()+"/le_shi";
+    public static final String SHARE_LOGO = SdRootPath + "/share/logo/";//分享功能资源路径
 
 }

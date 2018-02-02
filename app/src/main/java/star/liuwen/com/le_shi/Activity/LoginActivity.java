@@ -17,6 +17,7 @@ import star.liuwen.com.le_shi.Dao.DaoUserQuery;
 import star.liuwen.com.le_shi.MainActivity;
 import star.liuwen.com.le_shi.Model.UserModel;
 import star.liuwen.com.le_shi.R;
+import star.liuwen.com.le_shi.Utils.KeyboardUtil;
 import star.liuwen.com.le_shi.Utils.SharedPreferencesUtil;
 import star.liuwen.com.le_shi.Utils.UIUtils;
 
@@ -47,8 +48,7 @@ public class LoginActivity extends BaseActivity {
         tvVersion = getView(R.id.id_version_tv);
     }
 
-    private String commGetTxt(EditText editText)
-    {
+    private String commGetTxt(EditText editText) {
         return editText.getText().toString().trim();
     }
 
@@ -75,20 +75,22 @@ public class LoginActivity extends BaseActivity {
         }
 
         List<UserModel> temUserList = DaoUserQuery.query();
-        for (UserModel userModel : temUserList) {
-            if (!userModel.getUserTel().equals(txtTel)) {
-                UIUtils.showToast("此号码为被注册");
-                return;
-            }
+        if (temUserList != null && temUserList.size() != 0) {
+            for (UserModel userModel : temUserList) {
+                if (!userModel.getUserTel().equals(txtTel)) {
+                    UIUtils.showToast("此号码未被注册");
+                    return;
+                }
 
-            if (!userModel.getUserPassword().equals(txtPassword)) {
-                UIUtils.showToast("密码错误,请重新输入");
-                return;
+                if (!userModel.getUserPassword().equals(txtPassword)) {
+                    UIUtils.showToast("密码错误,请重新输入");
+                    return;
+                }
             }
         }
-
         SharedPreferencesUtil.setStringPreferences(getActivityContext(), Config.SHARD_USER_TEL, txtTel);
         SharedPreferencesUtil.setStringPreferences(getActivityContext(), Config.SHARD_USER_PASSWORD, txtPassword);
+        KeyboardUtil.hideInputMethodWindow(this, tvVersion);
         openActivity(MainActivity.class);
         finish();
 

@@ -5,8 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Looper;
+import android.support.multidex.MultiDexApplication;
 
-import com.mob.MobApplication;
 import com.mob.MobSDK;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
@@ -17,7 +17,7 @@ import star.liuwen.com.le_shi.Utils.CrashHandler;
 /**
  * Created by liuwen on 2017/10/12.
  */
-public class App extends MobApplication {
+public class App extends MultiDexApplication {
     private RefWatcher mRefWatcher;
     //以下是属性应用用于整个应用程序 合理利用资源 减少资源浪费
     private static Context mContext;//上下文

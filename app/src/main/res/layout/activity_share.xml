@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/background"
+              android:orientation="vertical">
+
+
+    <include layout="@layout/common_bar"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:layout_marginTop="30dp"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/share_to_qq_friend"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawablePadding="8dp"
+                android:drawableTop="@mipmap/ssdk_oks_classic_qq"
+                android:gravity="center"
+                android:text="QQ朋友圈"
+                android:textColor="@color/font_dark_gray"/>
+
+            <TextView
+                android:id="@+id/share_to_sina"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawablePadding="8dp"
+                android:drawableTop="@mipmap/ssdk_oks_classic_sinaweibo"
+                android:gravity="center"
+                android:text="新浪微博"
+                android:textColor="@color/font_dark_gray"/>
+
+            <TextView
+                android:id="@+id/share_to_twitter"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawablePadding="8dp"
+                android:drawableTop="@mipmap/ssdk_oks_classic_twitter"
+                android:gravity="center"
+                android:text="推特"
+                android:textColor="@color/font_dark_gray"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/share_to_weixin_friend"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawablePadding="8dp"
+                android:drawableTop="@mipmap/ssdk_oks_classic_wechat"
+                android:gravity="center"
+                android:text="微信"
+                android:textColor="@color/font_dark_gray"/>
+
+            <TextView
+                android:id="@+id/share_to_friendlock"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawablePadding="8dp"
+                android:drawableTop="@mipmap/ssdk_oks_classic_wechatmoments"
+                android:gravity="center"
+                android:text="微信朋友圈"
+                android:textColor="@color/font_dark_gray"/>
+            <TextView
+                android:id="@+id/share_to_instagram"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawablePadding="8dp"
+                android:drawableTop="@mipmap/ssdk_oks_classic_instagram"
+                android:gravity="center"
+                android:text="Instagram"
+                android:textColor="@color/font_dark_gray"/>
+
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

@@ -111,7 +111,7 @@ public class RegisterActivity extends BaseActivity {
 
     private void registerSuccess() {
         UIUtils.showToast("注册成功");
-        UserModel moder = new UserModel(DaoUserQuery.getCount(), "", txtTel, edPassword);
+        UserModel moder = new UserModel(DaoUserQuery.getCount(), "", txtTel, edPassword,"");
         DaoUserQuery.insert(moder);
         openActivity(LoginActivity.class);
         finish();
