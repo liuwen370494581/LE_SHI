@@ -56,7 +56,7 @@ public class AdActivity extends BaseActivity {
                         tvName.setText(count + "s");
                         break;
                     case 1:
-                        startActivity(new Intent(AdActivity.this, LoginActivity.class));
+                        startActivity(new Intent(AdActivity.this, MainActivity.class));
                         finish();
                         break;
                     default:

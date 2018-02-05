@@ -33,12 +33,6 @@ public class PopAndCityLoveAndXuanningAdapter extends RecyclerView.Adapter<PopAn
     }
 
 
-    public PopAndCityLoveAndXuanningAdapter(Context context, List<CoverModel> list, List<CoverModel> list2) {
-        mContext = context;
-        mList = list;
-        mList2 = list2;
-    }
-
     public PopAndCityLoveAndXuanningAdapter(Context context, List<CoverModel> list, List<CoverModel> list2, boolean isTvOrMovieView) {
         mContext = context;
         mList = list;
@@ -56,7 +50,6 @@ public class PopAndCityLoveAndXuanningAdapter extends RecyclerView.Adapter<PopAn
         View view = LayoutInflater.from(mContext).inflate(isTvOrMovieView ? R.layout.item_edit_over_view : R.layout.item_tv_movie, parent, false);
         MyViewHolder holder = new MyViewHolder(view);
         return holder;
-
     }
 
 

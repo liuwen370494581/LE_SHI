@@ -24,6 +24,8 @@ public class Config {
     //Intent mark
     public static final String INTENT_BBS_URL = "BBS_URL";
     public static final String INTENT_COMM_MODEL = "COMM_MODEL";
+    public static final String INTENT_AREA_CODE = "AreaCode";
+
 
 
     //channel mark
@@ -35,11 +37,6 @@ public class Config {
     public static final String CHANNEL_DONG_MAN = "dongMan";
     public static final String CHANNEL_VIP = "vip";
     public static final String CHANNEL_MAL = "mal";
-
-
-    //intent mark
-
-    public static final String INTENT_AREA_CODE = "AreaCode";
 
 
     //SharedPreferences mark

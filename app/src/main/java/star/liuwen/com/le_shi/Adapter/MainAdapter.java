@@ -15,8 +15,8 @@ import java.util.List;
  */
 public class MainAdapter extends PagerAdapter {
 
-    List<Fragment> fragmentList = null;
-    private FragmentManager mFragmentManager = null;
+    List<Fragment> fragmentList;
+    private FragmentManager mFragmentManager;
 
 
     public MainAdapter(List<Fragment> fragmentList, FragmentManager fragmentManager) {

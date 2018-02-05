@@ -55,7 +55,7 @@ public class MainActivity extends BaseActivity {
         fragmentList.add(mVipFragment);
         fragmentList.add(mLiveFragment);
         fragmentList.add(mMyFragment);
-        final MainAdapter mAdapter = new MainAdapter(fragmentList, getSupportFragmentManager());
+        MainAdapter mAdapter = new MainAdapter(fragmentList, getSupportFragmentManager());
         mMyViewPager.setAdapter(mAdapter);
         mMyViewPager.setOffscreenPageLimit(0);
         mMyViewPager.setSlipping(false);

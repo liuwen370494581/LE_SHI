@@ -32,7 +32,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     private App mApp;
     private Context mActivityContext, mAppContext;//尽量地采用 Application Context 避免内存泄漏
 
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -202,4 +201,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void receiveStickyEvent(Event event) {
 
     }
+
+
+
 }
