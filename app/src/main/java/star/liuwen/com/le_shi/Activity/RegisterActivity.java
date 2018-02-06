@@ -110,8 +110,9 @@ public class RegisterActivity extends BaseActivity {
     }
 
     private void registerSuccess() {
+        hideLoadDialog();
         UIUtils.showToast("注册成功");
-        UserModel moder = new UserModel(DaoUserQuery.getCount(), "", txtTel, edPassword,"");
+        UserModel moder = new UserModel(DaoUserQuery.getCount(), "", txtTel, edPassword, "");
         DaoUserQuery.insert(moder);
         openActivity(LoginActivity.class);
         finish();
@@ -129,7 +130,6 @@ public class RegisterActivity extends BaseActivity {
             UIUtils.showToast("请输入电话号码");
             return;
         }
-
         SMSSDK.getVerificationCode(txtAreaCode, txtTel);
         mTimerCounter = new TimeCount(60000, 1000, btnSmsSend);
         mTimerCounter.start();
@@ -168,6 +168,7 @@ public class RegisterActivity extends BaseActivity {
         }
         if (NetUtil.checkNet(getActivityContext())) {
             //提交注册
+            showLoadDialog("正在注册");
             SMSSDK.submitVerificationCode(txtAreaCode, txtTel, txtSmsCode);
         }
     }

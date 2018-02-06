@@ -15,7 +15,7 @@
         <item name="android:windowActionBar">false</item>
         <item name="android:windowBackground">@android:color/transparent</item>
     </style>
-    <!-- 自定义进度条 -->
+    <!-- 自定义进度条  web页面需要的资源-->
     <style name="StyleProgressBarMini" parent="@android:style/Widget.ProgressBar.Horizontal">
         <item name="android:maxHeight">100dip</item>
         <item name="android:minHeight">10dip</item>
@@ -36,5 +36,13 @@
         <item name="android:textColor">@color/font_dark_gray</item>
         <item name="android:drawablePadding">10dp</item>
         <item name="android:gravity">center_vertical</item>
+    </style>
+
+    <style name="style_normal_text">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:textColor">@color/font_dark_gray</item>
+        <item name="android:textSize">16sp</item>
     </style>
 </resources>

@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/background">
+
+
+    <include
+        android:id="@+id/common_title"
+        layout="@layout/common_bar"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/common_title">
+
+        <TextView
+            android:id="@+id/id_exit_app_tv"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/white_gray_drawable"
+            android:gravity="center"
+            android:onClick="clickExitAccount"
+            android:padding="10dp"
+            android:text="退出当前账号"
+            android:textColor="@color/colorPrimary"
+            android:textSize="18sp"/>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/id_exit_app_tv"
+            android:background="@drawable/bg_content"
+            android:requiresFadingEdge="none"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/bg_white"
+                    android:padding="12dp">
+
+                    <TextView
+                        style="@style/style_normal_text"
+                        android:text="头像"/>
+
+                    <ImageView
+                        android:id="@+id/id_avatar_img"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_alignParentRight="true"
+                        android:onClick="clickAvatar"
+                        android:src="@mipmap/ic_default_gray_avatar"
+                        android:transitionName="@string/transition_name"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/bg_white"
+                    android:padding="12dp">
+
+                    <TextView
+                        style="@style/style_normal_text"
+                        android:text="账户"/>
+
+                    <TextView
+                        android:id="@+id/id_tel_tv"
+                        style="@style/style_normal_text"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="28dp"
+                        android:text="111111"
+                        android:textColor="@color/gray0"/>
+                </RelativeLayout>
+
+                <include layout="@layout/list_line_match"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/white_gray_drawable"
+                    android:onClick="clickNickName"
+                    android:padding="12dp">
+
+                    <TextView
+                        android:id="@+id/id_nick_tip_tv"
+                        style="@style/style_normal_text"
+                        android:layout_marginRight="6dp"
+                        android:text="昵称"/>
+
+                    <ImageView
+                        android:id="@+id/id_arrow_right_img0"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:src="@mipmap/arrow_right"/>
+
+                    <TextView
+                        android:id="@+id/id_nick_tv"
+                        style="@style/style_normal_text"
+                        android:layout_toLeftOf="@id/id_arrow_right_img0"
+                        android:layout_toRightOf="@id/id_nick_tip_tv"
+                        android:gravity="right"
+                        android:maxLines="1"
+                        android:text="未设置"
+                        android:textColor="@color/gray0"/>
+                </RelativeLayout>
+
+                <include layout="@layout/list_line_match"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/white_gray_drawable"
+                    android:onClick="clickAddress"
+                    android:padding="12dp">
+
+                    <TextView
+                        android:id="@+id/id_address_tip_tv"
+                        style="@style/style_normal_text"
+                        android:text="地址"/>
+
+                    <ImageView
+                        android:id="@+id/id_arrow_right_img1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:src="@mipmap/arrow_right"/>
+
+                    <TextView
+                        android:id="@+id/id_address_tv"
+                        style="@style/style_normal_text"
+                        android:layout_toLeftOf="@id/id_arrow_right_img1"
+                        android:layout_toRightOf="@id/id_address_tip_tv"
+                        android:gravity="right"
+                        android:maxLines="1"
+                        android:text="未设置"
+                        android:textColor="@color/gray0"/>
+                </RelativeLayout>
+            </LinearLayout>
+        </ScrollView>
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/id_zhezhao_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/gray_transparent"
+        android:onClick="clickZheZhao"
+        android:visibility="gone"/>
+</RelativeLayout>

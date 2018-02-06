@@ -8,7 +8,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import star.liuwen.com.le_shi.Activity.AboutActivity;
+import star.liuwen.com.le_shi.Activity.HelpActivity;
 import star.liuwen.com.le_shi.Activity.ShareActivity;
+import star.liuwen.com.le_shi.Activity.UserInfoActivity;
 import star.liuwen.com.le_shi.Base.BaseFragment;
 import star.liuwen.com.le_shi.R;
 
@@ -54,18 +57,18 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         if (imgUserPhoto == view) {
-
+            openActivity(UserInfoActivity.class, imgUserPhoto, R.string.transition_name);
         } else if (tvMall == view) {
-
         } else if (tvWatchRecode == view) {
 
         } else if (tvUpdate == view) {
-
         } else if (tvShare == view) {
             openActivity(ShareActivity.class);
         } else if (tvHelp == view) {
+            openActivity(HelpActivity.class);
         } else if (tvAbout == view) {
-
+            openActivity(AboutActivity.class);
         }
     }
+
 }

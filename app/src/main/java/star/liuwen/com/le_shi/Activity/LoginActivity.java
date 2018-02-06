@@ -1,5 +1,7 @@
 package star.liuwen.com.le_shi.Activity;
 
+import android.os.Handler;
+import android.os.Message;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -9,6 +11,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import star.liuwen.com.le_shi.Base.BaseActivity;
@@ -32,6 +35,35 @@ public class LoginActivity extends BaseActivity {
     private EditText mEditPassword;
     private ImageView imgTelClear, imgPassWordClear;
     private TextView tvVersion;
+    private String txtTel, txtPassword;
+    private Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            List<UserModel> mModelList = new ArrayList<>();
+            msg.obj = mModelList;
+            if (mModelList != null && mModelList.size() != 0) {
+                for (UserModel userModel : mModelList) {
+                    if (!userModel.getUserTel().equals(txtTel)) {
+                        hideLoadDialog();
+                        UIUtils.showToast("此号码未被注册");
+                        return;
+                    }
+                    if (!userModel.getUserPassword().equals(txtPassword)) {
+                        hideLoadDialog();
+                        UIUtils.showToast("密码错误,请重新输入");
+                        return;
+                    }
+                }
+            }
+            SharedPreferencesUtil.setStringPreferences(getActivityContext(), Config.SHARD_USER_TEL, txtTel);
+            SharedPreferencesUtil.setStringPreferences(getActivityContext(), Config.SHARD_USER_PASSWORD, txtPassword);
+            KeyboardUtil.hideInputMethodWindow(LoginActivity.this, tvVersion);
+            openActivity(MainActivity.class);
+            hideLoadDialog();
+            finish();
+        }
+    };
 
     @Override
     protected int setLayoutRes() {
@@ -62,8 +94,8 @@ public class LoginActivity extends BaseActivity {
     }
 
     private void startLogin() {
-        String txtTel = commGetTxt(mAutoTel);
-        String txtPassword = commGetTxt(mEditPassword);
+        txtTel = commGetTxt(mAutoTel);
+        txtPassword = commGetTxt(mEditPassword);
         if (TextUtils.isEmpty(txtTel)) {
             UIUtils.showToast("电话不能为空");
             return;
@@ -73,27 +105,16 @@ public class LoginActivity extends BaseActivity {
             UIUtils.showToast("密码不能为空");
             return;
         }
-
-        List<UserModel> temUserList = DaoUserQuery.query();
-        if (temUserList != null && temUserList.size() != 0) {
-            for (UserModel userModel : temUserList) {
-                if (!userModel.getUserTel().equals(txtTel)) {
-                    UIUtils.showToast("此号码未被注册");
-                    return;
-                }
-
-                if (!userModel.getUserPassword().equals(txtPassword)) {
-                    UIUtils.showToast("密码错误,请重新输入");
-                    return;
-                }
+        showLoadDialog("正在登陆");
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                List<UserModel> temUserList = DaoUserQuery.query();
+                Message message = Message.obtain();
+                message.obj = temUserList;
+                mHandler.sendMessage(message);
             }
-        }
-        SharedPreferencesUtil.setStringPreferences(getActivityContext(), Config.SHARD_USER_TEL, txtTel);
-        SharedPreferencesUtil.setStringPreferences(getActivityContext(), Config.SHARD_USER_PASSWORD, txtPassword);
-        KeyboardUtil.hideInputMethodWindow(this, tvVersion);
-        openActivity(MainActivity.class);
-        finish();
-
+        }, 1500);
     }
 
     public void onClickTelClearImg(View view) {

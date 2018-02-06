@@ -21,6 +21,7 @@ import star.liuwen.com.le_shi.Listener.OnCommonBarListener;
 import star.liuwen.com.le_shi.R;
 import star.liuwen.com.le_shi.Utils.ActivityKiller;
 import star.liuwen.com.le_shi.Utils.ToastUtils;
+import star.liuwen.com.le_shi.View.LoadingDialog;
 
 
 /**
@@ -31,6 +32,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     private TextView mTvCenter;//toobar中间文字
     private App mApp;
     private Context mActivityContext, mAppContext;//尽量地采用 Application Context 避免内存泄漏
+    private LoadingDialog mLoadingDialog;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -119,6 +122,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         //内存检测器
         RefWatcher refWatcher = App.getRefWatcher(this);
         refWatcher.watch(this);
+        mLoadingDialog = null;
     }
 
     protected void showLeftView() {
@@ -202,6 +206,17 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     }
 
+    public void showLoadDialog(String msg) {
+        if (mLoadingDialog == null) {
+            mLoadingDialog = new LoadingDialog(this);
+        }
+        mLoadingDialog.show();
+        mLoadingDialog.setMessage(msg);
+    }
 
-
+    public void hideLoadDialog() {
+        if (mLoadingDialog != null) {
+            mLoadingDialog.dismiss();
+        }
+    }
 }

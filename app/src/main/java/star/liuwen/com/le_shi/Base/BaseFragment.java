@@ -1,6 +1,7 @@
 package star.liuwen.com.le_shi.Base;
 
 import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
@@ -110,6 +111,16 @@ public abstract class BaseFragment extends Fragment {
     protected void openActivity(Class toActivity, int reqCode) {
         Intent intent = new Intent(getActivity(), toActivity);
         startActivityForResult(intent, reqCode);
+    }
+
+    protected void openActivity(Class toActivity, View view, int transitionNameRes) {
+        Intent intent = new Intent(getActivity(), toActivity);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(getActivity(), view, getString(transitionNameRes));
+            startActivity(intent, options.toBundle());
+        } else {
+            startActivity(intent);
+        }
     }
 
 

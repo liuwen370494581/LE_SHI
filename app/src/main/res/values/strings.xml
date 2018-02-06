@@ -18,7 +18,7 @@
     <string name="get_ver_code_again">%s秒后重新获取</string>
     <string name="register_new_user">注册新用户</string>
     <string name="btn_login">登录</string>
-
+    <string name="transition_name">transition_01</string>
     <string name="get_again">重新获取</string>
     <string-array name="tabs">
         <item>首页</item>
