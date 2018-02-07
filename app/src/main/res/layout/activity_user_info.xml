@@ -77,7 +77,6 @@
                         style="@style/style_normal_text"
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="28dp"
-                        android:text="111111"
                         android:textColor="@color/gray0"/>
                 </RelativeLayout>
 

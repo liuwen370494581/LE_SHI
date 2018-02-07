@@ -20,8 +20,14 @@ android {
         }
     }
 
+    //添加这段代码
+    packagingOptions {
+        exclude 'META-INF/rxjava.properties'
+        // … and any other excludes go here
+    }
+
     greendao {
-        schemaVersion 1 //版本号，升级时可配置
+        schemaVersion 2 //版本号，升级时可配置
         daoPackage 'star.liuwen.com.le_shi.Dao'//包名
         targetGenDir 'src/main/java'//生成目录
     }
@@ -62,4 +68,5 @@ dependencies {
     compile files('libs/MobCommons-2017.1213.1552.jar')
     compile files('libs/MobTools-2017.1213.1552.jar')
     compile files('libs/SMSSDK-3.1.0.jar')
+    compile 'com.jph.takephoto:takephoto_library:4.0.3'
 }

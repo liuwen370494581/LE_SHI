@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -18,6 +19,7 @@ import org.greenrobot.eventbus.ThreadMode;
 import star.liuwen.com.le_shi.EventBus.Event;
 import star.liuwen.com.le_shi.EventBus.EventBusUtil;
 import star.liuwen.com.le_shi.Listener.OnCommonBarListener;
+import star.liuwen.com.le_shi.Listener.onRightListener;
 import star.liuwen.com.le_shi.R;
 import star.liuwen.com.le_shi.Utils.ActivityKiller;
 import star.liuwen.com.le_shi.Utils.ToastUtils;
@@ -28,8 +30,9 @@ import star.liuwen.com.le_shi.View.LoadingDialog;
  * Created by liuwen on 2017/6/21.
  */
 public abstract class BaseActivity extends AppCompatActivity {
+    private ImageView mImgRight;
     private LinearLayout lyCommonBar, lyRightBar;
-    private TextView mTvCenter;//toobar中间文字
+    private TextView mTvCenter, mTvRight;//toobar中间文字
     private App mApp;
     private Context mActivityContext, mAppContext;//尽量地采用 Application Context 避免内存泄漏
     private LoadingDialog mLoadingDialog;
@@ -102,6 +105,12 @@ public abstract class BaseActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    protected void openActivity(Class toActivity, int reqCode, Bundle bundle) {
+        Intent intent = new Intent(this, toActivity);
+        intent.putExtras(bundle);
+        startActivityForResult(intent, reqCode);
+    }
+
     protected void closeActivity() {
         finish();
     }
@@ -141,16 +150,35 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     protected void setRightListener(final OnCommonBarListener listener) {
         lyRightBar = getView(R.id.right_view);
-        if (lyRightBar == null) {
+        mImgRight = getView(R.id.toolbar_righ_iv);
+        if (lyRightBar == null || mImgRight == null) {
             return;
         }
         lyRightBar.setVisibility(View.VISIBLE);
+        mImgRight.setVisibility(View.VISIBLE);
         lyRightBar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (listener != null) {
                     listener.onRightChoiceListener();
                 }
+            }
+        });
+    }
+
+    protected void setRightText(String rightText, final onRightListener listener) {
+        lyRightBar = getView(R.id.right_view);
+        mTvRight = getView(R.id.toolbar_righ_tv);
+        if (lyRightBar == null || mTvRight == null) {
+            return;
+        }
+        lyRightBar.setVisibility(View.VISIBLE);
+        mTvRight.setVisibility(View.VISIBLE);
+        mTvRight.setText(rightText);
+        lyRightBar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                listener.rightTextListener();
             }
         });
     }

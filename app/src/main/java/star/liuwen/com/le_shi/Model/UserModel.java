@@ -1,10 +1,10 @@
 package star.liuwen.com.le_shi.Model;
 
 import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.Id;
 
 import java.io.Serializable;
-import org.greenrobot.greendao.annotation.Generated;
 
 /**
  * author : liuwen
@@ -20,23 +20,23 @@ public class UserModel implements Serializable {
     private String userTel;//用户电话号码
     private String userPassword;//用户密码
     private String userPhoto;//用户头像
+    private String userAddress;//用户地址
 
 
-
-    @Generated(hash = 974438033)
+    @Generated(hash = 238939904)
     public UserModel(Long userId, String userName, String userTel,
-            String userPassword, String userPhoto) {
+            String userPassword, String userPhoto, String userAddress) {
         this.userId = userId;
         this.userName = userName;
         this.userTel = userTel;
         this.userPassword = userPassword;
         this.userPhoto = userPhoto;
+        this.userAddress = userAddress;
     }
 
     @Generated(hash = 782181818)
     public UserModel() {
     }
-
 
 
     public Long getUserId() {
@@ -77,5 +77,13 @@ public class UserModel implements Serializable {
 
     public void setUserPhoto(String userPhoto) {
         this.userPhoto = userPhoto;
+    }
+
+    public String getUserAddress() {
+        return this.userAddress;
+    }
+
+    public void setUserAddress(String userAddress) {
+        this.userAddress = userAddress;
     }
 }

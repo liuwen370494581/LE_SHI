@@ -11,8 +11,13 @@ import com.mob.MobSDK;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
 
+import java.util.List;
+
 import star.liuwen.com.le_shi.Dao.DaoManager;
+import star.liuwen.com.le_shi.Dao.DaoUserQuery;
+import star.liuwen.com.le_shi.Model.UserModel;
 import star.liuwen.com.le_shi.Utils.CrashHandler;
+import star.liuwen.com.le_shi.Utils.SharedPreferencesUtil;
 
 /**
  * Created by liuwen on 2017/10/12.
@@ -112,5 +117,28 @@ public class App extends MultiDexApplication {
             }
         }
         return currentProcessName;
+    }
+
+    //获取当前用户
+    public static UserModel getUserInfo(String tel) {
+        List<UserModel> temList = DaoUserQuery.query();
+        for (UserModel model : temList) {
+            if (model.getUserTel().equals(tel)) {
+                return model;
+            }
+        }
+        return null;
+    }
+
+    //获取当前用户的手机号码
+    public static String getUserInfoTel() {
+        return SharedPreferencesUtil.getStringPreferences(getContext(), Config.SHARD_USER_TEL, "");
+    }
+
+    //清除所有用户信息
+    public static void clearAll() {
+        SharedPreferencesUtil.setStringPreferences(getContext(), Config.SHARD_USER_TEL, "");
+        SharedPreferencesUtil.setStringPreferences(getContext(), Config.SHARD_USER_PASSWORD, "");
+        SharedPreferencesUtil.setStringPreferences(getContext(), Config.SHARD_USER_NAME, "");
     }
 }

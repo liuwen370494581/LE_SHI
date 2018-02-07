@@ -25,7 +25,9 @@ public class Config {
     public static final String INTENT_BBS_URL = "BBS_URL";
     public static final String INTENT_COMM_MODEL = "COMM_MODEL";
     public static final String INTENT_AREA_CODE = "AreaCode";
-
+    public static final String INTENT_MODIFY = "modify";
+    public static final String INTENT_ADDRESS = "address";
+    public static final String INTENT_NICK_NAME = "nickName";
 
 
     //channel mark
@@ -40,10 +42,11 @@ public class Config {
 
 
     //SharedPreferences mark
+    public static final String SdRootPath = Environment.getExternalStorageDirectory().getPath() + "/le_shi";
+    public static final String CACHE_IMG_PATH = SdRootPath + "/images/";//图片缓存路径
     public static final String SHARD_USER_NAME = "userName";
     public static final String SHARD_USER_TEL = "userTel";
     public static final String SHARD_USER_PASSWORD = "userPassWord";
-    public static final String SdRootPath = Environment.getExternalStorageDirectory().getPath()+"/le_shi";
     public static final String SHARE_LOGO = SdRootPath + "/share/logo/";//分享功能资源路径
 
 }

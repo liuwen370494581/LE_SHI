@@ -12,8 +12,13 @@ import star.liuwen.com.le_shi.Activity.AboutActivity;
 import star.liuwen.com.le_shi.Activity.HelpActivity;
 import star.liuwen.com.le_shi.Activity.ShareActivity;
 import star.liuwen.com.le_shi.Activity.UserInfoActivity;
+import star.liuwen.com.le_shi.Base.App;
 import star.liuwen.com.le_shi.Base.BaseFragment;
+import star.liuwen.com.le_shi.EventBus.C;
+import star.liuwen.com.le_shi.EventBus.Event;
 import star.liuwen.com.le_shi.R;
+import star.liuwen.com.le_shi.Utils.GlideCircleTransform;
+import star.liuwen.com.le_shi.Utils.GlideUtils;
 
 /**
  * Created by liuwen on 2017/10/12.
@@ -29,7 +34,15 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_my, container, false);
         initView(view);
+        init();
         return view;
+    }
+
+    private void init() {
+        String userTel = App.getUserInfoTel();
+        if (App.getUserInfo(userTel) != null) {
+            loadImgUserUrl(App.getUserInfo(userTel).getUserPhoto());
+        }
     }
 
     private void initView(View view) {
@@ -49,9 +62,32 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
         tvAbout.setOnClickListener(this);
     }
 
+    //懒加载
     @Override
     public void initData() {
 
+    }
+
+    @Override
+    protected boolean isRegisterEventBus() {
+        return true;
+    }
+
+    private void loadImgUserUrl(String url) {
+        GlideUtils.loadImage(imgUserPhoto, url, R.mipmap.ic_default_gray_avatar,
+                R.mipmap.ic_default_gray_avatar, new GlideCircleTransform(getFragmentContext()));
+    }
+
+    @Override
+    public void onEventBusCome(Event event) {
+        super.onEventBusCome(event);
+        switch (event.getCode()) {
+            case C.EventCode.UserURl:
+                loadImgUserUrl(event.getData().toString());
+                break;
+            default:
+                break;
+        }
     }
 
     @Override

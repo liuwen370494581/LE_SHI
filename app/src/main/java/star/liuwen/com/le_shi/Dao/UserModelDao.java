@@ -29,6 +29,7 @@ public class UserModelDao extends AbstractDao<UserModel, Long> {
         public final static Property UserTel = new Property(2, String.class, "userTel", false, "USER_TEL");
         public final static Property UserPassword = new Property(3, String.class, "userPassword", false, "USER_PASSWORD");
         public final static Property UserPhoto = new Property(4, String.class, "userPhoto", false, "USER_PHOTO");
+        public final static Property UserAddress = new Property(5, String.class, "userAddress", false, "USER_ADDRESS");
     }
 
 
@@ -48,7 +49,8 @@ public class UserModelDao extends AbstractDao<UserModel, Long> {
                 "\"USER_NAME\" TEXT," + // 1: userName
                 "\"USER_TEL\" TEXT," + // 2: userTel
                 "\"USER_PASSWORD\" TEXT," + // 3: userPassword
-                "\"USER_PHOTO\" TEXT);"); // 4: userPhoto
+                "\"USER_PHOTO\" TEXT," + // 4: userPhoto
+                "\"USER_ADDRESS\" TEXT);"); // 5: userAddress
     }
 
     /** Drops the underlying database table. */
@@ -85,6 +87,11 @@ public class UserModelDao extends AbstractDao<UserModel, Long> {
         if (userPhoto != null) {
             stmt.bindString(5, userPhoto);
         }
+ 
+        String userAddress = entity.getUserAddress();
+        if (userAddress != null) {
+            stmt.bindString(6, userAddress);
+        }
     }
 
     @Override
@@ -115,6 +122,11 @@ public class UserModelDao extends AbstractDao<UserModel, Long> {
         if (userPhoto != null) {
             stmt.bindString(5, userPhoto);
         }
+ 
+        String userAddress = entity.getUserAddress();
+        if (userAddress != null) {
+            stmt.bindString(6, userAddress);
+        }
     }
 
     @Override
@@ -129,7 +141,8 @@ public class UserModelDao extends AbstractDao<UserModel, Long> {
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // userName
             cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // userTel
             cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // userPassword
-            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4) // userPhoto
+            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // userPhoto
+            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5) // userAddress
         );
         return entity;
     }
@@ -141,6 +154,7 @@ public class UserModelDao extends AbstractDao<UserModel, Long> {
         entity.setUserTel(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
         entity.setUserPassword(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
         entity.setUserPhoto(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
+        entity.setUserAddress(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
      }
     
     @Override

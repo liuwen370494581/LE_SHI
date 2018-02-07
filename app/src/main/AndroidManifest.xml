@@ -82,32 +82,39 @@
 
         <activity
             android:name=".Activity.RegisterActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:windowSoftInputMode="stateHidden|adjustResize"/>
+            android:launchMode="standard"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Activity.LoginActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:windowSoftInputMode="stateHidden|adjustResize"/>
+            android:launchMode="standard"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Activity.AreaSelectionActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:windowSoftInputMode="stateHidden|adjustResize"/>
+            android:launchMode="standard"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Activity.ShareActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:windowSoftInputMode="stateHidden|adjustResize"/>
+            android:launchMode="standard"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Activity.HelpActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:windowSoftInputMode="stateHidden|adjustResize"/>
+            android:launchMode="standard"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Activity.AboutActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:windowSoftInputMode="stateHidden|adjustResize"/>
+            android:launchMode="standard"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Activity.UserInfoActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:windowSoftInputMode="stateHidden|adjustResize"/>
-
+            android:launchMode="standard"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".Activity.ToTakePhotoActivity"
+            android:launchMode="standard"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".Activity.ModifyActivity"
+            android:launchMode="standard"
+            android:screenOrientation="portrait"/>
     </application>
 </manifest>

@@ -63,11 +63,12 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="返回"
-            android:textColor="@color/white"
+            android:textColor="@color/colorPrimary"
             android:textSize="16sp"
             android:visibility="gone"/>
 
         <ImageView
+            android:visibility="gone"
             android:id="@+id/toolbar_righ_iv"
             android:layout_width="25dp"
             android:layout_height="25dp"
