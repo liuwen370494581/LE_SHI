@@ -116,5 +116,9 @@
             android:name=".Activity.ModifyActivity"
             android:launchMode="standard"
             android:screenOrientation="portrait"/>
+        <activity
+            android:name=".Activity.WatchHistoryActivity"
+            android:launchMode="standard"
+            android:screenOrientation="portrait"/>
     </application>
 </manifest>

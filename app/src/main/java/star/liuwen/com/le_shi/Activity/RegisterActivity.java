@@ -95,6 +95,7 @@ public class RegisterActivity extends BaseActivity {
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
+                                    hideLoadDialog();
                                     UIUtils.showToast("注册失败" + des);
                                 }
                             });
@@ -102,6 +103,7 @@ public class RegisterActivity extends BaseActivity {
                     } catch (JSONException e) {
                         e.printStackTrace();
                         UIUtils.showToast("注册失败,解析错误");
+                        hideLoadDialog();
                     }
                 }
             }

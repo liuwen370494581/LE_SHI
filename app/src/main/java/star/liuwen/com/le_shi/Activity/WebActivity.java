@@ -13,10 +13,13 @@ import com.liaoinstan.springview.container.DefaultFooter;
 import com.liaoinstan.springview.container.DefaultHeader;
 import com.liaoinstan.springview.widget.SpringView;
 
+import star.liuwen.com.le_shi.Base.App;
 import star.liuwen.com.le_shi.Base.BaseActivity;
 import star.liuwen.com.le_shi.Base.Config;
+import star.liuwen.com.le_shi.Dao.DaoCoverQuery;
 import star.liuwen.com.le_shi.Model.CoverModel;
 import star.liuwen.com.le_shi.R;
+import star.liuwen.com.le_shi.Utils.DateTimeUtils;
 import star.liuwen.com.le_shi.Utils.UIUtils;
 
 /**
@@ -48,10 +51,22 @@ public class WebActivity extends BaseActivity {
         url = getIntent().getStringExtra(Config.INTENT_BBS_URL);
         if (model != null) {
             setCenterText(model.getCoverTitle());
+            //保存历史播放记录
+            saveWatchHistory(model);
         } else {
             setCenterText(UIUtils.getString(R.string.bbs));
         }
         mWvContent.loadUrl(url);
+    }
+
+    private void saveWatchHistory(CoverModel model) {
+        CoverModel insertModel = new CoverModel(DaoCoverQuery.getCount(),
+                App.getUserInfoTel(),
+                model.getCoverVideoUrl()
+                , model.getCoverDesc() != null ? model.getCoverDesc() : ""
+                , model.getCoverTitle(), model.getCoverUrl(), model.getCoverPage() != null ?
+                model.getCoverPage() : "", DateTimeUtils.getTodayDate(), DateTimeUtils.getCurrentTime_Y_M_D_H_M_S());
+        DaoCoverQuery.insert(insertModel);
 
     }
 

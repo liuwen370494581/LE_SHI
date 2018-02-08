@@ -163,5 +163,13 @@ public class UserInfoActivity extends BaseActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        if(mAvatarPopupWindow!=null&&mAvatarPopupWindow.isShowing()){
+            mAvatarPopupWindow.dismiss();
+        }else {
+            super.onBackPressed();
+        }
 
+    }
 }

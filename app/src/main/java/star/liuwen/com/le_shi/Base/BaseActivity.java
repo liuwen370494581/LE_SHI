@@ -183,6 +183,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         });
     }
 
+
     protected void setCenterText(String str) {
         mTvCenter = getView(R.id.title);
         if (mTvCenter == null) {

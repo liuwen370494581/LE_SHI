@@ -12,6 +12,7 @@ import star.liuwen.com.le_shi.Activity.AboutActivity;
 import star.liuwen.com.le_shi.Activity.HelpActivity;
 import star.liuwen.com.le_shi.Activity.ShareActivity;
 import star.liuwen.com.le_shi.Activity.UserInfoActivity;
+import star.liuwen.com.le_shi.Activity.WatchHistoryActivity;
 import star.liuwen.com.le_shi.Base.App;
 import star.liuwen.com.le_shi.Base.BaseFragment;
 import star.liuwen.com.le_shi.EventBus.C;
@@ -26,7 +27,7 @@ import star.liuwen.com.le_shi.Utils.GlideUtils;
 public class MyFragment extends BaseFragment implements View.OnClickListener {
 
     private ImageView imgUserPhoto;
-    private TextView tvMall, tvWatchRecode, tvUpdate, tvShare, tvHelp, tvAbout;
+    private TextView tvMall, tvWatchRecode, tvUpdate, tvShare, tvHelp, tvAbout, tvTel;
 
 
     @Nullable
@@ -42,6 +43,7 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
         String userTel = App.getUserInfoTel();
         if (App.getUserInfo(userTel) != null) {
             loadImgUserUrl(App.getUserInfo(userTel).getUserPhoto());
+            tvTel.setText(userTel);
         }
     }
 
@@ -53,6 +55,7 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
         tvShare = (TextView) view.findViewById(R.id.id_share_tv);
         tvHelp = (TextView) view.findViewById(R.id.id_help_tv);
         tvAbout = (TextView) view.findViewById(R.id.id_about_tv);
+        tvTel = (TextView) view.findViewById(R.id.id_tel_tv);
         imgUserPhoto.setOnClickListener(this);
         tvMall.setOnClickListener(this);
         tvWatchRecode.setOnClickListener(this);
@@ -96,7 +99,7 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
             openActivity(UserInfoActivity.class, imgUserPhoto, R.string.transition_name);
         } else if (tvMall == view) {
         } else if (tvWatchRecode == view) {
-
+            openActivity(WatchHistoryActivity.class);
         } else if (tvUpdate == view) {
         } else if (tvShare == view) {
             openActivity(ShareActivity.class);

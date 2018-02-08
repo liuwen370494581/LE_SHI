@@ -1,16 +1,13 @@
 package star.liuwen.com.le_shi.Jsoup;
 
 import android.util.Log;
-import android.widget.ListPopupWindow;
 
 import org.jsoup.Jsoup;
-import org.jsoup.nodes.Comment;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import star.liuwen.com.le_shi.Base.Config;
@@ -876,6 +873,7 @@ public class HtmlParserUtil {
             Document document = Jsoup.connect(url)
                     .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31").timeout(4000).get();
             Elements elements = document.select("div.index-box-list").select("a");
+            Log.e("yichao", document.select("div.index-box-list").toString());
             Elements elements1 = elements.select("a");
             Elements elements2 = elements.select("div.info");
             Log.e(Config.TAG, elements.size() + "");
@@ -891,12 +889,8 @@ public class HtmlParserUtil {
                 for (int j = 0; j < 4; j++) {
                     CoverModel model = new CoverModel();
                     Log.e(Config.TAG, "video===" + elements1.get(j).select("a").attr("href"));
-                    Log.e(Config.TAG, "price====" + elements2.get(j).select("span.price").text());
                     Log.e(Config.TAG, "title===" + elements1.get(j).select("span.name").text());
-                    Log.e(Config.TAG, "desc===" + elements1.get(j).select("span.intro").text());
-                    model.setCoverTitle(elements1.get(j).select("span.name").text());
-                    model.setCoverDesc(elements1.get(j).select("span.intro").text());
-                    model.setCoverScore(elements2.get(j).select("span.price").text());
+                    model.setCoverTitle(elements1.get(j).select("a").attr("title"));
                     model.setCoverVideoUrl(elements1.get(j).select("a").attr("href"));
                     model.setCoverType(type);
                     list.add(model);

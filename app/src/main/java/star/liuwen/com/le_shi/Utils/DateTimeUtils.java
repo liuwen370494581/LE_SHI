@@ -1,13 +1,7 @@
 package star.liuwen.com.le_shi.Utils;
 
-import android.content.Context;
-
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
-
-import star.liuwen.com.le_shi.R;
 
 /**
  * Created by liuwen on 2017/7/28.
@@ -32,6 +26,11 @@ public class DateTimeUtils {
      */
     public static Date getCurrentDateObject() {
         return new Date(System.currentTimeMillis());
+    }
+
+    public static String getCurrentTime_Y_M_D_H_M_S() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return sdf.format(new Date());
     }
 
 }

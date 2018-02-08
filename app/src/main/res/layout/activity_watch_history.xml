@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/background"
+                android:orientation="vertical">
+
+
+    <include
+        android:id="@+id/watch_history_title"
+        layout="@layout/common_bar"/>
+
+    <com.liaoinstan.springview.widget.SpringView
+        android:id="@+id/watch_history_sping_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/watch_history_title">
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/watch_history_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </android.support.v7.widget.RecyclerView>
+
+    </com.liaoinstan.springview.widget.SpringView>
+
+    <RelativeLayout
+        android:id="@+id/watch_history_re"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/white_gray_drawable"
+        android:visibility="gone">
+
+
+        <TextView
+            android:id="@+id/watch_history_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="删除"
+            android:textColor="@color/colorPrimary"
+            android:textSize="18sp"/>
+
+        <TextView
+            android:id="@+id/watch_history_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_toRightOf="@id/watch_history_delete"
+            android:text="(3)"
+            android:textColor="@color/colorPrimary"
+            android:textSize="18sp"/>
+    </RelativeLayout>
+</RelativeLayout>

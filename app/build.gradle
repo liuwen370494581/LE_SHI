@@ -27,7 +27,7 @@ android {
     }
 
     greendao {
-        schemaVersion 2 //版本号，升级时可配置
+        schemaVersion 5 //版本号，升级时可配置
         daoPackage 'star.liuwen.com.le_shi.Dao'//包名
         targetGenDir 'src/main/java'//生成目录
     }

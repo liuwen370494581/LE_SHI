@@ -366,7 +366,7 @@ public class MalUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof HomeUIAdapter.BannerHolder) {
             HomeUIAdapter.BannerHolder bannerHolder = (HomeUIAdapter.BannerHolder) holder;
-            setBanner(mContext,bannerHolder);
+            setBanner(mContext, bannerHolder);
         } else if (holder instanceof HomeUIAdapter.ChannelHolder) {
             HomeUIAdapter.ChannelHolder channelHolder = (HomeUIAdapter.ChannelHolder) holder;
             ChannelAdapter channelAdapter = new ChannelAdapter(channelList, mContext);
@@ -403,7 +403,7 @@ public class MalUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 public void onItemClickListener(int position, List<CoverModel> listOne, List<CoverModel> listTwo) {
                     Intent intent = new Intent(mContext, WebActivity.class);
                     intent.putExtra(Config.INTENT_COMM_MODEL, sportsList2.get(position));
-                    intent.putExtra(Config.INTENT_BBS_URL, Config.BAO_FENG_URL_2 + sportsList.get(position).getCoverVideoUrl());
+                    intent.putExtra(Config.INTENT_BBS_URL,  sportsList.get(position).getCoverVideoUrl());
                     mContext.startActivity(intent);
                 }
             });
@@ -424,7 +424,7 @@ public class MalUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 public void onItemClickListener(int position, List<CoverModel> listOne, List<CoverModel> listTwo) {
                     Intent intent = new Intent(mContext, WebActivity.class);
                     intent.putExtra(Config.INTENT_COMM_MODEL, dailySpecialList2.get(position));
-                    intent.putExtra(Config.INTENT_BBS_URL, Config.BAO_FENG_URL_2 + dailySpecialList.get(position).getCoverVideoUrl());
+                    intent.putExtra(Config.INTENT_BBS_URL, dailySpecialList.get(position).getCoverVideoUrl());
                     mContext.startActivity(intent);
                 }
             });
@@ -443,7 +443,7 @@ public class MalUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 public void onItemClickListener(int position, List<CoverModel> listOne, List<CoverModel> listTwo) {
                     Intent intent = new Intent(mContext, WebActivity.class);
                     intent.putExtra(Config.INTENT_COMM_MODEL, baoFengTVList2.get(position));
-                    intent.putExtra(Config.INTENT_BBS_URL, Config.BAO_FENG_URL_2 + baoFengTVList.get(position).getCoverVideoUrl());
+                    intent.putExtra(Config.INTENT_BBS_URL, baoFengTVList2.get(position).getCoverVideoUrl());
                     mContext.startActivity(intent);
                 }
             });
@@ -463,7 +463,7 @@ public class MalUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 public void onItemClickListener(int position, List<CoverModel> listOne, List<CoverModel> listTwo) {
                     Intent intent = new Intent(mContext, WebActivity.class);
                     intent.putExtra(Config.INTENT_COMM_MODEL, baofengMirror2.get(position));
-                    intent.putExtra(Config.INTENT_BBS_URL, Config.BAO_FENG_URL_2 + baofengMirror.get(position).getCoverVideoUrl());
+                    intent.putExtra(Config.INTENT_BBS_URL, baofengMirror.get(position).getCoverVideoUrl());
                     mContext.startActivity(intent);
                 }
             });
@@ -482,7 +482,7 @@ public class MalUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 public void onItemClickListener(int position, List<CoverModel> listOne, List<CoverModel> listTwo) {
                     Intent intent = new Intent(mContext, WebActivity.class);
                     intent.putExtra(Config.INTENT_COMM_MODEL, funList2.get(position));
-                    intent.putExtra(Config.INTENT_BBS_URL, Config.BAO_FENG_URL_2 + funList.get(position).getCoverVideoUrl());
+                    intent.putExtra(Config.INTENT_BBS_URL,funList.get(position).getCoverVideoUrl());
                     mContext.startActivity(intent);
                 }
             });
@@ -502,7 +502,7 @@ public class MalUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 public void onItemClickListener(int position, List<CoverModel> listOne, List<CoverModel> listTwo) {
                     Intent intent = new Intent(mContext, WebActivity.class);
                     intent.putExtra(Config.INTENT_COMM_MODEL, clothesList2.get(position));
-                    intent.putExtra(Config.INTENT_BBS_URL, Config.BAO_FENG_URL_2 + clothesList.get(position).getCoverVideoUrl());
+                    intent.putExtra(Config.INTENT_BBS_URL,  clothesList.get(position).getCoverVideoUrl());
                     mContext.startActivity(intent);
                 }
             });
@@ -522,7 +522,7 @@ public class MalUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 public void onItemClickListener(int position, List<CoverModel> listOne, List<CoverModel> listTwo) {
                     Intent intent = new Intent(mContext, WebActivity.class);
                     intent.putExtra(Config.INTENT_COMM_MODEL, milkList2.get(position));
-                    intent.putExtra(Config.INTENT_BBS_URL, Config.BAO_FENG_URL_2 + milkList.get(position).getCoverVideoUrl());
+                    intent.putExtra(Config.INTENT_BBS_URL, milkList.get(position).getCoverVideoUrl());
                     mContext.startActivity(intent);
                 }
             });
@@ -538,7 +538,7 @@ public class MalUIAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         }
     }
 
-    private void setBanner(Context context,HomeUIAdapter.BannerHolder channelHolder) {
+    private void setBanner(Context context, HomeUIAdapter.BannerHolder channelHolder) {
         BannerAdapter mBannerAdapter = new BannerAdapter(context, mCoverList);
         channelHolder.viewpager.setAdapter(mBannerAdapter);
         channelHolder.viewpager.setLooperPic(true);

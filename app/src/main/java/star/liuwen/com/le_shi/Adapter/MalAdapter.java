@@ -62,8 +62,8 @@ public class MalAdapter extends RecyclerView.Adapter<MalAdapter.MyViewHolder> {
                     holder.tvDesc.setText("折后价:" + mList2.get(position).getCoverScore());
                 } else if (mList2.get(position).getCoverType().equals("暴风TV")) {
                     holder.tvName.setText(mList2.get(position).getCoverTitle());
-                    holder.tvDesc.setText(mList2.get(position).getCoverDesc());
-                    holder.tvPrice.setText(mList2.get(position).getCoverScore());
+                    holder.tvDesc.setVisibility(View.GONE);
+                    holder.tvPrice.setVisibility(View.GONE);
                 } else {
                     holder.tvName.setText(mList2.get(position).getCoverTitle());
                     holder.tvDesc.setText(mList2.get(position).getCoverScore());
@@ -96,7 +96,6 @@ public class MalAdapter extends RecyclerView.Adapter<MalAdapter.MyViewHolder> {
         ImageView imgUrl;
         //CornerLabelView cvTitle;
         TextView tvPrice;
-
 
 
         public MyViewHolder(View view) {
