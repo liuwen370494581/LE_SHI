@@ -13,8 +13,10 @@ import com.squareup.leakcanary.RefWatcher;
 
 import java.util.List;
 
+import star.liuwen.com.le_shi.Dao.DaoCoverQuery;
 import star.liuwen.com.le_shi.Dao.DaoManager;
 import star.liuwen.com.le_shi.Dao.DaoUserQuery;
+import star.liuwen.com.le_shi.Model.CoverModel;
 import star.liuwen.com.le_shi.Model.UserModel;
 import star.liuwen.com.le_shi.Utils.CrashHandler;
 import star.liuwen.com.le_shi.Utils.SharedPreferencesUtil;
@@ -124,6 +126,28 @@ public class App extends MultiDexApplication {
         List<UserModel> temList = DaoUserQuery.query();
         for (UserModel model : temList) {
             if (model.getUserTel().equals(tel)) {
+                return model;
+            }
+        }
+        return null;
+    }
+
+    //获取当前用户下的浏览记录是否是同一个
+    public static boolean getWatchHistory(String title) {
+        List<CoverModel> temList = DaoCoverQuery.queryByTel(App.getUserInfoTel());
+        for (CoverModel model : temList) {
+            if (model.getCoverTitle().equals(title)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    //获取当前用户下的浏览记录
+    public static CoverModel getWatchHistoryInfo(String title) {
+        List<CoverModel> temList = DaoCoverQuery.queryByTel(App.getUserInfoTel());
+        for (CoverModel model : temList) {
+            if (model.getCoverTitle().equals(title)) {
                 return model;
             }
         }

@@ -24,7 +24,7 @@ public class DaoCoverQuery {
     }
 
     public static void deleteAllData() {
-        DaoManager.getInstance().getDaoSession().getUserModelDao().deleteAll();
+        DaoManager.getInstance().getDaoSession().getCoverModelDao().deleteAll();
     }
 
     public static void update(CoverModel model) {
@@ -35,6 +35,19 @@ public class DaoCoverQuery {
         List<CoverModel> list = new ArrayList<>();
         list = DaoManager.getInstance().getDaoSession().getCoverModelDao().queryBuilder().list();
 
+        return list;
+    }
+
+    public static List<CoverModel> queryByTel(String tel, int page) {
+        List<CoverModel> list = new ArrayList<>();
+        list = DaoManager.getInstance().getDaoSession().getCoverModelDao().queryBuilder().
+                where(CoverModelDao.Properties.UserTel.eq(tel)).limit(page).build().list();
+        Collections.sort(list, new Comparator<CoverModel>() {
+            @Override
+            public int compare(CoverModel model, CoverModel model2) {
+                return model2.getCompareTime().compareTo(model.getCompareTime());
+            }
+        });
         return list;
     }
 

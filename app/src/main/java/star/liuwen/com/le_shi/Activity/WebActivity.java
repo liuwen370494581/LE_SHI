@@ -60,14 +60,30 @@ public class WebActivity extends BaseActivity {
     }
 
     private void saveWatchHistory(CoverModel model) {
-        CoverModel insertModel = new CoverModel(DaoCoverQuery.getCount(),
-                App.getUserInfoTel(),
-                model.getCoverVideoUrl()
-                , model.getCoverDesc() != null ? model.getCoverDesc() : ""
-                , model.getCoverTitle(), model.getCoverUrl(), model.getCoverPage() != null ?
-                model.getCoverPage() : "", DateTimeUtils.getTodayDate(), DateTimeUtils.getCurrentTime_Y_M_D_H_M_S());
-        DaoCoverQuery.insert(insertModel);
-
+        if (!App.getWatchHistory(model.getCoverTitle())) {
+            try {
+                int y = 1 + (int) (Math.random() * 1000);
+                CoverModel insertModel = new CoverModel(
+                        DaoCoverQuery.getCount()+y,
+                        App.getUserInfoTel(),
+                        model.getCoverVideoUrl(),
+                        model.getCoverDesc() != null ? model.getCoverDesc() : "",
+                        model.getCoverTitle(),
+                        model.getCoverUrl(), model.getCoverPage() != null ? model.getCoverPage() : "",
+                        DateTimeUtils.getTodayDate(),
+                        DateTimeUtils.getCurrentTime_Y_M_D_H_M_S());
+                DaoCoverQuery.insert(insertModel);
+            } catch (Exception e) {
+                UIUtils.showToast(e.toString());
+            }
+        } else {
+            if (App.getWatchHistoryInfo(model.getCoverTitle()) != null) {
+                CoverModel mCoverModel = App.getWatchHistoryInfo(model.getCoverTitle());
+                mCoverModel.setCoverWatchDate(DateTimeUtils.getTodayDate());
+                mCoverModel.setCompareTime(DateTimeUtils.getCurrentTime_Y_M_D_H_M_S());
+                DaoCoverQuery.update(mCoverModel);
+            }
+        }
     }
 
     @Override
