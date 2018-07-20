@@ -55,8 +55,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         if (isRegisterEventBus()) {
             EventBusUtil.register(this);
         }
-//        //大于android 4.4版本才有这种沉侵式状态
-//        StatusBarUtils.setWindowStatusBarColor(this, R.color.bg_color);
         ActivityKiller.getInstance().addActivity(this);
     }
 
