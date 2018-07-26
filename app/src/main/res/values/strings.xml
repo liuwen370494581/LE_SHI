@@ -20,6 +20,8 @@
     <string name="btn_login">登录</string>
     <string name="transition_name">transition_01</string>
     <string name="get_again">重新获取</string>
+    <string name="shop">商城</string>
+    <string name="watch_history">观看记录</string>
     <string-array name="tabs">
         <item>首页</item>
         <item>商城</item>

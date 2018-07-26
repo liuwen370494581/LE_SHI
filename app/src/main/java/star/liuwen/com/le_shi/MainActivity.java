@@ -17,6 +17,7 @@ import star.liuwen.com.le_shi.Fragment.MyFragment;
 import star.liuwen.com.le_shi.Fragment.UpgcFragment;
 import star.liuwen.com.le_shi.Fragment.VipFragment;
 import star.liuwen.com.le_shi.Utils.ActivityKiller;
+import star.liuwen.com.le_shi.Utils.StatusBarUtil;
 import star.liuwen.com.le_shi.View.MyViewPager;
 import star.liuwen.com.le_shi.View.NoPreloadViewPager;
 

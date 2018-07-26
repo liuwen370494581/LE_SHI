@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scrollbars="none">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="none">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,58 +14,71 @@
             android:id="@+id/id_my_msg_layout"
             android:layout_width="match_parent"
             android:layout_height="180dp"
-            android:background="@mipmap/profile_bg"
+            android:background="@mipmap/bg_user"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
             <ImageView
+                android:layout_marginTop="-25dp"
                 android:id="@+id/id_avatar_img"
                 android:layout_width="68dp"
                 android:layout_height="68dp"
-                android:layout_marginRight="14dp"
                 android:src="@mipmap/ic_default_gray_avatar"
-                android:transitionName="transition_01"/>
+                android:transitionName="transition_01" />
 
             <TextView
+                android:layout_marginTop="5dp"
+                android:maxLines="1"
                 android:id="@+id/id_tel_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=""
+                android:text="eeee"
                 android:textColor="@color/white"
-                android:textSize="22sp"/>
+                android:textSize="22sp" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:orientation="horizontal">
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="-45dp"
+            android:background="@mipmap/bg_user_ly">
 
             <TextView
                 android:id="@+id/id_mall_tv"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/white_gray_drawable"
                 android:drawableTop="@mipmap/ic_mall"
                 android:gravity="center"
-                android:padding="10dp"
-                android:text="商城"
+                android:padding="20dp"
+                android:text="@string/shop"
                 android:textColor="@color/font_dark_gray"
-                android:textSize="14sp"/>
+                android:textSize="14sp" />
+
+
+            <LinearLayout
+                android:id="@+id/ly_01"
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/line_color"
+                android:orientation="horizontal" />
 
             <TextView
                 android:id="@+id/id_local_tv"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/white_gray_drawable"
                 android:drawableTop="@mipmap/ic_local"
                 android:gravity="center"
-                android:padding="10dp"
-                android:text="观看记录"
+                android:padding="20dp"
+                android:text="@string/watch_history"
                 android:textColor="@color/font_dark_gray"
-                android:textSize="14sp"/>
+                android:textSize="14sp" />
+
         </LinearLayout>
 
         <TextView
@@ -74,7 +87,7 @@
             android:layout_marginBottom="1dp"
             android:drawableLeft="@mipmap/ic_push"
             android:drawableRight="@mipmap/ic_slide_on"
-            android:text="消息推送"/>
+            android:text="消息推送" />
 
 
         <TextView
@@ -83,7 +96,7 @@
             android:layout_marginBottom="1dp"
             android:drawableLeft="@mipmap/ic_update"
             android:drawableRight="@mipmap/arrow_right"
-            android:text="检查更新"/>
+            android:text="检查更新" />
 
         <TextView
             android:id="@+id/id_share_tv"
@@ -91,7 +104,7 @@
             android:layout_marginBottom="1dp"
             android:drawableLeft="@mipmap/ic_share"
             android:drawableRight="@mipmap/arrow_right"
-            android:text="分享"/>
+            android:text="分享" />
 
         <TextView
             android:id="@+id/id_help_tv"
@@ -99,14 +112,14 @@
             android:layout_marginBottom="1dp"
             android:drawableLeft="@mipmap/ic_help"
             android:drawableRight="@mipmap/arrow_right"
-            android:text="帮助"/>
+            android:text="帮助" />
 
         <TextView
             android:id="@+id/id_about_tv"
             style="@style/Mine_Item_Style"
             android:drawableLeft="@mipmap/ic_about"
             android:drawableRight="@mipmap/arrow_right"
-            android:text="关于"/>
+            android:text="关于" />
 
     </LinearLayout>
 </ScrollView>
