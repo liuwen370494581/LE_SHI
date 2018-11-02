@@ -53,7 +53,7 @@ public abstract class BaseActivity extends AppCompatActivity {
             }
         }
         setContentView(setLayoutRes());
-        initView();
+        initView();//初始化视图
         initData();
         setListener();
         mActivityContext = this;

@@ -138,7 +138,7 @@ public class MainActivity extends BaseActivity {
             }
             TabLayout.Tab selectedTab = tabLayout.getTabAt(position);
             tv = (TextView) selectedTab.getCustomView().findViewById(R.id.id_tab_tv);
-            tv.setTextColor(ContextCompat.getColor(this, R.color.colorPrimary));
+            tv.setTextColor(ContextCompat.getColor(this, R.color.gray2));
             img = (ImageView) selectedTab.getCustomView().findViewById(R.id.id_tab_img);
             img.setImageResource(mImgSelectedResArr[position]);
         } catch (Exception e) {
