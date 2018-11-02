@@ -17,6 +17,7 @@ import star.liuwen.com.le_shi.Fragment.MyFragment;
 import star.liuwen.com.le_shi.Fragment.UpgcFragment;
 import star.liuwen.com.le_shi.Fragment.VipFragment;
 import star.liuwen.com.le_shi.Utils.ActivityKiller;
+import star.liuwen.com.le_shi.Utils.StatusBarUtil;
 import star.liuwen.com.le_shi.View.MyViewPager;
 import star.liuwen.com.le_shi.View.NoPreloadViewPager;
 
@@ -137,7 +138,7 @@ public class MainActivity extends BaseActivity {
             }
             TabLayout.Tab selectedTab = tabLayout.getTabAt(position);
             tv = (TextView) selectedTab.getCustomView().findViewById(R.id.id_tab_tv);
-            tv.setTextColor(ContextCompat.getColor(this, R.color.colorPrimary));
+            tv.setTextColor(ContextCompat.getColor(this, R.color.gray2));
             img = (ImageView) selectedTab.getCustomView().findViewById(R.id.id_tab_img);
             img.setImageResource(mImgSelectedResArr[position]);
         } catch (Exception e) {

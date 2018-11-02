@@ -41,12 +41,19 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            //设置系统的bar全部显示出来
-            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         }
         super.onCreate(savedInstanceState);
+        if (!isTaskRoot()) {
+            Intent intent = getIntent();
+            String action = intent.getAction();
+            if (intent.hasCategory(Intent.CATEGORY_LAUNCHER) && Intent.ACTION_MAIN.equals(action)) {
+                finish();
+                return;
+            }
+        }
         setContentView(setLayoutRes());
-        initView();
+        initView();//初始化视图
         initData();
         setListener();
         mActivityContext = this;
@@ -55,8 +62,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         if (isRegisterEventBus()) {
             EventBusUtil.register(this);
         }
-//        //大于android 4.4版本才有这种沉侵式状态
-//        StatusBarUtils.setWindowStatusBarColor(this, R.color.bg_color);
         ActivityKiller.getInstance().addActivity(this);
     }
 
